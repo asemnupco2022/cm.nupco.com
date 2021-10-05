@@ -1,0 +1,19 @@
+.invalid-feedback {
+     display: block;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
+
+.hide{
+    display: none !important;
+}
+.show{
+    display: block !important;
+}
+
+.flat{
+    border-radius: 0px !important;
+    box-shadow: none !important;
+}

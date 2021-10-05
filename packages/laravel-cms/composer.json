@@ -1,0 +1,59 @@
+{
+    "name": "rifrocket/laravel-cms",
+    "description": "laravel cms with livewire",
+    "keywords": [
+        "alkatechsoft",
+        "laravel-cms"
+    ],
+    "homepage": "https://github.com/alkatechsoft/laravel-cms",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mohammad Arif",
+            "email": "developer.tech.dev@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3",
+        "livewire/livewire": "^2.3",
+        "intervention/image": "^2.5",
+        "cyber-duck/laravel-excel": "^2.2",
+        "barryvdh/laravel-debugbar": "^3.5",
+        "tormjens/eventy": "^0.7"
+
+    },
+    "require-dev": {
+
+
+    },
+    "autoload": {
+        "psr-4": {
+            "rifrocket\\LaravelCms\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "rifrocket\\LaravelCms\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "rifrocket\\LaravelCms\\Providers\\LaravelCmsServiceProvider"
+            ],
+            "aliases": {
+                "LaravelCms": "rifrocket\\LaravelCms\\Facades\\LaravelCmsFacade"
+            }
+        }
+    }
+}
