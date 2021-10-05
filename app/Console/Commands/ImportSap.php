@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\PoSapMaster;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class ImportSap extends Command
@@ -45,6 +46,7 @@ class ImportSap extends Command
         $excel = Importer::make('Excel');
         $excel->load(Storage::disk('public_uploads')->get('uploads/sap_nupco_backup.csv'));
         $collection = $excel->getCollection();
+        Log::info('importer-hit success');
 
 //        if ($collection and !empty($collection)){
 //
