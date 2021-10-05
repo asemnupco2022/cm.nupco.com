@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class ImportSap extends Command
 {
@@ -37,6 +38,7 @@ class ImportSap extends Command
      */
     public function handle()
     {
+        Storage::disk('public_uploads')->put('sap_nupco_backup.csv', Storage::disk('nupco_remote')->get('PO Download_ZMM001_20211003_084814.csv'));
 
         return 0;
     }
