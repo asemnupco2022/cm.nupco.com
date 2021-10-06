@@ -4,6 +4,7 @@ use App\Http\Controllers\Automation\AutoController;
 use App\Http\Controllers\Filters\FilterController;
 use App\Http\Controllers\Logs\UserLogController;
 use App\Http\Controllers\Po\PoImportController;
+use App\Http\Controllers\Staffs\StaffController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,15 @@ Route::group(array('middleware'=>'web'), function () {
         Route::get('/',[AutoController::class,'index'])->name('web.route.ticket.manager.list');
         Route::get('/chat/{token}',[AutoController::class,'automationHistory'])->name('web.route.ticket.manager.chat');
     });
+
+
+    //TICKET MANAGER
+    Route::group(['prefix'=>'staff-manager'], function(){
+        Route::get('/',[StaffController::class,'index'])->name('web.route.staff.manager.list');
+        Route::get('/chat/{token}',[AutoController::class,'automationHistory'])->name('web.route.ticket.manager.chat');
+    });
+
+
 
     Route::get('/clear-cache', function () {
         Artisan::call('cache:clear');

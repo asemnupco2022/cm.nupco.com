@@ -126,6 +126,16 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('staff-manager/*')?'active':'')  }}">
+                        <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
+                        <img src="{{ asset('img/management.svg') }}" alt="job image" title="job image">
+                        <p>
+                            Staffs
+                        </p>
+                    </a>
+                </li>
+
 
 {{--                <li class="nav-item ">--}}
 {{--                    <a href="" wire:click.prevent="logout" class="nav-link ">--}}

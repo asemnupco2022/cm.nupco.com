@@ -15,7 +15,8 @@
         "laravel/tinker": "^2.5",
         "league/flysystem-sftp": "~1.0",
         "rifrocket/laravel-cms": "@dev",
-        "spatie/laravel-activitylog": "^3.17"
+        "spatie/laravel-activitylog": "^3.17",
+        "spatie/laravel-permission": "dev-rifRocket-patch-lbs"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -32,6 +33,10 @@
             "options": {
                 "symlink": true
             }
+        },
+        {
+            "type": "vcs",
+            "url": "git@github.com:rifrocket/laravel-permission.git"
         }
     ],
     "autoload": {

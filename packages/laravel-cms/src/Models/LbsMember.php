@@ -19,6 +19,16 @@ class LbsMember extends Authenticatable
         'remember_token',
     ];
 
+    const CONS_COLUMNS=[
+        'username'=>true,
+        'email'=>true,
+        'role'=>true,
+        'contact'=>true,
+        'status'=>true,
+    ];
+
+    public $selectedPo=[];
+    public $selectAll=false;
 
     public function sendPasswordResetNotification($token)
     {

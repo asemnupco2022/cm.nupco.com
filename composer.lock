@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e7dbb553aaca5327c46cb8acebbd5e58",
+    "content-hash": "764649b221a4905cd69d72458d23e812",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3795,6 +3795,92 @@
                 }
             ],
             "time": "2021-03-02T16:49:06+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "dev-rifRocket-patch-lbs",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rifrocket/laravel-permission.git",
+                "reference": "24e197dd423686ab1bae4ee9bef9b45173c8b685"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rifrocket/laravel-permission/zipball/24e197dd423686ab1bae4ee9bef9b45173c8b685",
+                "reference": "24e197dd423686ab1bae4ee9bef9b45173c8b685",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^5.8|^6.0|^7.0|^8.0",
+                "illuminate/container": "^5.8|^6.0|^7.0|^8.0",
+                "illuminate/contracts": "^5.8|^6.0|^7.0|^8.0",
+                "illuminate/database": "^5.8|^6.0|^7.0|^8.0",
+                "php": "^7.2.5"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.8|^4.0|^5.0|^6.0",
+                "phpunit/phpunit": "^8.0|^9.0",
+                "predis/predis": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Spatie\\Permission\\Test\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 5.8 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "permissions",
+                "rbac",
+                "roles",
+                "security",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/rifrocket/laravel-permission/tree/rifRocket-patch-lbs"
+            },
+            "funding": [
+                {
+                    "type": "github",
+                    "url": "https://github.com/spatie"
+                }
+            ],
+            "time": "2020-11-09T11:20:41+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -9032,7 +9118,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "rifrocket/laravel-cms": 20
+        "rifrocket/laravel-cms": 20,
+        "spatie/laravel-permission": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

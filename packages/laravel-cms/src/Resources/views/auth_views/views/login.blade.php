@@ -6,7 +6,7 @@
     @push('styles')
         <style>
             body {
-                background: URL('background.jpg');
+                background: URL('img/nupco-banner.png');
             }
         </style>
     @endpush
