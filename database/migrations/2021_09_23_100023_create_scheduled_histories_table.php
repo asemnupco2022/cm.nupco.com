@@ -24,7 +24,7 @@ class CreateScheduledHistoriesTable extends Migration
             $table->string('sender_role')->nullable();
             $table->string('sender_category')->nullable();
             $table->bigInteger('recipient_user_id')->nullable();
-            $table->bigInteger('recipient_user_model')->nullable();
+            $table->string('recipient_user_model')->nullable();
             $table->string('recipient_name')->nullable();
             $table->string('recipient_email');
             $table->string('recipient_role')->nullable();

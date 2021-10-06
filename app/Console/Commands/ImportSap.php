@@ -41,12 +41,13 @@ class ImportSap extends Command
      */
     public function handle()
     {
-        Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get('PO Download_ZMM001_20211003_084814.csv'));
+        Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.png','450.png');
+//        Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get('PO Download_ZMM001_20211003_084814.csv'));
 
-        $excel = Importer::make('Excel');
-        $excel->load(Storage::disk('public_uploads')->get('uploads/sap_nupco_backup.csv'));
-        $collection = $excel->getCollection();
-        Log::info('importer-hit success');
+//        $excel = Importer::make('Excel');
+//        $excel->load(Storage::disk('public_uploads')->get('uploads/sap_nupco_backup.csv'));
+//        $collection = $excel->getCollection();
+//        Log::info('importer-hit success');
 
 //        if ($collection and !empty($collection)){
 //

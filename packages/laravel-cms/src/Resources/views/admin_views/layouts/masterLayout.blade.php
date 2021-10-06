@@ -17,7 +17,8 @@
     <!-- overlayScrollbars -->
 
     <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
-        <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'css/custom.min.css')}}">
+    <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'css/custom.min.css')}}">
+    <link href="//db.onlinewebfonts.com/c/7758d88db1fe2060f8b28055f108d316?family=Co+Headline+W23+Arabic+Regular" rel="stylesheet" type="text/css"/>
     @if(LaravelCms::lbs_object_key_exists('dark_mode', Session::get('_LbsLteSession'))=='true')
         <style>
             span.select2-selection.select2-selection--multiple {
@@ -27,6 +28,21 @@
     @endif
     <livewire:styles />
     @stack('styles')
+
+
+
+    <style>
+        body {
+            font-family: Regular
+        }
+
+        @font-face {
+            font-family: Regular;
+
+            src:url({{ URL::asset('uploads/font/7758d88db1fe2060f8b28055f108d316.woff') }});
+
+        }
+    </style>
 </head>
 <!--
 `body` tag options:
@@ -61,7 +77,7 @@
             {{--main body content--}}
             @section('content')
             @show
-                <!-- /.row -->
+            <!-- /.row -->
             </div>
             <!-- /.container-fluid -->
         </div>

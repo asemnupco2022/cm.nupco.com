@@ -6,14 +6,15 @@
         </li>
         <li class="nav-item d-none d-sm-inline-block">
 
-{{--            <div class="user-panel d-flex">--}}
-{{--                <div class="image">--}}
-{{--                    <img src="{{URL(LaravelCms::lbs_object_key_exists('avatar',Session::get('_LbsUserSession')))}}" class="img-circle elevation-2" alt="User Image">--}}
-{{--                </div>--}}
-{{--                <div class="info">--}}
-{{--                    <a href="#" class="d-block text-uppercase ">{{LaravelCms::lbs_object_key_exists('username',Session::get('_LbsUserSession'))}}</a>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="user-panel d-flex">
+                <div class="image">
+{{--                    <img src="{{URL(LaravelCms::lbs_object_key_exists('app_logo',Session::get('_LbsAppSession')))}}" alt="{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}" class="brand-image" style="opacity: .8">--}}
+
+                </div>
+                <div class="info">
+                    <span class=" font-weight-light">{{(LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession')))}}</span>
+                </div>
+            </div>
         </li>
 
     </ul>
@@ -109,6 +110,14 @@
 {{--                <i class="fas fa-expand-arrows-alt"></i>--}}
 {{--            </a>--}}
 {{--        </li>--}}
+
+        <li class="nav-item ">
+            <a href="" wire:click.prevent="logout"  class="nav-link logout_btn">
+                <img src="{{ asset('img/logout.png') }}" alt="job image" title="job image"> Logout
+
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                 <i class="fas fa-th-large"></i>
