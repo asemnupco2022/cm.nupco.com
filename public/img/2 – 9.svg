@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50" height="50" viewBox="0 0 50 50">
+  <defs>
+    <clipPath id="clip-_2_9">
+      <rect width="50" height="50"/>
+    </clipPath>
+  </defs>
+  <g id="_2_9" data-name="2 – 9" clip-path="url(#clip-_2_9)">
+    <g id="user" transform="translate(6.001 6)">
+      <path id="Path_1" data-name="Path 1" d="M37.937,18.969A18.969,18.969,0,1,1,18.968,0,18.921,18.921,0,0,1,37.937,18.969Zm0,0" transform="translate(0 0)" fill="#d0d3db"/>
+      <path id="Path_2" data-name="Path 2" d="M274.969,18.968A18.968,18.968,0,0,1,256,37.937V0a18.969,18.969,0,0,1,18.969,18.969Zm0,0" transform="translate(-237.031)" fill="#d0d3db"/>
+      <path id="Path_3" data-name="Path 3" d="M109.053,284.4v.076a18.97,18.97,0,0,1-25.565,0V284.4a12.783,12.783,0,1,1,25.565,0Zm0,0" transform="translate(-77.302 -251.496)" fill="#7985eb"/>
+      <path id="Path_4" data-name="Path 4" d="M268.783,284.4v.076A18.9,18.9,0,0,1,256,289.432V271.621A12.782,12.782,0,0,1,268.783,284.4Zm0,0" transform="translate(-237.032 -251.495)" fill="#4b5be6"/>
+      <path id="Path_5" data-name="Path 5" d="M165.871,96.953a7.84,7.84,0,1,1-7.84-7.84A7.849,7.849,0,0,1,165.871,96.953Zm0,0" transform="translate(-139.063 -82.51)" fill="#ffdba9"/>
+    </g>
+  </g>
+</svg>

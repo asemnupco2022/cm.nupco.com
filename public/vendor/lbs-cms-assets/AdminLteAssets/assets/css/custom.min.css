@@ -14,33 +14,32 @@
 }
 
 .flat{
-    border-radius: 0px !important;
-    box-shadow: none !important;
+    box-shadow: 0 3px 0px rgba(0,0,0,.20),0 2px 8px rgba(0,0,0,.20) !important;
 }
 
 /*=========== yusuf css ===========*/
 
 .sidebar ul li img {
-    width: 22px;
-    margin-right: 14px;
+    width: 24px;
+    margin-right: 19px;
     position: relative;
     top: -3px;
 }
 .sidebar-dark-navy .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-navy .nav-sidebar>.nav-item>.nav-link.active {
-    background-color: #ffffff !important;
-    color: #e46e00 !important;
+    background-color: #f3f3f3 !important;
+    color: #747778 !important;
     border: none !important;
     box-shadow: none;
 }
 .nav-sidebar .nav-item>.nav-link {
     position: relative;
-    color: #1C2346;
-    font-size: 17px;
+    color: #76797a;
+    font-size: 18px;
     align-items: center;
+    padding: 12px 30px;
 }
 .elevation-4 {
-    box-shadow: none !important;
-    border-right: 2px solid #FBCFD1;
+    box-shadow: 0 0px 7px rgba(0,0,0,0.25),0 0px 1px rgba(0,0,0,.22)!important;
 }
 [class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link, [class*=sidebar-light-] .nav-sidebar>.nav-item:hover>.nav-link {
     background-color: rgb(255 255 255 / 10%);
@@ -50,10 +49,7 @@
     padding-left: 0px !important;
     padding-right: 0px !important;
 }
-.sidebar nav.mt-2 {
-    padding-left: 5px;
-    padding-right: 5px;
-}
+
 .user-panel img {
     height: auto;
     width: 2.1rem;
@@ -63,7 +59,7 @@
     box-shadow: none !important;
 }
 a.brand-link.logo_aria {
-    min-height: 57px;
+    min-height: 61px;
 }
 .brand-link .brand-image {
     float: left;
@@ -76,7 +72,7 @@ a.brand-link.logo_aria {
 }
 .main-sidebar, .main-sidebar::before {
     transition: margin-left .3s ease-in-out,width .3s ease-in-out;
-    width: 260px;
+    width: 305px;
 }
 span.font-weight-light {
     color: #e46e00;
@@ -87,7 +83,7 @@ span.font-weight-light {
     margin-left: 0px !important;
     margin-right: .5rem;
     margin-top: -13px  !important;
-    max-height: 40px !important;
+    max-height: 54px !important;
     width: auto;
 }
 .logout_btn img {
@@ -96,4 +92,98 @@ span.font-weight-light {
     position: relative;
     top: -1px;
 }
+/* .sidebar_bg {
+    background-image: url(http://cm.nupco.com/img/Path38.svg);
+    background-position: bottom left;
+    background-repeat: no-repeat;
+    background-size: auto;
+} */
+.sidebar_bg {
+    position: absolute;
+    bottom: -23px;
+    /* left: -55px; */
+    margin-left: -7px;
+    width: 100%;
+    z-index: -1;
+}
+.sidebar_bg img {
+    width: 100%;
+}
+body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
+    transition: margin-left .3s ease-in-out;
+    margin-left: 304px;
+}
+.sidebar ul li img {
+    margin-right: 20px;
+    position: relative;
+    top: -3px;
+}
+.user-panel .info {
+    font-size: 23px;
+    text-transform: capitalize !important;
+    color: #76797a;
+}
+.user-panel .info a {
+    color: #76797a !important;
+}
+.user-panel img {
+    height: auto;
+    width: 42px!important;
+    box-shadow: none !important;
+}
+.increase_size img {
+    width: 28px !important;
+}
+li.nav-item.increase_size {
+    position: relative;
+    left: -6px;
+}
+.increase_size img {
+    width: 28px !important;
+    position: relative !important;
+    left: 6px;
+}
+.sidebar-collapse a.brand-link.logo_aria img {
+    width: 69px;
+    padding-top: 9px;
+}
+[class*=sidebar-dark-] {
+    background-color: #565f63 !important;
+}
 
+.sidebar-dark-warning .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-warning .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #6d7275;
+    color: #ffffff !important;
+}
+.dark-mode .nav-pills .nav-link {
+    color: #ffffff !important;
+}
+.accent-warning [class*=sidebar-dark-] .sidebar a:not(.dropdown-item):not(.btn-app):not(.nav-link):not(.brand-link) {
+    color: #ffffff !important;
+}
+.dark-mode img.light_mode_img {
+    display: none;
+}
+img.dark_mode_img {
+    display: none;
+}
+.dark-mode img.dark_mode_img {
+    display: initial;
+}
+.dark-mode a.brand-link.logo_aria.navbar-gray-dark {
+    background: #fff !important;
+}
+
+.navbar-dark {
+    background-color: #ffffff !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(41 41 41 / 75%);
+}
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+    color: #76797a;
+}
+.dark-mode .content-wrapper {
+    background-color: #ffffff !important;
+    color: #333 !important;
+}
