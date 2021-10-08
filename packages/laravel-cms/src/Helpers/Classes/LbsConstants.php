@@ -4,6 +4,8 @@
 namespace rifrocket\LaravelCms\Helpers\Classes;
 
 
+use Spatie\Permission\Models\Permission;
+
 class LbsConstants
 {
 
@@ -14,6 +16,7 @@ class LbsConstants
     const STATUS_DELETED ='deleted';
 
     const MEMBER_ROLE='super_user';
+    const SUPER_ADMIN_ROLE='super_user';
     const CLIENT_ROLE='client';
     const STAFF_ROLE='staff';
 
@@ -54,6 +57,8 @@ class LbsConstants
         'warning-email'=>'warning-email',
         'penalty-email'=>'penalty-email',
     ];
+
+
 
 
 }

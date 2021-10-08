@@ -45,11 +45,12 @@ class FilterSap implements ShouldQueue
             $now = Carbon::now();
             $diff = $initDate->diffInDays($now);
 
-            dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email')); break;
+//            dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email')); break;
+
+
             if ($diff ==20){
                 PoSapMasterSchedle::where('vendor_code', $prepares[$key]->vendor_code)->update('execution_done',20);
                 dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email'));
-
             }
 
             if ($diff ==15){

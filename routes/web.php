@@ -5,6 +5,7 @@ use App\Http\Controllers\Filters\FilterController;
 use App\Http\Controllers\Logs\UserLogController;
 use App\Http\Controllers\Po\PoImportController;
 use App\Http\Controllers\Staffs\StaffController;
+use App\Http\Controllers\Vendors\VendorController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -55,13 +56,23 @@ Route::group(array('middleware'=>'web'), function () {
     });
 
 
-    //TICKET MANAGER
+    //STAFF MANAGER
     Route::group(['prefix'=>'staff-manager'], function(){
         Route::get('/',[StaffController::class,'index'])->name('web.route.staff.manager.list');
-        Route::get('/chat/{token}',[AutoController::class,'automationHistory'])->name('web.route.ticket.manager.chat');
     });
 
 
+    //VENDOR MANAGER
+    Route::group(['prefix'=>'vendor-manager'], function(){
+        Route::get('/',[VendorController::class,'index'])->name('web.route.vendor.manager.list');
+    });
+
+
+    //HOS API
+    Route::group(['prefix'=>'hos-api'], function(){
+        Route::get('/vendor-response-to-line',[VendorController::class,'index'])->name('web.route.vendor.manager.list');
+    });
+//    hos-api/vendor-response-to-line
 
     Route::get('/clear-cache', function () {
         Artisan::call('cache:clear');

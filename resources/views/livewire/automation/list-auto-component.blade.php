@@ -15,7 +15,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                             <div class="form-inline">
                                 <div class="input-group input-group-sm" style="width: 250px;">
                                     <select class="form-control  " style="width: 13rem;" wire:model="selected_bulk_action" title="Select bulk action">
@@ -33,7 +33,6 @@
                             </div>
                         </div>
 
-
                         <div class="col-sm-2">
                             <div class="form-inline">
                                 <div class="form-group input-group-sm">
@@ -47,7 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <div class="input-group input-group-sm" style="width: 250px;">
                                 <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                        placeholder="Search Template" wire:model.debounce.500ms="searchable_col_val">
@@ -101,11 +100,7 @@
                                     </td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'user_name' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->UserName->display_name)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_table' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->table_type)}}</td>
-{{--                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'notification_type' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->notification_type)}}</td>--}}
-{{--                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'notification_template' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->notifi_template_name)}}</td>--}}
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'query' )==false?'hide':''}}" >{!!$collection->json_to_string  !!}</td>
-{{--                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'year_recurrence' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->year_recurrence)}}</td>--}}
-{{--                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'month_recurrence' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->month_recurrence)}}</td>--}}
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'day_recurrence' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->recurrentDays)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'start_date' )==false?'hide':''}}" >{{$collection->execute_at_date}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'start_time' )==false?'hide':''}}" >{{$collection->execute_at_time}}</td>

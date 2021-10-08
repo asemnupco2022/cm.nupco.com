@@ -7,6 +7,7 @@ use App\Models\LbsUserSearchSet;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
+
 class ComposeMailComponent extends Component
 {
 

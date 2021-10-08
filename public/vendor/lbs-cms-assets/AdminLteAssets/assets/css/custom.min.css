@@ -59,7 +59,7 @@
     box-shadow: none !important;
 }
 a.brand-link.logo_aria {
-    min-height: 61px;
+    min-height: 66px;
 }
 .brand-link .brand-image {
     float: left;
@@ -186,4 +186,21 @@ img.dark_mode_img {
 .dark-mode .content-wrapper {
     background-color: #ffffff !important;
     color: #333 !important;
+}
+.navbar-dark {
+    background-color: #343a40;
+    border-color: #e57624;
+}
+.main-header {
+    border-bottom: 5px solid #e57624 !important;
+    z-index: 1034;
+}
+[class*=sidebar-dark] .brand-link {
+    border-bottom: 5px solid #e57624 !important;
+}
+[class*=sidebar-light] .brand-link {
+    border-bottom: 5px solid #e57624 !important;
+}
+div#open_confirmation_box {
+    background: #000000b3;
 }

@@ -19,6 +19,10 @@ class CreateLbsAdminsTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('username');
             $table->string('display_name')->nullable();
+            $table->string('country',50)->nullable();
+            $table->string('country_code',10)->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->string('phone_code',10)->nullable();
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();

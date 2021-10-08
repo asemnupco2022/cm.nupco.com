@@ -15,18 +15,32 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-5">
                             <div class="form-inline">
-                                <div class="input-group input-group-sm" style="width: 250px;">
-                                    <select class="form-control  " style="width: 13rem;" wire:model="selected_bulk_action" title="Select bulk action">
-                                        <option value="" selected disabled >Bulk Actions</option>
-                                        @foreach($actions as $actionKey => $action)
-                                            <option value="{{$actionKey}}" > {{ \App\Helpers\PoHelper::NormalizeColString($action)  }}</option>
+
+                                <div class="form-group input-group-sm">
+
+                                    <select class="form-control select2 " style="width: 100%;" wire:model="searchable_col" title="Select Search Column">
+                                        @foreach($columns as $colKey => $column)
+                                            <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group input-group-sm">
+
+                                    <select class="form-control select2 " style="width: 100%;" wire:model="searchable_operator"  title="Select Search Operator">
+                                        @foreach($operators as $operatorKey => $operator)
+                                            <option value="{{$operatorKey}}"> {{ $operator }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="input-group input-group-sm" style="width: 250px;">
+                                    <input type="text" name="table_search" class="form-control float-right" title="Search String"
+                                           placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
+
                                     <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default text-capitalize" wire:click="bulk_action" title="Reset Current Filter">
-                                            <i class="fas fa-check"></i>
+                                        <button type="submit" class="btn btn-default text-capitalize" wire:click="search_reset" title="Reset Current Filter">
+                                            <i class="fas fa-sync"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -34,26 +48,11 @@
                         </div>
 
 
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" style="width: 250px;">
-                                <input type="text" name="table_search" class="form-control float-right" title="Search String"
-                                       placeholder="Search Template" wire:model.debounce.500ms="searchable_col_val">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn btn-default text-capitalize" wire:click="search_reset" title="Reset Current Filter">
-                                        <i class="fas fa-sync"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="col-sm-2 ">
                             <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
-                        </div>
-
-                        <div class="col-md-1">
-                            <button class="btn btn-sm btn-success float-right flat text-capitalize" data-toggle="modal" data-target="#_create_filter"><i class="fas fa-plus "></i>  add staff</button>
                         </div>
                     </div>
                 </div>
@@ -63,43 +62,19 @@
                     <table class="table table-hover text-nowrap">
                         <thead>
                         <tr>
-                            <th>
-
-                                <div class="icheck-primary d-inline">
-                                    <input type="checkbox" autocomplete="off" wire:model="selectAll">
-                                </div>
-                            </th>
                             @foreach($columns as $colKey => $column)
                                 <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</th>
                             @endforeach
-                            <th>Action</th>
-
                         </tr>
                         </thead>
                         <tbody>
                         @if($collections)
                             @foreach($collections as $key => $collection)
                                 <tr>
-                                    <td>
-
-                                        <div class="icheck-primary d-inline " >
-                                            <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $key }}" wire:model="selectedPo.{{$collection->id }}">
-                                        </div>
-                                    </td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'first_name' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->first_name)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_name' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->last_name)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'username' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->username)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'employee_num' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->employee_num)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'Vendor_name' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->username)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_code' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->vendor_code)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'email' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->email)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'role' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->role)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'phone' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->phone)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'permissions' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->getPermissionDisplayNames())}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'status' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->status)}}</td>
-                                    <td>
-                                        <i class="fas fa-trash" style="cursor:pointer" title="delete" wire:click="updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)"></i>&nbsp;&nbsp;&nbsp;
-                                        <i class="fas fa-edit" style="cursor:pointer" title="delete" wire:click="editStaff({{$collection->id}})"></i>
-                                    </td>
-
                                 </tr>
                             @endforeach
                         @endif

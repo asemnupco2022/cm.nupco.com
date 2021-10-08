@@ -134,7 +134,18 @@
                 </li>
 
                 <li class="nav-item increase_size">
-                    <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('staff-manager/*')?'active':'')  }}">
+                    <a href="{{route('web.route.vendor.manager.list')}}" class="nav-link {{ (Request::is('staff-manager/*')?'active':'')  }}">
+                        <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
+                        <img src="{{ asset('img/Group 74.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/Group 80.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <p>
+                            Vendors
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item increase_size">
+                    <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('vendor-manager/*')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
                         <img src="{{ asset('img/Group 74.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/Group 80.svg') }}" alt="job image" title="job image" class="dark_mode_img">

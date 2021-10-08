@@ -15,17 +15,21 @@ class CreateAutoComponent extends Component
     {
         $this->emit('toast-notification-component',$message,$msgType);
     }
+    public $confirmBox=false;
 
     public $templateArray=LbsUserSearchSet::TEMPLATE_ARRAY;
     public $availableQuery=[];
     public $json_data_to_string;
 
    public $poTable='';
-   public $poQuery=null;
+   public $poQuery='';
    public $subject=null;
    public $startTime=null;
    public $startDate=null;
    public $endDate=null;
+
+   public $poTableName;
+   public $selectedFilterName;
 
     public $selectedDays=[
         "mon",
@@ -77,9 +81,25 @@ class CreateAutoComponent extends Component
         $this->endDate=Carbon::parse($value)->format('Y-m-d');
     }
 
+    public function dismiss_confirm_box()
+    {
+        $this->dispatchBrowserEvent('close-confirmation-box');
+    }
+    public function confirm_confirm_box()
+    {
+        $this->confirmBox=true;
+        $this->save_scheduler();
+    }
+
     public function save_scheduler()
     {
+
         $this->validate();
+
+        if (!$this->confirmBox){
+
+            return  $this->dispatchBrowserEvent('open-confirmation-box');
+        }
         $store=new ScheduleNotification();
         $store->subject=$this->subject;
         $store->user_id=auth()->user()->id;
@@ -95,9 +115,10 @@ class CreateAutoComponent extends Component
         $store->expires_at=$this->endDate;
 
         if ($store->save()){
-
             $this->reset_schedule_input();
-         return   $this->emitNotifications('Schedules saved','success');
+
+            $this->emitNotifications('Schedules saved','success');
+            return   $this->dispatchBrowserEvent('close-confirmation-box');
         }
         return  $this->emitNotifications('There is something error','error');
     }
@@ -106,6 +127,7 @@ class CreateAutoComponent extends Component
 
     public function updatedPoTable($value)
     {
+        $this->poTableName= $this->templateArray[$this->poTable];
         $tableTpe=$this->templateArray[$value];
         if (auth()->user()->role =='super_admin'){
             $userQueries=LbsUserSearchSet::onlyActive()->where('template_for_table',$tableTpe)->get();
@@ -115,8 +137,9 @@ class CreateAutoComponent extends Component
         $this->availableQuery=$userQueries->pluck('template_name','id');
     }
 
-    public function updatedSelectedAvailableQuery($value)
+    public function updatedpoQuery($value)
     {
+        $this->selectedFilterName= $this->availableQuery[$value];
         $this->json_data_to_string=LbsUserSearchSet::find($value)->json_to_string;
     }
 

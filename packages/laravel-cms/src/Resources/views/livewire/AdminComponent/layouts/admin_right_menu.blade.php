@@ -505,7 +505,7 @@
                     }).on('click', function () {
                         legacy_sidebar_container($(this))
                     })
-                    var $legacy_sidebar_container = $('<div />', {class: 'mb-1 custom-control custom-switch'}).append($legacy_sidebar_checkbox).append('<span class="custom-control-label" >Sidebar nav legacy style</span>')
+                    var $legacy_sidebar_container = $('<div />', {class: 'mb-1 custom-control custom-switch'}).append($legacy_sidebar_checkbox).append('<span class="custom-control-label" >Sidebar nav legacy</span>')
                     $container.append($legacy_sidebar_container)
 
 
@@ -523,74 +523,6 @@
                     $container.append($dark_mode_container)
 
 
-                    $container.append('<h6 class="darkModeStatus" >Navbar Variants</h6>')
-                    var $navbar_variants = $('<div />', {
-                        class: 'd-flex ',
-
-                    })
-                    var navbar_all_colors = navbar_dark_skins.concat(navbar_light_skins)
-                    var $navbar_variants_colors = createSkinBlock(navbar_all_colors, function () {
-                        var color = $(this).data('color')
-                        navbar_variants_colors(color)
-
-                    })
-                    $navbar_variants.append($navbar_variants_colors)
-                    $container.append($navbar_variants)
-
-
-                    $container.append('<h6 class="darkModeStatus">Accent Color Variants</h6>')
-                    var $accent_variants = $('<div />', {
-                        class: 'd-flex '
-                    })
-                    $container.append($accent_variants)
-                    $container.append(createSkinBlock(accent_colors, function () {
-                        var color = $(this).data('color')
-                        accent_color_variants(color)
-                    }))
-
-                    $container.append('<h6 class="darkModeStatus">Dark Sidebar Variants</h6>')
-                    var $sidebar_variants_dark = $('<div />', {
-                        class: 'd-flex'
-                    })
-                    $container.append($sidebar_variants_dark)
-                    $container.append(createSkinBlock(sidebar_colors, function () {
-                        var color = $(this).data('color')
-                        var sidebarDarkMode = "true";
-                        sidebar_variants(color, sidebarDarkMode)
-                    }))
-
-                    $container.append('<h6 class="darkModeStatus">Light Sidebar Variants</h6>')
-                    var $sidebar_variants_light = $('<div />', {
-                        class: 'd-flex'
-                    })
-                    $container.append($sidebar_variants_light)
-                    $container.append(createSkinBlock(sidebar_colors, function () {
-                        var color = $(this).data('color')
-                        var sidebarDarkMode = "false";
-                        sidebar_variants(color, sidebarDarkMode)
-
-                    }))
-
-                    var logo_skins = navbar_all_colors
-                    $container.append('<h6 class="darkModeStatus">Brand Logo Variants</h6>')
-                    var $logo_variants = $('<div />', {
-                        class: 'd-flex'
-                    })
-                    $container.append($logo_variants)
-                    var $clear_btn = $('<a />', {
-                        href: '#'
-                    }).text('clear').on('click', function (e) {
-                    @this.setThemeSetting({'BrandLogoVariants': ' '});
-                        e.preventDefault()
-                        var $logo = $('.brand-link')
-                        logo_skins.forEach(function (skin) {
-                            $logo.removeClass(skin)
-                        })
-                    })
-                    $container.append(createSkinBlock(logo_skins, function () {
-                        var color = $(this).data('color')
-                        brand_logo_variants(color)
-                    }).append($clear_btn))
 
                     function createSkinBlock(colors, callback) {
                         var $block = $('<div />', {

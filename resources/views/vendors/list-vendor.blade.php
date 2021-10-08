@@ -9,14 +9,14 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Staffs</h3>
+            <h3 class="card-title">Vendors</h3>
 
             <div class="card-tools">
                 {{-- add something--}}
             </div>
         </div>
         <div class="card-body">
-            @livewire('staffs.staff-component')
+            @livewire('vendors.vendor-component')
         </div>
         <!-- /.card-body -->
     </div>

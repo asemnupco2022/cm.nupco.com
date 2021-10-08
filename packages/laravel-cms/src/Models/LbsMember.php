@@ -8,10 +8,11 @@ use rifrocket\LaravelCms\Notifications\MemberResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class LbsMember extends Authenticatable
 {
-    use UniversalModelTrait,HasFactory,Notifiable;
+    use UniversalModelTrait,HasFactory,Notifiable, HasRoles;
 
 
     protected $hidden = [
@@ -20,10 +21,9 @@ class LbsMember extends Authenticatable
     ];
 
     const CONS_COLUMNS=[
-        'username'=>true,
+        'Vendor_name'=>true,
+        'vendor_code'=>true,
         'email'=>true,
-        'role'=>true,
-        'contact'=>true,
         'status'=>true,
     ];
 

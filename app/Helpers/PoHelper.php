@@ -25,6 +25,9 @@ class PoHelper
         }
         $string=  Str::replace('_', ' ', $string);
         $string=  Str::replace('-', ' ', $string);
+        $string=  Str::replace('[', ' ', $string);
+        $string=  Str::replace(']', ' ', $string);
+        $string=  Str::replace('"', ' ', $string);
         return ucwords(trans($string));
     }
 

@@ -104,8 +104,8 @@
                     <div class="input-group-append" data-target="#schedule_end_date" data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    @error('endDate') <span class="error">{{ $message }}</span> @enderror
                 </div>
+                @error('endDate') <span class="error">{{ $message }}</span> @enderror
             </div>
         </div>
 
@@ -198,6 +198,100 @@
                         });
                     });
                 })
+
+                window.addEventListener('open-confirmation-box', event => {
+                    $('#open_confirmation_box').modal({backdrop: 'static', keyboard: false})
+                })
+                window.addEventListener('close-confirmation-box', event => {
+                    setTimeout(function() {  location.reload(); }, 1000);;
+                })
+
+
             </script>
     @endpush
+
+
+        <div class="modal fade"  id="open_confirmation_box" >
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+                                <p class="text-uppercase text-center"> <strong>CONFIRM SCHEDULER</strong> </p>
+                            </div>
+                            <br>
+                            @if($json_data_to_string)
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning alert-dismissible flat">
+                                        <i class="icon fas fa-info-circle"></i>
+                                        {!! $json_data_to_string !!}
+                                    </div>
+                                </div>
+                                <br>
+                            @endif
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Select PO Table: {{\App\Helpers\PoHelper::NormalizeColString($poTableName)}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Select Query: {{\App\Helpers\PoHelper::NormalizeColString($selectedFilterName)}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Subject: {{\App\Helpers\PoHelper::NormalizeColString($subject)}}</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <!-- time Picker -->
+                                <div class="bootstrap-timepicker">
+                                    <div class="form-group">
+                                        <label>Start Time: {{$startTime}}</label>
+                                    </div>
+                                    <!-- /.form group -->
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <!-- Date -->
+                                <div class="form-group">
+                                    <label>Start Date: {{$startDate}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- Date -->
+                                <div class="form-group">
+                                    <label>End Date: {{$endDate}}</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12" >
+                                <div class="form-group">
+                                    <label>Select Day <small>(s)</small>: {{\App\Helpers\PoHelper::NormalizeColString(json_encode($selectedDays))}}</label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" wire:click="dismiss_confirm_box">Cancel</button>
+                        <button class="btn btn-info flat text-capitalize flat" wire:click="confirm_confirm_box">Confirm</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+
+        </div>
 </div>
