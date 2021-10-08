@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Automation\AutoController;
 use App\Http\Controllers\Filters\FilterController;
+use App\Http\Controllers\HosController;
 use App\Http\Controllers\Logs\UserLogController;
 use App\Http\Controllers\Po\PoImportController;
 use App\Http\Controllers\Staffs\StaffController;
@@ -70,7 +71,7 @@ Route::group(array('middleware'=>'web'), function () {
 
     //HOS API
     Route::group(['prefix'=>'hos-api'], function(){
-        Route::get('/vendor-response-to-line',[VendorController::class,'index'])->name('web.route.vendor.manager.list');
+        Route::post('/vendor-response-to-line',[HosController::class,'index'])->name('web.route.vendor.manager.list');
     });
 //    hos-api/vendor-response-to-line
 
