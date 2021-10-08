@@ -69,15 +69,18 @@ Route::group(array('middleware'=>'web'), function () {
     });
 
 
-    //HOS API
-    Route::group(['prefix'=>'hos-api'], function(){
-        Route::post('/vendor-response-to-line',[HosController::class,'index'])->name('web.route.vendor.manager.list');
-    });
+
 //    hos-api/vendor-response-to-line
 
     Route::get('/clear-cache', function () {
         Artisan::call('cache:clear');
         return 'cache cleared';
+    });
+
+
+    //HOS API
+    Route::group(['prefix'=>'hos-api'], function(){
+        Route::post('/vendor-response-to-line',[HosController::class,'index'])->name('web.route.vendor.manager.list');
     });
 
 });
