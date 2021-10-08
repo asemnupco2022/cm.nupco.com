@@ -18,6 +18,7 @@ class HosController extends Controller
         {
             return response()->json(['success'=>false,'msg'=>$v->errors()->first()]);
         }
+
         return response()->json(['success'=>true,'msg'=>'data saved successfully']);
     }
 }
