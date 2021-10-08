@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//HOS API
+Route::group(['prefix'=>'hos-api'], function(){
+    Route::post('/vendor-response-to-line',[HosController::class,'index'])->name('web.route.vendor.manager.list');
 });

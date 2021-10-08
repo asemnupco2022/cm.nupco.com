@@ -78,10 +78,7 @@ Route::group(array('middleware'=>'web'), function () {
     });
 
 
-    //HOS API
-    Route::group(['prefix'=>'hos-api'], function(){
-        Route::post('/vendor-response-to-line',[HosController::class,'index'])->name('web.route.vendor.manager.list');
-    });
+
 
 });
 
