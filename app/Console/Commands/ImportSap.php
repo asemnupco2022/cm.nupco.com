@@ -55,7 +55,7 @@ class ImportSap extends Command
 
 
 
-        $excel = Importer::make('Excel');
+        $excel = Importer::make('Csv');
         $excel->load(Storage::disk('public_uploads')->get('uploads/sap_nupco_backup.csv'));
         $collection = $excel->getCollection();
 
@@ -67,7 +67,7 @@ class ImportSap extends Command
 
                 foreach ($collection as $groupKey => $collectionGroup) {
 
-                    if ($groupKey == 0) continue;
+//                    if ($groupKey == 0) continue;
 
                     if (PoSapMaster::where('purchasing_document', Str::replace(' ', '', $groupKey))->exists()) {
                         PoSapMaster::where('purchasing_document', Str::replace(' ', '', $groupKey))->delete();
