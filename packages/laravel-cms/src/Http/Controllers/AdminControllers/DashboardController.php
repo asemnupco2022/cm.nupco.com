@@ -23,8 +23,8 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $filesPathTest=   Storage::disk('public_uploads')->allFiles('testfolder')[0];
-        dd($filesPathTest);
+//        $filesPathTest=   Storage::disk('public_uploads')->allFiles('testfolder')[0];
+//        dd($filesPathTest);
 //        $expDate_20 = Carbon::now()->subDays(20)->format('Y-m-d');
 //
 //        $prepares=PoSapMasterSchedle::whereDate('nupco_delivery_date','>','2021-08-05')->orderBy('vendor_code')->get()->toArray();
