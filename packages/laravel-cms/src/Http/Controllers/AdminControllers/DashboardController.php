@@ -6,6 +6,7 @@ use App\Jobs\Po\NotifySap;
 use App\Models\PoSapMaster;
 use App\Models\PoSapMasterSchedle;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
@@ -20,6 +21,21 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+
+//        $expDate_20 = Carbon::now()->subDays(20)->format('Y-m-d');
+//
+//        $prepares=PoSapMasterSchedle::whereDate('nupco_delivery_date','>','2021-08-05')->orderBy('vendor_code')->get()->toArray();
+//        $prepares=collect($prepares)->groupBy('vendor_code');
+//
+//        foreach ($prepares as $vendorCode=> $collection){
+//            $childCollection =collect($collection)->groupBy('scheduler_id');
+//            foreach ($childCollection as $schedulerId=> $CCollection){
+//                dispatch(new NotifySap($vendorCode,$schedulerId,$CCollection, 'enquiry-email'));
+//            }
+//        }
+//        dd('eixt');
+
+//       $data = PoSapMasterSchedle::where('vendor_code',400021)->update(['execution_done'=>'20']);dd($data);
 //        Permission::create(['name' => 'lbs-permission-staff-data','display_name'=>'Access Staff','json_data'=>'master']);
 
 //        return response()->json([

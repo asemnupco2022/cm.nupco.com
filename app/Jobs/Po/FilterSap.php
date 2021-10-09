@@ -6,12 +6,10 @@ namespace App\Jobs\Po;
 use App\Models\PoSapMasterSchedle;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail;
 
 class FilterSap implements ShouldQueue
 {
@@ -35,37 +33,67 @@ class FilterSap implements ShouldQueue
      */
     public function handle()
     {
-        $prepares=PoSapMasterSchedle::orderBy('vendor_code')->groupBy('vendor_code')->get();
-        foreach ($prepares as $key=> $prepare){
-            if ($prepare->execution_done=='finish'){
-                continue;
+
+
+        $expDate_20 = Carbon::now()->subDays(20)->format('Y-m-d');
+        $expDate_15 = Carbon::now()->subDays(15)->format('Y-m-d');
+        $expDate_05 = Carbon::now()->subDays(5)->format('Y-m-d');
+        $expDate_00 = Carbon::now()->format('Y-m-d');
+
+        $prepares_20=PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->get()->toArray();
+        $prepares_15=PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_15)->where('execution_done', '20')->get()->toArray();
+        $prepares_05=PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_05)->where('execution_done', '15')->get()->toArray();
+        $prepares_00=PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_00)->where('execution_done', '05')->get()->toArray();
+
+
+        if ($prepares_20 and !empty($prepares_20)){
+
+            PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->update(['execution_done'=>'20']);
+            $vendorByCollection=collect($prepares_20)->groupBy('vendor_code');
+            foreach ($vendorByCollection as $vendorCode=> $collection){
+                $childCollection =collect($collection)->groupBy('scheduler_id');
+                foreach ($childCollection as $schedulerId=> $CCollection){
+                    dispatch(new NotifySap($vendorCode,$schedulerId,$CCollection, 'enquiry-email'));
+                }
             }
 
-            $initDate=Carbon::parse($prepare->trade_date);
-            $now = Carbon::now();
-            $diff = $initDate->diffInDays($now);
+        }
 
-//            dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email')); break;
+        if ($prepares_15 and !empty($prepares_15)){
 
-
-            if ($diff ==20){
-                PoSapMasterSchedle::where('vendor_code', $prepares[$key]->vendor_code)->update('execution_done',20);
-                dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email'));
+            PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->update(['execution_done'=>'15']);
+            $vendorByCollection=collect($prepares_20)->groupBy('vendor_code');
+            foreach ($vendorByCollection as $vendorCode=> $collection){
+                $childCollection =collect($collection)->groupBy('scheduler_id');
+                foreach ($childCollection as $schedulerId=> $CCollection){
+                    dispatch(new NotifySap($vendorCode,$schedulerId,$CCollection, 'enquiry-email'));
+                }
             }
 
-            if ($diff ==15){
-                PoSapMasterSchedle::where('vendor_code', $prepares[$key]->vendor_code)->update('execution_done',15);
-                dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email'));
-            }
+        }
 
-            if ($diff ==5){
-                PoSapMasterSchedle::where('vendor_code', $prepares[$key]->vendor_code)->update('execution_done',5);
-                dispatch(new NotifySap($prepares[$key]->vendor_code,'enquiry-email'));
-            }
+        if ($prepares_05 and !empty($prepares_05)){
 
-            if ($diff ==0){
-                PoSapMasterSchedle::where('vendor_code', $prepares[$key]->vendor_code)->update('execution_done',0);
-                dispatch(new NotifySap($prepares[$key]->vendor_code,'warning email'));
+            PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->update(['execution_done'=>'5']);
+            $vendorByCollection=collect($prepares_20)->groupBy('vendor_code');
+            foreach ($vendorByCollection as $vendorCode=> $collection){
+                $childCollection =collect($collection)->groupBy('scheduler_id');
+                foreach ($childCollection as $schedulerId=> $CCollection){
+                    dispatch(new NotifySap($vendorCode,$schedulerId,$CCollection, 'enquiry-email'));
+                }
+            }
+        }
+
+
+        if ($prepares_00 and !empty($prepares_00)){
+
+            PoSapMasterSchedle::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->update(['execution_done'=>'0']);
+            $vendorByCollection=collect($prepares_20)->groupBy('vendor_code');
+            foreach ($vendorByCollection as $vendorCode=> $collection){
+                $childCollection =collect($collection)->groupBy('scheduler_id');
+                foreach ($childCollection as $schedulerId=> $CCollection){
+                    dispatch(new NotifySap($vendorCode,$schedulerId,$CCollection, 'enquiry-email'));
+                }
             }
         }
 

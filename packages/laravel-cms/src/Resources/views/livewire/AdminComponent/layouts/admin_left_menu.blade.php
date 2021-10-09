@@ -116,7 +116,7 @@
                         <img src="{{ asset('img/Group 76.svg') }}" alt="job image" title="job image"  class="light_mode_img">
                         <img src="{{ asset('img/light/Group 76.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
-                            Automation History
+                            Notification History
                         </p>
                     </a>
                 </li>

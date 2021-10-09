@@ -16,8 +16,13 @@ class LbsUserSearchSet extends Model
 
     const LOG_NAME='LOG_SEARCH_TEMPLATE';
     const TEMPLATE_ALL='all';
+    const TEMPLATE_NOTIFICATION_HISTORY='notification_history';
+
     const TEMPLATE_SAP_LINE_ITEM='sap_line_item';
     const TEMPLATE_SAP_HEADER_ITEM='sap_header_item';
+
+    const TEMPLATE_MOWARED_LINE_ITEM='mowared_line_item';
+    const TEMPLATE_MOWARED_HEADER_ITEM='mowared_header_item';
 
     const TEMPLATE_ARRAY=[
 //        "App\Models\SapView"=>LbsUserSearchSet::TEMPLATE_SAP_HEADER_ITEM,

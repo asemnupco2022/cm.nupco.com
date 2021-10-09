@@ -128,7 +128,6 @@
                         <thead>
                         <tr>
                             <th>
-
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" autocomplete="off" wire:model="selectAll">
                                 </div>
@@ -144,7 +143,6 @@
                         @foreach($collections as $key => $collection)
                             <tr>
                                 <td>
-
                                     <div class="icheck-primary d-inline " >
                                         <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $key }}" wire:model="selectedPo.{{$collection->po_item }}">
                                     </div>

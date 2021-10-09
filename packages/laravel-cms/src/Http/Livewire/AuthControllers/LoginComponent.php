@@ -3,12 +3,18 @@
 
 namespace rifrocket\LaravelCms\Http\Livewire\AuthControllers;
 
+use Illuminate\Support\Facades\Hash;
 use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use Livewire\Component;
 use TorMorten\Eventy\Facades\Eventy;
 
 class LoginComponent extends Component
 {
+
+    public function mount()
+    {
+//        dd(Hash::make(123456789));
+    }
     public $email = 'developer@gmail.com';
     public $password = '123456789';
     public $rememberMe = '';

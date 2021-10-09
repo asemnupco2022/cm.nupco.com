@@ -10,38 +10,24 @@ use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 use rifrocket\LaravelCms\Models\ModelTraits\UniversalModelTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class ScheduleNotification extends Model
+class NotificationHistory extends Model
 {
-use LogsActivity,UniversalModelTrait, HasFactory;
+    use LogsActivity,UniversalModelTrait, HasFactory;
 
-    const LOG_NAME='LOG_SCHEDULE_AUTOMATE';
-    protected static $logName = ScheduleNotification::LOG_NAME;
+    const LOG_NAME='LOG_SCHEDULE_HISTORY';
+    protected static $logName = NotificationHistory::LOG_NAME;
     public $operators=LbsConstants::CONST_OPERATOR;
 
     const CONS_COLUMNS = [
-        'user_name' => true,
-        'po_table' => true,
-//        'notification_type' => true,
-//        'notification_template' => true,
-        'query' => true,
-//        'year_recurrence' => true,
-//        'month_recurrence' => true,
-        'day_recurrence' => true,
-        'start_date' => true,
-        'start_time' => true,
+        'broadcast_type' => true,
+        'mail_type' => true,
+        'table_type'=>true,
+        'sender_name' => true,
+        'recipient_name' => true,
+        'msg_subject' => true,
         'last_executed_at' => true,
-        'attempts' => true,
-        'end_date' => true,
-        'option' => false,
-        'meta' => false,
-        'schedule_status' => true,
-        'status' => true,
-        ];
+    ];
 
-    const JOB_STATUS_AWAIT='await';
-    const JOB_STATUS_COMPLETE='complete';
-    const JOB_STATUS_RECURRENCE='recurrence';
-    const JOB_STATUS_HOLD='hold';
 
     protected $appends = ['user_name','json_to_string','recurrent_days'];
 
@@ -52,7 +38,7 @@ use LogsActivity,UniversalModelTrait, HasFactory;
             $recurrent_days=  Str::replace(['_','-','[',']','"'], ' ', $recurrent_days);
             return $recurrent_days;
         }
-      return '';
+        return '';
     }
 
     public function getUserNameAttribute(){
@@ -74,6 +60,4 @@ use LogsActivity,UniversalModelTrait, HasFactory;
         }
         return $this->attributes['json_to_string'] = $json_data_to_string;
     }
-
-
 }

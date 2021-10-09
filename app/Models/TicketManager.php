@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TicketManager extends Model
 {
     use HasFactory;
+
+
 }

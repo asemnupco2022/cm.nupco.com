@@ -22,12 +22,12 @@ class CreateTicketManagersTable extends Migration
             $table->string('staff_name')->nullable();
             $table->string('staff_email');
             $table->bigInteger('vendor_user_id');
-            $table->bigInteger('vendor_user_model');
+            $table->string('vendor_user_model');
             $table->string('vendor_name')->nullable();
             $table->string('vendor_email');
-            $table->bigInteger('msg_sender_id');
+            $table->enum('msg_sender_id',['staff','vendor']);
             $table->text('msg_body');
-            $table->bigInteger('msg_receiver_id');
+            $table->enum('msg_receiver_id',['staff','vendor']);
             $table->timestamp('msg_read_at')->nullable();
             $table->text('json_data')->nullable();
             $table->enum('status',['new','active', 'deactivated', 'suspended'])->default('active');

@@ -57,7 +57,7 @@ class SapLineItemComponent extends Component
             'customer_name'=>$this->baseInfo->customer_name,
             'po_items'=>$this->selectedPo
         ];
-        $this->emit('event-show-compose-email', $reqType,$sendData);
+        $this->emit('event-show-compose-email', $reqType,$sendData,$this->tableType);
     }
 
 
@@ -106,7 +106,7 @@ class SapLineItemComponent extends Component
     public function fetchBaseInfo()
     {
        $this->baseInfo= PoSapMaster::where('purchasing_document',$this->purchasing_document)->first();
-       $this->userFilterTemplates = LbsUserSearchSet::where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
+       $this->userFilterTemplates = LbsUserSearchSet::NotDel()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
        $getFavFilter=LbsUserSearchSet::OnlyActive()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->where('make_fav','!=', null)->first();
     }
 

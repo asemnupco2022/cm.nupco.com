@@ -3,15 +3,20 @@
 namespace App\Http\Livewire\Mail;
 
 
+use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
+use rifrocket\LaravelCms\Models\LbsMember;
 
 
 class ComposeMailComponent extends Component
 {
 
-    public $mail_to, $mail_subject, $mail_content;
+    public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType;
 
 
     protected $listeners = ['event-show-compose-email' => 'prepareComposerModal'];
@@ -23,9 +28,11 @@ class ComposeMailComponent extends Component
     ];
 
 
-    public function prepareComposerModal($mailType, $mail_data )
+    public function prepareComposerModal($mailType, $mail_data, $tableType )
     {
         $this->mail_content=null;
+        $this->mailType_pro=$mailType;
+        $this->tableType=$tableType;
         $this->mail_content = $this->fetchTemplate($mailType, $mail_data);
         $this->emit('set-mail-content', $this->mail_content);
         $this->dispatchBrowserEvent('open-mail-composer');
@@ -49,7 +56,7 @@ class ComposeMailComponent extends Component
                 $this->mail_subject='expedite email';
                 return $getView= view('mail-templates.expedite-email',compact('mail_data'))->render();
                 break;
-            case 'warning-email':
+                case 'warning-email':
                 $this->mail_subject='warning-email';
                 return $getView= view('mail-templates.warning-email',compact('mail_data'))->render();
                 break;
@@ -84,6 +91,34 @@ class ComposeMailComponent extends Component
             if (Mail::failures()) {
                 return redirect()->back()->with('error','mail sending failed, check log for more details');
             }
+
+            $messageBody =view('mail-templates.mail-container',$mailData)->render();
+            $vendorDetails=LbsMember::where('email',$this->mail_to)->first();
+            $ticket_number=LaravelCmsFacade::lbs_random_generator(16,true,false,true,false);
+            $ticket_hash=Hash::make($ticket_number);
+            $notifiable=  [
+                'broadcast_type'=>'manual',
+                'mail_ticket_number'=>$ticket_number,
+                'mail_ticket_hash'=>$ticket_hash,
+                'mail_type'=>$this->mailType_pro,
+                'table_type'=>$this->tableType,
+                'sender_user_id'=>auth()->user()->id,
+                'sender_user_model'=>"rifrocket\\LaravelCms\\Models\\LbsAdmin",
+                'sender_name'=>auth()->user()->display_name,
+                'sender_email'=>auth()->user()->email,
+                'recipient_user_id'=>$vendorDetails?$vendorDetails->id:null,
+                'recipient_user_model'=>"rifrocket\\LaravelCms\\Models\\LbsMember",
+                'recipient_email'=>$this->mail_to,
+                'msg_subject'=>$this->mail_subject,
+                'msg_body'=>$messageBody,
+                'execute_at_date'=>Carbon::now()->format('Y-m-d'),
+                'execute_at_time'=>Carbon::now()->format('h:m'),
+                'last_executed_at'=>Carbon::now()->format('Y-m-d'),
+                'meta'=>null,
+                'json_data'=>null,
+            ];
+
+            PoHelper::SaveNotificationHistory($notifiable);
             $this->clearData();
 
             return redirect()->back()->with('success','mail send successfully');
