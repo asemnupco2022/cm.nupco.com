@@ -12,7 +12,7 @@
                 <img src="{{URL(LaravelCms::lbs_object_key_exists('avatar',Session::get('_LbsUserSession')))}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block text-uppercase ">{{LaravelCms::lbs_object_key_exists('username',Session::get('_LbsUserSession'))}}</a>
+                <a href="{{route('web.route.profile')}}" class="d-block text-uppercase ">{{LaravelCms::lbs_object_key_exists('username',Session::get('_LbsUserSession'))}}</a>
             </div>
         </div>
 

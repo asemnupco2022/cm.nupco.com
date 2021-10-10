@@ -24,6 +24,7 @@ class NotificationHistory extends Model
         'table_type'=>true,
         'sender_name' => true,
         'recipient_name' => true,
+        'recipient_email' => true,
         'msg_subject' => true,
         'last_executed_at' => true,
     ];

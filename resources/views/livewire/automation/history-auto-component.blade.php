@@ -130,6 +130,7 @@
                                     @else
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'recipient_name' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString('unknown recipient')}}</td>
                                     @endif
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'recipient_email' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->recipient_email)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'msg_subject' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->msg_subject)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->last_executed_at)}}</td>
                                  </tr>

@@ -5,6 +5,7 @@ use App\Http\Controllers\Filters\FilterController;
 use App\Http\Controllers\HosController;
 use App\Http\Controllers\Logs\UserLogController;
 use App\Http\Controllers\Po\PoImportController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Staffs\StaffController;
 use App\Http\Controllers\Vendors\VendorController;
 use Illuminate\Support\Facades\Artisan;
@@ -66,6 +67,12 @@ Route::group(array('middleware'=>'web'), function () {
     //VENDOR MANAGER
     Route::group(['prefix'=>'vendor-manager'], function(){
         Route::get('/',[VendorController::class,'index'])->name('web.route.vendor.manager.list');
+    });
+
+
+    //VENDOR MANAGER
+    Route::group(['prefix'=>'profile'], function(){
+        Route::get('/',[ProfileController::class,'index'])->name('web.route.profile');
     });
 
 
