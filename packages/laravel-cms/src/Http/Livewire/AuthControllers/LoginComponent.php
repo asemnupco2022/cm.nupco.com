@@ -15,8 +15,8 @@ class LoginComponent extends Component
     {
 //        dd(Hash::make(123456789));
     }
-    public $email = 'developer@gmail.com';
-    public $password = '123456789';
+    public $email = null;
+    public $password = null;
     public $rememberMe = '';
 
     //props

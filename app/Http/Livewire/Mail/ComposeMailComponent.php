@@ -57,11 +57,11 @@ class ComposeMailComponent extends Component
                 return $getView= view('mail-templates.expedite-email',compact('mail_data'))->render();
                 break;
                 case 'warning-email':
-                $this->mail_subject='warning-email';
+                $this->mail_subject='warning email';
                 return $getView= view('mail-templates.warning-email',compact('mail_data'))->render();
                 break;
             case 'penalty-email':
-                $this->mail_subject='penalty-email';
+                $this->mail_subject='penalty email';
                 return $getView= view('mail-templates.penalty-email',compact('mail_data'))->render();
                 break;
             default:
