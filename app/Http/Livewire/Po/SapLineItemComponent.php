@@ -55,7 +55,8 @@ class SapLineItemComponent extends Component
             'vendor_code'=>$this->baseInfo->vendor_code,
             'vendor_name'=>$this->baseInfo->vendor_name,
             'customer_name'=>$this->baseInfo->customer_name,
-            'po_items'=>$this->selectedPo
+            'po_items'=>$this->selectedPo,
+            'sap_object'=>$this->selectedPo
         ];
         $this->emit('event-show-compose-email', $reqType,$sendData,$this->tableType);
     }
