@@ -78,6 +78,22 @@
                 </div>
             </div>
         </div>
+{{--            Password--}}
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Password</label>
+                <input type="title" class="form-control"  placeholder="Enter First Name" wire:model="password">
+                @error('password') <span class="error-msg">{{ $message  }}</span> @enderror
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Confirm Password</label>
+                <input type="title" class="form-control"  placeholder="Enter First Name" wire:model="password_confirmation">
+                @error('password_confirmation') <span class="error-msg">{{ $message  }}</span> @enderror
+            </div>
+        </div>
         <div class="row">
             <div class="col-md">
                 <button class="btn btn-info flat text-capitalize" wire:click="updateStaff"><i class="fas fa-download"></i>  Update</button>

@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Staffs;
 
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 use rifrocket\LaravelCms\Models\LbsAdmin;
@@ -28,6 +30,10 @@ class EditStaffComponent extends Component
     public $email=null;
     public $phone=null;
     public $permissions=[];
+
+
+    public $password=null;
+    public $password_confirmation =null;
 
     protected $rules = [
         'employee_num'=>'required',
@@ -66,7 +72,7 @@ class EditStaffComponent extends Component
         $this->first_name=$updateInfo->first_name ;
         $this->last_name=$updateInfo->last_name ;
         $this->username=$updateInfo->username ;
-        $this->password=$updateInfo->password ;
+
         $this->display_name=$updateInfo->display_name ;
         $this->email=$updateInfo->email ;
         $this->role=$updateInfo->role ;
@@ -81,6 +87,22 @@ class EditStaffComponent extends Component
     {
 
         $this->validate();
+
+        if ($this->password){
+
+            $this->validate([
+                'password' => [
+                    'required',
+                    'confirmed',
+                    Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised(),
+                ],
+            ]);
+        }
 
 
         $saveStaff=LbsAdmin::find($this->staff_id);
@@ -97,12 +119,14 @@ class EditStaffComponent extends Component
         $saveStaff->first_name = $this->first_name;
         $saveStaff->last_name = $this->last_name;
         $saveStaff->username = $this->username;
-        $saveStaff->password = Hash::make($this->username);
         $saveStaff->display_name = $this->first_name.' '.$this->last_name;
         $saveStaff->email = $this->email;
         $saveStaff->role = LbsConstants::STAFF_ROLE;
         $saveStaff->phone = $this->phone;
 
+        if ($this->password){
+            $saveStaff->password = Hash::make($this->password);
+        }
         if ($saveStaff->save()){
             $saveStaff->syncPermissions($this->permissions);
             $this->search_reset();
@@ -120,6 +144,8 @@ class EditStaffComponent extends Component
         $this->username=[];
         $this->email=null;
         $this->phone=null;
+        $this->password_confirmation=null;
+        $this->password=null;
         $this->dispatchBrowserEvent('reset-permission-select2');
     }
 

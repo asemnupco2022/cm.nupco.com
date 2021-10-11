@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Profile;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 use rifrocket\LaravelCms\Models\LbsAdmin;
@@ -28,6 +29,9 @@ class ProfileComponent extends Component
     public $email=null;
     public $phone=null;
     public $permissions=[];
+
+    public $password=null;
+    public $password_confirmation =null;
 
     protected $rules = [
         'employee_num'=>'required',
@@ -67,7 +71,6 @@ class ProfileComponent extends Component
         $this->first_name=$updateInfo->first_name ;
         $this->last_name=$updateInfo->last_name ;
         $this->username=$updateInfo->username ;
-        $this->password=$updateInfo->password ;
         $this->display_name=$updateInfo->display_name ;
         $this->email=$updateInfo->email ;
         $this->role=$updateInfo->role ;
@@ -83,6 +86,22 @@ class ProfileComponent extends Component
 
         $this->validate();
 
+        if ($this->password){
+
+            $this->validate([
+                'password' => [
+                    'required',
+                    'confirmed',
+                    Password::min(8)
+                        ->mixedCase()
+                        ->letters()
+                        ->numbers()
+                        ->symbols()
+                        ->uncompromised(),
+                ],
+            ]);
+        }
+
 
         $saveStaff=LbsAdmin::find($this->staff_id);
 
@@ -97,15 +116,18 @@ class ProfileComponent extends Component
         $saveStaff->first_name = $this->first_name;
         $saveStaff->last_name = $this->last_name;
         $saveStaff->username = $this->username;
-        $saveStaff->password = Hash::make($this->username);
         $saveStaff->display_name = $this->first_name.' '.$this->last_name;
         $saveStaff->email = $this->email;
         $saveStaff->role = LbsConstants::STAFF_ROLE;
         $saveStaff->phone = $this->phone;
 
+        if ($this->password){
+            $saveStaff->password = Hash::make($this->password);
+        }
+
         if ($saveStaff->save()){
             $saveStaff->syncPermissions($this->permissions);
-
+            $this->search_reset();
             return $this->emitNotifications('data updated successfully','success');
         }else{
             return $this->emitNotifications('There is something wrong','error');
@@ -114,13 +136,8 @@ class ProfileComponent extends Component
 
     public function search_reset()
     {
-        $this->employee_num=null;
-        $this->first_name=null;
-        $this->last_name=null;
-        $this->username=[];
-        $this->email=null;
-        $this->phone=null;
-        $this->dispatchBrowserEvent('reset-permission-select2');
+        $this->password_confirmation=null;
+        $this->password=null;
     }
     public function render()
     {

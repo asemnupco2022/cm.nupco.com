@@ -231,6 +231,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'TranslationHelper' => App\Helpers\TranslationHelper::class,
+        'DashboardHelper' => App\Helpers\DashboardHelper::class,
 
     ],
 
