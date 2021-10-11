@@ -7,6 +7,7 @@ use App\Http\Controllers\Logs\UserLogController;
 use App\Http\Controllers\Po\PoImportController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Staffs\StaffController;
+use App\Http\Controllers\TicketManagerController;
 use App\Http\Controllers\Vendors\VendorController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -53,8 +54,8 @@ Route::group(array('middleware'=>'web'), function () {
 
     //TICKET MANAGER
     Route::group(['prefix'=>'ticket-manager'], function(){
-        Route::get('/',[AutoController::class,'index'])->name('web.route.ticket.manager.list');
-        Route::get('/chat/{token}',[AutoController::class,'automationHistory'])->name('web.route.ticket.manager.chat');
+        Route::get('/',[TicketManagerController::class,'index'])->name('web.route.ticket.manager.list');
+        Route::get('chat/{token}',[TicketManagerController::class,'ticketChat'])->name('web.route.ticket.manager.chat');
     });
 
 

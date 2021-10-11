@@ -16,17 +16,6 @@
             </div>
         </div>
 
-        <!-- SidebarSearch Form -->
-    {{--        <div class="form-inline">--}}
-    {{--            <div class="input-group" data-widget="sidebar-search">--}}
-    {{--                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">--}}
-    {{--                <div class="input-group-append">--}}
-    {{--                    <button class="btn btn-sidebar">--}}
-    {{--                        <i class="fas fa-search fa-fw"></i>--}}
-    {{--                    </button>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
 
     <!-- Sidebar Menu -->
         <nav class="mt-0">
@@ -34,7 +23,6 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item ">
-
                     <a href="/"  class="nav-link {{ (Request::is('dashboard')?'active':'') }} ">
                         <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
                         <img src="{{ asset('img/Group 69.svg') }}" alt="job image" title="job image" class="light_mode_img">
@@ -46,16 +34,6 @@
                 </li>
 
 
-                <li class="nav-item">
-                    <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
-                        <!-- <i class=" nav-icon fas fa-upload"></i> -->
-                        <img src="{{ asset('img/Group 70.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 70.svg') }}" alt="job image" title="job image" class="dark_mode_img">
-                        <p>
-                            Import PO
-                        </p>
-                    </a>
-                </li>
 
                 <li class="nav-item increase_size">
                     <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">
@@ -68,24 +46,6 @@
                     </a>
                 </li>
 
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{route('web.route.po.MawTable')}}" class="nav-link  {{ (Request::is('mowared-pos')?'active':'')  }}  {{(Request::is('mow-line-items-po/*')?'active':'')}}">--}}
-                {{--                        <i class=" nav-icon fas fa-file"></i>--}}
-                {{--                        <p>--}}
-                {{--                            Mowared PO--}}
-                {{--                        </p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
-
-
-                {{--                <li class="nav-item">--}}
-                {{--                    <a href="{{route('lbs.admin.dashboard.listAppSettings')}}" class="nav-link">--}}
-                {{--                        <i class=" nav-icon fas fa-cogs"></i>--}}
-                {{--                        <p>--}}
-                {{--                            Settings--}}
-                {{--                        </p>--}}
-                {{--                    </a>--}}
-                {{--                </li>--}}
 
                 <li class="nav-item">
                     <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('filters')?'active':'')  }}  ">
@@ -155,15 +115,27 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{route('web.route.ticket.manager.list')}}" class="nav-link {{ (Request::is('ticket-manager/*')?'active':'') }}">
+                        <!-- <i class=" nav-icon fas fa-upload"></i> -->
+                        <img src="{{ asset('img/Group 83.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/Group 83.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <p>
+                            Ticket Manager
+                        </p>
+                    </a>
+                </li>
 
-{{--                <li class="nav-item ">--}}
-{{--                    <a href="" wire:click.prevent="logout" class="nav-link ">--}}
-{{--                        <p class="">--}}
-{{--                            Logout--}}
-{{--                        </p>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-
+                <li class="nav-item">
+                    <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
+                        <!-- <i class=" nav-icon fas fa-upload"></i> -->
+                        <img src="{{ asset('img/Group 70.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/Group 70.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <p>
+                            Import PO
+                        </p>
+                    </a>
+                </li>
 
             </ul>
         </nav>
