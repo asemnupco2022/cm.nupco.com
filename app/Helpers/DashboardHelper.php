@@ -33,35 +33,44 @@ class DashboardHelper
         return $months;
 
     }
-    public static function historyCounter( $mail_type, $onlyTotal=null, $broadcastType=null, $year=null, $months=null)
+    public static function historyCounter( $mail_type=null, $onlyTotal=null, $broadcastType=null, $year=null, $months=null)
     {
 
-        $counts=0;
+        $counts=null;
 
-        if (!empty($onlyTotal)){
-            $counts = DB::table('notification_histories')
-                ->where('mail_type',$mail_type );
-        }
+        $counts = DB::table('notification_histories');
 
-        elseif ( $months and $year and $mail_type and !empty($year) and !empty($months)){
-          $counts = DB::table('notification_histories')
+            if($mail_type){
+                $counts= $counts->where('mail_type',$mail_type );
+            }
+
+
+
+        if ($year and $months  and !empty($year) and !empty($months)){
+            $counts= $counts
                 ->whereMonth('created_at', $months)
-                ->whereYear('created_at', $year)
-                ->where('mail_type',$mail_type );
+                ->whereYear('created_at', $year);
         }
+
 
         if ($broadcastType){
+
             $counts= $counts->where('broadcast_type',$broadcastType);
         }
 
-        $counts=$counts->get()->count();
+        if ($counts !=null){
+            $counts=$counts->get()->count();
+        }
+
         return $counts;
     }
 
 
-    public static function lineChart($mail_type=null ,array $months=[],$onlyMonths=null, $year=null, $broadcastType=null )
+    public static function lineChart($mail_type=null ,array $months=null,$onlyMonths=null, $year=null, $broadcastType=null )
     {
        $valueReturn=[];
+
+
 
         if ($onlyMonths ){
             if ($months){
@@ -75,12 +84,13 @@ class DashboardHelper
         }
 
         foreach ($months as $month){
-            if ( $month and $year and $mail_type and !empty($year) and !empty($month)){
+            if ( $month and $year and $mail_type and !empty($year) and !empty($month) ){
 
                 $valueReturn[] = self::historyCounter($mail_type,null,$broadcastType,$year,$month);
             }else{
 
                 $valueReturn[] = self::historyCounter($mail_type,null,$broadcastType,date('Y'),$month);
+
             }
 
         }
