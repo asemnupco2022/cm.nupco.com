@@ -76,7 +76,7 @@ class DashboardHelper
             if ($months){
                 return $months;
             }
-            return self::monthGenerator(7,true, true);
+            return self::monthGenerator(6,true, true);
         }
 
         if (empty($months)){
