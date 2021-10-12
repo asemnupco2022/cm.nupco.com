@@ -11,14 +11,76 @@
                 font-weight: 300 !important;
             }
 
+            @charset "UTF-8";
+            .avatar-wrapper {
+                position: relative;
+                height: 200px;
+                width: 200px;
+                margin: 50px auto;
+                border-radius: 50%;
+                overflow: hidden;
+                box-shadow: 1px 1px 15px -5px black;
+                transition: all 0.3s ease;
+            }
+            .avatar-wrapper:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+            .avatar-wrapper:hover .profile-pic {
+                opacity: 0.5;
+            }
+            .avatar-wrapper .profile-pic {
+                height: 100%;
+                width: 100%;
+                transition: all 0.3s ease;
+            }
+            .avatar-wrapper .profile-pic:after {
+                font-family: FontAwesome;
+                content: "";
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                font-size: 190px;
+                background: #ecf0f1;
+                color: #ecf0f1;
+                text-align: center;
+            }
+            .avatar-wrapper .upload-button {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+            }
+            .avatar-wrapper .upload-button .fa-arrow-circle-up {
+                position: absolute;
+                font-size: 234px;
+                top: -17px;
+                left: -17px;
+                text-align: center;
+                opacity: 0;
+                transition: all 0.3s ease;
+                color: #e54b00;
+            }
+            .avatar-wrapper .upload-button:hover .fa-arrow-circle-up {
+                opacity: 0.9;
+            }
+
         </style>
     @endpush
 
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-uppercase text-center text-uppercase"> <strong>UPDATE PROFILE</strong> </p>
-
+    <div class="avatar-wrapper">
+            <img class="profile-pic" src="{{$OldAvatar}}" />
+        <div class="upload-button">
+            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
         </div>
+        <input class="file-upload" wire:model="avatar" type="file" accept="image/*" />
+        @error('avatar') <span class="error">{{ $message }}</span> @enderror
+    </div>
+
+    <div class="row">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="exampleInputEmail1">Employee Number</label>
@@ -143,6 +205,21 @@
                 });
             })
 
+
+
+
+            // =======avatar====|
+            document.addEventListener('livewire:load', function () {
+
+
+                // $(".file-upload").on('change', function(){
+                //     @this.saveAvatar();
+                // });
+
+                $(".upload-button").on('click', function() {
+                    $(".file-upload").click();
+                });
+            })
 
         </script>
     @endpush

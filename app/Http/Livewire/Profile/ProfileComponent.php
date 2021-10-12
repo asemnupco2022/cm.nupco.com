@@ -3,18 +3,44 @@
 namespace App\Http\Livewire\Profile;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 use rifrocket\LaravelCms\Models\LbsAdmin;
+use Sabberworm\CSS\Value\URL;
 use Spatie\Permission\Models\Permission;
 
 class ProfileComponent extends Component
 {
+    use WithFileUploads;
 
     public function emitNotifications($message, $msgType)
     {
         $this->emit('toast-notification-component',$message,$msgType);
+    }
+
+    public $avatar;
+    public $OldAvatar;
+//    public function saveAvatar()
+    public function updatedAvatar()
+    {
+//        $this->validate([
+//            'avatar' => 'image|max:1024', // 1MB Max
+//        ]);
+
+        $extension=$this->avatar->getClientOriginalName();
+        $path ='uploads/avatar/';
+        $fileName='staff_avatar_'.auth()->user()->id.'_'.$extension;
+
+
+        $this->avatar->storeAs($path, $fileName, 'public_uploads');
+        if (LbsAdmin::find(auth()->user()->id)->update(['avatar'=>$path.$fileName])){
+            $this->fetchBseInfo();
+            return $this->emitNotifications('data updated successfully','success');
+        }
+        return $this->emitNotifications('There is something wrong','error');
     }
 
     protected $listeners=['update-staff-data'=>'fetchBseInfo'];
@@ -75,6 +101,7 @@ class ProfileComponent extends Component
         $this->email=$updateInfo->email ;
         $this->role=$updateInfo->role ;
         $this->phone=$updateInfo->phone ;
+        $this->OldAvatar=URL($updateInfo->avatar) ;
 
         $this->permissions=$updateInfo->getPermissionNames();
 

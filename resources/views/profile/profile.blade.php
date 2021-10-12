@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Profile</h3>
+            <h3 class="card-title">UPDATE PROFILE</h3>
 
             <div class="card-tools">
                 {{-- add something--}}

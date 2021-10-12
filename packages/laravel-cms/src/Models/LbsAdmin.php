@@ -14,6 +14,7 @@ use Spatie\Permission\Traits\HasRoles;
 class LbsAdmin extends Authenticatable
 {
     use UniversalModelTrait,HasFactory,Notifiable, HasRoles;
+    protected $fillable  = ['avatar'];
 
     const LBS_CONST_ADMIN='admin';
     const LBS_CONST_SUPER_ADMIN='super_admin';

@@ -41,7 +41,7 @@
                         <img src="{{ asset('img/lt3.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/dk3.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
-                            SAP PO
+                            Purchase Orders Management
                         </p>
                     </a>
                 </li>
