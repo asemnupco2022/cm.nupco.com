@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 permission_col_profile">
             <div class="form-group">
                 <label>Permissions</label>
 

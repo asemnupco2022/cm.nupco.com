@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">
                     <br>
-                    <div class="row">
+                    <div class="row yf_display_inline">
                         <div class="col-sm-1">
                             <div class="form-group input-group-sm">
                                 <select class="form-control  " style="width: 100%;" wire:model="number_of_rows" >
@@ -15,15 +15,22 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <div class="form-inline">
-                                <div class="input-group input-group-sm" style="width: 250px;">
+                                <div class="input-group input-group-sm"">
                                     <select class="form-control  " style="width: 13rem;" wire:model="selected_bulk_action" title="Select bulk action">
                                         <option value="" selected disabled >Bulk Actions</option>
                                         @foreach($actions as $actionKey => $action)
                                             <option value="{{$actionKey}}" > {{ \App\Helpers\PoHelper::NormalizeColString($action)  }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-1">
+                            <div class="form-inline">
+                                <div class="input-group input-group-sm"">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default text-capitalize" wire:click="bulk_action" title="Reset Current Filter">
                                             <i class="fas fa-check"></i>
@@ -47,7 +54,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <div class="input-group input-group-sm" style="width: 250px;">
+                            <div class="input-group input-group-sm"">
                                 <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                        placeholder="Search Template" wire:model.debounce.500ms="searchable_col_val">
                                 <div class="input-group-append">
@@ -58,13 +65,10 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-4 display-block">
                             <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
-                        </div>
-
-                        <div class="col-md-2">
                             <button class="btn btn-sm btn-success float-right flat" data-toggle="modal" data-target="#_create_filter"><i class="fas fa-plus"></i>  Create Filter</button>
                         </div>
                     </div>

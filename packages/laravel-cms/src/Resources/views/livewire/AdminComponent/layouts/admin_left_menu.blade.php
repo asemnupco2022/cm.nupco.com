@@ -25,8 +25,8 @@
                 <li class="nav-item ">
                     <a href="/"  class="nav-link {{ (Request::is('dashboard')?'active':'') }} ">
                         <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
-                        <img src="{{ asset('img/Group 69.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 69.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt1.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk1.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p class="">
                             Dashboard
                         </p>
@@ -38,8 +38,8 @@
                 <li class="nav-item increase_size">
                     <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">
                         <!-- <i class=" nav-icon fas fa-file"></i> -->
-                        <img src="{{ asset('img/Group 71.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 71.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt3.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk3.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             SAP PO
                         </p>
@@ -50,8 +50,8 @@
                 <li class="nav-item">
                     <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('filters')?'active':'')  }}  ">
                         <!-- <i class=" nav-icon fas fa-filter"></i> -->
-                        <img src="{{ asset('img/Group 72.svg') }}" alt="job image" title="Filters image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 72.svg') }}" alt="job image" title="Filters image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt4.svg') }}" alt="job image" title="Filters image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk4.svg') }}" alt="job image" title="Filters image" class="dark_mode_img">
                         <p>
                             Filters
                         </p>
@@ -59,11 +59,11 @@
                 </li>
 
 
-                <li class="nav-item increase_size">
+                <li class="nav-item ">
                     <a href="{{route('web.route.automation.list')}}" class="nav-link {{ (Request::is('automation')?'active':'')  }} ">
                         <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
-                        <img src="{{ asset('img/Group 73.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 73.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt5.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk5.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Automation
                         </p>
@@ -73,8 +73,8 @@
                 <li class="nav-item">
                     <a href="{{route('web.route.automation.history')}}" class="nav-link {{ (Request::is('automation/automation-history')?'active':'')  }} ">
                         <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
-                        <img src="{{ asset('img/Group 76.svg') }}" alt="job image" title="job image"  class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 76.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt6.svg') }}" alt="job image" title="job image"  class="light_mode_img">
+                        <img src="{{ asset('img/light/dk6.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Notification History
                         </p>
@@ -85,8 +85,8 @@
                 <li class="nav-item ">
                     <a href="{{route('web.route.logs.staff.logs')}}" class="nav-link {{ (Request::is('logs/staff-logs')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
-                        <img src="{{ asset('img/Group 75.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 75.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt7.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk7.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Staff Logs
                         </p>
@@ -96,8 +96,8 @@
                 <li class="nav-item increase_size">
                     <a href="{{route('web.route.vendor.manager.list')}}" class="nav-link {{ (Request::is('staff-manager/*')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
-                        <img src="{{ asset('img/Group 74.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 80.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt8.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk8.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Vendors
                         </p>
@@ -107,30 +107,30 @@
                 <li class="nav-item increase_size">
                     <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('vendor-manager/*')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
-                        <img src="{{ asset('img/Group 74.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 80.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt9.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk9.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Staffs
                         </p>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item increase_size" >
                     <a href="{{route('web.route.ticket.manager.list')}}" class="nav-link {{ (Request::is('ticket-manager/*')?'active':'') }}">
                         <!-- <i class=" nav-icon fas fa-upload"></i> -->
-                        <img src="{{ asset('img/Group 83.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 83.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt10.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk10.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Ticket Manager
                         </p>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item ">
                     <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
                         <!-- <i class=" nav-icon fas fa-upload"></i> -->
-                        <img src="{{ asset('img/Group 70.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/Group 70.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/lt2.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk2.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Import PO
                         </p>

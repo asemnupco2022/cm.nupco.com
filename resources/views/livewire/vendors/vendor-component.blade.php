@@ -4,8 +4,8 @@
             <div class="card">
                 <div class="card-header">
                     <br>
-                    <div class="row">
-                        <div class="col-sm-1">
+                    <div class="row yf_display_inline">
+                        <div class= "col-sm-1">
                             <div class="form-group input-group-sm">
                                 <select class="form-control  " style="width: 100%;" wire:model="number_of_rows" >
                                     @foreach($num_rows as $rowKey => $num_row)
@@ -14,42 +14,44 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="col-sm-5">
+                        <div class="col-sm-2">
                             <div class="form-inline">
-
                                 <div class="form-group input-group-sm">
-
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_col" title="Select Search Column">
                                         @foreach($columns as $colKey => $column)
                                             <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group input-group-sm">
-
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-inline">
+                            <div class="form-group input-group-sm">
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_operator"  title="Select Search Operator">
                                         @foreach($operators as $operatorKey => $operator)
                                             <option value="{{$operatorKey}}"> {{ $operator }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-group input-group-sm" style="width: 250px;">
-                                    <input type="text" name="table_search" class="form-control float-right" title="Search String"
-                                           placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
+                            </div>
+                       </div>
+                        <div class="col-sm-3">
+                            <div class="form-inline">
+                                <div class="input-group input-group-sm">
+                                        <input type="text" name="table_search" class="form-control float-right" title="Search String"
+                                            placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
 
-                                    <div class="input-group-append">
-                                        <button type="submit" class="btn btn-default text-capitalize" wire:click="search_reset" title="Reset Current Filter">
-                                            <i class="fas fa-sync"></i>
-                                        </button>
-                                    </div>
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default text-capitalize" wire:click="search_reset" title="Reset Current Filter">
+                                                <i class="fas fa-sync"></i>
+                                            </button>
+                                        </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="col-sm-2 ">
+                       </div>
+                       
+                        <div class="col-sm-4 align-right">
                             <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>

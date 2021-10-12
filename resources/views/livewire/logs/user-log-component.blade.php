@@ -17,7 +17,7 @@
                         </div>
                     </div> <br>
 
-                    <div class="row">
+                    <div class="row yf_display_inline">
 
                         <div class="col-sm-1">
                             <div class="form-group input-group-sm">
@@ -30,7 +30,7 @@
                         </div>
 
 
-                        <div class="col-sm-5">
+                        <div class="col-sm-2">
                             <div class="form-inline">
 
                                 <div class="form-group input-group-sm">
@@ -41,15 +41,24 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="form-group input-group-sm">
+                            </div>
+                        </div>
 
+                        <div class="col-sm-2">
+                            <div class="form-inline">
+                                <div class="form-group input-group-sm">
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_operator"  title="Select Search Operator">
                                         @foreach($operators as $operatorKey => $operator)
                                             <option value="{{$operatorKey}}"> {{ $operator }}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-group input-group-sm" style="width: 250px;">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="form-inline">
+                                <div class="input-group input-group-sm">
                                     <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                            placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
 
@@ -59,9 +68,7 @@
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
 
 {{--                        <div class="col-sm-3">--}}
@@ -85,7 +92,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
-                        <div class="col-sm-2 ">
+                        <div class="col-sm-5 display-block user-log">
                             <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>

@@ -59,7 +59,7 @@
     box-shadow: none !important;
 }
 a.brand-link.logo_aria {
-    min-height: 66px;
+    min-height: 65px;
 }
 .brand-link .brand-image {
     float: left;
@@ -128,7 +128,7 @@ body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-fo
 }
 .user-panel img {
     height: auto;
-    width: 42px!important;
+    width: 50px!important;
     box-shadow: none !important;
 }
 .increase_size img {
@@ -189,18 +189,78 @@ img.dark_mode_img {
 }
 .navbar-dark {
     background-color: #343a40;
-    border-color: #e57624;
+    border-color: #e52900;
 }
 .main-header {
-    border-bottom: 5px solid #e57624 !important;
+    border-bottom: 5px solid #e52900 !important;
     z-index: 1034;
 }
 [class*=sidebar-dark] .brand-link {
-    border-bottom: 5px solid #e57624 !important;
+    border-bottom: 5px solid #e52900 !important;
 }
 [class*=sidebar-light] .brand-link {
-    border-bottom: 5px solid #e57624 !important;
+    border-bottom: 5px solid #e52900 !important;
 }
 div#open_confirmation_box {
     background: #000000b3;
+}
+.content-wrapper {
+    background: #f3f3f3 !important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #378cc9 !important;
+    border-color: #378cc9 !important;
+    box-shadow: none;
+}
+.btn-success {
+    color: #fff;
+    background-color: #A3B443 !important;
+    border-color: #A3B443 !important;
+    box-shadow: none;
+}
+.yf_display_inline .form-inline {
+    display: contents;
+}
+.yf_display_inline .col-sm-4.display-block {
+    float: right;
+    text-align: right;
+}
+.yf_display_inline button.btn.btn-sm.btn-success.float-right.flat {
+    margin-left: 10px;
+}
+td {
+    font-size: 14px;
+}
+.btn-warning {
+    color: #ffffff !important;
+    background-color: #f2c600 !important;
+    border-color: #f2c600 !important;
+    box-shadow: none;
+}
+.yf_display_inline select.form-control {
+    line-height: 14px !important;
+    padding: 0px 2px;
+}
+.yf_display_inline .col-sm-3.inline_block .form-group.input-group-sm {
+    width: 50%;
+}
+.yf_display_inline .col-sm-3.inline_block .form-group.input-group-sm {
+    width: 50%;
+    float: left;
+}
+.yf_display_inline .col-sm-3.display-block.automation {
+    padding: 0px;
+}
+.yf_display_inline .col-sm-5.display-block.user-log {
+    text-align: right;
+}
+th {
+    font-size: 15px;
+}
+.yf_display_inline .col-sm-4.align-right {
+    text-align: right;
+}
+.permission_col_profile span.right.badge.badge-info.lbs-badge {
+    margin-bottom: 10px;
 }
