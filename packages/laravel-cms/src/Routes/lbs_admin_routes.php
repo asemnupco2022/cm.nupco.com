@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Route;
 //Route::group(array('domain' => config('lbs-laravel-cms.application.admin_route_domain').'.'.env('APP_DOMAIN'),'middleware'=>'web'), function () {
 Route::group(array('middleware'=>'web'), function () {
 
-
     // Login and Logout
     Route::GET('/', [LoginController::class, 'showLoginForm'])->name('lbs.auth.admin.login');
     Route::GET('/logout', [LoginController::class, 'logout'])->name('lbs.auth.admin.logout');
