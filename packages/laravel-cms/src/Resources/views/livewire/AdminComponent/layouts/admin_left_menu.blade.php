@@ -36,17 +36,106 @@
 
 
                 <li class="nav-item increase_size">
-                    <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">
-                        <!-- <i class=" nav-icon fas fa-file"></i> -->
+                    <a href="#" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }} {{ (Request::is('import-pos')?'active':'')  }}  {{(Request::is('sap-pos')?' menu-is-opening menu-open':'')}}
+                
+                    ">    
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/lt3.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/dk3.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
-                            Purchase Orders Management
+                            PO Management
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview "  style="display: {{ Request::is('sap-pos') ? 'block;' : '' }} {{ Request::is('import-pos') ? 'block;' : '' }}">
+                        <li class="nav-item ">
+                            <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }} ">
+                            <img src="{{ asset('img/dspa_light.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
+                            <img src="{{ asset('img/light-dropdown-icon/dspa_dark.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;"> 
+                            <p>SAP Reports</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/audit-report-survey.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
+                            <img src="{{ asset('img/light-dropdown-icon/audit-report-survey.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;"> 
+                            <p>Mawared Report</p>
+                            </a>
+                        </li>
+                        <li class="nav-item ">
+                            <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
+                                <!-- <i class=" nav-icon fas fa-upload"></i> -->
+                                <img src="{{ asset('img/lt2.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 24px !important; margin-right: 22px;">
+                                <img src="{{ asset('img/light/dk2.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 24px !important; margin-right: 22px;">
+                                <p>
+                                    Import PO
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-
-
+                <li class="nav-item increase_size">
+                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">    
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                        <img src="{{ asset('img/management.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 25px !important; ">
+                        <img src="{{ asset('img/light-dropdown-icon/management.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 25px !important;">
+                        <p>
+                            Expediting Management
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/reminders.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 24px !important; margin-right: 22px;">
+                            <img src="{{ asset('img/light-dropdown-icon/reminders.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 24px !important; margin-right: 22px;">
+                            <p>Supplier Reminder</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/supplier_warning.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/supplier_warning.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>Supplier Warning</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item increase_size">
+                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">    
+                        <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                        <img src="{{ asset('img/control-panel.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 25px !important; margin-right: 24px;">
+                        <img src="{{ asset('img/light-dropdown-icon/control-panel.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 25px !important; margin-right: 24px;">
+                        <p>
+                            Expediting Control
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>Supplier Requests</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/radar-tracking.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/radar-tracking.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>Tracking Requests</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/frq.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/rfq.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>RFQ</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+               
                 <li class="nav-item">
                     <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('filters')?'active':'')  }}  ">
                         <!-- <i class=" nav-icon fas fa-filter"></i> -->
@@ -62,7 +151,7 @@
                 <li class="nav-item ">
                     <a href="{{route('web.route.automation.list')}}" class="nav-link {{ (Request::is('automation')?'active':'')  }} ">
                         <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
-                        <img src="{{ asset('img/lt5.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/lt5.svg') }}" alt="job image" title="job image" class="light_mode_img" style=" width: 21px;  margin-right: 22px;">
                         <img src="{{ asset('img/light/dk5.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Automation
@@ -118,21 +207,10 @@
                 <li class="nav-item increase_size" >
                     <a href="{{route('web.route.ticket.manager.list')}}" class="nav-link {{ (Request::is('ticket-manager/*')?'active':'') }}">
                         <!-- <i class=" nav-icon fas fa-upload"></i> -->
-                        <img src="{{ asset('img/lt10.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/dk10.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                        <img src="{{ asset('img/ticket.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                        <img src="{{ asset('img/light/dk12.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
                             Ticket Manager
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-item ">
-                    <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
-                        <!-- <i class=" nav-icon fas fa-upload"></i> -->
-                        <img src="{{ asset('img/lt2.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/dk2.svg') }}" alt="job image" title="job image" class="dark_mode_img">
-                        <p>
-                            Import PO
                         </p>
                     </a>
                 </li>

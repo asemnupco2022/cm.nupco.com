@@ -34,9 +34,9 @@
 .nav-sidebar .nav-item>.nav-link {
     position: relative;
     color: #76797a;
-    font-size: 18px;
+    font-size: 17px;
     align-items: center;
-    padding: 12px 30px;
+    padding: 12px 25px;
 }
 .elevation-4 {
     box-shadow: 0 0px 7px rgba(0,0,0,0.25),0 0px 1px rgba(0,0,0,.22)!important;
@@ -72,7 +72,7 @@ a.brand-link.logo_aria {
 }
 .main-sidebar, .main-sidebar::before {
     transition: margin-left .3s ease-in-out,width .3s ease-in-out;
-    width: 305px;
+    width: 309px;
 }
 span.font-weight-light {
     color: #e46e00;
@@ -263,4 +263,41 @@ th {
 }
 .permission_col_profile span.right.badge.badge-info.lbs-badge {
     margin-bottom: 10px;
+}
+.yf_display_inline .col-sm-3.display-block.automation {
+    text-align: right;
+}
+.yf_display_inline .col-sm-8.display-block .form-inline {
+    display: flex;
+}
+.yf_display_inline .col-sm-4.button_pos {
+    text-align: right;
+}
+.sidebar {
+    min-height: 692px;
+}
+.nav-sidebar .nav-item>.nav-link .right {
+    margin-top: 8px;
+}
+.bg-info {
+    background-color: #378cc9!important;
+}
+.bg-success {
+    background-color: #a3b443!important;
+}
+.bg-warning {
+    background-color: #f2c600!important;
+}
+.bg-danger {
+    background-color: #972f48!important;
+}
+.card-success:not(.card-outline)>.card-header {
+    background-color: #A3B443;
+}
+.card-info:not(.card-outline)>.card-header {
+    background-color: #a3b443;
+}
+.dashboard_style .card-header {
+    background: #A3B442 !important;
+    padding: 11px 20px;
 }

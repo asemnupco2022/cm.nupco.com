@@ -18,7 +18,7 @@
                 <div class="card-header">
                     <br>
                     @if($json_data_to_string)
-                    <div class="row">
+                    <div class="row ">
                         <div class="col-md">
                             <div class="alert alert-warning alert-dismissible flat">
                                 <i class="icon fas fa-info-circle"></i>

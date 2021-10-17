@@ -12,7 +12,7 @@
 
                     <br>
 
-                    <div class="row">
+                    <div class="row yf_display_inline">
 {{--                        <div class="col-sm-2">--}}
 {{--                            <div class="form-group">--}}
 {{--                                <div class="input-group input-group-sm">--}}
@@ -28,7 +28,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-8 display-block">
                             <div class="form-inline">
 
                                 <div class="form-group input-group-sm">
@@ -64,7 +64,7 @@
 
                         </div>
 
-                        <div class="col-sm-2">
+                        <div class="col-sm-4 button_pos">
                             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>

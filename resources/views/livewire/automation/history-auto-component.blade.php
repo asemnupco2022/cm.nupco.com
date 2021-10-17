@@ -27,7 +27,7 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 
-                        <div class="col-sm-3 inline_block">
+                        <div class="col-sm-3 inline_block pr-0">
                             <div class="form-inline">
                                 <div class="form-group input-group-sm">
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_col" title="Select Search Column">
@@ -45,11 +45,12 @@
                                     </select>
                                 </div>
                                 
+                                
                             </div>
                         </div>
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 pl-0">
                             <div class="form-inline">
-                                <div class="input-group input-group-sm">
+                            <div class="input-group input-group-sm">
                                     <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                            placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
 

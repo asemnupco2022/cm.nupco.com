@@ -92,12 +92,11 @@
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-        <strong>Copyright &copy;2014-{{date('Y')}} <a href="/">{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</a>.</strong>
-        All rights reserved.
-        <div class="float-right d-none d-sm-inline-block">
+    <footer class="main-footer text-center">
+        <strong>Copyright &copy; {{date('Y')}} <a href="/">{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</a>.</strong>
+       {{-- <div class="float-right d-none d-sm-inline-block">
             <b>Version</b> {{LaravelCms::lbs_object_key_exists('app_version',Session::get('_LbsAppSession'))}}
-        </div>
+        </div> --}}
     </footer>
 </div>
 <!-- ./wrapper -->

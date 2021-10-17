@@ -84,7 +84,7 @@
         <!-- ./col -->
     </div>
 
-    <div class="row">
+    <div class="row dashboard_style">
         <div class="col-md-6">
 
             <!-- BAR CHART -->

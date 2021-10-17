@@ -48,7 +48,8 @@ class ImportSap extends Command
 
         $filesName=   Storage::disk('nupco_remote')->allFiles()[0];
         if (App::environment('local')){
-            Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($filesName));
+            // Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($filesName));
+             Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($filesName));
         }else{
             Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($filesName));
         }
