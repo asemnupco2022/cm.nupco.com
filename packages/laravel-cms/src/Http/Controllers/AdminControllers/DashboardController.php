@@ -13,6 +13,7 @@ use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use Importer;
+
 class DashboardController extends Controller
 {
 
@@ -23,6 +24,12 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        $baseFilePath=public_path('uploads/sap_nupco_backup.csv');        
+        if(File::exists($baseFilePath)) {
+            File::delete($baseFilePath);
+        }
+
+
         return view('LbsViews::admin_views.views.dashboard');
     }
 

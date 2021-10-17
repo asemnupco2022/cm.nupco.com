@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
 //         $schedule->command('lbs:scheduler')->everyMinute();
          $schedule->command('lbs:po-scheduler')->everyMinute();
          $schedule->command('lbs:po-scheduler-ex')->daily();
-         $schedule->command('lba:import-sap')->everyMinute();
+         $schedule->command('lba:import-sap')->dailyAt('02:00');
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Importer;
 
 class ImportSap extends Command
@@ -43,6 +44,11 @@ class ImportSap extends Command
      */
     public function handle()
     {
+        $baseFilePath=public_path('uploads/sap_nupco_backup.csv');        
+        if(File::exists($baseFilePath)) {
+            File::delete($baseFilePath);
+        }
+
         if (App::environment('local')){
             $filesName=   Storage::disk('nupco_remote_dev')->allFiles()[0];
             Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote_dev')->get($filesName));
@@ -54,7 +60,7 @@ class ImportSap extends Command
 
 
         $excel = Importer::make('Csv');
-        $excel->load(public_path('uploads/sap_nupco_backup.csv'));
+        $excel->load($baseFilePath);
         $collection = $excel->getCollection()->toArray();
 
         $newCollection=[];
