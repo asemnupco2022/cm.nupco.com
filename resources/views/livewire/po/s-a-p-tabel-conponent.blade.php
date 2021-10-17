@@ -132,7 +132,6 @@
         </div>
         <div class="col-md-12">
 
-            <form>
                 <div class="card-body">
                     <table class="table table-hover text-nowrap">
                         <tbody>
@@ -272,7 +271,7 @@
                                     <input type="date" class="form-control Deliver_Date" id="Deliver_Date" data-date-format="YYYY-MM-DD" wire:model="initTradeDate.from" >
                                 </div>
                             </td>
-                            <td>To</td>ss
+                            <td>To</td>
                             <td>
                                 <div class="form-group">
                                     <input type="date" class="form-control Deliver_Date" id="Deliver_Date" data-date-format="YYYY-MM-DD" wire:model="initTradeDate.to" >
@@ -291,7 +290,7 @@
                 <div class="card-footer">
                     <button type="button" class="btn btn-primary" wire:click="initSearchFilter">Check Now</button>
                 </div>
-            </form>
+
 
         </div>
     </div>
