@@ -35,6 +35,14 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+
+            <div wire:loading>
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <br>
+            </div>
+
             <div class="form-group">
                 <input class="form-control" placeholder="To:" wire:model.lazy="mail_to" >
                 @error('mail_to') <span class="error">{{ $message }}</span> @enderror
@@ -54,7 +62,7 @@
         <!-- /.card-body -->
         <div class="card-footer">
             <div class="float-right">
-                <button type="button" class="btn btn-primary" wire:click="sendEmail"><i class="far fa-envelope" ></i> Send</button>
+                <button type="button" class="btn btn-primary" wire:click="sendEmail" wire:loading.attr="disabled"><i class="far fa-envelope" ></i> Send</button>
             </div>
         </div>
         <!-- /.card-footer -->

@@ -105,6 +105,11 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'order_total' )==false?'hide':''}}" >{{number_format($collection->order_total, 2)}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{number_format($collection->gr_amount,2)}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'trade_date' )==false?'hide':''}}" >{{$collection->trade_date}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'storage_location' )==false?'hide':''}}" >{{$collection->storage_location}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'contract_item_no' )==false?'hide':''}}" >{{$collection->contract_item_no}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'generic_mat_code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
                                 <td><a href="{{route('web.route.po.SAPTableLineItem',['slug'=>base64_encode($collection->purchasing_document)])}}"><i class="fas fa-eye"></i></a></td>
                             </tr>
                         @endforeach

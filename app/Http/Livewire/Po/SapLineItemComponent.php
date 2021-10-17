@@ -50,13 +50,16 @@ class SapLineItemComponent extends Component
 
     public function emitMailComposerReq($reqType)
     {
+        $collections=PoSapMaster::whereIn('po_item',array_keys($this->selectedPo))->where('purchasing_document',$this->purchasing_document)->get();
+
+
         $sendData=[
             'purchasing_code'=>$this->purchasing_document,
             'vendor_code'=>$this->baseInfo->vendor_code,
             'vendor_name'=>$this->baseInfo->vendor_name,
             'customer_name'=>$this->baseInfo->customer_name,
             'po_items'=>$this->selectedPo,
-            'sap_object'=>$this->selectedPo
+            'sap_object'=>$collections
         ];
         $this->emit('event-show-compose-email', $reqType,$sendData,$this->tableType);
     }

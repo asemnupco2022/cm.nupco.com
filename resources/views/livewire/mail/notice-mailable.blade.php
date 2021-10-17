@@ -129,7 +129,7 @@
 
 <body>
 <div class="wrapper">
-    <div class="container">
+    <div >
         <div class="header">
             {{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}
         </div>
