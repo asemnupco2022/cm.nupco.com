@@ -47,7 +47,7 @@ return [
             'root'   => public_path(),
         ],
 
-        'nupco_remote'=>[
+        'nupco_remote_dev'=>[
 
             'driver' => 'sftp',
             'host' => '10.1.12.92',
@@ -55,6 +55,17 @@ return [
             'username' => 'cm_sftp_user',
             'password' => 'Nup$2030cm',
             'root' => '/var/ftp/CM_Portal_Data/Dev',
+            'timeout' => 10,
+
+        ],
+        'nupco_remote'=>[
+
+            'driver' => 'sftp',
+            'host' => '10.1.12.92',
+            'port' => 22,
+            'username' => 'cm_sftp_user',
+            'password' => 'Nup$2030cm',
+            'root' => '/var/ftp/CM_Portal_Data/Prd',
             'timeout' => 10,
 
         ],
