@@ -3,6 +3,8 @@
 /public/storage
 /public/uploads
 /storage/*.key
+*.zip
+*.rar
 /vendor
 .env
 .htaccess
