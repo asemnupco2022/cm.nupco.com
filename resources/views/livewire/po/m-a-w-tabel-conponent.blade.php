@@ -85,6 +85,13 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'pending_qty' )==false?'hide':''}}" >{{$collection->pending_qty}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'total_recived_qty' )==false?'hide':''}}" >{{$collection->total_recived_qty}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'order_total' )==false?'hide':''}}" >{{$collection->order_total}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'trade_date' )==false?'hide':''}}" >{{$collection->trade_date}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'storage_location' )==false?'hide':''}}" >{{$collection->storage_location}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'contract_item_no' )==false?'hide':''}}" >{{$collection->contract_item_no}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'generic_mat_code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
                                 <td><a href="{{route('web.route.po.MawTableLineItem',['slug'=>base64_encode($collection->item_code)])}}"><i class="fas fa-eye"></i></a></td>
                             </tr>
                         @endforeach

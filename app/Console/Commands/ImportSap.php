@@ -44,7 +44,7 @@ class ImportSap extends Command
      */
     public function handle()
     {
-        $baseFilePath=public_path('uploads/sap_nupco_backup.csv');        
+        $baseFilePath=public_path('uploads/sap_nupco_backup.csv');
         if(File::exists($baseFilePath)) {
             File::delete($baseFilePath);
         }
@@ -119,6 +119,7 @@ class ImportSap extends Command
                         $fillable->on_behalf_of_po = $collectionInd[86];
                         $fillable->on_behalf_of_po_item = $collectionInd[88];
                         $fillable->the_testimonial = $collectionInd[88];
+                        $fillable->customer_number = $collectionInd[73];
                         $fillable->trade_date = Carbon::now();
                         $fillable->save();
                     }

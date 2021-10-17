@@ -281,6 +281,94 @@
                         </tr>
 
 
+{{--                        =====================================--}}
+
+
+
+                        <tr>
+                            <td>storage_location</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="storage_location.from" >
+                                </div>
+                            </td>
+                            <td>To</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="storage_location.to" >
+                                </div>
+                            </td>
+                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
+                        </tr>
+
+
+                        <tr>
+                            <td>delivery_address</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="delivery_address.from" >
+                                </div>
+                            </td>
+                            <td>To</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="delivery_address.to" >
+                                </div>
+                            </td>
+                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
+                        </tr>
+
+
+                        <tr>
+                            <td>contract_item_no</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="contract_item_no.from" >
+                                </div>
+                            </td>
+                            <td>To</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="contract_item_no.to" >
+                                </div>
+                            </td>
+                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
+                        </tr>
+
+
+                        <tr>
+                            <td>plant</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="plant.from" >
+                                </div>
+                            </td>
+                            <td>To</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="plant.to" >
+                                </div>
+                            </td>
+                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
+                        </tr>
+
+                        <tr>
+                            <td>generic_mat_code</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="generic_mat_code.from" >
+                                </div>
+                            </td>
+                            <td>To</td>
+                            <td>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="Name" wire:model="generic_mat_code.to" >
+                                </div>
+                            </td>
+                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
+                        </tr>
+
+
 
                         </tbody>
                     </table>

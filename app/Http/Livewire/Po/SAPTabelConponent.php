@@ -29,6 +29,13 @@ class SAPTabelConponent extends Component
     public $initTotalQty = [];
     public $initGrAmt = [];
     public $initTradeDate = [];
+//    ========
+
+    public $storage_location = [];
+    public $delivery_address = [];
+    public $contract_item_no = [];
+    public $plant = [];
+    public $generic_mat_code = [];
     public function initSearchFilter(){
         $this->initiateSearch=true;
     }
@@ -63,16 +70,29 @@ class SAPTabelConponent extends Component
             $query=$query->whereBetween('gr_amount',[$this->initGrAmt['from'],$this->initGrAmt['to']]);
         }
         if (Arr::has($this->initTradeDate, ['from','to'])){
-            $query=$query->whereBetween('trade_date',[Carbon::parse($this->initTradeDate['from'])->format('Y-m-d'),Carbon::parse($this->initTradeDate['to'])->format('Y-m-d')]);
+            $query=$query->whereDate('trade_date','<=',Carbon::parse($this->initTradeDate['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->initTradeDate['to'])->format('Y-m-d'));
+        }
+//        ===================
+
+        if (Arr::has($this->storage_location, ['from','to'])){
+            $query=$query->whereBetween('storage_location',[Carbon::parse($this->storage_location['from'])->format('Y-m-d'),Carbon::parse($this->storage_location['to'])->format('Y-m-d')]);
+        }
+        if (Arr::has($this->delivery_address, ['from','to'])){
+            $query=$query->whereBetween('delivery_address',[Carbon::parse($this->delivery_address['from'])->format('Y-m-d'),Carbon::parse($this->delivery_address['to'])->format('Y-m-d')]);
+        }
+        if (Arr::has($this->contract_item_no, ['from','to'])){
+            $query=$query->whereBetween('contract_item_no',[Carbon::parse($this->contract_item_no['from'])->format('Y-m-d'),Carbon::parse($this->contract_item_no['to'])->format('Y-m-d')]);
+        }
+        if (Arr::has($this->plant, ['from','to'])){
+            $query=$query->whereBetween('plant',[Carbon::parse($this->plant['from'])->format('Y-m-d'),Carbon::parse($this->plant['to'])->format('Y-m-d')]);
+        }
+        if (Arr::has($this->generic_mat_code, ['from','to'])){
+            $query=$query->whereBetween('generic_mat_code',[Carbon::parse($this->generic_mat_code['from'])->format('Y-m-d'),Carbon::parse($this->generic_mat_code['to'])->format('Y-m-d')]);
         }
 
 
         return $query;
     }
-
-
-
-
 
 
     public $dateRangePicker=null;

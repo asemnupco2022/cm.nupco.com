@@ -10,7 +10,6 @@ class SapView extends Model
     use HasFactory;
 
     const CONS_COLUMNS = [
-
         'po_type' => false,
         'po_type_description' => false,
         'pur_group' => false,
@@ -25,6 +24,11 @@ class SapView extends Model
         'order_total' => true,
         'gr_amount'=>true,
         'trade_date' => true,
+        'storage_location' => true,
+        'delivery_address' => true,
+        'contract_item_no' => true,
+        'plant' => true,
+        'generic_mat_code' => true,
     ];
 
 
