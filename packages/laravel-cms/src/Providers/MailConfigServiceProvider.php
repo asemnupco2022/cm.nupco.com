@@ -4,6 +4,7 @@
 namespace rifrocket\LaravelCms\Providers;
 
 
+use Illuminate\Support\Facades\Schema;
 use rifrocket\LaravelCms\Models\LbsSetting;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
@@ -30,7 +31,11 @@ class MailConfigServiceProvider extends ServiceProvider
     {
         $LbsAppSession = [];
         $emailServices='';
+        $appSession=null;
+        if(Schema::hasTable('lbs_settings')){
         $appSession = LbsSetting::all()->toArray();
+        }
+
         if ($appSession and !empty($appSession)) {
 
             foreach ($appSession as $key => $value) {
