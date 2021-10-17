@@ -6,8 +6,6 @@ use App\Models\PoSapMaster;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Importer;
@@ -44,27 +42,27 @@ class ImportSap extends Command
      * @return int
      */
     public function handle()
-    {       
+    {
         if (App::environment('local')){
             $filesName=   Storage::disk('nupco_remote_dev')->allFiles()[0];
             Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote_dev')->get($filesName));
-            
+
         }else{
             $filesName=   Storage::disk('nupco_remote')->allFiles()[0];
             Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($filesName));
         }
 
 
-        $excel = Importer::make('Csv');        
-        $excel->load(public_path('uploads/sap_nupco_backup.csv'));  
-        $collection = $excel->getCollection()->toArray(); 
+        $excel = Importer::make('Csv');
+        $excel->load(public_path('uploads/sap_nupco_backup.csv'));
+        $collection = $excel->getCollection()->toArray();
 
         $newCollection=[];
         foreach(  $collection as $key => $collect){
-            $implded=implode("|",$collect);               
-            $newCollection[$key]  =explode('|',$implded);         
+            $implded=implode("|",$collect);
+            $newCollection[$key]  =explode('|',$implded);
         }
-            $collection = collect($newCollection);
+        $collection = collect($newCollection);
 
         if ($collection and !empty($collection)) {
             $collection = $collection->groupBy(0);
@@ -76,7 +74,7 @@ class ImportSap extends Command
                         PoSapMaster::where('purchasing_document', Str::replace(' ', '', $groupKey))->delete();
                     }
                     foreach ($collectionGroup as $key => $collectionInd) {
-                     
+
                         $fillable = new PoSapMaster();
                         $fillable->po_type = $collectionInd[1];
                         $fillable->po_type_description = $collectionInd[18];
