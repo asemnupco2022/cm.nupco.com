@@ -286,7 +286,7 @@
 
 
                         <tr>
-                            <td>storage_location</td>
+                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('storage_location')  }}</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Name" wire:model="storage_location.from" >
@@ -303,7 +303,7 @@
 
 
                         <tr>
-                            <td>delivery_address</td>
+                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('delivery_address')  }}</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Name" wire:model="delivery_address.from" >
@@ -320,7 +320,7 @@
 
 
                         <tr>
-                            <td>contract_item_no</td>
+                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('contract_item_no')  }}</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Name" wire:model="contract_item_no.from" >
@@ -337,7 +337,7 @@
 
 
                         <tr>
-                            <td>plant</td>
+                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('plant')  }}</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Name" wire:model="plant.from" >
@@ -353,7 +353,7 @@
                         </tr>
 
                         <tr>
-                            <td>generic_mat_code</td>
+                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('generic_mat_code')  }}</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Name" wire:model="generic_mat_code.from" >
