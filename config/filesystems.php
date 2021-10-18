@@ -54,7 +54,7 @@ return [
             'port' => 22,
             'username' => 'cm_sftp_user',
             'password' => 'Nup$2030cm',
-            'root' => '/var/ftp/CM_Portal_Data/Dev',
+            'root' => '/var/ftp/CM_Portal_Data/QA',
             'timeout' => 10,
 
         ],

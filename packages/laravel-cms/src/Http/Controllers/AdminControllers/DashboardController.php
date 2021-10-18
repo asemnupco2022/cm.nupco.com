@@ -25,18 +25,18 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-//        $baseFilePath=public_path('uploads/sap_nupco_backup.csv');
-//        $excel = Importer::make('Csv');
-//        $excel->load($baseFilePath);
-//        $collection = $excel->getCollection()->toArray();
-//        dd($collection);
-//        $newCollection=[];
-//        foreach(  $collection as $key => $collect){
-//            $implded=implode("|",$collect);
-//            $newCollection[$key]  =explode('|',$implded);
-//        }
-//        dd($collection);
-////        $collection = collect($newCollection);
+    //    $baseFilePath=public_path('uploads/sap_nupco_backup.csv');
+    //    $excel = Importer::make('Csv');
+    //    $excel->load($baseFilePath);
+    //    $collection = $excel->getCollection()->toArray();
+    //    dd($collection);
+    //    $newCollection=[];
+    //    foreach(  $collection as $key => $collect){
+    //        $implded=implode("|",$collect);
+    //        $newCollection[$key]  =explode('|',$implded);
+    //    }
+    //    dd($collection);
+//        $collection = collect($newCollection);
 
         return view('LbsViews::admin_views.views.dashboard');
     }
