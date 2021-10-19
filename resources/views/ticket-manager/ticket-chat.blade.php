@@ -7,7 +7,7 @@
 
 
 
-    <div class="card">
+    <div class="card chat_div_section">
         <div class="card-header">
             <h3 class="card-title">Ticket Conversation</h3>
 

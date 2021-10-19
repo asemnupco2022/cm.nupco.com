@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="col-sm-4 display-block">
-                            <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
+                            <button type="button" class="btn btn-primary btn-sm flat btn-sm outline_org_btn" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
                             <button class="btn btn-sm btn-success float-right flat text-capitalize" data-toggle="modal" data-target="#_create_filter"><i class="fas fa-plus "></i>  add staff</button>

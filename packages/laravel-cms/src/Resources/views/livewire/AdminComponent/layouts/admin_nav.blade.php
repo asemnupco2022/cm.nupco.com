@@ -113,7 +113,7 @@
 
         <li class="nav-item ">
             <a href="" wire:click.prevent="logout"  class="nav-link logout_btn">
-                <img src="{{ asset('img/logout.png') }}" alt="job image" title="job image"> Logout
+                <img src="{{ asset('img/logout.svg') }}" alt="job image" title="job image"> Logout
 
             </a>
         </li>

@@ -52,7 +52,7 @@
                        </div>
                        
                         <div class="col-sm-4 align-right">
-                            <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
+                            <button type="button" class="btn btn-success btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
                         </div>

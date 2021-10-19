@@ -105,7 +105,7 @@
     </style>
 @endpush
 <div>
-<div class="row">
+<div class="row chat_row">
     <div class="col-md-12">
         <div class="card  card-outline">
             <div class="card-header">
@@ -137,7 +137,7 @@
 </div>
 <div class="row">
     <div class="col-md-3">
-        <div class="card card-primary">
+        <div class="card card-primary chat_sidebar">
             <div class="card-header">
                 <h3>Line Items</h3>
             </div>

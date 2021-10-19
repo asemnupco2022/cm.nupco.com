@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="col-sm-4 button_pos">
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-primary">
+                            <button type="button" class="btn btn-primary btn-sm fill_org_btn" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
 

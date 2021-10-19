@@ -18,29 +18,16 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $baseFile=file(public_path('uploads/sap_nupco_backup.csv'));
-        $parts= (array_chunk($baseFile,1000));
-        foreach ($parts as $key=> $part){
-            $fileName='sap_part_'.$key.'.csv';
-            Storage::disk('public_uploads')->put('uploads/sap_parts/'.$fileName,$part);
-        }
+        // $baseFile=file(public_path('uploads/sap_nupco_backup.csv'));
+        // $parts= (array_chunk($baseFile,1000));
+        // foreach ($parts as $key=> $part){
+        //     $fileName='sap_part_'.$key.'.csv';
+        //     Storage::disk('public_uploads')->put('uploads/sap_parts/'.$fileName,$part);
+        // }
         return view('LbsViews::admin_views.views.dashboard');
     }
 
-<<<<<<< Updated upstream
-    //    $baseFilePath=public_path('uploads/sap_nupco_backup.csv');
-    //    $excel = Importer::make('Csv');
-    //    $excel->load($baseFilePath);
-    //    $collection = $excel->getCollection()->toArray();
-    //    dd($collection);
-    //    $newCollection=[];
-    //    foreach(  $collection as $key => $collect){
-    //        $implded=implode("|",$collect);
-    //        $newCollection[$key]  =explode('|',$implded);
-    //    }
-    //    dd($collection);
-//        $collection = collect($newCollection);
-=======
+
     public function importPO()
     {
         $path =public_path('uploads/sap_parts/*.csv');
@@ -58,7 +45,7 @@ class DashboardController extends Controller
                 File::delete($file);
             }
         }
->>>>>>> Stashed changes
+
 
     }
 

@@ -175,9 +175,9 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'on_behalf_of_po_item' )==false?'hide':''}}" >{{$collection->on_behalf_of_po_item}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'the_testimonial' )==false?'hide':''}}" >{{$collection->the_testimonial}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'trade_date' )==false?'hide':''}}" >{{$collection->trade_date}}</td>
-                                <td><a class="btn btn-app" wire:click="open_comment_modal({{$collection->po_item }})">
+                                <td><a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_item }})">
                                         <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($purchasing_document,$collection->po_item, 'sap_line_item' )}}</span>
-                                        <i class="fas fa-inbox"></i> comments
+                                        <i class="far fa-comment-alt"></i> 
                                     </a>
                                 </td>
                             </tr>

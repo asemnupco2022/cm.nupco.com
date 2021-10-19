@@ -93,7 +93,7 @@
 {{--                        </div>--}}
 
                         <div class="col-sm-5 display-block user-log">
-                            <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
+                            <button type="button" class="btn btn-success btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
 
