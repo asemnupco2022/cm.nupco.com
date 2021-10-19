@@ -11,6 +11,7 @@ use App\Http\Controllers\TicketManagerController;
 use App\Http\Controllers\Vendors\VendorController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use rifrocket\LaravelCms\Http\Controllers\AdminControllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/import-me',[DashboardController::class,'importPO'])->name('web.route.po.impodrt');
 
 Route::group(array('middleware'=>'web'), function () {
 
@@ -71,7 +74,7 @@ Route::group(array('middleware'=>'web'), function () {
     });
 
 
-    //VENDOR MANAGER
+    //PROFILE MANAGER
     Route::group(['prefix'=>'profile'], function(){
         Route::get('/',[ProfileController::class,'index'])->name('web.route.profile');
     });
@@ -79,6 +82,9 @@ Route::group(array('middleware'=>'web'), function () {
 
 
 //    hos-api/vendor-response-to-line
+    Route::group(['prefix'=>'hos'], function(){
+        Route::get('/vendor-response',[ProfileController::class,'index'])->name('web.route.hos.vendor.response');
+    });
 
     Route::get('/clear-cache', function () {
         Artisan::call('cache:clear');

@@ -116,7 +116,6 @@ class LbsExceptionHandler extends AppHandler
 //    Error path for admin side and web side
     protected function registerErrorViewPaths()
     {
-
         $paths = collect(config('laravelcrm.exception.member_exception_views'));
 
         if (config('laravelcrm.application.ssl')=='true'){

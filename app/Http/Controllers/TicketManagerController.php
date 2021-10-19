@@ -17,8 +17,8 @@ class TicketManagerController extends Controller
             return view('ticket-manager.list-tickets');
     }
 
-    public function ticketChat()
+    public function ticketChat(Request $request)
     {
-            return view('ticket-manager.ticket-chat');
+            return view('ticket-manager.ticket-chat', ['mail_ticket_hash'=>$request->token]);
     }
 }

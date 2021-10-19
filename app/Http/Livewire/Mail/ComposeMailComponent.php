@@ -16,7 +16,7 @@ use rifrocket\LaravelCms\Models\LbsMember;
 class ComposeMailComponent extends Component
 {
 
-    public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType;
+    public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType, $mailableData;
 
 
     protected $listeners = ['event-show-compose-email' => 'prepareComposerModal'];
@@ -30,6 +30,7 @@ class ComposeMailComponent extends Component
 
     public function prepareComposerModal($mailType, $mail_data, $tableType )
     {
+        $this->mailableData=$mail_data;
         $this->mail_content=null;
         $this->mailType_pro=$mailType;
         $this->tableType=$tableType;
@@ -118,7 +119,7 @@ class ComposeMailComponent extends Component
                 'json_data'=>null,
             ];
 
-            PoHelper::SaveNotificationHistory($notifiable);
+            PoHelper::SaveNotificationHistory($notifiable, $this->mailableData);
             $this->clearData();
 
             return redirect()->back()->with('success','mail send successfully');

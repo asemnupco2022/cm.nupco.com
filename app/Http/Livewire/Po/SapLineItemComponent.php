@@ -65,6 +65,12 @@ class SapLineItemComponent extends Component
     }
 
 
+    public function open_comment_modal($poNo)
+    {
+        $this->emit('open-edit-internal-comment', $this->purchasing_document,$poNo,$this->tableType);
+    }
+
+
 
     public function UpdatedGetFilterTemplate($value)
     {

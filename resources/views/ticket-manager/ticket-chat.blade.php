@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card-body">
-            @livewire('tickets.ticket-chat-component')
+            @livewire('tickets.ticket-chat-component', ['mail_ticket_hash'=>$mail_ticket_hash])
         </div>
         <!-- /.card-body -->
     </div>

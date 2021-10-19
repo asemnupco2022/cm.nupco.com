@@ -25,7 +25,7 @@ class HosAPI implements ShouldQueue
      */
     public function __construct($vendor_code, $mail_type, $collection, $email_unique, $email_hash)
     {
-        $this->hosUrl='';
+        $this->hosUrl='https://hos-dev.nupco.com/HOS_S4/api/add-supplier-comment';
         $this->vendor_code=$vendor_code;
         $this->collection=$collection;
         $this->email_unique=$email_unique;
@@ -71,16 +71,16 @@ class HosAPI implements ShouldQueue
                 $insertToHos->mail_hash= $this->email_hash;
                 $insertToHos->message_type= $this->mail_type;
                 $insertToHos->unique_hash= $unique_hash;
-                $insertToHos->tender_num= $poItemCol->tender_no;
+                $insertToHos->tender_num= $poItemCol['tender_no'];
                 $insertToHos->vendor_num=$this->vendor_code;
-                $insertToHos->po_num=$poItemCol->purchasing_document;
-                $insertToHos->customer_num=$poItemCol->customer_name;
-                $insertToHos->po_item_num=$poItemCol->po_item;
-                $insertToHos->uom=$poItemCol->uom;
-                $insertToHos->ordered_qty=$poItemCol->ordered_quantity;
-                $insertToHos->open_qty=$poItemCol->open_quantity;
-                $insertToHos->net_order_value=$poItemCol->net_order_value;
-                $insertToHos->delivery_date=$poItemCol->nupco_delivery_date;
+                $insertToHos->po_num=$poItemCol['purchasing_document'];
+                $insertToHos->customer_num=$poItemCol['customer_name'];
+                $insertToHos->po_item_num=$poItemCol['po_item'];
+                $insertToHos->uom=$poItemCol['uom'];
+                $insertToHos->ordered_qty=$poItemCol['ordered_quantity'];
+                $insertToHos->open_qty=$poItemCol['open_quantity'];
+                $insertToHos->net_order_value=$poItemCol['net_order_value'];
+                $insertToHos->delivery_date=$poItemCol['nupco_delivery_date'];
                 $insertToHos->save();
 
                 $response = Http::post($this->hosUrl, [
@@ -88,16 +88,16 @@ class HosAPI implements ShouldQueue
                     'mail_hash'=> $this->email_hash,
                     'message_type'=> $this->mail_type,
                     'unique_hash'=> $unique_hash,
-                    'tender_num'=> $poItemCol->tender_no,
+                    'tender_num'=> $poItemCol['tender_no'],
                     'vendor_num'=>$this->vendor_code,
-                    'po_num'=>$poItemCol->purchasing_document,
-                    'customer_num'=>$poItemCol->customer_name,
-                    'po_item_num'=>$poItemCol->po_item,
-                    'uom'=>$poItemCol->uom,
-                    'ordered_qty'=>$poItemCol->ordered_quantity,
-                    'open_qty'=>$poItemCol->open_quantity,
-                    'net_order_value'=>$poItemCol->net_order_value,
-                    'delivery_date'=>$poItemCol->nupco_delivery_date,
+                    'po_num'=>$poItemCol['purchasing_document'],
+                    'customer_num'=>$poItemCol['customer_name'],
+                    'po_item_num'=>$poItemCol['po_item'],
+                    'uom'=>$poItemCol['uom'],
+                    'ordered_qty'=>$poItemCol['ordered_quantity'],
+                    'open_qty'=>$poItemCol['open_quantity'],
+                    'net_order_value'=>$poItemCol['net_order_value'],
+                    'delivery_date'=>$poItemCol['nupco_delivery_date'],
                 ]);
 
                 Log::info('HOS-API-POST-REQUEST',[$response]);

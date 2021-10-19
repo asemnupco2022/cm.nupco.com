@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use rifrocket\LaravelCms\Models\LbsMember;
 
 class HosPostHistory extends Model
 {
@@ -12,5 +13,10 @@ class HosPostHistory extends Model
     public function hasNotificationHistory()
     {
         return $this->belongsTo(NotificationHistory::class,'mail_unique','mail_ticket_hash');
+    }
+
+    public function VendorData()
+    {
+        return $this->belongsTo(LbsMember::class, 'vendor_num', 'vendor_code');
     }
 }

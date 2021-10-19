@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-sm-3">
                             <div class="input-group input-group-sm" >
                                 <select class="form-control float-right" title="Select Preset Filter" wire:model="getFilterTemplate">
@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-3 display-block automation"">
+                        <div class="col-sm-3 display-block automation">
                             <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>

@@ -135,7 +135,7 @@
                             @foreach($columns as $colKey => $column)
                                 <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</th>
                             @endforeach
-
+                            <th>Comments</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -175,7 +175,11 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'on_behalf_of_po_item' )==false?'hide':''}}" >{{$collection->on_behalf_of_po_item}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'the_testimonial' )==false?'hide':''}}" >{{$collection->the_testimonial}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'trade_date' )==false?'hide':''}}" >{{$collection->trade_date}}</td>
-
+                                <td><a class="btn btn-app" wire:click="open_comment_modal({{$collection->po_item }})">
+                                        <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($purchasing_document,$collection->po_item, 'sap_line_item' )}}</span>
+                                        <i class="fas fa-inbox"></i> comments
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -284,6 +288,21 @@
     </div>
     <!-- /.modal -->
 
+    <div class="modal fade" id="modal-open-edit-internal-comment"  >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @livewire('internals.show-comment-component')
+                </div>
+                <div class="modal-footer justify-content-between">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
     {{--    =====================--}}
 
@@ -298,6 +317,10 @@
             Livewire.on('update-users-filter-template', event => {
                 $('#modal-add-filter-lib').modal('hide');
             })
+            Livewire.on('open-edit-internal-comment', event => {
+                $('#modal-open-edit-internal-comment').modal('show');
+            })
+
         </script>
 
     <!-- date-range-picker -->

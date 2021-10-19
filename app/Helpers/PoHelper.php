@@ -4,6 +4,8 @@
 namespace App\Helpers;
 
 
+use App\Jobs\Po\HosAPI;
+use App\Models\InternalComment;
 use App\Models\LbsUserSearchSet;
 use App\Models\NotificationHistory;
 use Illuminate\Support\Facades\Hash;
@@ -55,7 +57,7 @@ class PoHelper
     }
 
 
-    public static function SaveNotificationHistory($notifiable)
+    public static function SaveNotificationHistory($notifiable, $mailableData)
     {
 
         $ticket_hash=Hash::make($notifiable['mail_ticket_number']);
@@ -80,10 +82,14 @@ class PoHelper
         $schedulerHistory->last_executed_at =$notifiable['last_executed_at'];
         $schedulerHistory->meta =$notifiable['meta'];
         $schedulerHistory->json_data =$notifiable['json_data'];
+        dispatch(new HosAPI($mailableData['vendor_code'],$notifiable['mail_type'],$mailableData['sap_object'],$notifiable['mail_ticket_number'],$ticket_hash));
         return $schedulerHistory->save();
     }
 
 
-
+    public static function getInternalCommentCount( $purchasing_doc_no, $line_item_no, $tableType )
+    {
+      return  InternalComment::where('table_type',$tableType)->where('purchasing_doc_no',$purchasing_doc_no)->where('line_item_no',$line_item_no)->count();
+    }
 
 }

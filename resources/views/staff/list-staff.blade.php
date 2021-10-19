@@ -17,6 +17,7 @@
         </div>
         <div class="card-body">
             @livewire('staffs.staff-component')
+
         </div>
         <!-- /.card-body -->
     </div>
