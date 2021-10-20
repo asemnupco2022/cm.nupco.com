@@ -151,7 +151,7 @@ li.nav-item.increase_size {
     padding-top: 9px;
 }
 [class*=sidebar-dark-] {
-    background-color: #75797a !important;
+    background-color: #76797a !important;
 }
 .sidebar-dark-warning .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-warning .nav-sidebar>.nav-item>.nav-link.active {
     background-color: #6d7275;
@@ -302,7 +302,7 @@ th {
 .dashboard_style .card-header {
     background: #e6e6e6 !important;
     padding: 11px 20px;
-    color: #75797a !important;
+    color: #76797a !important;
 }
 .card.chat_div_section {
     min-height: 590px;
@@ -379,7 +379,7 @@ a.btn.btn-app.chat_po_btn span.badge.bg-teal {
 .main-footer {
     background-color: #fff;
     border-top: 1px solid #a3b442;
-    color: #75797a !important;
+    color: #76797a !important;
     padding: 1rem;
 }
 .dashboard_style button.btn.btn-tool {
@@ -404,4 +404,60 @@ a.btn.btn-app.chat_po_btn span.badge.bg-teal {
 }
 .outline_org_btn:hover {
     color: #e37526;
+}
+.small-box.dash_color1 {
+    background-color: #3CBDC7 !important;
+}
+.small-box.dash_color1 {
+    background-color: #3C8DC7 !important;
+    color: #fff;
+    border: 4px solid #3477A2
+}
+/* .dash_color1 i.ion.ion-email {
+    display: none;
+}
+.dash_color2 i.ion.ion-email {
+    display: none;
+}
+.dash_color3 i.ion.ion-email {
+    display: none;
+}
+.dash_color2 i.ion.ion-email {
+    display: none;
+} */
+.small-box.bg-success.dash_color2 {
+    background: #895D94 !important;
+    border: 4px solid #72547A
+}
+.small-box.bg-warning.dash_color3 {
+    background: #E78E4A !important;
+    color: #fff !important;
+    border: 4px solid #BB7D4E
+}
+
+.small-box.dash_color4 {
+    background: #963149 !important;
+    color: #fff !important;
+    border: 4px solid #84283F
+}
+.small-box>.inner {
+    padding: 10px 15px !important;
+}
+.dash_color1 i.far.fa-circle {
+    font-size: 13px;
+}
+.dash_color2 i.far.fa-circle {
+    font-size: 13px;
+}
+.dash_color3 i.far.fa-circle {
+    font-size: 13px;
+}
+.dash_color4 i.far.fa-circle {
+    font-size: 13px;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #1c2346 !important;
+    background-color: transparent;
 }

@@ -20,7 +20,7 @@
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-info">
+            <div class="small-box dash_color1">
                 <div class="inner">
                     <h3>{{DashboardHelper::historyCounter('enquiry-email',1)}}</h3>
                     <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('enquiry-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
@@ -36,7 +36,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-success dash_color2">
                 <div class="inner">
                     <h3>{{DashboardHelper::historyCounter('expedite-email',1)}}</h3>
                     <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('expedite-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
@@ -52,11 +52,11 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-warning dash_color3">
                 <div class="inner">
                     <h3>{{DashboardHelper::historyCounter('warning-email',1)}}</h3>
                     <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('warning-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
-                    <i class="ion ion-person" title="manual"></i>  {{DashboardHelper::historyCounter('warning-email',null,'manual',null,null)}}
+                    <i class="ion ion-person" title="manual"></i> {{DashboardHelper::historyCounter('warning-email',null,'manual',null,null)}}
                     <p>Warning Email</p>
                 </div>
                 <div class="icon">
@@ -68,7 +68,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box dash_color4">
                 <div class="inner">
                     <h3>{{DashboardHelper::historyCounter('penalty-email',1)}}</h3>
                     <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('penalty-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
