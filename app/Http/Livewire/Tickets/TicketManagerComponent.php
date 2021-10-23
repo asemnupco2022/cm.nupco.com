@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Tickets;
 
 use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
-use App\Models\NotificationHistory;
+use App\Models\SchedulerNotificationHistory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -25,7 +25,7 @@ class TicketManagerComponent extends Component
     public $selected_staff='';
 
 
-    public $columns=NotificationHistory::CONS_COLUMNS;   //table columns for this table
+    public $columns=SchedulerNotificationHistory::CONS_COLUMNS;   //table columns for this table
     public $templateArray=LbsUserSearchSet::TEMPLATE_ARRAY;
     public $operators=LbsConstants::CONST_OPERATOR;
     public $number_of_rows=10;
@@ -83,7 +83,7 @@ class TicketManagerComponent extends Component
 
         $ColKeys = array_keys(array_filter($this->columns));
         $selectedRows = array_keys(array_filter($this->selectedPo));
-        $collection = NotificationHistory::whereIn('id',$selectedRows)->select($ColKeys)->get();
+        $collection = SchedulerNotificationHistory::whereIn('id',$selectedRows)->select($ColKeys)->get();
         $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
 
         if ($type=='PDF'){
@@ -104,7 +104,7 @@ class TicketManagerComponent extends Component
 
     public function searchEngine()
     {
-        $query=NotificationHistory::NotDel();
+        $query=SchedulerNotificationHistory::NotDel();
         if (!empty($this->selected_staff)){
             $query= $query->where('user_id',$this->selected_staff);
         }

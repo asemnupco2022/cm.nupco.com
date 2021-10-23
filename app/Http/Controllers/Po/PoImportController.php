@@ -33,8 +33,8 @@ class PoImportController extends Controller
 
     public function SAPTableLineItem($slug)
     {
-        $po_id=base64_decode($slug);
-        return view('po.sapLineItems',compact('po_id'));
+        $po_number=base64_decode($slug);
+        return view('po.sapLineItems',compact('po_number'));
     }
 
 

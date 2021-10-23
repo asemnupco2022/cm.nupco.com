@@ -3,7 +3,7 @@
 namespace App\Jobs\Po;
 
 use App\Models\PoSapMaster;
-use App\Models\PoSapMasterSchedle;
+use App\Models\PoSapMasterScheduler;
 use App\Models\ScheduleNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -55,7 +55,7 @@ class MigrateSap implements ShouldQueue
             if ($query and !empty($query)){
                 foreach ($query as $query_data){
 
-                    $newPoEntry=new PoSapMasterSchedle();
+                    $newPoEntry=new PoSapMasterScheduler();
                     $newPoEntry->po_type=$query_data->po_type;
                     $newPoEntry->po_type_description=$query_data->po_type_description;
                     $newPoEntry->pur_group=$query_data->pur_group;

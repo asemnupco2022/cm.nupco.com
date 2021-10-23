@@ -69,7 +69,7 @@
             }
 
         </style>
-    @endpush
+@endpush
 
     <div class="avatar-wrapper">
             <img class="profile-pic" src="{{$OldAvatar}}" />

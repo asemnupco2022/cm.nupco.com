@@ -4,7 +4,7 @@
 namespace App\Helpers;
 
 
-use App\Models\NotificationHistory;
+use App\Models\SchedulerNotificationHistory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Integer;
@@ -38,11 +38,11 @@ class DashboardHelper
 
         $counts=null;
 
-        $counts = DB::table('notification_histories');
+        $counts = DB::table('scheduler_notification_histories');
 
-            if($mail_type){
-                $counts= $counts->where('mail_type',$mail_type );
-            }
+        if($mail_type){
+            $counts= $counts->where('mail_type',$mail_type );
+        }
 
 
 

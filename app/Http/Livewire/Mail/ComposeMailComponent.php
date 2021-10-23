@@ -49,20 +49,20 @@ class ComposeMailComponent extends Component
         }
         switch ($mailType){
             case 'enquiry-email':
-                $this->mail_subject='enquiry email';
+                $this->mail_subject=PoHelper::NormalizeColString('enquiry email');
                 return $getView= view('mail-templates.enquiry-email',compact('mail_data'))->render();
 
                 break;
             case 'expedite-email':
-                $this->mail_subject='expedite email';
+                $this->mail_subject=PoHelper::NormalizeColString('expedite email');
                 return $getView= view('mail-templates.expedite-email',compact('mail_data'))->render();
                 break;
                 case 'warning-email':
-                $this->mail_subject='warning email';
+                $this->mail_subject=PoHelper::NormalizeColString('warning email');
                 return $getView= view('mail-templates.warning-email',compact('mail_data'))->render();
                 break;
             case 'penalty-email':
-                $this->mail_subject='penalty email';
+                $this->mail_subject=PoHelper::NormalizeColString('penalty email');
                 return $getView= view('mail-templates.penalty-email',compact('mail_data'))->render();
                 break;
             default:
@@ -118,8 +118,10 @@ class ComposeMailComponent extends Component
                 'meta'=>null,
                 'json_data'=>null,
             ];
-
             PoHelper::SaveNotificationHistory($notifiable, $this->mailableData);
+
+
+
             $this->clearData();
 
             return redirect()->back()->with('success','mail send successfully');

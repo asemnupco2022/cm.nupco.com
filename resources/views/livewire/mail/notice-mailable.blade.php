@@ -20,6 +20,7 @@
             margin: 0;
             padding-top: 16.7088608px;
             font-size: 15.1898734px;
+            text-align: center;
         }
 
         .footer {
@@ -47,9 +48,9 @@
 
 <body>
 
-    <h2> {{\App\Helpers\PoHelper::NormalizeColString($msg_subject )}}</h2>
+    <h2 style="text-align: center"> {{\App\Helpers\PoHelper::NormalizeColString($msg_subject )}}</h2>
     <br>
-    <p class="text-main"> {!!  $msg_content !!}</p>
+    <p class="text-main "> {!!  $msg_content !!}</p>
     <div class="footer">
         <p>Sent by &#8226; <a
                 href="{{LaravelCms::lbs_object_key_exists('app_url',Session::get('_LbsAppSession'))}}">{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</a>

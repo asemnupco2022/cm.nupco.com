@@ -9,7 +9,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3  d-flex">
             <div class="image">
-                <img src="{{URL(LaravelCms::lbs_object_key_exists('avatar',Session::get('_LbsUserSession')))}}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{URL('').'/'.LaravelCms::lbs_object_key_exists('avatar',Session::get('_LbsUserSession'))}}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="{{route('web.route.profile')}}" class="d-block text-uppercase ">{{LaravelCms::lbs_object_key_exists('username',Session::get('_LbsUserSession'))}}</a>
@@ -37,8 +37,8 @@
 
                 <li class="nav-item increase_size">
                     <a href="#" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }} {{ (Request::is('import-pos')?'active':'')  }}  {{(Request::is('sap-pos')?' menu-is-opening menu-open':'')}}
-                
-                    ">    
+                    {{(Request::is('sap-line-items-po/*')?'active':'')}}
+                    ">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/lt3.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/dk3.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -47,18 +47,18 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview "  style="display: {{ Request::is('sap-pos') ? 'block;' : '' }} {{ Request::is('import-pos') ? 'block;' : '' }}">
+                    <ul class="nav nav-treeview "  style="display: {{(Request::is('sap-line-items-po/*')?'block':'')}} {{ Request::is('sap-pos') ? 'block;' : '' }} {{ Request::is('import-pos') ? 'block;' : '' }}" >
                         <li class="nav-item ">
-                            <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }} ">
+                            <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}   {{(Request::is('sap-line-items-po/*')?'active':'')}}">
                             <img src="{{ asset('img/dspa_light.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
-                            <img src="{{ asset('img/light-dropdown-icon/dspa_dark.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;"> 
+                            <img src="{{ asset('img/light-dropdown-icon/dspa_dark.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;">
                             <p>SAP Reports</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                             <img src="{{ asset('img/dropdown-icon/audit-report-survey.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
-                            <img src="{{ asset('img/light-dropdown-icon/audit-report-survey.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;"> 
+                            <img src="{{ asset('img/light-dropdown-icon/audit-report-survey.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;">
                             <p>Mawared Report</p>
                             </a>
                         </li>
@@ -75,7 +75,7 @@
                     </ul>
                 </li>
                 <li class="nav-item increase_size">
-                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">    
+                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  ">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/management.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 25px !important; ">
                         <img src="{{ asset('img/light-dropdown-icon/management.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 25px !important;">
@@ -102,7 +102,7 @@
                     </ul>
                 </li>
                 <li class="nav-item increase_size">
-                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  {{(Request::is('sap-line-items-po/*')?'active':'')}}">    
+                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  ">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/control-panel.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 25px !important; margin-right: 24px;">
                         <img src="{{ asset('img/light-dropdown-icon/control-panel.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 25px !important; margin-right: 24px;">
@@ -135,7 +135,7 @@
                         </li>
                     </ul>
                 </li>
-               
+
                 <li class="nav-item">
                     <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('filters')?'active':'')  }}  ">
                         <!-- <i class=" nav-icon fas fa-filter"></i> -->

@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class HosController extends Controller
 {
-    public function index(Request $request)
+    public function vendorResponse(Request $request)
     {
         $v = Validator::make($request->all(), [
             'unique_hash' => 'required',
-            'supplier_comment' => 'required',
+            'vendor_comment' => 'required',
         ]);
 
         if ($v->fails())
@@ -23,6 +23,7 @@ class HosController extends Controller
         if (!HosPostHistory::where('unique_hash',$request->unique_hash)->exists()){
             return response()->json(['success'=>false,'msg'=>'unique hash does not found']);
         }
+
         $hosHistory = HosPostHistory::with('hasNotificationHistory')->where('unique_hash',$request->unique_hash)->first();
 
         $tickets = new TicketManager();

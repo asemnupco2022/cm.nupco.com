@@ -24,10 +24,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-//         $schedule->command('lbs:scheduler')->everyMinute();
-         $schedule->command('lbs:po-scheduler')->everyMinute();
-         $schedule->command('lbs:po-scheduler-ex')->daily();
-         $schedule->command('lba:import-sap')->dailyAt('02:00');
+
+
+        //new import schedulers
+        $schedule->command('lbs:import-sap-po')->dailyAt('02:00'); //SAP Import and copy files
+        $schedule->command('lbs:po-import-scheduler')->everyMinute(); //SAP move copied files to database everyTwoMinutes
+
+         //Run Notification Scheduler
+         $schedule->command('lbs:notification-scheduler')->everyMinute(); //Execute Notification Scheduler for manual-automation
+
+
+//         $schedule->command('lbs:po-scheduler')->everyMinute();
+//         $schedule->command('lbs:po-scheduler-filter')->daily();
     }
 
     /**

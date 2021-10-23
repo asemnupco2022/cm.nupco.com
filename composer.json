@@ -16,6 +16,7 @@
         "league/flysystem-sftp": "~1.0",
         "rifrocket/laravel-cms": "@dev",
         "spatie/laravel-activitylog": "^3.17",
+        "spatie/laravel-backup": "^6.16",
         "spatie/laravel-permission": "dev-rifRocket-patch-lbs"
     },
     "require-dev": {

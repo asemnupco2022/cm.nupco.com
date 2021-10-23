@@ -30,7 +30,7 @@
                     @endif
                     <div class="row">
                         <div class="col-md">
-                            <h3 class="card-title" >Purchasing Document # {{$purchasing_document}} &nbsp; &nbsp;&nbsp;&nbsp;
+                            <h3 class="card-title" >Purchasing Document # {{$po_number}} &nbsp; &nbsp;&nbsp;&nbsp;
                                 Vendor Code: &nbsp;{{ $baseInfo->vendor_code  }} &nbsp; :  &nbsp;{{ $baseInfo->vendor_name}}</h3>
                         </div>
                     </div> <br>
@@ -143,41 +143,52 @@
                         @foreach($collections as $key => $collection)
                             <tr>
                                 <td>
-                                    <div class="icheck-primary d-inline " >
+                                    <div class="icheck-primary d-inline">
                                         <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $key }}" wire:model="selectedPo.{{$collection->po_item }}">
                                     </div>
                                 </td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type_desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
+{{--                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_number' )==false?'hide':''}}" >{{$collection->po_number}}</td>--}}
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_item' )==false?'hide':''}}" >{{$collection->po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'contract_item_no' )==false?'hide':''}}" >{{$collection->contract_item_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'generic_mat_code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'nupco_trade_code' )==false?'hide':''}}" >{{$collection->nupco_trade_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'cust_gen_code' )==false?'hide':''}}" >{{$collection->cust_gen_code}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'material_number' )==false?'hide':''}}" >{{$collection->material_number}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'mat_description' )==false?'hide':''}}" >{{$collection->mat_description}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'uom' )==false?'hide':''}}" >{{$collection->uom}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'ordered_quantity' )==false?'hide':''}}" >{{$collection->ordered_quantity}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ration' )==false?'hide':''}}" >{{$collection->supply_ration}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'open_quantity' )==false?'hide':''}}" >{{$collection->open_quantity}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'net_price_per_unit_1' )==false?'hide':''}}" >{{$collection->net_price_per_unit_1}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'net_order_value' )==false?'hide':''}}" >{{$collection->net_order_value}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{number_format($collection->gr_amount, 2)}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_created_on' )==false?'hide':''}}" >{{$collection->po_created_on}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'purchasing_organization' )==false?'hide':''}}" >{{$collection->purchasing_organization}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'purchasing_group' )==false?'hide':''}}" >{{$collection->purchasing_group}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'currency' )==false?'hide':''}}" >{{$collection->currency}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'nupco_delivery_date' )==false?'hide':''}}" >{{$collection->nupco_delivery_date}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_no' )==false?'hide':''}}" >{{$collection->delivery_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'item_status' )==false?'hide':''}}" >{{$collection->item_status}}</td>
+{{--                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'customer_no' )==false?'hide':''}}" >{{$collection->customer_no}}</td>--}}
+{{--                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'customer_name' )==false?'hide':''}}" >{{$collection->customer_name}}</td>--}}
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'tender_no' )==false?'hide':''}}" >{{$collection->tender_no}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'tender_desc' )==false?'hide':''}}" >{{$collection->tender_desc}}</td>
+{{--                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_code' )==false?'hide':''}}" >{{$collection->vendor_code}}</td>--}}
+{{--                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_name_en' )==false?'hide':''}}" >{{$collection->vendor_name_en}}</td>--}}
+{{--                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_name_er' )==false?'hide':''}}" >{{$collection->vendor_name_er}}</td>--}}
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'storage_location' )==false?'hide':''}}" >{{$collection->storage_location}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'uo_m' )==false?'hide':''}}" >{{$collection->uo_m}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'net_price' )==false?'hide':''}}" >{{$collection->net_price}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'price_unit' )==false?'hide':''}}" >{{$collection->price_unit}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'net_value' )==false?'hide':''}}" >{{$collection->net_value}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'nupco_trade_code' )==false?'hide':''}}" >{{$collection->nupco_trade_code}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'nupco_delivery_date' )==false?'hide':''}}" >{{$collection->nupco_delivery_date}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'ordered_quantity' )==false?'hide':''}}" >{{$collection->ordered_quantity}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'open_quantity' )==false?'hide':''}}" >{{$collection->open_quantity}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'item_status' )==false?'hide':''}}" >{{$collection->item_status}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_no' )==false?'hide':''}}" >{{$collection->delivery_no}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'cust_cont_trade_numb' )==false?'hide':''}}" >{{$collection->cust_cont_trade_numb}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'cust_gen_code' )==false?'hide':''}}" >{{$collection->cust_gen_code}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'generic_mat_code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'old_new_po_number' )==false?'hide':''}}" >{{$collection->old_new_po_number}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'old_po_item' )==false?'hide':''}}" >{{$collection->old_po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'old_p_o1' )==false?'hide':''}}" >{{$collection->old_p_o1}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'old_po_item1' )==false?'hide':''}}" >{{$collection->old_po_item1}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'on_behalf_of_po' )==false?'hide':''}}" >{{$collection->on_behalf_of_po}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'on_behalf_of_po_item' )==false?'hide':''}}" >{{$collection->on_behalf_of_po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'the_testimonial' )==false?'hide':''}}" >{{$collection->the_testimonial}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'trade_date' )==false?'hide':''}}" >{{$collection->trade_date}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_quantity' )==false?'hide':''}}" >{{$collection->gr_quantity}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
+
                                 <td><a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_item }})">
-                                        <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($purchasing_document,$collection->po_item, 'sap_line_item' )}}</span>
-                                        <i class="far fa-comment-alt"></i> 
+                                        <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($po_number,$collection->po_item, 'sap_line_item' )}}</span>
+                                        <i class="far fa-comment-alt"></i>
                                     </a>
                                 </td>
                             </tr>

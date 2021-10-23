@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card-body">
-          @livewire('po.sap-line-item-component',['purchasing_document'=> $po_id])
+          @livewire('po.sap-line-item-component',['po_number'=> $po_number])
         </div>
         <!-- /.card-body -->
     </div>

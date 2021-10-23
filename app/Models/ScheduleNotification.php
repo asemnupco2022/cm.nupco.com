@@ -21,11 +21,7 @@ use LogsActivity,UniversalModelTrait, HasFactory;
     const CONS_COLUMNS = [
         'user_name' => true,
         'po_table' => true,
-//        'notification_type' => true,
-//        'notification_template' => true,
         'query' => true,
-//        'year_recurrence' => true,
-//        'month_recurrence' => true,
         'day_recurrence' => true,
         'start_date' => true,
         'start_time' => true,

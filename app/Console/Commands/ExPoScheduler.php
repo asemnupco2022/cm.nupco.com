@@ -12,7 +12,7 @@ class ExPoScheduler extends Command
      *
      * @var string
      */
-    protected $signature = 'lbs:po-scheduler-ex';
+    protected $signature = 'lbs:po-scheduler-filter';
 
     /**
      * The console command description.
@@ -40,7 +40,7 @@ class ExPoScheduler extends Command
     public function handle()
     {
         dispatch(new \App\Jobs\Po\FilterSap());    //SAP jobs
-//        dispatch(new \App\Jobs\Po\SendNotification());    //MAWAR jobs
+//        dispatch(new \App\Jobs\Po\FilterSap());     //Mowared jobs
         return 0;
     }
 }

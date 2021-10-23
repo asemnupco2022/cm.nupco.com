@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Po;
 
 
 
-use App\Models\SapView;
+use App\Models\SapMasterView;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Livewire\Component;
@@ -43,12 +43,9 @@ class SAPTabelConponent extends Component
     public function hitSearchInt($query)
     {
         if (Arr::has($this->initTenderNo, ['from','to'])){
-
             $query=$query->whereBetween('tender_no',[$this->initTenderNo['from'],$this->initTenderNo['to']]);
-
         }
         if (Arr::has($this->initPurchaseNo, ['from','to'])){
-
             $query=$query->whereBetween('purchasing_document',[$this->initPurchaseNo['from'],$this->initPurchaseNo['to']]);
         }
         if (Arr::has($this->iniVendorNo, ['from','to'])){
@@ -72,7 +69,6 @@ class SAPTabelConponent extends Component
         if (Arr::has($this->initTradeDate, ['from','to'])){
             $query=$query->whereDate('trade_date','<=',Carbon::parse($this->initTradeDate['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->initTradeDate['to'])->format('Y-m-d'));
         }
-//        ===================
 
         if (Arr::has($this->storage_location, ['from','to'])){
             $query=$query->whereBetween('storage_location',[Carbon::parse($this->storage_location['from'])->format('Y-m-d'),Carbon::parse($this->storage_location['to'])->format('Y-m-d')]);
@@ -113,7 +109,7 @@ class SAPTabelConponent extends Component
 
     protected $queryString = ['searchable_col_val'];
 
-    public $columns=SapView::CONS_COLUMNS;
+    public $columns=SapMasterView::CONS_COLUMNS;
     public $operators=LbsConstants::CONST_OPERATOR;
     public $num_rows=LbsConstants::CONST_PAGE_NUMBERS;
 
@@ -129,11 +125,10 @@ class SAPTabelConponent extends Component
 
     public function searchEngine()
     {
-        $query=SapView::orderBy('tender_no', 'DESC');
+        $query=SapMasterView::orderBy('tender_no', 'ASC');
 
         if ($this->initiateSearch){
             $this->initSearch=false;
-//            dd($this->hitSearchInt($query)->paginate(10));
            return $this->hitSearchInt($query)->paginate(10);
         }
 
@@ -149,7 +144,6 @@ class SAPTabelConponent extends Component
                  $query=$query->where($this->searchable_col,"LIKE", '%'.$this->searchable_col_val.'%')->paginate(10);
             }
         }
-
         return $query;
     }
 

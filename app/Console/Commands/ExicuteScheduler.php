@@ -13,7 +13,7 @@ class ExicuteScheduler extends Command
      *
      * @var string
      */
-    protected $signature = 'lbs:scheduler';
+    protected $signature = 'lbs:notification-scheduler';
 
     /**
      * The console command description.
@@ -109,7 +109,6 @@ class ExicuteScheduler extends Command
                 else{
                     continue;
                 }
-
             }
         }
     }

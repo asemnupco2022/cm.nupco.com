@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="exampleInputEmail1">Employee Number</label>
-                <input type="title" class="form-control"  placeholder="Enter Employee Number" wire:model="employee_num">
+                <input type="title" class="form-control"  placeholder="Enter Employee Number" wire:model="employee_num" readonly>
                 @error('employee_num') <span class="error-msg">{{ $message  }}</span> @enderror
 
             </div>

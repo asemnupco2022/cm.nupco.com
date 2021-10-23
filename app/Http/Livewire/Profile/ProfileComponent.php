@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Profile;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use Livewire\Component;
@@ -26,10 +27,6 @@ class ProfileComponent extends Component
 //    public function saveAvatar()
     public function updatedAvatar()
     {
-//        $this->validate([
-//            'avatar' => 'image|max:1024', // 1MB Max
-//        ]);
-
         $extension=$this->avatar->getClientOriginalName();
         $path ='uploads/avatar/';
         $fileName='staff_avatar_'.auth()->user()->id.'_'.$extension;
@@ -101,8 +98,7 @@ class ProfileComponent extends Component
         $this->email=$updateInfo->email ;
         $this->role=$updateInfo->role ;
         $this->phone=$updateInfo->phone ;
-        $this->OldAvatar=URL($updateInfo->avatar) ;
-
+        $this->OldAvatar=URL('').'/'.$updateInfo->avatar;
         $this->permissions=$updateInfo->getPermissionNames();
 
     }

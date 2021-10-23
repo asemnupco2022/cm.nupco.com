@@ -82,6 +82,8 @@
             </div>
         </div>
         <!-- ./col -->
+
+
     </div>
 
     <div class="row dashboard_style">
@@ -193,6 +195,55 @@
         <!-- /.col (RIGHT) -->
     </div>
 
+    <div class="row dashboard_style">
+
+        <!-- Item Delivery Status -->
+        <div class="col-md-12">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Delivery Summary Report</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @livewire('reports.deliver-sum-repo-component')
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+
+
+        <!-- Item Delivery Status -->
+        <div class="col-md-12">
+            <div class="card card-success">
+                <div class="card-header">
+                    <h3 class="card-title">Item Delivery Status</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @livewire('reports.item-delivery-status-component')
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+
+    </div>
+
     @push('scripts')
 
         <script>
@@ -214,8 +265,8 @@
                     datasets: [
                         {
                             label               : 'Enquiry Email',
-                            backgroundColor     : 'rgba(23, 162, 184, 1)',
-                            borderColor         : 'rgba(23, 162, 184, 1)',
+                            backgroundColor     : 'rgba(60, 141, 199, 1)',
+                            borderColor         : 'rgba(60, 141, 199, 1)',
                             pointRadius          : false,
                             pointColor          : '#3b8bba',
                             pointStrokeColor    : 'rgba(60,141,188,1)',
@@ -225,10 +276,10 @@
                         },
                         {
                             label               : 'Expedite Email',
-                            backgroundColor     : 'rgba(40, 167, 69, 1)',
-                            borderColor         : 'rgba(40, 167, 69, 1)',
+                            backgroundColor     : 'rgba(137, 93, 148, 1)',
+                            borderColor         : 'rgba(137, 93, 148, 1)',
                             pointRadius         : false,
-                            pointColor          : 'rgba(40, 167, 69, 1)',
+                            pointColor          : 'rgba(137, 93, 148, 1)',
                             pointStrokeColor    : '#c1c7d1',
                             pointHighlightFill  : '#fff',
                             pointHighlightStroke: 'rgba(220,220,220,1)',
@@ -237,10 +288,10 @@
 
                         {
                             label               : 'Warning Email',
-                            backgroundColor     : 'rgba(255, 193, 7, 1)',
-                            borderColor         : 'rgba(255, 193, 7, 1)',
+                            backgroundColor     : 'rgba(231, 142, 74, 1)',
+                            borderColor         : 'rgba(231, 142, 74, 1)',
                             pointRadius         : false,
-                            pointColor          : 'rgba(255, 193, 7, 1)',
+                            pointColor          : 'rgba(231, 142, 74, 1)',
                             pointStrokeColor    : '#c1c7d1',
                             pointHighlightFill  : '#fff',
                             pointHighlightStroke: 'rgba(220,220,220,1)',
@@ -249,10 +300,10 @@
 
                         {
                             label               : 'Penalty Email',
-                            backgroundColor     : 'rgba(220, 53, 69, 1)',
-                            borderColor         : 'rgba(220, 53, 69, 1)',
+                            backgroundColor     : 'rgba(150, 49, 73, 1)',
+                            borderColor         : 'rgba(150, 49, 73, 1)',
                             pointRadius         : false,
-                            pointColor          : 'rgba(220, 53, 69, 1)',
+                            pointColor          : 'rgba(150, 49, 73, 1)',
                             pointStrokeColor    : '#c1c7d1',
                             pointHighlightFill  : '#fff',
                             pointHighlightStroke: 'rgba(220,220,220,1)',
@@ -354,7 +405,7 @@
                                 {{DashboardHelper::historyCounter('warning-email',null,'manual', date('Y'), date('m'))}},
                                 {{DashboardHelper::historyCounter('penalty-email',null,'manual', date('Y'), date('m'))}}
                             ],
-                            backgroundColor : ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
+                            backgroundColor : ['#3c8dc7', '#895d94', '#e78e4a', '#963149'],
                         }
                     ]
                 }
@@ -391,7 +442,7 @@
                                 {{DashboardHelper::historyCounter('warning-email',null,'automation', date('Y'), date('m'))}},
                                 {{DashboardHelper::historyCounter('penalty-email',null,'automation', date('Y'), date('m'))}}
                             ],
-                            backgroundColor : ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
+                            backgroundColor : ['#3c8dc7', '#895d94', '#e78e4a', '#963149'],
                         }
                     ]
                 }

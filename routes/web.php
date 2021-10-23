@@ -28,7 +28,9 @@ use rifrocket\LaravelCms\Http\Controllers\AdminControllers\DashboardController;
 //    return view('welcome');
 //});
 
-Route::get('/import-me',[DashboardController::class,'importPO'])->name('web.route.po.impodrt');
+Route::get('/import-po',[DashboardController::class,'importPO'])->name('web.route.po.import');
+Route::get('/read-po',[DashboardController::class,'readPO'])->name('web.route.po.read');
+Route::get('/vendor-import',[DashboardController::class,'importCsv'])->name('web.route.po.importCsv');
 
 Route::group(array('middleware'=>'web'), function () {
 

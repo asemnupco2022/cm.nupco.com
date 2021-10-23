@@ -3,7 +3,7 @@
 namespace App\Jobs\Po;
 
 use App\Models\LbsUserSearchSet;
-use App\Models\NotificationHistory;
+use App\Models\SchedulerNotificationHistory;
 use App\Models\ScheduleNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -109,7 +109,7 @@ class NotifySap implements ShouldQueue
                     $logMessage='mail send successfully-';
 
 
-                    $schedulerHistory=new NotificationHistory();
+                    $schedulerHistory=new SchedulerNotificationHistory();
 
                     $schedulerHistory->broadcast_type ='automation';
                     $schedulerHistory->mail_ticket_number   =$ticket_number;

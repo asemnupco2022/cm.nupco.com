@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Tickets;
 
 use App\Models\HosPostHistory;
 use App\Models\InternalComment;
-use App\Models\NotificationHistory;
+use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -36,7 +36,7 @@ class TicketChatComponent extends Component
 
     public function fetchBaseInfo(){
 
-        $this->notificationHistory =NotificationHistory::where('mail_ticket_hash',base64_decode($this->mail_ticket_hash))->first();
+        $this->notificationHistory =SchedulerNotificationHistory::where('mail_ticket_hash',base64_decode($this->mail_ticket_hash))->first();
         $this->allLineItems=HosPostHistory::where('mail_hash',base64_decode($this->mail_ticket_hash))->get();
     }
 

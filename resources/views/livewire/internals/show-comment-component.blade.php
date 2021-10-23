@@ -25,7 +25,8 @@
                     <br>
                     <a href="{{URL($collection->attachment)}}" download><i class="fas fa-file-download fa-7x"></i></a>
                     <br>
-                    <span class="error">{{( explode('/',$collection->attachment) )[2]}}</span>
+                    <?php $exp=explode('/',$collection->attachment);?>
+                    <span class="error">{{ end($exp)}}</span>
                 @endif
                 <!-- /.direct-chat-text -->
             </div>

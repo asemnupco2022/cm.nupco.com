@@ -91,26 +91,24 @@
 
                         @foreach($collections as $key => $collection)
                             <tr>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_type' )==false?'hide':''}}" >{{$collection->po_type}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_type_description' )==false?'hide':''}}" >{{$collection->po_type_description}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'pur_group' )==false?'hide':''}}" >{{$collection->pur_group}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_number' )==false?'hide':''}}" >{{$collection->po_number}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'purchasing_group' )==false?'hide':''}}" >{{$collection->purchasing_group}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'material_number' )==false?'hide':''}}" >{{$collection->material_number}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'tender_no' )==false?'hide':''}}" >{{$collection->tender_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'purchasing_document' )==false?'hide':''}}" >{{$collection->purchasing_document}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'customer_name' )==false?'hide':''}}" >{{$collection->customer_name}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_code' )==false?'hide':''}}" >{{$collection->vendor_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_name' )==false?'hide':''}}" >{{$collection->vendor_name}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'Ordered_quantity' )==false?'hide':''}}" >{{$collection->Ordered_quantity}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'pending_qty' )==false?'hide':''}}" >{{$collection->pending_qty}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'total_recived_qty' )==false?'hide':''}}" >{{$collection->total_recived_qty}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'order_total' )==false?'hide':''}}" >{{number_format($collection->order_total, 2)}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{number_format($collection->gr_amount,2)}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'trade_date' )==false?'hide':''}}" >{{$collection->trade_date}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'vendor_name_en' )==false?'hide':''}}" >{{$collection->vendor_name_en}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'storage_location' )==false?'hide':''}}" >{{$collection->storage_location}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivery_address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'contract_item_no' )==false?'hide':''}}" >{{$collection->contract_item_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'generic_mat_code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
-                                <td><a href="{{route('web.route.po.SAPTableLineItem',['slug'=>base64_encode($collection->purchasing_document)])}}"><i class="fas fa-eye"></i></a></td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'ordered_quantity' )==false?'hide':''}}" >{{$collection->ordered_quantity}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'open_quantity' )==false?'hide':''}}" >{{$collection->open_quantity}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'total_received_quantity' )==false?'hide':''}}" >{{$collection->total_received_quantity}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'net_value' )==false?'hide':''}}" >{{$collection->net_value}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
+                                <td><a href="{{route('web.route.po.SAPTableLineItem',['slug'=>base64_encode($collection->po_number)])}}"><i class="fas fa-eye"></i></a></td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -381,6 +379,11 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer">
+                    <div wire:loading>
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
                     <button type="button" class="btn btn-primary" wire:click="initSearchFilter">Check Now</button>
                 </div>
 
