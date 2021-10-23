@@ -41,6 +41,7 @@ class PoImportScheduler extends Command
      */
     public function handle()
     {
+        return 0;
         $getRecords=\App\Models\PoImportScheduler::OnlyActive()->get();
         foreach ($getRecords as $getRecord){
             if(LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM == $getRecord->table_type){

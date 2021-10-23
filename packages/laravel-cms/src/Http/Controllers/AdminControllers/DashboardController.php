@@ -13,6 +13,8 @@ use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use App\Http\Controllers\Controller;
 use Importer;
 use rifrocket\LaravelCms\Models\LbsMember;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class DashboardController extends Controller
 {
@@ -24,6 +26,28 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+
+
+    //     $passing_data=[
+    //         'mail_unique'=> 11111111111111111,
+    //         'mail_hash'=> 4234234324,
+    //         'message_type'=> 'enquiry',
+    //         'unique_hash'=> 423423984074234723,
+    //         'tender_num'=> 444444,
+    //         'vendor_num'=>4792847982347,
+    //         'po_num'=>42343,
+    //         'customer_num'=>423423,
+    //         'po_item_num'=>43242,
+    //         'uom'=>4234234,
+    //         'ordered_qty'=>4234234,
+    //         'open_qty'=>4324234,
+    //         'net_order_value'=>42342342,
+    //         'delivery_date'=>4234234,
+    //     ];
+    //     $array1=['vendor_nos'=>[40001334,40003433]];
+    //    return  $response = Http::post('https://hos-dev.nupco.com/HOS_S4/api/get-vendor-master',$array1);
+       
+        
         return view('LbsViews::admin_views.views.dashboard');
     }
 
@@ -97,7 +121,7 @@ class DashboardController extends Controller
 
     public function readPO()
     {
-        $paths = public_path('uploads/sap_parts/2021_10_22/');
+        $paths = public_path('uploads/sap_parts/2021_10_23/');
         $path = ($paths.'*.csv');
         $global = glob($path);
         natsort($global);

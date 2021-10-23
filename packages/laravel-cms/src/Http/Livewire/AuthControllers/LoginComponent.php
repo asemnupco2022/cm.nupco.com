@@ -13,7 +13,7 @@ class LoginComponent extends Component
 
     public function mount()
     {
-//        dd(Hash::make(123456789));
+    //    dd(Hash::make(123456789));
     }
     public $email = null;
     public $password = null;

@@ -35,7 +35,7 @@
                         </div>
                     </div> <br>
 
-                    <div class="row">
+                    <div class="row yf_display_inline">
 
                         <div class="col-sm-1">
                             <div class="form-group input-group-sm">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-5">
+                       <div class="col-sm-3 inline_block pr-0">
                             <div class="form-inline">
 
                                 <div class="form-group input-group-sm">
@@ -58,6 +58,9 @@
                                         @endforeach
                                     </select>
                                 </div>
+
+                            </div>
+                            <div class="form-inline">
                                 <div class="form-group input-group-sm">
 
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_operator"  title="Select Search Operator">
@@ -66,7 +69,13 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="input-group input-group-sm" style="width: 250px;">
+
+                            </div>
+
+                        </div>
+                        <div class="col-sm-2 pl-0">
+                            <div class="form-inline">
+                                <div class="input-group input-group-sm" >
                                     <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                            placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
 
@@ -81,8 +90,8 @@
 
                         </div>
 
-                        <div class="col-sm-3">
-                            <div class="input-group input-group-sm" style="width: 250px;">
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-sm" >
                                 <select class="form-control float-right" title="Select Preset Filter" wire:model="getFilterTemplate">
                                     <option value="" selected disabled>Please Select Filter Template</option>
                                     @if($userFilterTemplates)
@@ -102,22 +111,21 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-2 ">
-                            <button type="button" class="btn btn-primary btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
+                        <div class="col-sm-2 text-right">
+                            <button type="button" class="btn btn-success btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
-
-                            <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
-                               PDF
-                            </button>
-
-                            <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
-                                Excel
-                            </button>
-
                         </div>
+                        <div class="download_btn">
+                            <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
+                                DOWNLOAD PDF
+                                </button>
 
-                    </div>
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
+                                DOWNLOAD Excel
+                                </button>
+                            </div> 
+                        </div>
 
 
 

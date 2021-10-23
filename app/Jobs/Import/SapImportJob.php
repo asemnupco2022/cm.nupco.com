@@ -50,20 +50,23 @@ class SapImportJob implements ShouldQueue
         foreach (array_splice($global, 0, 1) as $globalKey => $file) {
 
             $fileOrigin= explode('_',basename($file, '.csv'));
-            if ((int)end($fileOrigin)==0){
-                if (File::exists($file)) {
-                    File::delete($file);
-                }
-                PoImportScheduler::find($this->po_import_schedulers)->update([
-                    'start_time'=>Carbon::now()->format('H:i:s'),
-                ]);
-                continue;}
+           
 
 
             $data = array_map(function ($v) {
                 return str_getcsv($v, "|");
             }, file($file));
+
+
             foreach ($data as $key => $row) {
+
+                if ((int)end($fileOrigin)==0){
+               
+                    PoImportScheduler::find($this->po_import_schedulers)->update([
+                        'start_time'=>Carbon::now()->format('H:i:s'),
+                    ]);
+                    continue;}
+                    
                 $this->storeInfo($row,$txtFile);
             }
 

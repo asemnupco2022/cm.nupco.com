@@ -73,7 +73,7 @@ class SapImport extends Command
             return 0;
         }
 
-        $parts = (array_chunk($baseFile, 5000));
+        $parts = (array_chunk($baseFile, 50000));
         $partPath='uploads/sap_parts/'.Carbon::now()->format('Y_m_d').'/';
 
         $total_files=0;

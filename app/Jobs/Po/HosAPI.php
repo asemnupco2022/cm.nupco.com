@@ -25,7 +25,7 @@ class HosAPI implements ShouldQueue
      */
     public function __construct($vendor_code, $mail_type, $collection, $email_unique, $email_hash)
     {
-        $this->hosUrl='https://hos-dev.nupco.com/HOS_S4/api/add-supplier-comment';
+        $this->hosUrl='http://hos-dev.nupco.com/HOS_S4/api/add-supplier-comment';
         $this->vendor_code=$vendor_code;
         $this->collection=$collection;
         $this->email_unique=$email_unique;
@@ -73,32 +73,37 @@ class HosAPI implements ShouldQueue
                 $insertToHos->unique_hash= $unique_hash;
                 $insertToHos->tender_num= $poItemCol['tender_no'];
                 $insertToHos->vendor_num=$this->vendor_code;
-                $insertToHos->po_num=$poItemCol['purchasing_document'];
+                $insertToHos->po_num=$poItemCol['po_number'];
                 $insertToHos->customer_num=$poItemCol['customer_name'];
                 $insertToHos->po_item_num=$poItemCol['po_item'];
-                $insertToHos->uom=$poItemCol['uom'];
+                $insertToHos->uom=$poItemCol['uo_m'];
                 $insertToHos->ordered_qty=$poItemCol['ordered_quantity'];
                 $insertToHos->open_qty=$poItemCol['open_quantity'];
-                $insertToHos->net_order_value=$poItemCol['net_order_value'];
+                $insertToHos->net_order_value=$poItemCol['net_value'];
                 $insertToHos->delivery_date=$poItemCol['nupco_delivery_date'];
                 $insertToHos->save();
 
-                $response = Http::post($this->hosUrl, [
+
+
+                $sendable=[
                     'mail_unique'=> $this->email_unique,
                     'mail_hash'=> $this->email_hash,
                     'message_type'=> $this->mail_type,
                     'unique_hash'=> $unique_hash,
                     'tender_num'=> $poItemCol['tender_no'],
-                    'vendor_num'=>$this->vendor_code,
-                    'po_num'=>$poItemCol['purchasing_document'],
+                    'vendor_num'=>ltrim($this->vendor_code,0),
+                    'po_num'=>$poItemCol['po_number'],
                     'customer_num'=>$poItemCol['customer_name'],
                     'po_item_num'=>$poItemCol['po_item'],
-                    'uom'=>$poItemCol['uom'],
+                    'uom'=>$poItemCol['uo_m'],
                     'ordered_qty'=>$poItemCol['ordered_quantity'],
                     'open_qty'=>$poItemCol['open_quantity'],
-                    'net_order_value'=>$poItemCol['net_order_value'],
+                    'net_order_value'=>$poItemCol['net_value'],
                     'delivery_date'=>$poItemCol['nupco_delivery_date'],
-                ]);
+                ];
+
+            Log::info('whaterver sending',$sendable);
+                $response = Http::get($this->hosUrl,$sendable );
 
                 Log::info('HOS-API-POST-REQUEST',[$response]);
 

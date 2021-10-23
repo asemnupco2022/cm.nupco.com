@@ -63,6 +63,7 @@
 }
 a.brand-link.logo_aria {
     min-height: 65px;
+    border-bottom: 5px solid #e52900 !important;
 }
 .brand-link .brand-image {
     float: left;
@@ -234,11 +235,11 @@ div#open_confirmation_box {
 td {
     font-size: 14px;
 }
-.btn-warning {
-    color: #ffffff !important;
-    background-color: #f2c600 !important;
-    border-color: #f2c600 !important;
-    box-shadow: none;
+.download_btn .btn-warning {
+    color: #e37526 !important;
+    background-color: #ffffff !important;
+    border-color: #e37526 !important;
+    box-shadow: none !important;
 }
 .yf_display_inline select.form-control {
     line-height: 14px !important;
@@ -398,9 +399,9 @@ a.btn.btn-app.chat_po_btn span.badge.bg-teal {
     border: 1px solid #E37526 !important;
 }
 .outline_org_btn {
+    border: 1px solid #76797a!important;
     background: #ffffff !important;
-    border: 1px solid #e37526 !important;
-    color: #e37526;
+    color: #76797a !important;
 }
 .outline_org_btn:hover {
     color: #e37526;
@@ -460,4 +461,26 @@ a.btn.btn-app.chat_po_btn span.badge.bg-teal {
     margin-bottom: 1rem;
     color: #1c2346 !important;
     background-color: transparent;
+}
+nav.main-header.navbar.navbar-expand.navbar-light {
+    background: #fff;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #f8f8f8 !important;
+}
+.nav-pills .nav-link:not(.active):hover {
+    color: #76797a !important;
+}
+.table-hover tbody tr:hover {
+    color: #212529;
+    background-color: #f8f8f8 !important;
+}
+.download_btn {
+    position: absolute;
+    top: 7px;
+    right: 20px;
+    padding-top: 0px;
+}
+.head_space {
+    padding-top: 10px;
 }

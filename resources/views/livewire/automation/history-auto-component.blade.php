@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header">
                     <br>
-                    <div class="row yf_display_inline">
+                    <div class="row yf_display_inline head_space">
                         <div class="col-sm-1">
                             <div class="form-group input-group-sm">
                                 <select class="form-control  " style="width: 100%;" wire:model="number_of_rows" >
@@ -87,16 +87,18 @@
                             <button type="button" class="btn btn-success btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
+                        </div>
 
-                            <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
-                                PDF
+                        <div class="download_btn">
+                        <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
+                              DOWNLOAD PDF
                             </button>
 
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
-                                Excel
+                             DOWNLOAD Excel
                             </button>
-
                         </div>
+
 
                     </div>
                 </div>

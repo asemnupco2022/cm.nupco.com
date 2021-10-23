@@ -11,6 +11,7 @@ class HosController extends Controller
 {
     public function vendorResponse(Request $request)
     {
+        
         $v = Validator::make($request->all(), [
             'unique_hash' => 'required',
             'vendor_comment' => 'required',
@@ -39,7 +40,9 @@ class HosController extends Controller
         $tickets->vendor_name=$hosHistory->hasNotificationHistory->recipient_name;
         $tickets->vendor_email=$hosHistory->hasNotificationHistory->recipient_email;
         $tickets->msg_sender='staff';
-        $tickets->msg_body=$request->supplier_comment;
+        $tickets->msg_body=json_encode($request->vendor_comment).$request->item_note;
+        $tickets->attachment=$request->attachment_info['file_name'];
+        $tickets->attachment_name=$request->attachment_info['file_path'];
         $tickets->msg_receiver='vendor';
         if ($tickets->save()){
             return response()->json(['success'=>true,'msg'=>'data saved successfully']);

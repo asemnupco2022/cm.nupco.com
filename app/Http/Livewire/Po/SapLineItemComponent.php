@@ -61,7 +61,7 @@ class SapLineItemComponent extends Component
             'po_items'=>$this->selectedPo,
             'sap_object'=>$collections
         ];
-        dispatch(new SapMailHeader($collections, $reqType));
+        // dispatch(new SapMailHeader($collections, $reqType));
         $this->emit('event-show-compose-email', $reqType,$sendData,$this->tableType);
     }
 
