@@ -11,25 +11,27 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 
 class SapImportJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $path;
-    public $po_import_schedulers;
+    protected $file;
+    protected $po_import_schedulers;
+    protected $fileOrigin;
+    protected $globalKey;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($path,$po_import_schedulers)
+    public function __construct($file, $po_import_schedulers, $fileOrigin, $globalKey)
     {
-       $this->path=$path;
-       $this->po_import_schedulers=$po_import_schedulers;
+        $this->file=$file;
+        $this->po_import_schedulers=$po_import_schedulers;
+        $this->fileOrigin=$fileOrigin;
+        $this->globalKey=$globalKey;
     }
 
     /**
@@ -39,70 +41,47 @@ class SapImportJob implements ShouldQueue
      */
     public function handle()
     {
+        $data = array_map(function ($v) {
+            return str_getcsv($v, "|");
+        }, file($this->file));
 
-        $paths = public_path($this->path);
-        $filepath = ($paths.'*.csv');
-        $txtFile = $textFile ='uploads/sap_parts/'.basename($paths, ".txt").'/'.basename($paths, ".txt").'.txt';
+        foreach ($data as $key => $row) {
 
-        $global = glob($filepath);
-        natsort($global);
+            if ($this->fileOrigin == 0 and $key== 0 ){
 
-        foreach (array_splice($global, 0, 1) as $globalKey => $file) {
+                PoImportScheduler::find($this->po_import_schedulers)->update([
+                    'start_time'=>Carbon::now()->format('H:i:s'),
+                ]);
+                continue;}
 
-            $fileOrigin= explode('_',basename($file, '.csv'));
-           
-
-
-            $data = array_map(function ($v) {
-                return str_getcsv($v, "|");
-            }, file($file));
-
-
-            foreach ($data as $key => $row) {
-
-                if ((int)end($fileOrigin)==0){
-               
-                    PoImportScheduler::find($this->po_import_schedulers)->update([
-                        'start_time'=>Carbon::now()->format('H:i:s'),
-                    ]);
-                    continue;}
-                    
-                $this->storeInfo($row,$txtFile);
-            }
-
-            if (File::exists($file)) {
-                File::delete($file);
-            }
-
-            $updateInit = PoImportScheduler::find($this->po_import_schedulers);
-
-            $total_ex_files = $updateInit->total_ex_files + $globalKey + 1;
-            $total_ex_records = $updateInit->total_ex_records + $key + 1;
-            $deleted_at = null;
-
-
-            if ($updateInit->total_ex_records == $total_ex_files and $updateInit->total_ex_files == $total_ex_records ){
-                $deleted_at = Carbon::now()->format('Y-m-d');
-
-            }
-
-           PoImportScheduler::find($this->po_import_schedulers)->update([
-               'total_ex_files'=>$total_ex_files,
-               'total_ex_records'=>$total_ex_records,
-               'deleted_at'=>$deleted_at,
-               'end_time'=>Carbon::now()->format('H:i:s')
-           ]);
-
+            $this->storeInfo($row);
         }
+
+        if (File::exists($this->file)) {
+            File::delete($this->file);
+        }
+
+
+        $updateInit = PoImportScheduler::find($this->po_import_schedulers);
+        $total_ex_records = $updateInit->total_ex_records + $key + 1;
+        $deleted_at = null;
+
+
+        if ( $updateInit->total_ex_files == $total_ex_records ){
+            $deleted_at = Carbon::now()->format('Y-m-d');
+        }
+
+        PoImportScheduler::find($this->po_import_schedulers)->update([
+            'total_ex_records'=>$total_ex_records,
+            'deleted_at'=>$deleted_at,
+            'end_time'=>Carbon::now()->format('H:i:s')
+        ]);
+
     }
 
+    protected function storeInfo($row){
 
-    protected function storeInfo($row,$txtFile){
-
-        $tctArray = json_decode(Storage::disk('public_uploads')->get($txtFile), true);
-
-
-     $insertable=[
+        $insertable=[
 
             "document_type"=>$row[0],
             "document_type_desc"=>$row[1],
@@ -143,17 +122,8 @@ class SapImportJob implements ShouldQueue
             "supply_ratio"=>((int)$row[35]/(int)$row[25])*100
         ];
 
-//        if (! in_array((int)$row[2], $tctArray)){
-//            if (PoSapMaster::where('po_number',(int)$row[2])->exists()){
-//                PoSapMaster::where('po_number',(int)$row[2])->delete($insertable);
-//            }
-//            $tctArray[]=(int)$row[2];
-//            Storage::disk('public_uploads')->put($txtFile,json_encode($tctArray));
-//        }
-        $tctArray[]=(int)$row[2];
-        Storage::disk('public_uploads')->put($txtFile,json_encode($tctArray));
 
-         PoSapMaster::create($insertable);
+        PoSapMaster::create($insertable);
 
     }
 }

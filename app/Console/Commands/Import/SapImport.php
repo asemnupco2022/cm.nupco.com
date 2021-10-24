@@ -3,6 +3,7 @@
 namespace App\Console\Commands\Import;
 
 use App\Jobs\Import\SapImportJob;
+use App\Jobs\Import\SapImportJobNew;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoImportScheduler;
 use Carbon\Carbon;
@@ -74,6 +75,7 @@ class SapImport extends Command
         }
 
         $parts = (array_chunk($baseFile, 50000));
+        File::deleteDirectory(public_path('uploads/sap_parts/'.Carbon::now()->format('Y_m_d')));
         $partPath='uploads/sap_parts/'.Carbon::now()->format('Y_m_d').'/';
 
         $total_files=0;
@@ -87,8 +89,6 @@ class SapImport extends Command
             $fileName = 'sap_part_' . $key . '.csv';
             Storage::disk('public_uploads')->put($partPath . $fileName, $part);
         }
-
-        Storage::disk('public_uploads')->put($partPath .'/'. Carbon::now()->format('Y_m_d').'.txt', json_encode([]));
 
         if (PoImportScheduler::where('table_type',LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM)->whereDate('created_at', Carbon::now()->format('Y_m_d'))->first()){
 
@@ -107,8 +107,27 @@ class SapImport extends Command
         $insert->end_time=null;
         $insert->save();
 
+
 //        Artisan::call('php artisan backup:run --only-db');
         DB::table('po_sap_masters')->truncate();
+
+
+        $paths = public_path($partPath);
+        $path = ($paths.'*.csv');
+        $global = glob($path);
+        natsort($global);
+
+        foreach ($global as $globalKey => $file) {
+
+            $fileOrigin=1;
+            if ( $globalKey == 0 ){
+                $fileOrigin= explode('_',basename($file, '.csv'));
+                $fileOrigin=((int)end($fileOrigin));
+            }
+
+            dispatch(new SapImportJob($file,$insert->id,$fileOrigin,$globalKey));
+        }
+
         return 1;
     }
 

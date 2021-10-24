@@ -4,6 +4,7 @@ namespace rifrocket\LaravelCms\Http\Controllers\AdminControllers;
 
 use App\Models\LbsUserSearchSet;
 use App\Models\PoImportScheduler;
+use App\Models\PoSapMaster;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -26,28 +27,6 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-
-
-    //     $passing_data=[
-    //         'mail_unique'=> 11111111111111111,
-    //         'mail_hash'=> 4234234324,
-    //         'message_type'=> 'enquiry',
-    //         'unique_hash'=> 423423984074234723,
-    //         'tender_num'=> 444444,
-    //         'vendor_num'=>4792847982347,
-    //         'po_num'=>42343,
-    //         'customer_num'=>423423,
-    //         'po_item_num'=>43242,
-    //         'uom'=>4234234,
-    //         'ordered_qty'=>4234234,
-    //         'open_qty'=>4324234,
-    //         'net_order_value'=>42342342,
-    //         'delivery_date'=>4234234,
-    //     ];
-    //     $array1=['vendor_nos'=>[40001334,40003433]];
-    //    return  $response = Http::post('https://hos-dev.nupco.com/HOS_S4/api/get-vendor-master',$array1);
-       
-        
         return view('LbsViews::admin_views.views.dashboard');
     }
 
@@ -121,33 +100,83 @@ class DashboardController extends Controller
 
     public function readPO()
     {
-        $paths = public_path('uploads/sap_parts/2021_10_23/');
+        $paths = public_path('uploads/sap_parts/2021_10_24/');
         $path = ($paths.'*.csv');
         $global = glob($path);
         natsort($global);
 
-        foreach (array_splice($global, 0, 2) as $globalKey => $file) {
+        foreach ($global as $globalKey => $file) {
             $data = array_map(function ($v) {
                 return str_getcsv($v, "|");
             }, file($file));
 
-//            if ($globalKey == 0){
-//                $fileOrigin= explode('_',basename($file, '.csv'));
-//                if ((int)end($fileOrigin)==0){continue;}
-//            }
+            if ( $globalKey ==0 ){
+                $fileOrigin= explode('_',basename($file, '.csv'));
+                if ((int)end($fileOrigin)==0){
 
+                    continue;}
+            }
             foreach ($data as $key => $row) {
-                dump($row);
-                    if($key==65)  dd($row);
+
+               $this->storeInfo($row);
 
             }
-//            dd('end');
+
             if (File::exists($file)) {
                 File::delete($file);
             }
         }
 
     }
+
+    protected function storeInfo($row){
+
+        $insertable=[
+
+            "document_type"=>$row[0],
+            "document_type_desc"=>$row[1],
+            "po_number"=>(int)$row[2],
+            "po_item"=>(int)$row[3],
+            "material_number"=>$row[4],
+            "mat_description"=>$row[5],
+            "po_created_on"=>$row[6],
+            "purchasing_organization"=>$row[7],
+            "purchasing_group"=>$row[8],
+            "currency"=>$row[9],
+            "customer_no"=>$row[10],
+            "customer_name"=>$row[11],
+            "tender_no"=>$row[12],
+            "tender_desc"=>$row[13],
+            "vendor_code"=>$row[14],
+            "vendor_name_en"=>$row[15],
+            "vendor_name_er"=>$row[16],
+            "plant"=>$row[17],
+            "storage_location"=>$row[18],
+            "uo_m"=>$row[19],
+            "net_price"=>$row[20],
+            "price_unit"=>$row[21],
+            "net_value"=>$row[22],
+            "nupco_trade_code"=>$row[23],
+            "nupco_delivery_date"=>$row[24],
+            "ordered_quantity"=>$row[25],
+            "open_quantity"=>$row[26],
+            "item_status"=>$row[27],
+            "delivery_address"=>$row[28],
+            "delivery_no"=>$row[29],   //here is the index change
+            "cust_gen_code"=>$row[31],
+            "generic_mat_code"=>$row[32],
+            "old_new_po_number"=>$row[33],
+            "old_po_item"=>$row[34],
+            "gr_quantity"=>$row[35],
+            "gr_amount"=>$row[36],
+            "supply_ratio"=>((int)$row[35]/(int)$row[25])*100
+        ];
+
+
+        PoSapMaster::create($insertable);
+
+    }
+
 
     public function logout()
     {
