@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //HOS API
-Route::group(['prefix'=>'hos-api', 'middleware'=>'lbs_api_token'], function(){
+// Route::group(['prefix'=>'hos-api', 'middleware'=>'lbs_api_token'], function(){
+    Route::group(['prefix'=>'hos-api'], function(){
     Route::any('vendor-response-to-line',[HosController::class,'vendorResponse'])->name('web.route.vendor.manager.list');
 });

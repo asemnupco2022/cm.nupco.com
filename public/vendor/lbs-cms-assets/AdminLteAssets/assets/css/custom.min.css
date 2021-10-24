@@ -212,8 +212,8 @@ div#open_confirmation_box {
 }
 .btn-primary {
     color: #fff;
-    background-color: #378cc9 !important;
-    border-color: #378cc9 !important;
+    background-color: #e37526 !important;
+    border-color: #e37526 !important;
     box-shadow: none;
 }
 .btn-success {
@@ -483,4 +483,36 @@ nav.main-header.navbar.navbar-expand.navbar-light {
 }
 .head_space {
     padding-top: 10px;
+}
+.sidebar-dark-warning .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-warning .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: #6d7275 !important;
+}
+.custom-switch .custom-control-label::after {
+    top: calc(.25rem + 6px) !important; 
+}
+.custom-switch .custom-control-label::before {
+    top: 8px !important;
+}
+.dark-mode .nav-pills .nav-link:not(.active):hover {
+    color: #ffffff !important;
+}
+.dark-mode .page-item:not(.active) .page-link {
+    background-color: #ffffff !important;
+    border-color: #ffc107 !important;
+}
+.dark-mode .modal-content {
+    background-color: #ffffff !important;
+}
+a.btn.btn-app.chat_po_btn i {
+    color: #1c2346;
+}
+button.btn.btn-warning.flat {
+    background: #fff;
+    border-color: #76797a !important;
+    color: #76797a !important;
+}
+.btn-warning:not(:disabled):not(.disabled).active, .btn-warning:not(:disabled):not(.disabled):active, .show>.btn-warning.dropdown-toggle {
+    border-color: #76797a !important;
+    color: #76797a !important;
+    background: #fff;
 }
