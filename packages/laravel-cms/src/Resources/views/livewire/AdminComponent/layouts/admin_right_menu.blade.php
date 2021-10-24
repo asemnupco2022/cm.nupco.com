@@ -521,6 +521,7 @@
                     })
                     var $dark_mode_container = $('<div />', {class: 'mb-4 custom-control custom-switch'}).append($dark_mode_checkbox).append(' <span class="custom-control-label" for="customSwitch1">Dark Mode</span>')
                     $container.append($dark_mode_container)
+                    $('#dark_mode_switch').append($dark_mode_container)
 
 
 

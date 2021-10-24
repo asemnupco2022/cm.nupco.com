@@ -2,6 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\Po\MigrateSap;
+use App\Jobs\PoSchedulerJob;
+use App\Models\LbsUserSearchSet;
 use App\Models\ScheduleNotification;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -20,7 +23,7 @@ class ExicuteScheduler extends Command
      *
      * @var string
      */
-    protected $description = 'this is a custom scheduling';
+    protected $description = 'this is a custom for all po type and table scheduling';
 
     /**
      * Create a new command instance.
@@ -40,6 +43,7 @@ class ExicuteScheduler extends Command
 
     public function scheduler()
     {
+
 
         $scheduleModel = ScheduleNotification::OnlyActive()->where('schedule_status',ScheduleNotification::JOB_STATUS_AWAIT)->get();
 
@@ -76,39 +80,26 @@ class ExicuteScheduler extends Command
                 }
 
                 //Check requested for day vise scheduling
-                if ($execute_at_day){
+                if (($execute_at_day) and (Carbon::now()->diffInSeconds($findModel->execute_at_time) < 60) and ! (Carbon::now()->diffInSeconds($findModel->execute_at_time) > 60)){
 
-                    if ((Carbon::now()->diffInSeconds($findModel->execute_at_time) < 60) and ! (Carbon::now()->diffInSeconds($findModel->execute_at_time) > 60)){
+                    //send email data...
+                    $findModel->last_executed_at=Carbon::now();
+                    $findModel->increment('attempts',1);
+                    $findModel->save();
 
-                        //send email data...
-                        $findModel->last_executed_at=Carbon::now();
-                        $findModel->increment('attempts',1);
-                        $findModel->save();
+
+                    if ($findModel->table_type==LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM){
+                        dispatch(new MigrateSap($findModel->id));
                     }
+//                  elseif($findModel->table_type==LbsUserSearchSet::TEMPLATE_MOWARED_LINE_ITEM){
+//                       dispatch(new MigrateSap($$findModel->scheduler_id)); // mawarid
+//                   }
 
-                    //Check requested for date vise scheduling
-                }elseif(!empty($findModel->execute_at_date) and Carbon::now()->isSameDay($findModel->execute_at_date)){
-
-                    if ((Carbon::now()->diffInSeconds($findModel->execute_at_time) < 60) and ! (Carbon::now()->diffInSeconds($findModel->execute_at_time) > 60)){
-
-                        //send email data...
-                        $findModel->last_executed_at=Carbon::now();
-
-                        //Check requested for YEAR_RECURRENCE_ON
-                        if ($findModel->year_recurrence=='on'){
-                            $findModel->execute_at_date=Carbon::now()->addYears(1);
-                        }
-                        //Check requested for MONTH_RECURRENCE_ON
-                        elseif($findModel->month_recurrence=='on'){
-                            $findModel->execute_at_date=Carbon::now()->addMonths(1);
-                        }
-                        $findModel->increment('attempts',1);
-                        $findModel->save();
-                    }
                 }
                 else{
                     continue;
                 }
+
             }
         }
     }

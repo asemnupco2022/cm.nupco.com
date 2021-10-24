@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-
 use Illuminate\Console\Command;
 
-class ExPoScheduler extends Command
+class ExicutePoFilter extends Command
 {
     /**
      * The name and signature of the console command.
@@ -19,7 +18,7 @@ class ExPoScheduler extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'this command will run the filtration job every day';
 
     /**
      * Create a new command instance.
@@ -28,7 +27,6 @@ class ExPoScheduler extends Command
      */
     public function __construct()
     {
-
         parent::__construct();
     }
 
@@ -40,7 +38,6 @@ class ExPoScheduler extends Command
     public function handle()
     {
         dispatch(new \App\Jobs\Po\FilterSap());    //SAP jobs
-//        dispatch(new \App\Jobs\Po\FilterSap());     //Mowared jobs
-        return 0;
+//        dispatch(new \App\Jobs\Po\FilterSap());    //SAP Mowarid
     }
 }

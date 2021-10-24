@@ -31,7 +31,7 @@
                     <div class="row">
                         <div class="col-md">
                             <h3 class="card-title" >Purchasing Document # {{$po_number}} &nbsp; &nbsp;&nbsp;&nbsp;
-                                Vendor Code: &nbsp;{{ $baseInfo->vendor_code  }} &nbsp; :  &nbsp;{{ $baseInfo->vendor_name}}</h3>
+                                Vendor Code: &nbsp;{{ $baseInfo->vendor_code  }} &nbsp; :  &nbsp;{{ $baseInfo->vendor_name_en}}</h3>
                         </div>
                     </div> <br>
 
@@ -124,7 +124,7 @@
                                 <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
                                 DOWNLOAD Excel
                                 </button>
-                            </div> 
+                            </div>
                         </div>
 
 

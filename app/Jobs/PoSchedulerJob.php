@@ -40,6 +40,9 @@ class PoSchedulerJob implements ShouldQueue
         if ($scheduler->table_type==LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM){
             dispatch(new MigrateSap($this->scheduler_id));
         }
+//        elseif($scheduler->table_type==LbsUserSearchSet::TEMPLATE_MOWARED_LINE_ITEM){
+//            dispatch(new MigrateSap($this->scheduler_id)); // mawarid
+//        }
 
     }
 }
