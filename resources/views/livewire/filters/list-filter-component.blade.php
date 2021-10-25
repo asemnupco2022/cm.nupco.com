@@ -1,3 +1,6 @@
+@push('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+@endpush
 <div>
     <div class="row">
         <div class="col-12">
@@ -112,7 +115,8 @@
                                     <td>
                                         <i class="fas fa-edit" style="cursor:pointer" title="edit" wire:click="editUsersTemplate({{$collection->id}})"></i>
 
-                                        <i class="fas fa-trash" style="cursor:pointer" title="delete" wire:click="updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)"></i>
+{{--                                        <i class="fas fa-trash" style="cursor:pointer" title="delete" wire:click="updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)" onclick="confirm_before_delete({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)"></i>--}}
+                                        <i class="fas fa-trash" style="cursor:pointer" title="delete" onclick="confirm_before_delete()"></i>
                                     </td>
 
                                 </tr>
@@ -241,6 +245,34 @@
 
 
     @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <script>
+            function confirm_before_delete(id, txt, mode){
+                $.confirm({
+                    title: 'Confirm!',
+                    content: 'Are you sure you wanna delete !',
+                    buttons: {
+
+                        cancel: {
+                            text: 'Cancel',
+                            btnClass: 'btn flat btn-success',
+                            keys: ['enter', 'shift'],
+
+                        },
+                        somethingElse: {
+                            text: 'Confirmed',
+                            btnClass: 'btn flat btn-danger',
+                            keys: ['enter', 'shift'],
+                            action: function(){
+                                @this.updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1);
+                            }
+                        }
+
+                    }
+                });
+            }
+
+        </script>
         <script>
             window.addEventListener('open-create-user-search-template', event => {
 

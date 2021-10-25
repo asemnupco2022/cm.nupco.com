@@ -62,7 +62,7 @@ class EditFilterComponent extends Component
             $this->templateLoops[]=$key;
         }
 
-        
+
         $this->queryCol[] = '';
         $this->queryOpr[] = '';
 

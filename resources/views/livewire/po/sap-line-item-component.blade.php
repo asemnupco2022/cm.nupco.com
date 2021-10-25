@@ -215,7 +215,7 @@
 
             <button class="btn btn-success flat text-capitalize" wire:click="emitMailComposerReq('enquiry-email')"><i class="fas fa-envelope"></i> send enquiry status</button>
             <button class="btn btn-info flat text-capitalize" wire:click="emitMailComposerReq('expedite-email')"><i class="fas fa-envelope" ></i> Expedite /delay</button>
-            <button class="btn btn-warning flat text-capitalize"  wire:click="emitMailComposerReq('warning-email')"><i class="fas fa-envelope"></i> Warning lette</button>
+            <button class="btn btn-warning flat text-capitalize"  wire:click="emitMailComposerReq('warning-email')"><i class="fas fa-envelope"></i> Warning letter</button>
             <button class="btn btn-danger flat text-capitalize" wire:click="emitMailComposerReq('penalty-email')"><i class="fas fa-envelope" ></i> Penality</button>
 
 
