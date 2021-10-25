@@ -52,15 +52,21 @@ class EditFilterComponent extends Component
     {
         $fetch_Data= LbsUserSearchSet::find($this->model_id);
         $jsonData=json_decode($fetch_Data->json_data, true);
+
         $this->templateName=$fetch_Data->template_name;
         foreach ($jsonData as $key => $toString){
+
             $this->queryCol[$key]=$toString['queryCol'] ;
             $this->queryOpr[$key]=$toString['queryOpr'] ;
             $this->queryVal[$key]=$toString['queryVal'] ;
+            $this->templateLoops[]=$key;
         }
-        $this->templateLoops[] = '';
+
+        
         $this->queryCol[] = '';
         $this->queryOpr[] = '';
+
+//        dd($this->templateLoops);
     }
 
     public function addNewRow()
