@@ -17,7 +17,7 @@ return [
     */
 
     'application'=>[
-        'admin_route_domain'=>'admin',
+        'admin_route_domain'=>'nupco',
         'ssl'=>'true',
         'member_api_prefix'=>'lcrm-api',
         'admin_api_prefix'=>'lcrm-admin-api',

@@ -46,28 +46,26 @@ class SAPTabelConponent extends Component
             $query=$query->whereBetween('tender_no',[$this->initTenderNo['from'],$this->initTenderNo['to']]);
         }
         if (Arr::has($this->initPurchaseNo, ['from','to'])){
-            $query=$query->whereBetween('purchasing_document',[$this->initPurchaseNo['from'],$this->initPurchaseNo['to']]);
+            $query=$query->whereBetween('po_number',[$this->initPurchaseNo['from'],$this->initPurchaseNo['to']]);
         }
         if (Arr::has($this->iniVendorNo, ['from','to'])){
             $query=$query->whereBetween('vendor_code',[$this->iniVendorNo['from'],$this->iniVendorNo['to']]);
         }
         if (Arr::has($this->initOrderQty, ['from','to'])){
-            $query=$query->whereBetween('Ordered_quantity',[$this->initOrderQty['from'],$this->initOrderQty['to']]);
+            $query=$query->whereBetween('ordered_quantity',[$this->initOrderQty['from'],$this->initOrderQty['to']]);
         }
         if (Arr::has($this->initPendQty, ['from','to'])){
-            $query=$query->whereBetween('pending_qty',[$this->initPendQty['from'],$this->initPendQty['to']]);
+            $query=$query->whereBetween('open_quantity',[$this->initPendQty['from'],$this->initPendQty['to']]);
         }
-        if (Arr::has($this->initTotalQty, ['from','to'])){
-            $query=$query->whereBetween('order_total',[$this->initTotalQty['from'],$this->initTotalQty['to']]);
-        }
+
         if (Arr::has($this->initTotaRecelQty, ['from','to'])){
-            $query=$query->whereBetween('total_recived_qty',[$this->initTotaRecelQty['from'],$this->initTotaRecelQty['to']]);
+                $query=$query->whereBetween('total_recived_qty',[$this->initTotaRecelQty['from'],$this->initTotaRecelQty['to']]);
         }
         if (Arr::has($this->initGrAmt, ['from','to'])){
             $query=$query->whereBetween('gr_amount',[$this->initGrAmt['from'],$this->initGrAmt['to']]);
         }
         if (Arr::has($this->initTradeDate, ['from','to'])){
-            $query=$query->whereDate('trade_date','<=',Carbon::parse($this->initTradeDate['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->initTradeDate['to'])->format('Y-m-d'));
+            $query=$query->whereDate('po_created_on','<=',Carbon::parse($this->initTradeDate['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->initTradeDate['to'])->format('Y-m-d'));
         }
 
         if (Arr::has($this->storage_location, ['from','to'])){
@@ -76,9 +74,7 @@ class SAPTabelConponent extends Component
         if (Arr::has($this->delivery_address, ['from','to'])){
             $query=$query->whereBetween('delivery_address',[Carbon::parse($this->delivery_address['from'])->format('Y-m-d'),Carbon::parse($this->delivery_address['to'])->format('Y-m-d')]);
         }
-        if (Arr::has($this->contract_item_no, ['from','to'])){
-            $query=$query->whereBetween('contract_item_no',[Carbon::parse($this->contract_item_no['from'])->format('Y-m-d'),Carbon::parse($this->contract_item_no['to'])->format('Y-m-d')]);
-        }
+
         if (Arr::has($this->plant, ['from','to'])){
             $query=$query->whereBetween('plant',[Carbon::parse($this->plant['from'])->format('Y-m-d'),Carbon::parse($this->plant['to'])->format('Y-m-d')]);
         }

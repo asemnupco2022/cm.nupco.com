@@ -155,7 +155,7 @@
                         </tr>
 
                         <tr>
-                            <td>Purchasing Document	</td>
+                            <td>Po Number</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="vendor" wire:model="initPurchaseNo.from" >
@@ -171,7 +171,7 @@
                         </tr>
 
                         <tr>
-                            <td>Vendor Code	</td>
+                            <td>Vendor Code</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="document" wire:model="iniVendorNo.from" >
@@ -203,7 +203,7 @@
                         </tr>
 
                         <tr>
-                            <td>Pending Qty</td>
+                            <td>Open Qty</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Group" wire:model="initPendQty.from" >
@@ -219,7 +219,7 @@
                         </tr>
 
                         <tr>
-                            <td>Total Recived Qty</td>
+                            <td>Total Received Qty</td>
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Purchasing_doc" wire:model="initTotaRecelQty.from" >
@@ -229,22 +229,6 @@
                             <td>
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="Purchasing_doc" wire:model="initTotaRecelQty.to" >
-                                </div>
-                            </td>
-{{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>Order Total</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="Customer_no" wire:model="initTotalQty.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="Customer_no" wire:model="initTotalQty.to" >
                                 </div>
                             </td>
 {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}

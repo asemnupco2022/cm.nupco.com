@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title_') | {{config('lbs-laravel-cms.application.admin_route_domain')}}  {{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}} </title>
+    <title>@yield('title_')  {{config('lbs-laravel-cms.application.admin_route_domain')}}  {{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}} </title>
 
         <!-- Font Awesome -->
     <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/fontawesome-free/css/all.min.css')}}">
