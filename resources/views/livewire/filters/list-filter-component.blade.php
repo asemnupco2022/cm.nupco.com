@@ -264,7 +264,7 @@
                             btnClass: 'btn flat btn-danger',
                             keys: ['enter', 'shift'],
                             action: function(){
-                                @this.updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1);
+                                @this.updateModelStatus(id,txt,mode);
                             }
                         }
 
