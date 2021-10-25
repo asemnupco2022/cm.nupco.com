@@ -5,9 +5,11 @@ namespace App\Helpers;
 
 
 use App\Jobs\Po\HosAPI;
+use App\Models\HosPostHistory;
 use App\Models\InternalComment;
 use App\Models\LbsUserSearchSet;
 use App\Models\SchedulerNotificationHistory;
+use App\Models\TicketManager;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use PDF;
@@ -111,6 +113,24 @@ class PoHelper
 //            "delivery_date" => "2021-10-07"
 //        ];
         return Http::post(env('HOS_API_BASE') . '/HOS_S4/api/add-supplier-comment', $supplier_comment);
+    }
+
+    public static function unreadMessages( $level, $data=null)
+    {
+
+        if ($level=='top'){
+            return   TicketManager::where('msg_read_at', null)->get()->count();
+        }
+        if ($level=='middle'){
+          $unique_hash =  HosPostHistory::where('mail_hash',$data)->first()->unique_hash;
+          return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
+        }
+        if ($level=='lower'){
+            return  TicketManager::where('ticket_hash',$data)->where('msg_read_at', null)->get()->count();
+        }
+        if ($level=='lower-all'){
+            return  TicketManager::where('ticket_hash',$data)->get()->count();
+        }
     }
 
 }

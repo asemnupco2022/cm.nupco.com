@@ -19,4 +19,9 @@ class HosPostHistory extends Model
     {
         return $this->belongsTo(LbsMember::class, 'vendor_num', 'vendor_code');
     }
+
+    public function hasTicket()
+    {
+        return $this->belongsTo(TicketManager::class, 'unique_hash', 'ticket_hash');
+    }
 }

@@ -210,7 +210,8 @@
                         <img src="{{ asset('img/ticket.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/dk12.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
-                            Ticket Manager
+                            Supplier Comments
+                            <span class="right badge badge-danger">{{\App\Helpers\PoHelper::unreadMessages('top')}}</span>
                         </p>
                     </a>
                 </li>

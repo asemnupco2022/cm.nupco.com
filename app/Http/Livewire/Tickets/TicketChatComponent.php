@@ -6,6 +6,7 @@ use App\Models\HosPostHistory;
 use App\Models\InternalComment;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
+use Carbon\Carbon;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -47,8 +48,10 @@ class TicketChatComponent extends Component
 
         $this->restInputs();
         $this->ticketHash=$value;
+       TicketManager::where('ticket_hash',$value)->update(['msg_read_at'=>Carbon::now()]);
         $this->collections = TicketManager::where('ticket_hash',$value)->get();
         $this->ticketParent = HosPostHistory::with('VendorData')->where('unique_hash',$value)->first();
+
         $this->dispatchBrowserEvent('scroll-down-chat');
     }
 
@@ -83,7 +86,7 @@ class TicketChatComponent extends Component
         $insert->msg_body=$this->msg_body;
         $insert->msg_receiver_id='vendor';
         $insert->attachment=$filepath;
-        $insert->attachment_name=$filepath;
+        $insert->attachment_name=$this->attachment->getClientOriginalName();
         if ($insert->save()){
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();

@@ -43,6 +43,7 @@ class HosController extends Controller
         $tickets->msg_body=json_encode($request->vendor_comment);
         $tickets->attachment=$request->attachment_info['file_path'];
         $tickets->attachment_name=$request->attachment_info['file_name'];
+        $tickets->json_data=$request->item_note;
         $tickets->msg_receiver_id='staff';
         if ($tickets->save()){
             return response()->json(['success'=>true,'msg'=>'data saved successfully']);

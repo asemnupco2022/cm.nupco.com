@@ -89,7 +89,7 @@
                         </div>
                         <div class="download_btn">
                         <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
-                                DOWNLOAD PDF 
+                                DOWNLOAD PDF
                             </button>
 
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
@@ -138,7 +138,13 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'recipient_email' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->recipient_email)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'msg_subject' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->msg_subject)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->last_executed_at)}}</td>
-                                    <td><a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a></td>
+                                    <td>
+                                        <a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a>
+                                        <a class="btn btn-app chat_po_btn">
+                                            <span class="badge bg-teal">{{\App\Helpers\PoHelper::unreadMessages('middle',$collection->mail_ticket_hash)}}</span>
+                                            <i class="far fa-comment-alt"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif

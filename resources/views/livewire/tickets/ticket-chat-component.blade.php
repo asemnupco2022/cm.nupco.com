@@ -101,6 +101,19 @@
             border-radius: .25rem;
             transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
         }
+        .chat_batch span.right.badge.badge-danger {
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+        .chat_batch li.nav-item {
+            position: relative;
+        }
+        .chat_batch span.right.badge.badge-success {
+            position: absolute;
+            top: 10px;
+            right: 80px !important;
+        }
 
     </style>
 @endpush
@@ -145,13 +158,15 @@
             </div>
             <div class="">
                 <div class="card-body p-0">
-                    <ul class="nav nav-pills flex-column">
+                    <ul class="nav nav-pills flex-column chat_batch">
                         @if($allLineItems)
                             @foreach($allLineItems as $allLineItem)
                                 <li class="nav-item active"  style="cursor: pointer" >
                                     <a  class="nav-link" wire:click="fetchChat('{{$allLineItem->unique_hash}}')">
                                         PO Item: {{$allLineItem->po_item_num}}
                                     </a>
+                                    <span class="right badge badge-success">{{\App\Helpers\PoHelper::unreadMessages('lower-all',$allLineItem->unique_hash)}}</span>
+                                    <span class="right badge badge-danger" style=" right: 25px;">{{\App\Helpers\PoHelper::unreadMessages('lower',$allLineItem->unique_hash)}}</span>
                                 </li>
                             @endforeach
                         @endif
@@ -174,6 +189,7 @@
 
                 @if($collections)
                     @foreach($collections as $collection)
+
                         <!-- Message. Default to the left -->
                             <div class="direct-chat-msg {{$collection->msg_sender_id == 'staff' ? 'right':''}}">
                                 <div class="direct-chat-infos clearfix">
@@ -192,10 +208,10 @@
                                     @php
                                         if($collection->msg_sender_id == 'staff'){
                                              echo($collection->msg_body) ;
-
+                                              echo '<br>';
                                              if($collection->attachment){
-                                                echo '<a href="'.URL($collection->attachment).'" download><i
-                                            class="fas fa-file-alt fa-2x"></i>  '.$collection->attachment_name.'</a>';
+                                                echo '<a class="text-white" href="'.URL($collection->attachment).'" download><i
+                                            class="fas fa-file-alt fa-2x  "></i>  '.$collection->attachment_name.'</a>';
                                            }
 
                                         }else{
@@ -203,6 +219,11 @@
                                            foreach (json_decode( $collection->msg_body, true) as $comment){
                                                echo '<li>'.$comment.'</li>';
                                            }
+
+                                           if($collection->json_data){
+                                                echo '<li>'.$collection->json_data.'</li>';
+                                           }
+
                                            echo '</ul>';
                                            if($collection->attachment){
                                                 echo '<a href="'.$collection->attachment.'" download><i
@@ -227,8 +248,9 @@
             <div class="file_name">
                 <div class="row">
                     @if($attachmentName)
-                        <div class="col-md-1">
-                            <i class="fas fa-file-download fa-7x"></i><br>
+                        <br>
+                        <div class="col">
+                            <i class="fas fa-file-alt fa-2x"></i>
                             <span class="error">{{$attachmentName}}</span>
                         </div>
                     @endif

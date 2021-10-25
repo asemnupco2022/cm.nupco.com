@@ -11,6 +11,8 @@ class TicketManager extends Model
 {
     use HasFactory;
 
+    protected $fillable=['msg_receiver_id'];
+
     public function VendorData()
     {
         return $this->belongsTo(LbsMember::class, 'vendor_user_id', 'id');
