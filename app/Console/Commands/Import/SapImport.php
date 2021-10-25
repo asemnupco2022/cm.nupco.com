@@ -126,7 +126,8 @@ class SapImport extends Command
 
             dispatch(new SapImportJob($file,$insert->id,$fileOrigin,$globalKey));
         }
-
+        Artisan::call('lbs:fetch-vendors');
+        
         return 1;
     }
 
