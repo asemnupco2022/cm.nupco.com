@@ -122,14 +122,16 @@
                         @endif
                     @endif
                 </h3>
-            </div>
-            <!-- /.card-header -->
-            {{--            <div class="card-body">--}}
-            {{--                <div class="form-group">--}}
 
-            {{--                   {!! $notificationHistory->msg_body !!}--}}
-            {{--                </div>--}}
-            {{--            </div>--}}
+                @if($headerInfo)
+                <h3 class="card-title pl-2">vendor #:
+                 {{$headerInfo->vendor_num}}
+                </h3>
+                <h3 class="card-title pl-4">Po #:
+                    {{$headerInfo->po_num}}
+                </h3>
+                    @endif
+            </div>
         </div>
         <!-- /.card -->
     </div>
@@ -186,17 +188,31 @@
                                      alt="{{$collection->msg_sender_id == 'staff' ? $collection->staff_name : $collection->vendor_name }}">
                                 <!-- /.direct-chat-img -->
                                 <div class="direct-chat-text">
-                                    {{ $collection->msg_body}}
-                                    {!! \App\Helpers\PoHelper::NormalizeColString(json_decode( $collection->msg_body, true) ) !!}
+
+                                    @php
+                                        if($collection->msg_sender_id == 'staff'){
+                                             echo($collection->msg_body) ;
+
+                                             if($collection->attachment){
+                                                echo '<a href="'.URL($collection->attachment).'" download><i
+                                            class="fas fa-file-alt fa-2x"></i>  '.$collection->attachment_name.'</a>';
+                                           }
+
+                                        }else{
+                                                echo '<ul>';
+                                           foreach (json_decode( $collection->msg_body, true) as $comment){
+                                               echo '<li>'.$comment.'</li>';
+                                           }
+                                           echo '</ul>';
+                                           if($collection->attachment){
+                                                echo '<a href="'.$collection->attachment.'" download><i
+                                            class="fas fa-file-alt fa-2x"></i>  '.$collection->attachment_name.'</a>';
+                                           }
+
+                                        }
+                                    @endphp
+{{--                                    {!! \App\Helpers\PoHelper::NormalizeColString(json_decode( $collection->msg_body, true) ) !!}--}}
                                 </div>
-                                @if($collection->attachment)
-                                    <br>
-                                    <a href="{{URL($collection->attachment)}}" download><i
-                                            class="fas fa-file-download fa-7x"></i></a>
-                                    <br>
-                                <?php $exp=explode('/',$collection->attachment);?>
-                                    <span class="error">{{end($exp) }}</span>
-                            @endif
                             <!-- /.direct-chat-text -->
                             </div>
                             <!-- /.direct-chat-msg -->
@@ -208,17 +224,6 @@
                 </div>
                 <!--/.direct-chat-messages-->
             </div>
-
-            {{--            <div class="predefine_msg">--}}
-            {{--                <ul>--}}
-            {{--                    <li><a href="#"><span>Hello!</span></a></li>--}}
-            {{--                    <li><a href="#"><span>Welcome To Skyview!</span></a></li>--}}
-            {{--                    <li><a href="#"><span>Hello!</span></a></li>--}}
-            {{--                    <li><a href="#"><span>Hello!</span></a></li>--}}
-            {{--                    <li><a href="#"><span>Welcome To Skyview!</span></a></li>--}}
-            {{--                    <li><a href="#"><span>Hello!</span></a></li>--}}
-            {{--                </ul>--}}
-            {{--            </div>--}}
             <div class="file_name">
                 <div class="row">
                     @if($attachmentName)

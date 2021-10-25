@@ -27,6 +27,8 @@ class CreateTicketManagersTable extends Migration
             $table->string('vendor_email');
             $table->enum('msg_sender_id',['staff','vendor']);
             $table->text('msg_body');
+            $table->string('attachment')->nullable();
+            $table->string('attachment_name')->nullable();
             $table->enum('msg_receiver_id',['staff','vendor']);
             $table->timestamp('msg_read_at')->nullable();
             $table->text('json_data')->nullable();

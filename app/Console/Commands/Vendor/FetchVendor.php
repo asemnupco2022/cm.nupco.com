@@ -5,6 +5,8 @@ namespace App\Console\Commands\Vendor;
 use App\Models\PoMowaredMaster;
 use App\Models\PoSapMaster;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 use rifrocket\LaravelCms\Models\LbsAdmin;
 use rifrocket\LaravelCms\Models\LbsMember;
 
@@ -55,8 +57,14 @@ class FetchVendor extends Command
         //fetch Mowared vendor list
 //        $mowaredVendors=  PoMowaredMaster::pluck('vendor_code')->all();
 
-//        $commonValue = array_reduce($sapVendors,$currentVendors);
-        $result = array_diff($currentVendors, $sapVendors) + array_diff($sapVendors, $currentVendors);
-        dd(count($result));
+        //$commonValue = array_reduce($sapVendors,$currentVendors);
+        //
+        $fullDiff = array_merge(array_diff($currentVendors, $sapVendors), array_diff($sapVendors, $currentVendors));
+
+        $sendData=['vendor_nos'=>$fullDiff];
+        $url=env('HOS_API_BASE').'/HOS_S4/api/get-vendor-master';
+        $response = Http::get($url,[$sendData] );
+        dd(Storage::disk('public_uploads')->put('bangla.txt',json_encode()));
+
     }
 }

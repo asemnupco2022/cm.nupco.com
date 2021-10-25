@@ -19,11 +19,12 @@ class LbsAdminSeeder extends Seeder
     {
         LbsAdmin::truncate();
         DB::table('lbs_admins')->insert([
+            'employee_num '=>rand(10,10),
             'first_name' => 'super',
             'last_name' => 'admin',
             'username' => 'administrator',
             'display_name' => 'administrator',
-            'email' => 'developer@gmail.com',
+            'email' => 'admin@nupco.com',
             'password' => Hash::make('123456789'),
             'email_verified_at' => now(),
             'role' => LbsAdmin::LBS_CONST_SUPER_ADMIN,

@@ -8,6 +8,7 @@ use rifrocket\LaravelCms\Notifications\MemberResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Sabberworm\CSS\Value\URL;
 use Spatie\Permission\Traits\HasRoles;
 
 class LbsMember extends Authenticatable
@@ -30,9 +31,20 @@ class LbsMember extends Authenticatable
     public $selectedPo=[];
     public $selectAll=false;
 
+    protected $appends = ['avatar'];
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MemberResetPasswordNotification($token));
+    }
+
+    public function getAvatarAttribute()
+    {
+        if (empty($this->attributes['avatar'])) {
+
+            return  'img/default_avatar.svg';
+        }
+        return $this->attributes['avatar'];
     }
 
 }

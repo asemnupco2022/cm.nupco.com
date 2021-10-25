@@ -31,6 +31,8 @@ class LbsAdmin extends Authenticatable
         'status'=>true,
     ];
 
+    protected $appends = ['avatar'];
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new AdminResetPasswordNotification($token));
@@ -45,4 +47,12 @@ class LbsAdmin extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function getAvatarAttribute()
+    {
+        if (empty($this->attributes['avatar'])) {
+            return  'img/default_avatar.svg';
+        }
+        return $this->attributes['avatar'];
+    }
 }

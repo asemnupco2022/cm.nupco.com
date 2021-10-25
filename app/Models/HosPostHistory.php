@@ -12,7 +12,7 @@ class HosPostHistory extends Model
 
     public function hasNotificationHistory()
     {
-        return $this->belongsTo(SchedulerNotificationHistory::class,'mail_unique','mail_ticket_hash');
+        return $this->belongsTo(SchedulerNotificationHistory::class,'mail_hash','mail_ticket_hash');
     }
 
     public function VendorData()

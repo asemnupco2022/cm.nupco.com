@@ -21,6 +21,7 @@ class TicketChatComponent extends Component
 
     public $mail_ticket_hash, $notificationHistory, $allLineItems;
     public $collections;
+    public $headerInfo;
 
     public $msg_body=null, $attachment=null ,$attachmentName =null , $ticketHash=null, $ticketParent;
 
@@ -31,6 +32,7 @@ class TicketChatComponent extends Component
     public function mount()
     {
         $this->fetchBaseInfo();
+        $this->headerInfo = HosPostHistory::where('mail_hash',base64_decode($this->mail_ticket_hash))->first();
     }
 
 
@@ -81,6 +83,7 @@ class TicketChatComponent extends Component
         $insert->msg_body=$this->msg_body;
         $insert->msg_receiver_id='vendor';
         $insert->attachment=$filepath;
+        $insert->attachment_name=$filepath;
         if ($insert->save()){
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();

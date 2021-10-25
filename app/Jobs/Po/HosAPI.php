@@ -25,7 +25,7 @@ class HosAPI implements ShouldQueue
      */
     public function __construct($vendor_code, $mail_type, $collection, $email_unique, $email_hash)
     {
-        $this->hosUrl='http://hos-dev.nupco.com/HOS_S4/api/add-supplier-comment';
+        $this->hosUrl=env('HOS_API_BASE').'/HOS_S4/api/add-supplier-comment';
         $this->vendor_code=$vendor_code;
         $this->collection=$collection;
         $this->email_unique=$email_unique;

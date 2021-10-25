@@ -6,8 +6,10 @@ use App\Models\LbsUserSearchSet;
 use App\Models\PoImportScheduler;
 use App\Models\PoSapMaster;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use App\Http\Controllers\Controller;
@@ -24,7 +26,26 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-//        dd(Carbon::now());
+//        $sendable=[
+//            'mail_unique'=>'test',
+//            'mail_hash'=>'test',
+//            'message_type'=>'test',
+//            'unique_hash'=>'test',
+//            'tender_num'=>'test',
+//            'vendor_num'=>'test',
+//            'po_num'=>'test',
+//            'customer_num'=>'test',
+//            'po_item_num'=>'test',
+//            'uom'=>'test',
+//            'ordered_qty'=>'test',
+//            'open_qty'=>'test',
+//            'net_order_value'=>'test',
+//            'delivery_date'=>'test',
+//        ];
+//
+//        $this->hosUrl=env('HOS_API_BASE').'/HOS_S4/api/add-supplier-comment';
+//        return $response = Http::get($this->hosUrl,$sendable );
+
         return view('LbsViews::admin_views.views.dashboard');
     }
 
@@ -59,9 +80,7 @@ class DashboardController extends Controller
 
                 return $exception->getMessage();
             }
-
         }
-
         return 'transfer done';
     }
 
