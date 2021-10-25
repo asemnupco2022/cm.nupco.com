@@ -26,6 +26,51 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+       $currentVendors = LbsMember::pluck('vendor_code')->all();
+       $sapVendors= PoSapMaster::pluck('vendor_code')->all();
+       $fullDiff = array_unique(array_diff($sapVendors, $currentVendors)); 
+       if(empty( $fullDiff)){
+           return 0;
+       }
+       $url=env('HOS_API_BASE').'/HOS_S4/api/get-vendor-master';
+       $parts = (array_chunk($fullDiff, 70));
+
+       foreach ($parts as $key => $value) {
+        $sendData=['vendor_nos'=>$value]; 
+           $response = Http::get($url,$sendData);
+
+           foreach (json_decode($response, true)['data'] as $globalKey => $row) {
+           
+            try {
+
+                if (LbsMember::where('vendor_code',$row["vendor_no"] )->first()){
+                    $insert= LbsMember::where('vendor_code',$row["vendor_no"] )->first();                   
+    
+                }else{
+                    $insert=new LbsMember();
+                    var_dump('not found '.$row["vendor_no"]);
+                }
+
+                $insert->vendor_code=(int)$row["vendor_no"];
+                $insert->first_name=$row["en_name"];
+                $insert->last_name=$row["ar_name"];
+                $insert->username=$row["en_name"];
+                $insert->display_name=$row["en_name"];
+                $insert->email=$row["email"];
+                $insert->password=Hash::make($row["email"]);
+                $insert->save();
+                var_dump('saved '.$row["vendor_no"]);
+
+            }catch (\Exception $exception){
+dd($exception->getMessage());
+            return Log::info('vendor import failed ',[$exception->getMessage()]);
+            }
+        }   
+       } 
+      
+    die;
+    //    dd($response);
+
 //        $sendable=[
 //            'mail_unique'=>'test',
 //            'mail_hash'=>'test',
