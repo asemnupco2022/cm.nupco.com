@@ -60,13 +60,13 @@ class FetchVendor extends Command
 
         //$commonValue = array_reduce($sapVendors,$currentVendors);
         //
-        $fullDiff = array_unique(array_diff($sapVendors, $currentVendors)); 
+        $fullDiff = array_unique(array_diff($sapVendors, $currentVendors));  
         if(empty( $fullDiff)){
             return 0;
         }
         $url=env('HOS_API_BASE').'/HOS_S4/api/get-vendor-master';        
         $parts = (array_chunk($fullDiff, 70));
- 
+            
         foreach ($parts as $key => $value) {
          $sendData=['vendor_nos'=>$value]; 
           $response = Http::get($url,$sendData);

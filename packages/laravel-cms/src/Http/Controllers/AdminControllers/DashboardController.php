@@ -32,19 +32,20 @@ class DashboardController extends Controller
 //       if(empty( $fullDiff)){
 //           return 0;
 //       }
-//       $url=env('HOS_API_BASE').'/HOS_S4/api/get-vendor-master';
+    //   $url=env('HOS_API_BASE').'/HOS_S4/api/get-vendor-master';
 //       $parts = (array_chunk($fullDiff, 70));
 //
 //       foreach ($parts as $key => $value) {
-//        $sendData=['vendor_nos'=>$value];
-//           $response = Http::get($url,$sendData);
+    //    $sendData=['vendor_nos'=>$value];
+    //    $sendData=['vendor_nos'=>['42424']];
+    //    return   $response = Http::get($url,$sendData);
 //
 //           foreach (json_decode($response, true)['data'] as $globalKey => $row) {
 //
 //            try {
 //
 //                if (LbsMember::where('vendor_code',$row["vendor_no"] )->first()){
-//                    $insert= LbsMember::where('vendor_code',$row["vendor_no"] )->first();
+                //    $insert= LbsMember::where('vendor_code',$row["vendor_no"] )->first();
 //
 //                }else{
 //                    $insert=new LbsMember();
