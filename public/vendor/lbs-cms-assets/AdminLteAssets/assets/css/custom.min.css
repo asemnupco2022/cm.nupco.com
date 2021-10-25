@@ -516,3 +516,11 @@ button.btn.btn-warning.flat {
     color: #76797a !important;
     background: #fff;
 }
+.dark-mode .bg-secondary, .bg-secondary>a {
+    color: #1c2346!important;
+}
+.modal-header .close, .modal-header .mailbox-attachment-close {
+    padding: 1rem;
+    margin: -1rem -1rem -1rem auto;
+    color: #333 !important;
+}
