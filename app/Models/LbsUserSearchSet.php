@@ -26,7 +26,7 @@ class LbsUserSearchSet extends Model
 
     const TEMPLATE_ARRAY=[
 //        "App\Models\SapMasterView"=>LbsUserSearchSet::TEMPLATE_SAP_HEADER_ITEM,
-        "App\Models\SapMasterView"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
+        "App\Models\PoSapMaster"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
     ];
 
     const CONS_COLUMNS=[

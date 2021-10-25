@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Filters;
 
 use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
+use App\Models\PoSapMaster;
 use App\Models\SapLineView;
 use Illuminate\Support\Arr;
 use Livewire\Component;
@@ -18,7 +19,7 @@ class EditFilterComponent extends Component
 
     public $model_id;
     public  $template_for_table=LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM;
-    public $columns=SapLineView::CONS_COLUMNS;
+    public $columns=PoSapMaster::CONS_COLUMNS;
     public $operators=LbsConstants::CONST_OPERATOR;
 
 
