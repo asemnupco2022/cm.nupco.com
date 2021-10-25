@@ -208,7 +208,7 @@
                                     @php
                                         if($collection->msg_sender_id == 'staff'){
                                              echo($collection->msg_body) ;
-                                              echo '<br>';
+                                              echo '<br><br>';
                                              if($collection->attachment){
                                                 echo '<a class="text-white" href="'.URL($collection->attachment).'" download><i
                                             class="fas fa-file-alt fa-2x  "></i>  '.$collection->attachment_name.'</a>';

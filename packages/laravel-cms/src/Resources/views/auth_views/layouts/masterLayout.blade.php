@@ -25,7 +25,7 @@
 
     <div class="card child-card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="" class="h1"><b>{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</b></a>
+            <a href="" class="h5"><b>{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</b></a>
         </div>
 
         @section('content')

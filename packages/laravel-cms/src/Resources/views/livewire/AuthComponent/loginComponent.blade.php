@@ -3,7 +3,7 @@
             @include('LbsViews::core_helpers.toasterNotification')
             <p class="login-box-msg">Sign in to start your session</p>
 
-            <form wire:submit.prevent="onLogin" >
+            <form wire:submit.prevent="onLogin">
                 <div class="input-group mb-3">
                     <input wire:model="email" type="email" class="form-control" placeholder="Email">
                     <div class="input-group-append">
