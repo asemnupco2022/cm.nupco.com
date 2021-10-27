@@ -488,7 +488,7 @@ nav.main-header.navbar.navbar-expand.navbar-light {
     background-color: #6d7275 !important;
 }
 .custom-switch .custom-control-label::after {
-    top: calc(.25rem + 6px) !important; 
+    top: calc(.25rem + 6px) !important;
 }
 .custom-switch .custom-control-label::before {
     top: 8px !important;
@@ -524,3 +524,4 @@ button.btn.btn-warning.flat {
     margin: -1rem -1rem -1rem auto;
     color: #333 !important;
 }
+

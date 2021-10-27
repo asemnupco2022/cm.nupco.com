@@ -54,7 +54,16 @@
   * sidebar-mini
 -->
 <body class="hold-transition sidebar-mini">
+
 <div class="wrapper">
+
+{{--    <!-- Preloader -->--}}
+{{--    <div class="preloader flex-column justify-content-center align-items-center">--}}
+{{--        <img class="animation__shake" src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'dist/img/AdminLTELogo.png')}}" alt="AdminLTELogo" height="60" width="60">--}}
+{{--    </div>--}}
+{{--    --}}
+
+    <div class="clock-loader"></div>
     <!-- Navbar -->
     <livewire:livewire.AdminControllers.layouts.admin_nav />
     <!-- /.navbar -->
@@ -121,6 +130,10 @@
 
 <script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <livewire:scripts />
+
+
+
+
 @stack('scripts')
 
 </body>

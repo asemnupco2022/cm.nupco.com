@@ -7,6 +7,7 @@ use App\Models\InternalComment;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -68,6 +69,7 @@ class TicketChatComponent extends Component
         $this->validate();
         $filepath=null;
         if ($this->attachment){
+            $fileOriginalName=$this->attachment->getClientOriginalName();
             $filename=date('ymdHis').'_'.$this->attachment->getClientOriginalName();
             $filepath = $this->attachment->storeAs('uploads/vendorChat',$filename,'public_uploads');
         }
@@ -86,8 +88,13 @@ class TicketChatComponent extends Component
         $insert->msg_body=$this->msg_body;
         $insert->msg_receiver_id='vendor';
         $insert->attachment=$filepath;
-        $insert->attachment_name=$this->attachment->getClientOriginalName();
+        $insert->attachment_name=$fileOriginalName;
         if ($insert->save()){
+
+
+
+
+
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
             $this->fetchBaseInfo();
@@ -95,6 +102,22 @@ class TicketChatComponent extends Component
             return $this->emitNotifications('data updated successfully','success');
         }
         return $this->emitNotifications('Something Went Wrong Please try after some time','error');
+    }
+
+    public function sendToHos($vendor, $unique_hash, $contract_team_comment, $file=null, $fileName=null)
+    {
+        $url=env('HOS_API_BASE').'/HOS_S4/api/contractor-reply';
+        $send=[
+            "vendor_num" => $vendor,
+            "unique_hash" => $unique_hash,
+            "contract_team_comment" =>$contract_team_comment,
+            "attachment_info"=>[
+                "original_file_name" => $fileName,
+                "file_path"=>$file,
+                ],
+        ];
+        Http::post($url, $send);
+
     }
 
     public function restInputs()

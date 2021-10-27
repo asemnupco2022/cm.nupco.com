@@ -199,7 +199,7 @@
                         <img src="{{ asset('img/lt9.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/dk9.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                         <p>
-                            Staffs
+                            Authority
                         </p>
                     </a>
                 </li>

@@ -15,6 +15,7 @@ use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use App\Http\Controllers\Controller;
 use Importer;
 use rifrocket\LaravelCms\Models\LbsMember;
+use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
 {
@@ -26,6 +27,8 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+
+//        Permission::create(['name' => 'view_only_po_management','display_name'=>'View Only Po Management']);
         return view('LbsViews::admin_views.views.dashboard');
     }
 
