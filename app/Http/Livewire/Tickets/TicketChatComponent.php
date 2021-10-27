@@ -68,6 +68,7 @@ class TicketChatComponent extends Component
     {
         $this->validate();
         $filepath=null;
+        $fileOriginalName=null;
         if ($this->attachment){
             $fileOriginalName=$this->attachment->getClientOriginalName();
             $filename=date('ymdHis').'_'.$this->attachment->getClientOriginalName();
@@ -93,7 +94,7 @@ class TicketChatComponent extends Component
 
 
 
-
+            $this->sendToHos($this->ticketParent->VendorData->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
 
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
