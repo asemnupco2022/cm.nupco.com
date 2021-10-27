@@ -41,8 +41,12 @@ class HosController extends Controller
         $tickets->vendor_email=$hosHistory->hasNotificationHistory->recipient_email;
         $tickets->msg_sender_id='vendor';
         $tickets->msg_body=json_encode($request->vendor_comment);
-        $tickets->attachment=$request->attachment_info['file_path'];
-        $tickets->attachment_name=$request->attachment_info['file_name'];
+
+        if($request->attachment_info){
+            $tickets->attachment= $request->attachment_info['file_path'];
+            $tickets->attachment_name=$request->attachment_info['file_name'];
+        }        
+       
         $tickets->json_data=$request->item_note;
         $tickets->msg_receiver_id='staff';
         if ($tickets->save()){

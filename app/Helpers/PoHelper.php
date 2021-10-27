@@ -122,8 +122,14 @@ class PoHelper
             return   TicketManager::where('msg_read_at', null)->get()->count();
         }
         if ($level=='middle'){
-          $unique_hash =  HosPostHistory::where('mail_hash',$data)->first()->unique_hash;
-          return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
+           
+          $unique_hash =  HosPostHistory::where('mail_hash',$data)->first();
+          if($unique_hash){
+            $unique_hash=$unique_hash->unique_hash;
+            return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
+          }
+          return 0;
+          
         }
         if ($level=='lower'){
             return  TicketManager::where('ticket_hash',$data)->where('msg_read_at', null)->get()->count();
