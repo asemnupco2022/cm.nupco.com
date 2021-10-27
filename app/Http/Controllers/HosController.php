@@ -50,8 +50,8 @@ class HosController extends Controller
         $tickets->json_data=$request->item_note;
         $tickets->msg_receiver_id='staff';
         if ($tickets->save()){
-            return response()->json(['success'=>true,'msg'=>'data saved successfully']);
+            return response()->json(['status'=>1,'message'=>'data saved successfully']);
         }
-        return response()->json(['success'=>false,'msg'=>'there is something wrong']);
+        return response()->json(['status'=>0,'message'=>'there is something wrong']);
     }
 }
