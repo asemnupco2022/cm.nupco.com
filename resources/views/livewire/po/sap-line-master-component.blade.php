@@ -246,7 +246,7 @@
 
                             @foreach($columns as $colKey => $column)
                                 <div class="icheck-primary d-inline">
-                                    <input type="checkbox" id=" {{$colKey}}" {{$column==false?'':'checked'}} wire:model.defer="columns.{{$colKey}}">
+                                    <input type="checkbox" id=" {{$colKey}}" {{$column==false?'':'checked'}} wire:model="columns.{{$colKey}}">
                                     <label for="checkboxPrimary3">
                                         {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}
                                     </label>
@@ -608,9 +608,10 @@
 
                 $.alert({
                     title: 'Alert!',
-                    content: 'Select Only One Po Number At a Time'+event,
+                    content: event.detail.message,
                 });
-            });
+            })
+
 
             window.addEventListener('open-mail-composer', event => {
                 $('#modal-xl').modal('show');

@@ -162,19 +162,21 @@ class SapLineMasterComponent extends Component
     public function emitMailComposerReq($reqType)
     {
 
+
         $check=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->pluck('po_number','po_item')->toArray();
         $count = count(array_unique($check));
         if ($count>1){
-            return $this->dispatchBrowserEvent('mail-can-not-be-sent');
+            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Select only One Po Number"]);
         }
 
         $collections=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->get();
         $this->baseInfo=PoSapMaster::find($collections[0]->id);
-//        $to=$this->baseInfo->vendorInfo->email;
-        if ($this->baseInfo->vendorInfo){
-            return $this->dispatchBrowserEvent('jq-confirm-alert');
+
+        if (!$this->baseInfo->vendorInfo ){
+            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Vendor's Info Not Found, for vendor Code: ".$this->baseInfo->vendor_code]);
         }
 
+        $to=$this->baseInfo->vendorInfo->email;
         $sendData=[
             'purchasing_code'=>$this->po_number,
             'vendor_code'=>$this->baseInfo->vendorInfo->vendor_code,
