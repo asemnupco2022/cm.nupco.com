@@ -80,7 +80,8 @@ class FetchVendor extends Command
     
                 }else{
                     $insert=new LbsMember();
-                    var_dump('not found '.$row["vendor_no"]);
+                    dd($row);
+                    var_dump('not found '.$row);
                 }
 
                 $insert->vendor_code=(int)$row["vendor_no"];
@@ -92,7 +93,7 @@ class FetchVendor extends Command
                 $insert->password=Hash::make($row["email"]);
                 $insert->save();
               
-
+                var_dump('store id'.$insert->id);
             }catch (\Exception $exception){
             return Log::info('vendor import failed ',[$exception->getMessage()]);
             }

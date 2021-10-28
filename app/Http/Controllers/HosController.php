@@ -19,10 +19,10 @@ class HosController extends Controller
 
         if ($v->fails())
         {
-            return response()->json(['success'=>false,'msg'=>$v->errors()->first()]);
+            return response()->json(['success'=>false,'message'=>$v->errors()->first()]);
         }
         if (!HosPostHistory::where('unique_hash',$request->unique_hash)->exists()){
-            return response()->json(['success'=>false,'msg'=>'unique hash does not found']);
+            return response()->json(['success'=>false,'message'=>'unique hash does not found']);
         }
 
         $hosHistory = HosPostHistory::with('hasNotificationHistory')->where('unique_hash',$request->unique_hash)->first();
@@ -40,9 +40,10 @@ class HosController extends Controller
         $tickets->vendor_name=$hosHistory->hasNotificationHistory->recipient_name;
         $tickets->vendor_email=$hosHistory->hasNotificationHistory->recipient_email;
         $tickets->msg_sender_id='vendor';
+
         $tickets->msg_body=json_encode($request->vendor_comment);
 
-        if($request->attachment_info){
+        if($request->attachment_info ){
             $tickets->attachment= $request->attachment_info['file_path'];
             $tickets->attachment_name=$request->attachment_info['file_name'];
         }        
@@ -50,7 +51,7 @@ class HosController extends Controller
         $tickets->json_data=$request->item_note;
         $tickets->msg_receiver_id='staff';
         if ($tickets->save()){
-            return response()->json(['status'=>1,'message'=>'data saved successfully']);
+            return response()->json(['status'=>1,'message'=>'data saved successfully!']);
         }
         return response()->json(['status'=>0,'message'=>'there is something wrong']);
     }
