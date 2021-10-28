@@ -18,7 +18,9 @@
 
     <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
     <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'css/custom.min.css')}}">
+    <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'css/loader.css')}}">
     <link href="https//db.onlinewebfonts.com/c/7758d88db1fe2060f8b28055f108d316?family=Co+Headline+W23+Arabic+Regular" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
     @if(LaravelCms::lbs_object_key_exists('dark_mode', Session::get('_LbsLteSession'))=='true')
         <style>
             span.select2-selection.select2-selection--multiple {
@@ -129,9 +131,12 @@
 <!-- overlayScrollbars -->
 
 <script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 <livewire:scripts />
 
 
+@stack('loader')
 
 
 @stack('scripts')

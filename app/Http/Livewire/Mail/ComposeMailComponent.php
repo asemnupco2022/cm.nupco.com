@@ -28,8 +28,10 @@ class ComposeMailComponent extends Component
     ];
 
 
-    public function prepareComposerModal($mailType, $mail_data, $tableType )
+    public function prepareComposerModal($mailType, $mail_data, $tableType, $to)
     {
+
+        $this->mail_to=$to;
         $this->mailableData=$mail_data;
         $this->mail_content=null;
         $this->mailType_pro=$mailType;

@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
+use rifrocket\LaravelCms\Models\LbsAdmin;
+use rifrocket\LaravelCms\Models\LbsMember;
 use rifrocket\LaravelCms\Models\ModelTraits\UniversalModelTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -21,7 +23,7 @@ class PoSapMaster extends Model
 
             "document_type"=>true,
             "document_type_desc"=>true,
-//            "po_number"=>true,
+            "po_number"=>true,
             "po_item"=>true,
             "material_number"=>true,
             "mat_description"=>true,
@@ -29,13 +31,13 @@ class PoSapMaster extends Model
             "purchasing_organization"=>true,
             "purchasing_group"=>true,
             "currency"=>true,
-//            "customer_no"=>true,
-//            "customer_name"=>true,
+            "customer_no"=>true,
+            "customer_name"=>true,
             "tender_no"=>true,
             "tender_desc"=>true,
-//            "vendor_code"=>true,
-//            "vendor_name_en"=>true,
-//            "vendor_name_er"=>true,
+            "vendor_code"=>true,
+            "vendor_name_en"=>true,
+            "vendor_name_er"=>true,
             "plant"=>true,
             "storage_location"=>true,
             "uo_m"=>true,
@@ -111,5 +113,15 @@ class PoSapMaster extends Model
     public function setNupcoDeliveryDateAttribute($value)
     {
         return $this->attributes['nupco_delivery_date'] =  Carbon::createFromFormat('d.m.Y',$value)->format('Y-m-d');
+    }
+
+    public function vendorInfo()
+    {
+      return  $this->belongsTo(LbsMember::class, 'vendor_code', 'vendor_code');
+    }
+
+    public function staffInfo()
+    {
+       return  $this->belongsTo(LbsAdmin::class, 'meme', 'vendor_code');
     }
 }

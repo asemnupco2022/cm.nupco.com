@@ -49,7 +49,7 @@
                     </a>
                     <ul class="nav nav-treeview "  style="display: {{(Request::is('sap-line-items-po/*')?'block':'')}} {{ Request::is('sap-pos') ? 'block;' : '' }} {{ Request::is('import-pos') ? 'block;' : '' }}" >
                         <li class="nav-item ">
-                            <a href="{{route('web.route.po.SAPTable')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}   {{(Request::is('sap-line-items-po/*')?'active':'')}}">
+                            <a href="{{route('web.route.po.SAPTableLineItems')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}   {{(Request::is('sap-line-items-po/*')?'active':'')}}">
                             <img src="{{ asset('img/dspa_light.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
                             <img src="{{ asset('img/light-dropdown-icon/dspa_dark.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;">
                             <p>SAP Reports</p>
