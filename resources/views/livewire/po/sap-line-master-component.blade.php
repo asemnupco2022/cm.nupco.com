@@ -196,7 +196,7 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
 
-                                <td><a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_item }})">
+                                <td><a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
                                         <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($po_number,$collection->po_item, 'sap_line_item' )}}</span>
                                         <i class="far fa-comment-alt"></i>
                                     </a>
@@ -360,12 +360,12 @@
                                     <input type="text" class="form-control"  wire:model.defer="tender_desc.from" >
                                 </div>
                             </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="tender_desc.to" >
-                                </div>
-                            </td>
+{{--                            <td>To</td>--}}
+{{--                            <td>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <input type="text" class="form-control"   wire:model.defer="tender_desc.to" >--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
                             {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
                         </tr>
 
@@ -393,12 +393,12 @@
                                     <input type="text" class="form-control"  wire:model.defer="document_type_desc.from" >
                                 </div>
                             </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="document_type_desc.to" >
-                                </div>
-                            </td>
+{{--                            <td>To</td>--}}
+{{--                            <td>--}}
+{{--                                <div class="form-group">--}}
+{{--                                    <input type="text" class="form-control"   wire:model.defer="document_type_desc.to" >--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
                             {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
                         </tr>
 

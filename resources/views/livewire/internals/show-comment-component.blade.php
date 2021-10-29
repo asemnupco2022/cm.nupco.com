@@ -19,15 +19,17 @@
                 <!-- /.direct-chat-img -->
                 <div class="direct-chat-text">
                     {!! $collection->msg_body !!}
-
-                </div>
-                @if($collection->attachment)
+                    @if($collection->attachment)
                     <br>
-                    <a href="{{URL($collection->attachment)}}" download><i class="fas fa-file-download fa-7x"></i></a>
+                    <br>
+                    <a class="text-white"  href="{{URL($collection->attachment)}}" download><i class="fas fa-file-alt fa-2x"></i></a>
                     <br>
                     <?php $exp=explode('/',$collection->attachment);?>
                     <span class="error">{{ end($exp)}}</span>
                 @endif
+
+                </div>
+                
                 <!-- /.direct-chat-text -->
             </div>
             <!-- /.direct-chat-msg -->

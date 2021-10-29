@@ -70,53 +70,88 @@ class SapLineMasterComponent extends Component
 
     public function hitSearchInt($query)
     {
+
+
         if (Arr::has($this->tender_no, ['from','to'])){
             $query=$query->whereBetween('tender_no',[$this->tender_no['from'],$this->tender_no['to']]);
+        }elseif (Arr::has($this->tender_no, ['from'])){
+            $query=$query->where('tender_no',$this->tender_no['from']);
         }
         if (Arr::has($this->tender_desc, ['from','to'])){
             $query=$query->whereBetween('tender_desc',[$this->tender_desc['from'],$this->tender_desc['to']]);
+        }elseif (Arr::has($this->tender_desc, ['from'])){
+            $query=$query->where('tender_desc',$this->tender_desc['from']);
         }
         if (Arr::has($this->document_type, ['from','to'])){
             $query=$query->whereBetween('document_type',[$this->document_type['from'],$this->document_type['to']]);
+        }elseif (Arr::has($this->document_type, ['from'])){
+            $query=$query->where('document_type',$this->document_type['from']);
         }
         if (Arr::has($this->document_type_desc, ['from','to'])){
             $query=$query->whereBetween('document_type_desc',[$this->document_type_desc['from'],$this->document_type_desc['to']]);
+        }elseif (Arr::has($this->document_type_desc, ['from'])){
+            $query=$query->where('document_type_desc',$this->document_type_desc['from']);
         }
         if (Arr::has($this->init_po_number, ['from','to'])){
             $query=$query->whereBetween('po_number',[$this->init_po_number['from'],$this->init_po_number['to']]);
+        }elseif (Arr::has($this->init_po_number, ['from'])){
+            $query=$query->where('init_po_number',$this->init_po_number['from']);
         }
         if (Arr::has($this->purchasing_group, ['from','to'])){
             $query=$query->whereBetween('total_recived_qty',[$this->purchasing_group['from'],$this->purchasing_group['to']]);
+        }elseif (Arr::has($this->purchasing_group, ['from'])){
+            $query=$query->where('purchasing_group',$this->purchasing_group['from']);
         }
         if (Arr::has($this->purchasing_organization, ['from','to'])){
             $query=$query->whereBetween('purchasing_organization',[$this->purchasing_organization['from'],$this->purchasing_organization['to']]);
+        }elseif (Arr::has($this->purchasing_organization, ['from'])){
+            $query=$query->where('purchasing_organization',$this->purchasing_organization['from']);
         }
         if (Arr::has($this->customer_no, ['from','to'])){
             $query=$query->whereBetween('customer_no',[$this->customer_no['from'],$this->customer_no['to']]);
+        }elseif (Arr::has($this->customer_no, ['from'])){
+            $query=$query->where('customer_no',$this->customer_no['from']);
         }
         if (Arr::has($this->nupco_delivery_date, ['from','to'])){
             $query=$query->whereDate('nupco_delivery_date','<=',Carbon::parse($this->nupco_delivery_date['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->nupco_delivery_date['to'])->format('Y-m-d'));
+        }elseif (Arr::has($this->nupco_delivery_date, ['from'])){
+            $query=$query->where('nupco_delivery_date',Carbon::parse($this->nupco_delivery_date['from']));
         }
         if (Arr::has($this->po_created_on, ['from','to'])){
             $query=$query->whereDate('po_created_on','<=',Carbon::parse($this->po_created_on['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->po_created_on['to'])->format('Y-m-d'));
+        }elseif (Arr::has($this->po_created_on, ['from'])){
+            $query=$query->where('po_created_on',Carbon::parse($this->nupco_delivery_date['from']));
         }
         if (Arr::has($this->generic_mat_code, ['from','to'])){
             $query=$query->whereBetween('generic_mat_code',[$this->generic_mat_code['from'],$this->generic_mat_code['to']]);
+        }elseif (Arr::has($this->generic_mat_code, ['from'])){
+            $query=$query->where('generic_mat_code',$this->generic_mat_code['from']);
         }
         if (Arr::has($this->vendor_code, ['from','to'])){
             $query=$query->whereBetween('vendor_code',[$this->vendor_code['from'],$this->vendor_code['to']]);
+        }elseif (Arr::has($this->vendor_code, ['from'])){
+            $query=$query->where('vendor_code',$this->vendor_code['from']);
         }
         if (Arr::has($this->storage_location, ['from','to'])){
             $query=$query->whereBetween('storage_location',[$this->storage_location['from'],$this->storage_location['to']]);
+        }elseif (Arr::has($this->storage_location, ['from'])){
+            $query=$query->where('storage_location',$this->storage_location['from']);
         }
         if (Arr::has($this->plant, ['from','to'])){
             $query=$query->whereBetween('plant',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->plant, ['from'])){
+            $query=$query->where('plant',$this->plant['from']);
         }
+//        dd($query->get());
         return $query;
     }
 
     public function initSearchFilter(){
-        $this->initiateSearch=true;
+       $this->initiateSearch=true;
+
+        //testing
+        // $query=PoSapMaster::orderBy('tender_no', 'ASC');
+    //    $this->hitSearchInt($query);
     }
 
 
@@ -161,12 +196,10 @@ class SapLineMasterComponent extends Component
 
     public function emitMailComposerReq($reqType)
     {
-
-
         $check=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->pluck('po_number','po_item')->toArray();
-        $count = count(array_unique($check));
-        if ($count>1){
-            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Select only One Po Number"]);
+
+        if (!$check or count(array_unique($check)) >1){
+            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Select only One Po Number's Line Items"]);
         }
 
         $collections=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->get();
@@ -190,9 +223,9 @@ class SapLineMasterComponent extends Component
     }
 
 
-    public function open_comment_modal($poNo)
+    public function open_comment_modal($poNo,$line_item,$tableType)
     {
-        $this->emit('open-edit-internal-comment', $this->po_number,$poNo,$this->tableType);
+        $this->emit('open-edit-internal-comment', $poNo,$line_item,$tableType);
     }
 
 
