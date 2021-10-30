@@ -354,7 +354,7 @@
 
 
 
-    <div class="modal" id="modal-filter-sap-po"  >
+    <div class="modal" id="modal-filter-sap-po" data-backdrop="false">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
