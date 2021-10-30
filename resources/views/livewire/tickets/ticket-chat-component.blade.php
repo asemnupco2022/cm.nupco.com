@@ -163,7 +163,9 @@
                             @foreach($allLineItems as $allLineItem)
                                 <li class="nav-item active"  style="cursor: pointer" >
                                     <a  class="nav-link" wire:click="fetchChat('{{$allLineItem->unique_hash}}')">
-                                        PO Item: {{$allLineItem->po_item_num}}
+                                        PO Item: {{$allLineItem->po_item_num}} <br>
+                                        Matrial Description: {{\App\Helpers\PoHelper::getSAPpoData($allLineItem->po_num,$allLineItem->po_item_num,'mat_description')}} <br>
+                                        Matrial Code: {{\App\Helpers\PoHelper::getSAPpoData($allLineItem->po_num,$allLineItem->po_item_num,'material_number')}}
                                     </a>
                                     <span class="right badge badge-success">{{\App\Helpers\PoHelper::unreadMessages('lower-all',$allLineItem->unique_hash)}}</span>
                                     <span class="right badge badge-danger" style=" right: 25px;">{{\App\Helpers\PoHelper::unreadMessages('lower',$allLineItem->unique_hash)}}</span>

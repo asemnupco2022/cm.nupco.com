@@ -8,6 +8,7 @@ use App\Jobs\Po\HosAPI;
 use App\Models\HosPostHistory;
 use App\Models\InternalComment;
 use App\Models\LbsUserSearchSet;
+use App\Models\PoSapMaster;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
 use Illuminate\Support\Facades\Hash;
@@ -151,5 +152,15 @@ class PoHelper
             }
             return 0;
     }
+
+
+    public static function getSAPpoData($po_number, $po_item, $colunm){
+
+        if(PoSapMaster::where('po_number',$po_number)->where('po_item',$po_item)->orderBy('id','DESC')->first()){
+         $result = PoSapMaster::where('po_number',$po_number)->where('po_item',$po_item)->orderBy('id','DESC')->first();
+            return $result->{$colunm};
+        }
+        return null;
+}
 
 }
