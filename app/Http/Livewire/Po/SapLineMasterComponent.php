@@ -65,6 +65,7 @@ class SapLineMasterComponent extends Component
     public $vendor_code = [];
     public $storage_location = [];
     public $plant = [];
+    public $customer_name = [];
 //    ========
 
 
@@ -142,12 +143,22 @@ class SapLineMasterComponent extends Component
         }elseif (Arr::has($this->plant, ['from'])){
             $query=$query->where('plant',$this->plant['from']);
         }
+        if (Arr::has($this->customer_name, ['from','to'])){
+            $query=$query->whereBetween('customer_name',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->customer_name, ['from'])){
+            $query=$query->where('customer_name',$this->customer_name['from']);
+        }
 //        dd($query->get());
         return $query;
     }
 
     public function initSearchFilter(){
        $this->initiateSearch=true;
+    }
+
+    public function checknewfilter(){
+        $this->initiateSearch=rand(10,10);
+
     }
 
     // public function updatedSelectedPo($value){
@@ -229,6 +240,8 @@ class SapLineMasterComponent extends Component
     {
         $this->emit('open-edit-internal-comment', $poNo,$line_item,$tableType);
     }
+
+
 
 
     public function open_vendor_comment_modal($poNo,$line_item,$tableType)

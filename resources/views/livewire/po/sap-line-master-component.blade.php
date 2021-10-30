@@ -120,6 +120,10 @@
                             </button>
                         </div>
                         <div class="download_btn">
+                            <button type="button" class="btn btn-warning btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-filter-sap-po">
+                                <i class="fas fa-filter"></i>
+                              </button>
+
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
                                 DOWNLOAD PDF
                             </button>
@@ -347,6 +351,21 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+
+
+    <div class="modal" id="modal-filter-sap-po"  >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @include('livewire.po.sap-filter-template')
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 @endif
     {{--    =====================--}}
 
@@ -433,13 +452,13 @@
                             <td>{{ \App\Helpers\PoHelper::NormalizeColString('po_number')  }}</td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="init_po_number.from" >
+                                    <input type="text" class="form-control"  wire:model.defer="po_number.from" >
                                 </div>
                             </td>
                             <td>To</td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="init_po_number.to" >
+                                    <input type="text" class="form-control"   wire:model.defer="po_number.to" >
                                 </div>
                             </td>
                             {{--<td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
