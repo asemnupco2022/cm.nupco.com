@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Log;
 
 class TicketChatComponent extends Component
 {
@@ -35,6 +36,8 @@ class TicketChatComponent extends Component
     {
         $this->fetchBaseInfo();
         $this->headerInfo = HosPostHistory::where('mail_hash',base64_decode($this->mail_ticket_hash))->first();
+    
+       
     }
 
 
@@ -46,7 +49,7 @@ class TicketChatComponent extends Component
 
     public function fetchChat($value)
     {
-
+        
         $this->restInputs();
         $this->ticketHash=$value;
        TicketManager::where('ticket_hash',$value)->update(['msg_read_at'=>Carbon::now()]);
@@ -117,7 +120,8 @@ class TicketChatComponent extends Component
                 "file_path"=>$file,
                 ],
         ];
-        Http::post($url, $send);
+       $response = Http::get($url, $send);
+        Log::info('response',[$response]);
 
     }
 

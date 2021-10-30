@@ -32,6 +32,7 @@ class ComposeMailComponent extends Component
     public function prepareComposerModal($mailType, $mail_data, $tableType, $to)
     {
 
+       
         $this->mail_to=$to;
         $this->mailableData=$mail_data;
         $this->mail_content=null;
@@ -97,7 +98,7 @@ class ComposeMailComponent extends Component
             }
 
             $messageBody =view('mail-templates.mail-container',$mailData)->render();
-            $vendorDetails=LbsMember::where('email',$this->mail_to)->first();
+            $vendorDetails=LbsMember::where('vendor_code',$this->mailableData['vendor_code'])->first();
             $ticket_number=LaravelCmsFacade::lbs_random_generator(16,true,false,true,false);
             $ticket_hash=Hash::make($ticket_number);
             $notifiable=  [

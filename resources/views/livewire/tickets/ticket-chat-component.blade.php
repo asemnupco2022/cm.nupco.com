@@ -161,11 +161,11 @@
                     <ul class="nav nav-pills flex-column chat_batch">
                         @if($allLineItems)
                             @foreach($allLineItems as $allLineItem)
-                                <li class="nav-item active"  style="cursor: pointer" >
-                                    <a  class="nav-link" wire:click="fetchChat('{{$allLineItem->unique_hash}}')">
-                                        PO Item: {{$allLineItem->po_item_num}} <br>
-                                        Matrial Description: {{\App\Helpers\PoHelper::getSAPpoData($allLineItem->po_num,$allLineItem->po_item_num,'mat_description')}} <br>
-                                        Matrial Code: {{\App\Helpers\PoHelper::getSAPpoData($allLineItem->po_num,$allLineItem->po_item_num,'material_number')}}
+                                <li class="nav-item active"  style="cursor: pointer" wire:click="fetchChat('{{$allLineItem->unique_hash}}')" >
+                                    <a  class="nav-link" >
+                                        PO Item: {{$allLineItem->po_item_num}} <br>  
+                                        Matrial Description:   <br>
+                                        Matrial Code:                                 
                                     </a>
                                     <span class="right badge badge-success">{{\App\Helpers\PoHelper::unreadMessages('lower-all',$allLineItem->unique_hash)}}</span>
                                     <span class="right badge badge-danger" style=" right: 25px;">{{\App\Helpers\PoHelper::unreadMessages('lower',$allLineItem->unique_hash)}}</span>
@@ -212,7 +212,7 @@
                                              echo($collection->msg_body) ;
                                               echo '<br><br>';
                                              if($collection->attachment){
-                                                echo '<a class="text-white" href="'.URL($collection->attachment).'" download><i
+                                                echo '<a class="text-white" href="'.URL($collection->attachment).'" download ><i
                                             class="fas fa-file-alt fa-2x  "></i>  '.$collection->attachment_name.'</a>';
                                            }
 
@@ -228,7 +228,7 @@
 
                                            echo '</ul>';
                                            if($collection->attachment){
-                                                echo '<a href="'.$collection->attachment.'" download><i
+                                                echo '<a href="'.$collection->attachment.'" download ><i
                                             class="fas fa-file-alt fa-2x"></i>  '.$collection->attachment_name.'</a>';
                                            }
 

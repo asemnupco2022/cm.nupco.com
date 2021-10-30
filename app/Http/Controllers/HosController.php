@@ -45,7 +45,7 @@ class HosController extends Controller
 
         if($request->attachment_info ){
             $tickets->attachment= $request->attachment_info['file_path'];
-            $tickets->attachment_name=$request->attachment_info['file_name'];
+            $tickets->attachment_name=$request->attachment_info['original_file_name'];
         }        
        
         $tickets->json_data=$request->item_note;
