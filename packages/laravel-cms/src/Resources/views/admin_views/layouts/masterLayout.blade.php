@@ -29,6 +29,7 @@
         </style>
     @endif
     <livewire:styles />
+
     @stack('styles')
 
 

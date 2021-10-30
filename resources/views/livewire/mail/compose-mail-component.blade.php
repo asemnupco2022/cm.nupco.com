@@ -1,4 +1,7 @@
-@push('styles')
+
+<div>
+
+    {{-- @push('styles') --}}
     <!-- summernote -->
     <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/summernote/summernote-bs4.min.css')}}">
     <style>
@@ -6,8 +9,7 @@
             padding-right: 31px;
         }
     </style>
-    @endpush
-<div>
+    {{-- @endpush --}}
 
     <div class="card card-primary card-outline">
         <div class="card-header">
@@ -69,30 +71,32 @@
     </div>
     <!-- /.card -->
 
+
+     @push('scripts')
+        <!-- Summernote -->
+        <script src=" {{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/summernote/summernote-bs4.min.js')}}"></script>
+        <script>
+            document.addEventListener('livewire:load', function () {
+                $('#compose_textarea').summernote({
+                    height: 350,
+                    codemirror: {
+                        theme: 'monokai'
+                    },
+                    callbacks: {
+                        onChange: function(contents, $editable) {
+                        @this.set('mail_content', contents, $editable);
+                        }
+                    }
+                });
+            });
+            Livewire.on('set-mail-content', mail_contents => {
+
+                $('#compose_textarea').summernote('code',mail_contents);
+            })
+        </script>
+
+
+    @endpush
 </div>
 
-@push('scripts')
-    <!-- Summernote -->
-    <script src=" {{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/summernote/summernote-bs4.min.js')}}"></script>
-    <script>
-        document.addEventListener('livewire:load', function () {
-            $('#compose_textarea').summernote({
-                height: 350,
-                codemirror: {
-                    theme: 'monokai'
-                },
-                callbacks: {
-                    onChange: function(contents, $editable) {
-                    @this.set('mail_content', contents, $editable);
-                    }
-                }
-            });
-        });
-        Livewire.on('set-mail-content', mail_contents => {
 
-            $('#compose_textarea').summernote('code',mail_contents);
-        })
-    </script>
-
-
-@endpush

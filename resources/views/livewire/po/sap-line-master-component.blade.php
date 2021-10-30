@@ -3,6 +3,7 @@
 @push('styles')
     <!-- daterange picker -->
         <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/daterangepicker/daterangepicker.css')}}">
+        <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/summernote/summernote-bs4.min.css')}}">
         <style>
 
             .alert.alert-warning.alert-dismissible {
@@ -145,16 +146,18 @@
                             @foreach($columns as $colKey => $column)
                                 <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</th>
                             @endforeach
-                            <th>Comments</th>
+                            <th>Internal</th>
+                            <th>Vendor</th>
                         </tr>
                         </thead>
                         <tbody>
 
                         @foreach($collections as $key => $collection)
+                        {{-- @dd($collection) --}}
                             <tr>
                                 <td>
                                     <div class="icheck-primary d-inline">
-                                        <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $key }}" wire:model="selectedPo.{{$collection->id }}">
+                                        <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model="selectedPo.{{$collection->id}}">
                                     </div>
                                 </td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
@@ -195,9 +198,15 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_quantity' )==false?'hide':''}}" >{{$collection->gr_quantity}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
-
-                                <td><a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
-                                        <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($po_number,$collection->po_item, 'sap_line_item' )}}</span>
+                                <td>
+                                    <a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
+                                        <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($collection->po_number,$collection->po_item, 'sap_line_item' )}}</span>
+                                        <i class="far fa-comment-alt"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
+                                        <span class="badge bg-teal bg-maroon">{{\App\Helpers\PoHelper::lastVendorComment($collection->po_number,$collection->po_item, 'sap_line_item' )}}</span>
                                         <i class="far fa-comment-alt"></i>
                                     </a>
                                 </td>
@@ -312,6 +321,22 @@
             <div class="modal-content">
                 <div class="modal-body">
                     @livewire('internals.show-comment-component')
+                </div>
+                <div class="modal-footer justify-content-between">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="modal-open-edit-vendor-comment"  >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @livewire('tickets.vendor-chat-component')
                 </div>
                 <div class="modal-footer justify-content-between">
 
@@ -602,7 +627,7 @@
         <!-- loader -->
 
     @push('scripts')
-
+  <!-- loaderloader -->
         <script>
             window.addEventListener('jq-confirm-alert', event => {
 
@@ -623,6 +648,13 @@
             })
             Livewire.on('open-edit-internal-comment', event => {
                 $('#modal-open-edit-internal-comment').modal('show');
+            })
+
+            Livewire.on('open-edit-vendor-comment', event => {
+                $('#modal-open-edit-vendor-comment').modal('show');
+            })
+            window.addEventListener('close-edit-vendor-comment', event => {
+                $('#modal-open-edit-vendor-comment').modal('hide');
             })
 
         </script>
@@ -646,5 +678,28 @@
                 }
             });
         </script>
+
+<script src=" {{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/summernote/summernote-bs4.min.js')}}"></script>
+<script>
+    document.addEventListener('livewire:load', function () {
+        $('#compose_textarea').summernote({
+            height: 350,
+            codemirror: {
+                theme: 'monokai'
+            },
+            callbacks: {
+                onChange: function(contents, $editable) {
+                @this.set('mail_content', contents, $editable);
+                }
+            }
+        });
+    });
+    Livewire.on('set-mail-content', mail_contents => {
+
+        $('#compose_textarea').summernote('code',mail_contents);
+    })
+</script>
     @endpush
+
+    @livewire('livewire.CoreHelpers.core-helper-toaster-component')
 </div>

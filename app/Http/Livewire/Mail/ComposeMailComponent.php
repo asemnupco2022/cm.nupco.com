@@ -19,6 +19,7 @@ class ComposeMailComponent extends Component
     public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType, $mailableData;
 
 
+
     protected $listeners = ['event-show-compose-email' => 'prepareComposerModal'];
 
     protected $rules = [

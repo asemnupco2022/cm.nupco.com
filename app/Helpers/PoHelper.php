@@ -122,14 +122,14 @@ class PoHelper
             return   TicketManager::where('msg_read_at', null)->get()->count();
         }
         if ($level=='middle'){
-           
+
           $unique_hash =  HosPostHistory::where('mail_hash',$data)->first();
           if($unique_hash){
             $unique_hash=$unique_hash->unique_hash;
             return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
           }
           return 0;
-          
+
         }
         if ($level=='lower'){
             return  TicketManager::where('ticket_hash',$data)->where('msg_read_at', null)->get()->count();
@@ -137,6 +137,19 @@ class PoHelper
         if ($level=='lower-all'){
             return  TicketManager::where('ticket_hash',$data)->get()->count();
         }
+    }
+
+
+    public static function lastVendorComment($po_number, $po_item, $tableType=null){
+            if(HosPostHistory::where('po_num',$po_number)->where('po_item_num',$po_item)->orderBy('id','DESC')->first()){
+
+              $uniqueHash =  HosPostHistory::where('po_num',$po_number)->where('po_item_num',$po_item)->orderBy('id','DESC')->first()->unique_hash;
+              if($uniqueHash){
+
+                return  $tickets= TicketManager::where('ticket_hash',$uniqueHash)->get()->count();
+              }
+            }
+            return 0;
     }
 
 }

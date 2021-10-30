@@ -148,11 +148,12 @@ class SapLineMasterComponent extends Component
 
     public function initSearchFilter(){
        $this->initiateSearch=true;
-
-        //testing
-        // $query=PoSapMaster::orderBy('tender_no', 'ASC');
-    //    $this->hitSearchInt($query);
     }
+
+    // public function updatedSelectedPo($value){
+
+    //     dump($this->selectedPo);
+    // }
 
 
     public function updatedSelectAll($value)
@@ -196,6 +197,7 @@ class SapLineMasterComponent extends Component
 
     public function emitMailComposerReq($reqType)
     {
+
         $check=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->pluck('po_number','po_item')->toArray();
 
         if (!$check or count(array_unique($check)) >1){
@@ -226,6 +228,12 @@ class SapLineMasterComponent extends Component
     public function open_comment_modal($poNo,$line_item,$tableType)
     {
         $this->emit('open-edit-internal-comment', $poNo,$line_item,$tableType);
+    }
+
+
+    public function open_vendor_comment_modal($poNo,$line_item,$tableType)
+    {
+        $this->emit('open-edit-vendor-comment', $poNo,$line_item,$tableType);
     }
 
 
@@ -276,7 +284,7 @@ class SapLineMasterComponent extends Component
     public function searchEngine()
     {
 
-        $query=PoSapMaster::orderBy('tender_no', 'ASC');
+        $query=PoSapMaster::orderBy('po_item', 'ASC');
 
         if ($this->initiateSearch){
             $this->initSearch=false;
@@ -286,7 +294,7 @@ class SapLineMasterComponent extends Component
         if ($this->json_data and !empty($this->json_data)){
             $searchableItems=json_decode($this->json_data, true);
             if ($searchableItems and !empty($searchableItems)){
-                $query = PoSapMaster::orderBy('tender_no', 'ASC');
+                $query = PoSapMaster::orderBy('po_item', 'ASC');
                 foreach ($searchableItems as $key => $searchableItem){
                     $operator=$searchableItem['queryOpr'];
                     $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
@@ -296,12 +304,12 @@ class SapLineMasterComponent extends Component
         }
 
         if ($this->searchable_operator=='LIKE'){
-            return PoSapMaster::where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+            return PoSapMaster::where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('po_item', 'ASC')->paginate($this->number_of_rows);
         }else{
             if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-                return PoSapMaster::where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+                return PoSapMaster::where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('po_item', 'ASC')->paginate($this->number_of_rows);
             }else{
-                return  PoSapMaster::where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+                return  PoSapMaster::where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('po_item', 'ASC')->paginate($this->number_of_rows);
             }
         }
     }
