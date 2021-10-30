@@ -93,7 +93,7 @@ class HosAPI implements ShouldQueue
                     'tender_num'=> $poItemCol['tender_no'],
                     'vendor_num'=>ltrim($this->vendor_code,0),
                     'po_num'=>$poItemCol['po_number'],
-                    'customer_num'=>$poItemCol['customer_name'],
+                    'customer_name'=>$poItemCol['customer_name'],
                     'po_item_num'=>$poItemCol['po_item'],
                     'uom'=>$poItemCol['uo_m'],
                     'item_desc'=>$poItemCol['document_type_desc'],
@@ -103,7 +103,12 @@ class HosAPI implements ShouldQueue
                     'open_qty'=>$poItemCol['open_quantity'],
                     'net_order_value'=>$poItemCol['net_value'],
                     'delivery_date'=>$poItemCol['nupco_delivery_date'],
+                    "plant"=> $poItemCol['plant'],
+                    "item_desc"=>  $poItemCol['mat_description'],
+                    "mat_num"=> $poItemCol['material_number'],
+                    "cust_code"=> $poItemCol['customer_no'],
                 ];
+                
 
             Log::info('whaterver sending',$sendable);
                 $response = Http::get($this->hosUrl,$sendable );
