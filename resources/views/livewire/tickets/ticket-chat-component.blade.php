@@ -163,9 +163,10 @@
                             @foreach($allLineItems as $allLineItem)
                                 <li class="nav-item active"  style="cursor: pointer" wire:click="fetchChat('{{$allLineItem->unique_hash}}')" >
                                     <a  class="nav-link" >
-                                        PO Item: {{$allLineItem->po_item_num}} <br>  
-                                        Matrial Description:   <br>
-                                        Matrial Code:                                 
+                                        PO Number: {{$allLineItem->po_num}} <br>  
+                                        PO Item: {{$allLineItem->po_item_num}}   <br>
+                                        Matrial Description: {{$allLineItem->item_desc}}   <br>
+                                        Matrial Code:  {{$allLineItem->mat_num}}                                 
                                     </a>
                                     <span class="right badge badge-success">{{\App\Helpers\PoHelper::unreadMessages('lower-all',$allLineItem->unique_hash)}}</span>
                                     <span class="right badge badge-danger" style=" right: 25px;">{{\App\Helpers\PoHelper::unreadMessages('lower',$allLineItem->unique_hash)}}</span>
@@ -228,7 +229,7 @@
 
                                            echo '</ul>';
                                            if($collection->attachment){
-                                                echo '<a href="'.$collection->attachment.'" download ><i
+                                                echo '<a href="'.$collection->attachment.'" download  target="_blank" ><i
                                             class="fas fa-file-alt fa-2x"></i>  '.$collection->attachment_name.'</a>';
                                            }
 

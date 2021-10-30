@@ -22,13 +22,17 @@ class CreateHosPostHistoriesTable extends Migration
             $table->string('tender_num');
             $table->string('vendor_num');
             $table->string('po_num');
-            $table->string('customer_num');
+            $table->string('customer_name');
+            $table->string('cust_code');
             $table->string('po_item_num');
             $table->string('uom');
+            $table->string('plant');
             $table->string('ordered_qty');
             $table->string('open_qty');
             $table->string('net_order_value');
             $table->timestamp('delivery_date');
+            $table->string('item_desc');
+            $table->string('mat_num');
             $table->text('meta')->nullable();
             $table->text('json_data')->nullable();
             $table->enum('status',['new','active', 'deactivated', 'suspended'])->default('active');

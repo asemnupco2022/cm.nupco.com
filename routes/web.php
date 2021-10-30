@@ -62,6 +62,7 @@ Route::group(array('middleware'=>'web'), function () {
     Route::group(['prefix'=>'ticket-manager'], function(){
         Route::get('/',[TicketManagerController::class,'index'])->name('web.route.ticket.manager.list');
         Route::get('chat/{token}',[TicketManagerController::class,'ticketChat'])->name('web.route.ticket.manager.chat');
+        Route::get('/vendor-response-attachment-download',[TicketManagerController::class,'download_attachment'])->name('web.route.hos.vendor.download.attachment');
     });
 
 
@@ -87,6 +88,7 @@ Route::group(array('middleware'=>'web'), function () {
 //    hos-api/vendor-response-to-line
     Route::group(['prefix'=>'hos'], function(){
         Route::get('/vendor-response',[ProfileController::class,'index'])->name('web.route.hos.vendor.response');
+       
     });
 
     Route::get('/clear-cache', function () {

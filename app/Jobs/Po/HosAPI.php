@@ -74,13 +74,17 @@ class HosAPI implements ShouldQueue
                 $insertToHos->tender_num= $poItemCol['tender_no'];
                 $insertToHos->vendor_num=$this->vendor_code;
                 $insertToHos->po_num=$poItemCol['po_number'];
-                $insertToHos->customer_num=$poItemCol['customer_name'];
+                $insertToHos->customer_name=$poItemCol['customer_name'];
+                $insertToHos->cust_code=$poItemCol['customer_no'];
                 $insertToHos->po_item_num=$poItemCol['po_item'];
                 $insertToHos->uom=$poItemCol['uo_m'];
+                $insertToHos->plant=$poItemCol['plant'];
                 $insertToHos->ordered_qty=$poItemCol['ordered_quantity'];
                 $insertToHos->open_qty=$poItemCol['open_quantity'];
                 $insertToHos->net_order_value=$poItemCol['net_value'];
                 $insertToHos->delivery_date=$poItemCol['nupco_delivery_date'];
+                $insertToHos->item_desc=$poItemCol['mat_description'];
+                $insertToHos->mat_num=$poItemCol['material_number'];
                 $insertToHos->save();
 
 
@@ -94,19 +98,16 @@ class HosAPI implements ShouldQueue
                     'vendor_num'=>ltrim($this->vendor_code,0),
                     'po_num'=>$poItemCol['po_number'],
                     'customer_name'=>$poItemCol['customer_name'],
-                    'po_item_num'=>$poItemCol['po_item'],
-                    'uom'=>$poItemCol['uo_m'],
-                    'item_desc'=>$poItemCol['document_type_desc'],
                     'cust_code'=>$poItemCol['customer_no'],
+                    'po_item_num'=>$poItemCol['po_item'],
+                    'uom'=>$poItemCol['uo_m'],                    
                     'plant'=>$poItemCol['plant'],
                     'ordered_qty'=>$poItemCol['ordered_quantity'],
                     'open_qty'=>$poItemCol['open_quantity'],
                     'net_order_value'=>$poItemCol['net_value'],
-                    'delivery_date'=>$poItemCol['nupco_delivery_date'],
-                    "plant"=> $poItemCol['plant'],
+                    'delivery_date'=>$poItemCol['nupco_delivery_date'],                    
                     "item_desc"=>  $poItemCol['mat_description'],
                     "mat_num"=> $poItemCol['material_number'],
-                    "cust_code"=> $poItemCol['customer_no'],
                 ];
                 
 

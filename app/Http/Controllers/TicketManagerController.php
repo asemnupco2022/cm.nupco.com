@@ -21,4 +21,12 @@ class TicketManagerController extends Controller
     {
             return view('ticket-manager.ticket-chat', ['mail_ticket_hash'=>$request->token]);
     }
+
+    public function download_attachment(){
+        $filename = 'temp-image.jpg';
+        $tempImage = tempnam(sys_get_temp_dir(), $filename);
+        copy('https://my-cdn.com/files/image.jpg', $tempImage);
+ 
+        return response()->download($tempImage, $filename);
+    }
 }
