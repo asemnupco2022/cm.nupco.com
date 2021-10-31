@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
          $schedule->command('lbs:notification-scheduler')->everyMinute(); //Execute Notification Scheduler for manual-automation
          $schedule->command('lbs:po-scheduler-filter')->daily(); //filter data for sending notification
 
-         $schedule->command('queue:work')->everyFoureMinutes();
+         $schedule->command('queue:work')->everyFourMinutes();
 //         $schedule->command('lbs:po-scheduler-filter')->daily();
     }
 

@@ -161,7 +161,7 @@
                             <tr>
                                 <td>
                                     <div class="icheck-primary d-inline">
-                                        <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model="selectedPo.{{$collection->id}}">
+                                        <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model.defer="selectedPo.{{$collection->id}}">
                                     </div>
                                 </td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>

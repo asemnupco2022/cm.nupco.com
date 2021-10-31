@@ -8,6 +8,7 @@ use App\Models\PoSapMaster;
 use App\Models\SapMasterView;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -72,7 +73,7 @@ class SapLineMasterComponent extends Component
     public function hitSearchInt($query)
     {
 
-
+        Log::info('filter-test',$this->vendor_code);
         if (Arr::has($this->tender_no, ['from','to'])){
             $query=$query->whereBetween('tender_no',[$this->tender_no['from'],$this->tender_no['to']]);
         }elseif (Arr::has($this->tender_no, ['from'])){
@@ -294,11 +295,14 @@ class SapLineMasterComponent extends Component
         $this->searchEngine();
     }
 
+
+
     public function searchEngine()
     {
 
         $query=PoSapMaster::orderBy('po_item', 'ASC');
 
+        Log::info('initsearch-rendor',[$this->initiateSearch]);
         if ($this->initiateSearch){
             $this->initSearch=false;
             return $this->hitSearchInt($query)->paginate(10);

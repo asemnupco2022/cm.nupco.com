@@ -115,6 +115,11 @@
             right: 80px !important;
         }
 
+        .active {
+    background-color: #e375261c;
+   
+}
+
     </style>
 @endpush
 <div>
@@ -140,10 +145,7 @@
                 <h3 class="card-title pl-2">vendor #:
                  {{$headerInfo->vendor_num}}
                 </h3>
-                <h3 class="card-title pl-4">Po #:
-                    {{$headerInfo->po_num}}
-                </h3>
-                    @endif
+                @endif
             </div>
         </div>
         <!-- /.card -->
@@ -161,7 +163,7 @@
                     <ul class="nav nav-pills flex-column chat_batch">
                         @if($allLineItems)
                             @foreach($allLineItems as $allLineItem)
-                                <li class="nav-item active"  style="cursor: pointer" wire:click="fetchChat('{{$allLineItem->unique_hash}}')" >
+                                <li class="nav-item {{$ticketHash ==$allLineItem->unique_hash?'active':'' }}"  style="cursor: pointer" wire:click="fetchChat('{{$allLineItem->unique_hash}}')" >
                                     <a  class="nav-link" >
                                         PO Number: {{$allLineItem->po_num}} <br>  
                                         PO Item: {{$allLineItem->po_item_num}}   <br>
