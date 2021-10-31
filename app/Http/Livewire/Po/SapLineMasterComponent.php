@@ -102,7 +102,7 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->init_po_number, ['from','to'])){
             $query=$query->whereBetween('po_number',[$this->init_po_number['from'],$this->init_po_number['to']]);
         }elseif (Arr::has($this->init_po_number, ['from'])){
-            $query=$query->where('init_po_number',$this->init_po_number['from']);
+            $query=$query->where('po_number',$this->init_po_number['from']);
         }
         if (Arr::has($this->purchasing_group, ['from','to'])){
             $query=$query->whereBetween('total_recived_qty',[$this->purchasing_group['from'],$this->purchasing_group['to']]);

@@ -166,13 +166,13 @@ class PoHelper
 
     public static function hosLogs($response, $table_type, $request, $brodcast_type)
     {
-
+        $data=json_decode($response, true);
         $insert =new HosResponseLog();
         $insert->table_type=$table_type;
         $insert->request=$request;
         $insert->brodcast_type=$brodcast_type;
-        $insert->rs_status=$response->status;
-        $insert->rs_mesg=$response->message;
+        $insert->rs_status=$data['status'];
+        $insert->rs_mesg=$data['message'];
         $insert->rs_body=$response;
       return   $insert->save();
     }

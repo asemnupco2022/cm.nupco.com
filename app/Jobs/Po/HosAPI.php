@@ -116,9 +116,12 @@ class HosAPI implements ShouldQueue
 
             Log::info('whaterver sending',$sendable);
                 $response = Http::get($this->hosUrl,$sendable );
-               $hosLog = PoHelper::hosLogs( $response, 'sap_lin_item', 'get', 'send');
                 Log::info('HOS-API-POST-REQUEST',[$response]);
-                Log::info('HOS-API-LOG',[$$hosLog]);
+            //     Log::info($response);
+
+
+            //    $hosLog = PoHelper::hosLogs( $response, 'sap_lin_item', 'get', 'send');
+            //     Log::info('HOS-API-LOG',[$$hosLog]);
 
 
             }
