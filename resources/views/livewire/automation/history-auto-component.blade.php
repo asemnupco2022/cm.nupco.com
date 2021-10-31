@@ -44,8 +44,8 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
-                                
+
+
                             </div>
                         </div>
                         <div class="col-sm-2 pl-0">
@@ -140,7 +140,7 @@
                                     @endif
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'recipient_email' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->recipient_email)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'msg_subject' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->msg_subject)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->last_executed_at)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{$collection->last_executed_at}}</td>
                                  </tr>
                             @endforeach
                         @endif
@@ -207,6 +207,22 @@
             <div class="modal-content">
                 <div class="modal-body">
                     @livewire('po.user-filters-component',['columns'=>$columns,'template_for_table'=>$tableType])
+                </div>
+                <div class="modal-footer justify-content-between">
+
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="show-email-structure"  >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                   {!! $showEmailStructure !!}
                 </div>
                 <div class="modal-footer justify-content-between">
 

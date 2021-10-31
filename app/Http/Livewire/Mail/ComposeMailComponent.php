@@ -16,6 +16,11 @@ use rifrocket\LaravelCms\Models\LbsMember;
 class ComposeMailComponent extends Component
 {
 
+    public function emitNotifications($message, $msgType)
+    {
+        $this->emit('toast-notification-component',$message,$msgType);
+    }
+
     public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType, $mailableData;
 
 
@@ -32,7 +37,7 @@ class ComposeMailComponent extends Component
     public function prepareComposerModal($mailType, $mail_data, $tableType, $to)
     {
 
-       
+
         $this->mail_to=$to;
         $this->mailableData=$mail_data;
         $this->mail_content=null;
@@ -118,21 +123,20 @@ class ComposeMailComponent extends Component
                 'msg_body'=>$messageBody,
                 'execute_at_date'=>Carbon::now()->format('Y-m-d'),
                 'execute_at_time'=>Carbon::now()->format('h:m'),
-                'last_executed_at'=>Carbon::now()->format('Y-m-d'),
+                'last_executed_at'=>Carbon::now(),
                 'meta'=>null,
                 'json_data'=>null,
             ];
             PoHelper::SaveNotificationHistory($notifiable, $this->mailableData);
 
-
-
             $this->clearData();
 
-            return redirect()->back()->with('success','mail send successfully');
+            $this->dispatchBrowserEvent('close-mail-composer');
+            return $this->emitNotifications('mail send successfully','success');
 
 
         }catch (\Throwable $exception){
-            return redirect()->back()->with('error',$exception->getMessage());
+            return $this->emitNotifications($exception->getMessage(),'error');
         }
     }
 

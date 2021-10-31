@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Tender Desc" wire:model.defer="tender_desc.from" >
+          <input type="title" class="form-control"  placeholder="Tender Description" wire:model.defer="tender_desc.from" >
         </div>
       </div>
       <div class="col-md-3">
@@ -39,7 +39,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="po_number.from" >
+          <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="init_po_number.from" >
         </div>
       </div>
       <div class="col-md-3">
@@ -114,7 +114,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <button type="button" class="btn btn-success btn-sm flat btn-sm float-right" wire:click="checknewfilter" >
+            <button type="button" class="btn btn-success btn-sm flat btn-sm float-right" wire:click="search_enter" >
                 Check Now
             </button>
         </div>

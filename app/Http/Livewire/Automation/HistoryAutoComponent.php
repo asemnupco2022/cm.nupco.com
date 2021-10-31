@@ -44,6 +44,8 @@ class HistoryAutoComponent extends Component
     public $selectedPo=[];
     public $selectAll=false;
 
+    public $showEmailStructure=null;
+
 
     public function updatedSelectAll($value)
     {

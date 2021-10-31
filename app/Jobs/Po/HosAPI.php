@@ -2,7 +2,9 @@
 
 namespace App\Jobs\Po;
 
+use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
+use App\Models\PoSapMaster;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -86,8 +88,9 @@ class HosAPI implements ShouldQueue
                 $insertToHos->item_desc=$poItemCol['mat_description'];
                 $insertToHos->mat_num=$poItemCol['material_number'];
                 $insertToHos->save();
+              $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
 
-
+              Log::info('update sap hash for'.$poItemCol['id'],[$result]);
 
                 $sendable=[
                     'mail_unique'=> $this->email_unique,
@@ -100,21 +103,22 @@ class HosAPI implements ShouldQueue
                     'customer_name'=>$poItemCol['customer_name'],
                     'cust_code'=>$poItemCol['customer_no'],
                     'po_item_num'=>$poItemCol['po_item'],
-                    'uom'=>$poItemCol['uo_m'],                    
+                    'uom'=>$poItemCol['uo_m'],
                     'plant'=>$poItemCol['plant'],
                     'ordered_qty'=>$poItemCol['ordered_quantity'],
                     'open_qty'=>$poItemCol['open_quantity'],
                     'net_order_value'=>$poItemCol['net_value'],
-                    'delivery_date'=>$poItemCol['nupco_delivery_date'],                    
+                    'delivery_date'=>$poItemCol['nupco_delivery_date'],
                     "item_desc"=>  $poItemCol['mat_description'],
                     "mat_num"=> $poItemCol['material_number'],
                 ];
-                
+
 
             Log::info('whaterver sending',$sendable);
                 $response = Http::get($this->hosUrl,$sendable );
-
+               $hosLog = PoHelper::hosLogs( $response, 'sap_lin_item', 'get', 'send');
                 Log::info('HOS-API-POST-REQUEST',[$response]);
+                Log::info('HOS-API-LOG',[$$hosLog]);
 
 
             }

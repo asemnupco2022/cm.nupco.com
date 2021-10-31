@@ -67,13 +67,18 @@ class SapLineMasterComponent extends Component
     public $storage_location = [];
     public $plant = [];
     public $customer_name = [];
+    public $delivery_address = [];
+    public $supply_ratio = [];
+    public $mat_description = [];
+    public $cust_gen_code = [];
+    public $vendor_name_en = [];
 //    ========
 
 
     public function hitSearchInt($query)
     {
 
-        Log::info('filter-test',$this->vendor_code);
+
         if (Arr::has($this->tender_no, ['from','to'])){
             $query=$query->whereBetween('tender_no',[$this->tender_no['from'],$this->tender_no['to']]);
         }elseif (Arr::has($this->tender_no, ['from'])){
@@ -149,12 +154,39 @@ class SapLineMasterComponent extends Component
         }elseif (Arr::has($this->customer_name, ['from'])){
             $query=$query->where('customer_name',$this->customer_name['from']);
         }
-//        dd($query->get());
+        if (Arr::has($this->supply_ratio, ['from','to'])){
+            $query=$query->whereBetween('supply_ratio',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->supply_ratio, ['from'])){
+            $query=$query->where('supply_ratio',$this->supply_ratio['from']);
+        }
+        if (Arr::has($this->delivery_address, ['from','to'])){
+            $query=$query->whereBetween('delivery_address',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->delivery_address, ['from'])){
+            $query=$query->where('delivery_address',$this->delivery_address['from']);
+        }
+        if (Arr::has($this->mat_description, ['from','to'])){
+            $query=$query->whereBetween('mat_description',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->mat_description, ['from'])){
+            $query=$query->where('mat_description',$this->mat_description['from']);
+        }
+        if (Arr::has($this->cust_gen_code, ['from','to'])){
+            $query=$query->whereBetween('cust_gen_code',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->cust_gen_code, ['from'])){
+            $query=$query->where('cust_gen_code',$this->cust_gen_code['from']);
+        }
+        if (Arr::has($this->vendor_name_en, ['from','to'])){
+            $query=$query->whereBetween('vendor_name_en',[$this->plant['from'],$this->plant['to']]);
+        }elseif (Arr::has($this->vendor_name_en, ['from'])){
+            $query=$query->where('vendor_name_en',$this->vendor_name_en['from']);
+        }
+        // dd($this->purchasing_group['from']);
+    //    dd($query->getBindings());
         return $query;
     }
 
     public function initSearchFilter(){
        $this->initiateSearch=true;
+       $this->initSearch=false;
     }
 
     public function checknewfilter(){
@@ -162,10 +194,6 @@ class SapLineMasterComponent extends Component
 
     }
 
-    // public function updatedSelectedPo($value){
-
-    //     dump($this->selectedPo);
-    // }
 
 
     public function updatedSelectAll($value)
@@ -210,24 +238,26 @@ class SapLineMasterComponent extends Component
     public function emitMailComposerReq($reqType)
     {
 
-        $check=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->pluck('po_number','po_item')->toArray();
+        $check=PoSapMaster::whereIn('id',array_keys(array_filter($this->selectedPo)))->pluck('customer_no','vendor_code')->toArray();
 
         if (!$check or count(array_unique($check)) >1){
-            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Select only One Po Number's Line Items"]);
+            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Select only One Cumstomer and Vendor's Line Items"]);
         }
 
-        $collections=PoSapMaster::whereIn('id',array_keys($this->selectedPo))->get();
+        $collections=PoSapMaster::whereIn('id',array_keys(array_filter($this->selectedPo)))->get();
         $this->baseInfo=PoSapMaster::find($collections[0]->id);
 
         if (!$this->baseInfo->vendorInfo ){
             return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Vendor's Info Not Found, for vendor Code: ".$this->baseInfo->vendor_code]);
         }
 
+        // dd($this->baseInfo);
         $to=$this->baseInfo->vendorInfo->email;
         $sendData=[
             'purchasing_code'=>$this->po_number,
-            'vendor_code'=>$this->baseInfo->vendorInfo->vendor_code,
-            'vendor_name'=>$this->baseInfo->vendorInfo->display_name,
+            'vendor_code'=>$this->baseInfo->vendor_code,
+            'vendor_name_en'=> $this->baseInfo->vendor_name_en,
+            'vendor_name_er'=>$this->baseInfo->vendor_name_er,
             'customer_name'=>$this->baseInfo->customer_name,
             'po_items'=>$this->selectedPo,
             'sap_object'=>$collections
@@ -272,6 +302,27 @@ class SapLineMasterComponent extends Component
         $this->searchable_operator='LIKE';
         $this->searchable_col_val=null;
         $this->number_of_rows=10;
+        $this->selectedPo=[];
+        $this->tender_no = [];
+        $this->tender_desc = [];
+        $this->document_type = [];
+        $this->document_type_desc = [];  //string
+        $this->init_po_number = [];
+        $this->purchasing_group = [];
+        $this->purchasing_organization = [];
+        $this->customer_no = [];
+        $this->nupco_delivery_date = [];
+        $this->po_created_on = [];
+        $this->generic_mat_code = [];
+        $this->vendor_code = [];
+        $this->storage_location = [];
+        $this->plant = [];
+        $this->customer_name = [];
+        $this->delivery_address = [];
+        $this->supply_ratio = [];
+        $this->mat_description = [];
+        $this->cust_gen_code = [];
+        $this->vendor_name_en = [];
     }
 
     public function mount()
@@ -302,12 +353,6 @@ class SapLineMasterComponent extends Component
 
         $query=PoSapMaster::orderBy('po_item', 'ASC');
 
-        Log::info('initsearch-rendor',[$this->initiateSearch]);
-        if ($this->initiateSearch){
-            $this->initSearch=false;
-            return $this->hitSearchInt($query)->paginate(10);
-        }
-
         if ($this->json_data and !empty($this->json_data)){
             $searchableItems=json_decode($this->json_data, true);
             if ($searchableItems and !empty($searchableItems)){
@@ -320,15 +365,13 @@ class SapLineMasterComponent extends Component
             }
         }
 
-        if ($this->searchable_operator=='LIKE'){
-            return PoSapMaster::where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('po_item', 'ASC')->paginate($this->number_of_rows);
-        }else{
-            if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-                return PoSapMaster::where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('po_item', 'ASC')->paginate($this->number_of_rows);
-            }else{
-                return  PoSapMaster::where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('po_item', 'ASC')->paginate($this->number_of_rows);
-            }
+        if (!empty($this->searchable_col) and !empty($this->searchable_col_val) and !empty($this->searchable_operator)){
+            $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('po_item', 'ASC');
         }
+        $query = $this->hitSearchInt($query);
+        // dd($query->toSql());
+        return $query->paginate($this->number_of_rows);
+
     }
 
 

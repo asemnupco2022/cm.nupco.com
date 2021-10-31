@@ -202,6 +202,7 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_quantity' )==false?'hide':''}}" >{{$collection->gr_quantity}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'gr_amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'supplier_comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td>
                                 <td>
                                     <a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
                                         <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($collection->po_number,$collection->po_item, 'sap_line_item' )}}</span>
@@ -222,14 +223,16 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
+                        @if($collections)
                         {{$collections->links()}}
+                        @endif
                     </ul>
                 </div>
 
             </div>
 
-            <button class="btn btn-success flat text-capitalize" wire:click="emitMailComposerReq('enquiry-email')"><i class="fas fa-envelope"></i>  Enquiry Letter</button>
-            <button class="btn btn-info flat text-capitalize" wire:click="emitMailComposerReq('expedite-email')"><i class="fas fa-envelope" ></i> Warning Letter</button>
+            <button class="btn btn-success flat text-capitalize" wire:click="emitMailComposerReq('enquiry-email')"><i class="fas fa-envelope"></i>  Warning Letter</button>
+            <button class="btn btn-info flat text-capitalize" wire:click="emitMailComposerReq('expedite-email')"><i class="fas fa-envelope" ></i> Reminder Letter</button>
 
 
             <!-- /.card -->
@@ -357,6 +360,12 @@
     <div class="modal" id="modal-filter-sap-po" data-backdrop="false">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Filter SAP</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
                 <div class="modal-body">
                     @include('livewire.po.sap-filter-template')
                 </div>
@@ -452,13 +461,13 @@
                             <td>{{ \App\Helpers\PoHelper::NormalizeColString('po_number')  }}</td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="po_number.from" >
+                                    <input type="text" class="form-control"  wire:model.defer="init_po_number.from" >
                                 </div>
                             </td>
                             <td>To</td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="po_number.to" >
+                                    <input type="text" class="form-control"   wire:model.defer="init_po_number.to" >
                                 </div>
                             </td>
                             {{--<td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
@@ -659,6 +668,9 @@
 
             window.addEventListener('open-mail-composer', event => {
                 $('#modal-xl').modal('show');
+            })
+            window.addEventListener('close-mail-composer', event => {
+                $('#modal-xl').modal('hide');
             })
 
 

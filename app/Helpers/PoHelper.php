@@ -6,6 +6,7 @@ namespace App\Helpers;
 
 use App\Jobs\Po\HosAPI;
 use App\Models\HosPostHistory;
+use App\Models\HosResponseLog;
 use App\Models\InternalComment;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoSapMaster;
@@ -161,6 +162,19 @@ class PoHelper
             return $result->{$colunm};
         }
         return null;
-}
+    }
+
+    public static function hosLogs($response, $table_type, $request, $brodcast_type)
+    {
+
+        $insert =new HosResponseLog();
+        $insert->table_type=$table_type;
+        $insert->request=$request;
+        $insert->brodcast_type=$brodcast_type;
+        $insert->rs_status=$response->status;
+        $insert->rs_mesg=$response->message;
+        $insert->rs_body=$response;
+      return   $insert->save();
+    }
 
 }

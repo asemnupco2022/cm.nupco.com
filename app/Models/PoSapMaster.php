@@ -58,7 +58,8 @@ class PoSapMaster extends Model
             "old_po_item"=>true,
             "gr_quantity"=>true,
             "gr_amount"=>true,
-            "supply_ratio"=>true
+            "supply_ratio"=>true,
+            "supplier_comment"=>false,
         ];
 
 
@@ -101,7 +102,9 @@ class PoSapMaster extends Model
         "old_po_item",
         "gr_quantity",
         "gr_amount",
-        "supply_ratio"
+        "supply_ratio",
+        "uniue_hash",
+        "supplier_comment",
     ];
 
     public function setPoCreatedOnAttribute($value)

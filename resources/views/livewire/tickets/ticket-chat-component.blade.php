@@ -117,7 +117,7 @@
 
         .active {
     background-color: #e375261c;
-   
+
 }
 
     </style>
@@ -165,10 +165,10 @@
                             @foreach($allLineItems as $allLineItem)
                                 <li class="nav-item {{$ticketHash ==$allLineItem->unique_hash?'active':'' }}"  style="cursor: pointer" wire:click="fetchChat('{{$allLineItem->unique_hash}}')" >
                                     <a  class="nav-link" >
-                                        PO Number: {{$allLineItem->po_num}} <br>  
+                                        PO Number: {{$allLineItem->po_num}} <br>
                                         PO Item: {{$allLineItem->po_item_num}}   <br>
                                         Matrial Description: {{$allLineItem->item_desc}}   <br>
-                                        Matrial Code:  {{$allLineItem->mat_num}}                                 
+                                        Matrial Code:  {{$allLineItem->mat_num}}
                                     </a>
                                     <span class="right badge badge-success">{{\App\Helpers\PoHelper::unreadMessages('lower-all',$allLineItem->unique_hash)}}</span>
                                     <span class="right badge badge-danger" style=" right: 25px;">{{\App\Helpers\PoHelper::unreadMessages('lower',$allLineItem->unique_hash)}}</span>
@@ -201,7 +201,7 @@
                                     <span
                                         class="direct-chat-name {{$collection->msg_sender_id == 'staff' ? 'float-right':'float-left'}} ">{{$collection->name}}</span>
                                     <span
-                                        class="direct-chat-timestamp  {{$collection->msg_sender_id == 'staff' ? 'float-left':'float-right'}} ">{{\Carbon\Carbon::parse($collection->created_at)->toFormattedDateString()}}</span>
+                                        class="direct-chat-timestamp  {{$collection->msg_sender_id == 'staff' ? 'float-left':'float-right'}} ">{{\Carbon\Carbon::parse($collection->created_at)->format('Y-M-d H:i:s')}}</span>
                                 </div>
                                 <!-- /.direct-chat-infos -->
                                 <img class="direct-chat-img"

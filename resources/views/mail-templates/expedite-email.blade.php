@@ -140,25 +140,30 @@
                         <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tbody>
 
-                            <tr>
-                                <td align="left" style=" padding-right: 20px;  width: 60%;">
-                                    <h3 style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;"><b>Subject:</b> EXPEDITING LETTER </h3>
-                                    <p>Dear Draeger Aribia CO. LTD. </p>
-                                    <p>Reference to Nupco Tender NPT0007/18 for MINISTRY OF HELTH for Ambient/Central Warehouse Dammam, we hereby inform that delivery due date for below list is approaching (5/15/50 Days from today). Kindly expedite your efforts to submit the ASN enough time before the due date.</p>
-                                    <p>Thank you for your cooperation and your response this letter and look forward to a constructive and fruitful cooperation to serve the patient and healthcare sector.</p>
-                                </td>
-                                <td align="right" style=" padding-left: 20px;">
-                                    <h3 style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;">الموضوع: الحث على توريد  </h3>
-                                    <p>السادة / Draeger Arabia Co Ltd </p>
-                                    <p>إشارة لمنافسة نوبكو رقم NPT0007-18 لصالح MINISTRY OF HELTH  - منطقة ،Warehouse Dammam نحيطكم علما بقرب انتعاء توريد الدفعة للبنود المذكورة أدناة (خلال يوما من تاريخ اليوم) لذا نرجو منكم سرعة جدولة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية. شكرا على حسن تجاوبكم مع هذا الخطاب ونتطلع لتعاون بناء ومثمر لما يخدم المريض والقطاع الصحي.</p>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td align="left" style=" padding-right: 20px;  width: 60%;">
+                                       <h3 style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;"><b>Subject:</b> EXPEDITING LETTER </h3>
+                                       <p>Dear {{$mail_data['vendor_name_en']}} </p>
+                                       <p>Reference for {{$mail_data['customer_name']}} , we hereby inform that delivery due date for below list is approaching. Kindly expedite your efforts to submit the ASN enough time before the due date.</p>
+                                       <p>Thank you for your cooperation and your response this letter and look forward to a constructive and fruitful cooperation to serve the patient and healthcare sector.</p>
+                                     </td>
+                                    <td align="right" style=" padding-left: 20px;">
+                                         <h3 style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;">الموضوع: الحث على توريد  </h3>
+                                         <p>السادة / {{$mail_data['vendor_name_er']}} </p>
+                                         <p>إشارة لمنافسة نوبكو رقم  {{$mail_data['customer_name']}}  - منطقة  لذا نرجو منكم سرعة جدولة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية. شكرا على حسن تجاوبكم مع هذا الخطاب ونتطلع لتعاون بناء ومثمر لما يخدم المريض والقطاع الصحي.</p>
+                                    </td>
+                                 </tr>
                             <tr><td align="center" height="25" style="height:25px; font-size: 0;">&nbsp;</td>
                             </tr><tr>
                             </tr></tbody></table><table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" align="left" width="100%" style="border-collapse:collapse;border:none;
 											margin-right:6.75pt">
                             <tbody>
                             <tr style="height:14.6pt">
+                                <td width="74" nowrap="" valign="top" style="width:55.6pt;border:solid windowtext 1.0pt;
+														background:#1F3864;padding:0in 5.4pt 0in 5.4pt;height:14.6pt">
+                                    <p class="MsoNormal" align="center"><span style="font-size:12.0pt;font-family:&quot;Sakkal Majalla&quot;;
+														color:white">Tender desc</span></p>
+                                </td>
                                 <td width="74" nowrap="" valign="top" style="width:55.6pt;border:solid windowtext 1.0pt;
 														background:#1F3864;padding:0in 5.4pt 0in 5.4pt;height:14.6pt">
                                     <p class="MsoNormal" align="center"><span style="font-size:12.0pt;font-family:&quot;Sakkal Majalla&quot;;
@@ -209,6 +214,10 @@
                                 <td width="74" nowrap="" valign="top" style="width:55.6pt;border:solid windowtext 1.0pt;
 														border-top:none;padding:0in 5.4pt 0in 5.4pt;height:14.6pt">
                                     <p class="MsoNormal" align="center" style="text-align:center;line-height:normal"><span style="font-family:&quot;Sakkal Majalla&quot;">{{$sap_object['tender_no']}}</span></p>
+                                </td>
+                                <td width="74" nowrap="" valign="top" style="width:55.6pt;border:solid windowtext 1.0pt;
+														border-top:none;padding:0in 5.4pt 0in 5.4pt;height:14.6pt">
+                                    <p class="MsoNormal" align="center" style="text-align:center;line-height:normal"><span style="font-family:&quot;Sakkal Majalla&quot;">{{$sap_object['tender_desc']}}</span></p>
                                 </td>
                                 <td width="84" nowrap="" valign="top" style="width:63.05pt;border-top:none;
 														border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
