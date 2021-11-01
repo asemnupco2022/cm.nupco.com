@@ -15,8 +15,8 @@ class CreateHosResponseLogsTable extends Migration
     {
         Schema::create('hos_response_logs', function (Blueprint $table) {
             $table->id();
-            $table->string('table_type');
             $table->string('request');
+            $table->text('request_type');
             $table->string('brodcast_type');
             $table->string('rs_status');
             $table->string('rs_mesg');

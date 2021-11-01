@@ -4,6 +4,7 @@ namespace App\Console\Commands\Import;
 
 use App\Jobs\Import\SapImportJob;
 use App\Jobs\Import\SapImportJobNew;
+use App\Jobs\Vendor\FetchVendorJob;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoImportScheduler;
 use Carbon\Carbon;
@@ -126,8 +127,9 @@ class SapImport extends Command
 
             dispatch(new SapImportJob($file,$insert->id,$fileOrigin,$globalKey));
         }
-        Artisan::call('lbs:fetch-vendors');
-        
+        // Artisan::call('lbs:fetch-vendors');
+        dispatch(new FetchVendorJob());
+
         return 1;
     }
 

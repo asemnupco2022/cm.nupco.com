@@ -36,25 +36,6 @@ class HosAPI implements ShouldQueue
     }
 
 
-//mail_unique
-//mail_hash
-
-//{
-//"message_type": "enquiry",
-//"unique_hash": "3gr4htn3rrgh3jokrko",
-//"tender_num": "NPT0001/18",
-//"vendor_num": "23454",
-//"po_num": "345678909876",
-//"customer_num": "9765432234F",
-//"po_item_num": "10",
-//"mat_num": "10",
-//"uom": "103",
-//"ordered_qty": "10888",
-//"open_qty": "10000",
-//"net_order_value": "1034567.538",
-//"delivery_date": "2021-10-07"
-//}
-
     /**
      * Execute the job.
      *
@@ -88,9 +69,7 @@ class HosAPI implements ShouldQueue
                 $insertToHos->item_desc=$poItemCol['mat_description'];
                 $insertToHos->mat_num=$poItemCol['material_number'];
                 $insertToHos->save();
-              $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
 
-              Log::info('update sap hash for'.$poItemCol['id'],[$result]);
 
                 $sendable=[
                     'mail_unique'=> $this->email_unique,
@@ -114,19 +93,22 @@ class HosAPI implements ShouldQueue
                 ];
 
 
-            Log::info('whaterver sending',$sendable);
+                Log::info('whaterver sending',$sendable);
                 $response = Http::get($this->hosUrl,$sendable );
                 Log::info('HOS-API-POST-REQUEST',[$response]);
-            //     Log::info($response);
 
+               $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
+                Log::info('HOS-API-LOG',[$hosLog]);
 
-            //    $hosLog = PoHelper::hosLogs( $response, 'sap_lin_item', 'get', 'send');
-            //     Log::info('HOS-API-LOG',[$$hosLog]);
+                $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
+                Log::info('update sap hash for'.$poItemCol['id'],[$result]);
 
-
+                $saptmp=[
+                    'unique_hash'=>$unique_hash
+                ];
+                $tmpResult=PoHelper::sapMasterTmp($saptmp,$poItemCol['po_number'], $poItemCol['po_item']);
+                Log::info('update sap tmp record'.$poItemCol['id'],[$tmpResult]);
             }
         }
-
-
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Tickets;
 
+use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
 use App\Models\InternalComment;
 use App\Models\SchedulerNotificationHistory;
@@ -36,8 +37,8 @@ class TicketChatComponent extends Component
     {
         $this->fetchBaseInfo();
         $this->headerInfo = HosPostHistory::where('mail_hash',base64_decode($this->mail_ticket_hash))->first();
-    
-       
+
+
     }
 
 
@@ -49,7 +50,7 @@ class TicketChatComponent extends Component
 
     public function fetchChat($value)
     {
-        
+
         $this->restInputs();
         $this->ticketHash=$value;
        TicketManager::where('ticket_hash',$value)->update(['msg_read_at'=>Carbon::now()]);
@@ -93,6 +94,7 @@ class TicketChatComponent extends Component
         $insert->msg_receiver_id='vendor';
         $insert->attachment=$filepath;
         $insert->attachment_name=$fileOriginalName;
+        $insert->msg_read_at=Carbon::now();
         if ($insert->save()){
 
 
@@ -123,15 +125,18 @@ class TicketChatComponent extends Component
        $response = Http::get($url, $send);
         Log::info('response',[$response]);
 
+        $hosLog = PoHelper::hosLogs( $response, 'send response to HOS for sap line item: '.json_encode($send), 'SEND', 'SAP_LINE_ITEM');
+                Log::info('HOS-API-LOG',[$hosLog]);
+
     }
 
     public function restInputs()
     {
         $this->msg_body=null;
-        $ticketHash=null;
-        $ticketParent=null;
-        $attachment=null;
-        $attachmentName =null;
+        $this->ticketHash=null;
+        $this->ticketParent=null;
+        $this->attachment=null;
+        $this->attachmentName =null;
     }
 
     public function render()

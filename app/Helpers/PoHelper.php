@@ -10,6 +10,7 @@ use App\Models\HosResponseLog;
 use App\Models\InternalComment;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoSapMaster;
+use App\Models\PoSapMasterTmp;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
 use Illuminate\Support\Facades\Hash;
@@ -126,13 +127,25 @@ class PoHelper
         if ($level=='middle'){
 
           $unique_hash =  HosPostHistory::where('mail_hash',$data)->first();
+
           if($unique_hash){
-            $unique_hash=$unique_hash->unique_hash;
+          $unique_hash=$unique_hash->unique_hash;
             return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
           }
           return 0;
 
         }
+        if ($level=='middle-all'){
+
+            $unique_hash =  HosPostHistory::where('mail_hash',$data)->first();
+
+            if($unique_hash){
+            $unique_hash=$unique_hash->unique_hash;
+              return  TicketManager::where('ticket_hash',$unique_hash)->get()->count();
+            }
+            return 0;
+
+          }
         if ($level=='lower'){
             return  TicketManager::where('ticket_hash',$data)->where('msg_read_at', null)->get()->count();
         }
@@ -164,17 +177,33 @@ class PoHelper
         return null;
     }
 
-    public static function hosLogs($response, $table_type, $request, $brodcast_type)
+    public static function hosLogs($response, $request, $request_type, $brodcast_type)
     {
         $data=json_decode($response, true);
         $insert =new HosResponseLog();
-        $insert->table_type=$table_type;
         $insert->request=$request;
+        $insert->request_type=$request_type;
         $insert->brodcast_type=$brodcast_type;
         $insert->rs_status=$data['status'];
         $insert->rs_mesg=$data['message'];
         $insert->rs_body=$response;
       return   $insert->save();
+    }
+
+    public static function sapMasterTmp($requests, $po_number, $po_item)
+    {
+        $update =PoSapMasterTmp::where('po_number',$po_number )->where('po_item',$po_item )->first();
+
+        if(! $update){
+
+            $update = new PoSapMasterTmp();
+            $update->po_number=$po_number;
+            $update->po_item=$po_item;
+        }
+        foreach ($requests as $key => $value) {
+            $update->{$key} = $value;
+        }
+       return $update->save();
     }
 
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
+use rifrocket\LaravelCms\Models\LbsMember;
 use rifrocket\LaravelCms\Models\ModelTraits\UniversalModelTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -28,5 +29,11 @@ class SchedulerNotificationHistory extends Model
         'msg_subject' => true,
         'last_executed_at' => true,
     ];
+
+
+    public function venodInfo()
+    {
+        return $this->belongsTo(LbsMember::class, 'recipient_user_id','id');
+    }
 
 }

@@ -1,4 +1,4 @@
-<div>
+ <div>
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -139,11 +139,10 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'msg_subject' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->msg_subject)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->last_executed_at)}}</td>
                                     <td>
-                                        <a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a>
-                                        <a class="btn btn-app chat_po_btn">
-                                            <span class="badge bg-teal">{{\App\Helpers\PoHelper::unreadMessages('middle',$collection->mail_ticket_hash)}}</span>
-                                            <i class="far fa-comment-alt"></i>
-                                        </a>
+                                        <a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a>&nbsp;
+                                        <span class="right badge badge-success" title="total coments">{{\App\Helpers\PoHelper::unreadMessages('middle-all',$collection->mail_ticket_hash)}}</span>&nbsp;
+                                        <span class="right badge badge-danger" title="unread comments">{{\App\Helpers\PoHelper::unreadMessages('middle',$collection->mail_ticket_hash)}}</span>
+
                                     </td>
                                 </tr>
                             @endforeach

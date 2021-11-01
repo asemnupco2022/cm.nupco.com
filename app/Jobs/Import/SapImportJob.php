@@ -67,7 +67,7 @@ class SapImportJob implements ShouldQueue
         $deleted_at = null;
 
 
-        if ( $updateInit->total_ex_files == $total_ex_records ){
+        if ( $updateInit->total_records == $total_ex_records ){
             $deleted_at = Carbon::now()->format('Y-m-d');
         }
 

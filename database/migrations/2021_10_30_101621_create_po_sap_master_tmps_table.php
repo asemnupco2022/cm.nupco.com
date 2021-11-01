@@ -20,6 +20,7 @@ class CreatePoSapMasterTmpsTable extends Migration
             $table->bigInteger('po_item');
             $table->string('unique_hash')->nullable();
             $table->enum('execution_done',['init','20','15', '5', '0','finish'])->default('init');
+            $table->string('supplier_comment')->nullable();
             $table->text('meta')->nullable();
             $table->text('json_data')->nullable();
             $table->enum('status',['new','active', 'deactivated', 'suspended'])->default('active');
