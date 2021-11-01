@@ -48,7 +48,7 @@ class NotifySap implements ShouldQueue
         switch ($mailType){
             case 'enquiry-email':
                 $this->mail_subject='enquiry email';
-                return $getView= view('mail-templates.sap-enquiry-email',compact('mail_data'))->render();
+                return $getView= view('mail-templates.enquiry-email',compact('mail_data'))->render();
 
                 break;
             case 'expedite-email':
@@ -57,14 +57,14 @@ class NotifySap implements ShouldQueue
                 break;
             case 'warning-email':
                 $this->mail_subject='warning email';
-                return $getView= view('mail-templates.sap-warning-email',compact('mail_data'))->render();
+                return $getView= view('mail-templates.warning-email',compact('mail_data'))->render();
                 break;
             case 'penalty-email':
                 $this->mail_subject='penalty email';
                 return $getView= view('mail-templates.penalty-email',compact('mail_data'))->render();
                 break;
             default:
-                Log::error('sap-mail-template-not-fount:'. $mailType);
+                Log::error('mail-template-not-fount:'. $mailType);
                 return null;
         }
     }
@@ -94,7 +94,8 @@ class NotifySap implements ShouldQueue
             $mailData=['msg_content'=>$this->fetchTemplate($this->mail_type,$mail_data),'msg_subject'=>$this->mail_subject];
             $messageBody =view('mail-templates.mail-container',$mailData)->render();
 
-            $emails_to=$this->mail_to=$vendorInfo->email;
+            // $emails_to=$this->mail_to=$vendorInfo->email;
+            $emails_to=$this->mail_to='aasorayea@nupco.com';
             $emails_subject=$scheduler_colect->subject;
 
             try {

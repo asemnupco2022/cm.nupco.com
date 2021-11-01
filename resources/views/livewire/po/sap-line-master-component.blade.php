@@ -210,7 +210,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
+                                    <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->uniue_hash??"null" }}')">
                                         <span class="badge bg-teal bg-maroon">{{\App\Helpers\PoHelper::lastVendorComment($collection->po_number,$collection->po_item, 'sap_line_item' )}}</span>
                                         <i class="far fa-comment-alt"></i>
                                     </a>
@@ -223,7 +223,10 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-right">
+
                         @if($collections)
+                        <span class="right badge badge-danger">{{ $collections->total()}}</span>
+
                         {{$collections->links()}}
                         @endif
                     </ul>
@@ -231,7 +234,7 @@
 
             </div>
             @if(auth()->user()->hasAnyPermission(['who_can-send_notification']))
-            <button class="btn btn-success flat text-capitalize" wire:click="emitMailComposerReq('enquiry-email')"><i class="fas fa-envelope"></i>  Warning Letter</button>
+            <button class="btn btn-success flat text-capitalize" wire:click="emitMailComposerReq('enquiry-email')"><i class="fas fa-envelope"></i> Warning Letter</button>
             <button class="btn btn-info flat text-capitalize" wire:click="emitMailComposerReq('expedite-email')"><i class="fas fa-envelope" ></i> Reminder Letter</button>
             @endif
 
@@ -244,7 +247,7 @@
 
 
 
-    {{--    ==============  =====--}}
+    {{--    ===================--}}
 
 
     <div class="modal fade" id="modal-primary"  wire:ignore.self>
@@ -283,10 +286,10 @@
     </div>
     <!-- /.modal -->
 
-    {{--    ===================--}}
+    {{-- =================== --}}
 
 
-    {{--    ============Extra Large Model=========--}}
+    {{-- ============Extra Large Model========= --}}
 
     <div class="modal fade" id="modal-xl"  >
         <div class="modal-dialog modal-xl">

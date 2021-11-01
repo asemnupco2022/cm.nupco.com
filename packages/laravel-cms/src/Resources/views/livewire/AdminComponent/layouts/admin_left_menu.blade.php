@@ -182,7 +182,7 @@
                 </li>
                 @endif
 
-                @if(auth()->user()->hasAnyPermission(['lbs-permission-logs']))
+                {{-- @if(auth()->user()->hasAnyPermission(['lbs-permission-logs']))
                 <li class="nav-item ">
                     <a href="{{route('web.route.logs.staff.logs')}}" class="nav-link {{ (Request::is('logs/staff-logs')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
@@ -193,7 +193,7 @@
                         </p>
                     </a>
                 </li>
-                @endif
+                @endif --}}
 
                 @if(auth()->user()->hasAnyPermission(['lbs-permission-vendor-data']))
                 <li class="nav-item increase_size">

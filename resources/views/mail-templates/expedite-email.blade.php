@@ -63,8 +63,8 @@ table.table-data {
 										<table class="table-data" width="100%" border="1" align="center" width="100% cellpadding="0" cellspacing="0">
 											<tbody>
 												<tr style="background-color: #d0cece; color: #333;">
-													<th><span dir="rtl">منطقة</span></th>
-													<th><span dir="rtl">لصالح الجهة</span></th>
+													<th><span dir="rtl">منطقة</span><br>Plant</th>
+													<th><span dir="rtl">لصالح الجهة</span><br>Customer Name</th>
 													<th><span dir="rtl">أمر الشراء</span><br> PO No</th>
 													<th><span dir="rtl"></span>	رقم بند نوبكو<br>Nupco Code</th>
 													<th style="width: 154px;"><span dir="rtl"></span>مسمى البند<br>Description</th>
@@ -76,8 +76,8 @@ table.table-data {
                                                 @if($mail_data['sap_object'] and !empty($mail_data['sap_object']) and $mail_data['sap_object'] !='[]')
                                                 @foreach($mail_data['sap_object'] as $key=> $sap_object)
 												<tr>
-													<td>{{$sap_object['tender_no']}}</td>
-													<td>{{$sap_object['tender_desc']}}</td>
+													<td>{{$sap_object['plant']}}</td>
+													<td>{{$sap_object['customer_name']}}</td>
 													<td>{{$sap_object['po_number']}}</td>
 													<td>{{$sap_object['generic_mat_code']}}</td>
 													<td>{{$sap_object['mat_description']}}</td>

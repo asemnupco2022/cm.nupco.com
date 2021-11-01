@@ -39,7 +39,7 @@ table.table-data {
                                     </tr>
 									<tr>
 										<td>
-											<p dir="ltr" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px;"><span></span>السادة/ <span>{{$mail_data['vendor_name_en']}} | {{$mail_data['vendor_name_er']}}.</span></p>
+											<p dir="ltr" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px;"><span></span>السادة/ <span>vendor name.</span></p>
 										</td>
 									</tr>
 									<tr>

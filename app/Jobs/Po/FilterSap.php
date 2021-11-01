@@ -45,6 +45,16 @@ class FilterSap implements ShouldQueue
         $prepares_05=PoSapMasterScheduler::whereDate('nupco_delivery_date',$expDate_05)->where('execution_done', '15')->where('supply_ratio','<',90)->get()->toArray();
         $prepares_00=PoSapMasterScheduler::whereDate('nupco_delivery_date',$expDate_00)->where('execution_done', '05')->where('supply_ratio','<',90)->get()->toArray();
 
+        // $prepares_20=PoSapMasterScheduler::where('execution_done', 'init')->get()->toArray();
+        // $vendorByCollection=collect($prepares_20)->groupBy('vendor_code');
+        // foreach ($vendorByCollection as $vendorCode=> $collection){
+        //     $childCollection =collect($collection)->groupBy('scheduler_id');
+        //     foreach ($childCollection as $schedulerId=> $CCollection){
+        //         dispatch(new NotifySap($vendorCode,2,$CCollection, 'enquiry-email'));
+        //     }
+        // }
+
+        // die;
 
         if ($prepares_20 and !empty($prepares_20)){
 

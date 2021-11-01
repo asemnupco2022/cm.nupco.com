@@ -16,9 +16,13 @@ use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 
 class SapLineMasterComponent extends Component
 {
+    public function emitNotifications($message, $msgType)
+    {
+        $this->emit('toast-notification-component',$message,$msgType);
+    }
 
     public $tableType=LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM;
-
+    public  $counter=0;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -275,9 +279,14 @@ class SapLineMasterComponent extends Component
 
 
 
-    public function open_vendor_comment_modal($poNo,$line_item,$tableType)
+    public function open_vendor_comment_modal($poNo,$line_item,$tableType,$hash=null)
     {
-        $this->emit('open-edit-vendor-comment', $poNo,$line_item,$tableType);
+        if($hash != 'null'){
+            $this->emit('open-edit-vendor-comment', $poNo,$line_item,$tableType);
+        }else{
+            return $this->emitNotifications('No Comment Fond From vendor','error');
+        }
+
     }
 
 
@@ -370,6 +379,8 @@ class SapLineMasterComponent extends Component
         }
         $query = $this->hitSearchInt($query);
         // dd($query->toSql());
+        // $this->counter=$query->get()->count();
+        
         return $query->paginate($this->number_of_rows);
 
     }
