@@ -28,7 +28,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-//        Permission::create(['name' => 'view_only_po_management','display_name'=>'View Only Po Management']);
+    //    Permission::create(['name' => 'lbs-permission-supplier-comments','display_name'=>'Access To Supplier Comments']);
         return view('LbsViews::admin_views.views.dashboard');
     }
 

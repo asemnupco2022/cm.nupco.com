@@ -34,7 +34,7 @@
                 </li>
 
 
-
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-sap-po','lbs-permission-import','view_only_po_management','lbs-permission-mawari-po']))
                 <li class="nav-item increase_size">
                     <a href="#" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }} {{ (Request::is('import-pos')?'active':'')  }}  {{(Request::is('sap-pos')?' menu-is-opening menu-open':'')}}
                     {{(Request::is('sap-line-items-po/*')?'active':'')}}
@@ -48,6 +48,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview "  style="display: {{(Request::is('sap-line-items-po/*')?'block':'')}} {{ Request::is('sap-pos') ? 'block;' : '' }} {{ Request::is('import-pos') ? 'block;' : '' }}" >
+                        @if(auth()->user()->hasAnyPermission(['lbs-permission-sap-po','view_only_po_management']))
                         <li class="nav-item ">
                             <a href="{{route('web.route.po.SAPTableLineItems')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}   {{(Request::is('sap-line-items-po/*')?'active':'')}}">
                             <img src="{{ asset('img/dspa_light.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
@@ -55,6 +56,8 @@
                             <p>SAP Reports</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->hasAnyPermission(['lbs-permission-mawari-po','view_only_po_management']))
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                             <img src="{{ asset('img/dropdown-icon/audit-report-survey.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
@@ -62,6 +65,8 @@
                             <p>Mawared Report</p>
                             </a>
                         </li>
+                        @endif
+                        @if(auth()->user()->hasAnyPermission(['lbs-permission-import']))
                         <li class="nav-item ">
                             <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
                                 <!-- <i class=" nav-icon fas fa-upload"></i> -->
@@ -72,8 +77,10 @@
                                 </p>
                             </a>
                         </li>
+                        @endif
                     </ul>
                 </li>
+                @endif
                 <li class="nav-item increase_size">
                     <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }}  ">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
@@ -136,6 +143,7 @@
                     </ul>
                 </li>
 
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-filters']))
                 <li class="nav-item">
                     <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('filters')?'active':'')  }}  ">
                         <!-- <i class=" nav-icon fas fa-filter"></i> -->
@@ -146,8 +154,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
-
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-automation-po']))
                 <li class="nav-item ">
                     <a href="{{route('web.route.automation.list')}}" class="nav-link {{ (Request::is('automation')?'active':'')  }} ">
                         <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
@@ -158,7 +167,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-notification-history']))
                 <li class="nav-item">
                     <a href="{{route('web.route.automation.history')}}" class="nav-link {{ (Request::is('automation/automation-history')?'active':'')  }} ">
                         <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
@@ -169,8 +180,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
-
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-logs']))
                 <li class="nav-item ">
                     <a href="{{route('web.route.logs.staff.logs')}}" class="nav-link {{ (Request::is('logs/staff-logs')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
@@ -181,7 +193,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-vendor-data']))
                 <li class="nav-item increase_size">
                     <a href="{{route('web.route.vendor.manager.list')}}" class="nav-link {{ (Request::is('staff-manager/*')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
@@ -192,7 +206,10 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-staff-data']))
                 <li class="nav-item increase_size">
                     <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('vendor-manager/*')?'active':'')  }}">
                         <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
@@ -203,7 +220,9 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
+                @if(auth()->user()->hasAnyPermission(['lbs-permission-supplier-comments','who_can-reply_notification']))
                 <li class="nav-item increase_size" >
                     <a href="{{route('web.route.ticket.manager.list')}}" class="nav-link {{ (Request::is('ticket-manager/*')?'active':'') }}">
                         <!-- <i class=" nav-icon fas fa-upload"></i> -->
@@ -215,6 +234,7 @@
                         </p>
                     </a>
                 </li>
+                @endif
 
             </ul>
         </nav>

@@ -264,6 +264,7 @@
 
         @if($collections)
             <!-- /.card-body -->
+            @if(auth()->user()->hasAnyPermission(['who_can-reply_notification']))
             <div class="card-footer">
                 <div class="input-group chat_send_btn">
 
@@ -286,6 +287,7 @@
                 @error('attachment') <span class="error">{{ $message }}</span> @enderror
 
             </div>
+            @endif
             <!-- /.card-footer-->
         @endif
         </div>
