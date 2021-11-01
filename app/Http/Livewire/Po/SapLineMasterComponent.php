@@ -87,7 +87,7 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->tender_desc, ['from','to'])){
             $query=$query->whereBetween('tender_desc',[$this->tender_desc['from'],$this->tender_desc['to']]);
         }elseif (Arr::has($this->tender_desc, ['from'])){
-            $query=$query->where('tender_desc',$this->tender_desc['from']);
+            $query=$query->where('tender_desc','LIKE',$this->tender_desc['from']);
         }
         if (Arr::has($this->document_type, ['from','to'])){
             $query=$query->whereBetween('document_type',[$this->document_type['from'],$this->document_type['to']]);
@@ -97,7 +97,7 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->document_type_desc, ['from','to'])){
             $query=$query->whereBetween('document_type_desc',[$this->document_type_desc['from'],$this->document_type_desc['to']]);
         }elseif (Arr::has($this->document_type_desc, ['from'])){
-            $query=$query->where('document_type_desc',$this->document_type_desc['from']);
+            $query=$query->where('document_type_desc','LIKE',$this->document_type_desc['from']);
         }
         if (Arr::has($this->init_po_number, ['from','to'])){
             $query=$query->whereBetween('po_number',[$this->init_po_number['from'],$this->init_po_number['to']]);
@@ -167,7 +167,7 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->mat_description, ['from','to'])){
             $query=$query->whereBetween('mat_description',[$this->plant['from'],$this->plant['to']]);
         }elseif (Arr::has($this->mat_description, ['from'])){
-            $query=$query->where('mat_description',$this->mat_description['from']);
+            $query=$query->where('mat_description','LIKE',$this->mat_description['from']);
         }
         if (Arr::has($this->cust_gen_code, ['from','to'])){
             $query=$query->whereBetween('cust_gen_code',[$this->plant['from'],$this->plant['to']]);
@@ -350,7 +350,7 @@ class SapLineMasterComponent extends Component
 
     public function searchEngine()
     {
-
+        $this->dispatchBrowserEvent('close-edit-vendor-comment');
         $query=PoSapMaster::orderBy('po_item', 'ASC');
 
         if ($this->json_data and !empty($this->json_data)){

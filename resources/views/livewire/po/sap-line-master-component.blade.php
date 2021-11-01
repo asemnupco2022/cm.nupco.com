@@ -230,10 +230,10 @@
                 </div>
 
             </div>
-
+            @if(auth()->user()->hasAnyPermission(['who_can-send_notification']))
             <button class="btn btn-success flat text-capitalize" wire:click="emitMailComposerReq('enquiry-email')"><i class="fas fa-envelope"></i>  Warning Letter</button>
             <button class="btn btn-info flat text-capitalize" wire:click="emitMailComposerReq('expedite-email')"><i class="fas fa-envelope" ></i> Reminder Letter</button>
-
+            @endif
 
             <!-- /.card -->
         </div>
@@ -685,6 +685,8 @@
                 $('#modal-open-edit-vendor-comment').modal('show');
             })
             window.addEventListener('close-edit-vendor-comment', event => {
+
+                $('body').removeClass('modal-open');
                 $('#modal-open-edit-vendor-comment').modal('hide');
             })
 
