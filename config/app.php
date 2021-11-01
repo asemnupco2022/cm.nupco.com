@@ -68,8 +68,8 @@ return [
     */
 
 //    'timezone' => 'Asia/Kuwait', //Kuwait
-//   'timezone' => 'Asia/Riyadh', //Riyadh
-     'timezone' => 'Asia/Kolkata', //india
+  'timezone' => 'Asia/Riyadh', //Riyadh
+    //  'timezone' => 'Asia/Kolkata', //india
 
     /*
     |--------------------------------------------------------------------------

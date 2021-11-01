@@ -71,7 +71,7 @@
             <input type="text" name="message" placeholder="Type Message ..." class="form-control" wire:model="msg_body">
             <span class="input-group-append">
                 <input id="fileInput" type="file" style="display:none;" wire:model="attachment" />
-                  <button type="button" class="btn btn-secondary" onclick="document.getElementById('fileInput').click();" ><i class="fas fa-paperclip"></i></button>
+                  {{-- <button type="button" class="btn btn-secondary" onclick="document.getElementById('fileInput').click();" ><i class="fas fa-paperclip"></i></button> --}}
                   <button type="button" class="btn btn-primary" wire:click="saveComment">SUBMIT</button>
             </span>
         </div>

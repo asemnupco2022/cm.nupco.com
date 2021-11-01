@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Tickets;
 
+use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
 use App\Models\InternalComment;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -28,7 +30,9 @@ class VendorChatComponent extends Component
     public $headerInfo;
 
     public $msg_body=null, $attachment=null ,$attachmentName =null , $ticketHash=null, $ticketParent;
-
+    protected $rules = [
+        'msg_body' => 'required',
+    ];
 
     public function fetchBaseInfo($purchasing_doc_no, $line_item_no, $tableType ){
 
@@ -68,6 +72,7 @@ $this->fetchChat($uniqueHash);
 
     public function updatedAttachment($value)
     {
+      
         $this->validate([
             'attachment' => 'max:1024',
         ]);
@@ -100,6 +105,7 @@ $this->fetchChat($uniqueHash);
         $insert->msg_receiver_id='vendor';
         $insert->attachment=$filepath;
         $insert->attachment_name=$fileOriginalName;
+        $insert->msg_read_at=Carbon::now();
         if ($insert->save()){
 
 
@@ -108,7 +114,7 @@ $this->fetchChat($uniqueHash);
 
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
-            $this->fetchBaseInfo();
+            // $this->fetchBaseInfo();
             $this->collections = TicketManager::where('ticket_hash',$this->ticketHash)->get();
             return $this->emitNotifications('data updated successfully','success');
         }
@@ -127,7 +133,11 @@ $this->fetchChat($uniqueHash);
                 "file_path"=>$file,
                 ],
         ];
-        Http::post($url, $send);
+       $response = Http::get($url, $send);
+        Log::info('response',[$response]);
+
+        $hosLog = PoHelper::hosLogs( $response, 'send response to HOS for sap line item: '.json_encode($send), 'SEND', 'SAP_LINE_ITEM');
+                Log::info('HOS-API-LOG',[$hosLog]);
 
     }
 

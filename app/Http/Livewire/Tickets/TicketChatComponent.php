@@ -103,7 +103,7 @@ class TicketChatComponent extends Component
 
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
-            $this->fetchBaseInfo();
+            // $this->fetchBaseInfo();
             $this->collections = TicketManager::where('ticket_hash',$this->ticketHash)->get();
             return $this->emitNotifications('data updated successfully','success');
         }
