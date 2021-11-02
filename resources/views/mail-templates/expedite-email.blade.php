@@ -93,26 +93,27 @@ table.table-data {
 
 									<tr>
 										<td>
-											<div class="msg-box" style=" min-width: 300px; max-width: 300px; border: 1px solid; padding: 0px 20px; float: left;margin-bottom: 20px;">
+											<div class="msg-box" style=" min-width: 300px; max-width: 300px;  padding: 0px 20px; float: left;margin-bottom: 20px;">
 												<p>In order to respond to this
 													notification, you need to visit
-													Expediting portal: insert a HOS URL</p>
+													Expediting portal:  <a href="https://sapeq1ap1.nupco.com:52601/irj/portal" target="_blank">HOS PORTAL</a></p>
+
 											</div>
-											<div class="msg-box" style="min-width: 300px; max-width: 300px; border: 1px solid; padding: 0px 20px; float: right; margin-bottom: 20px;">
-												<p dir="rtl" style="text-align: right;">للرد على هذا الاشعار يتوجب عليك زيارة موقع متابعة العقود على الرابط الاتي: Insert a HoS URL here</p>
+											<div class="msg-box" style="min-width: 300px; max-width: 300px;  padding: 0px 20px; float: right; margin-bottom: 20px;">
+												<p dir="rtl" style="text-align: right;">للرد على هذا الاشعار يتوجب عليك زيارة موقع متابعة العقود على الرابط الاتي:  <a href="https://sapeq1ap1.nupco.com:52601/irj/portal" target="_blank">HOS PORTAL</a></p>
 											</div>
 										</td>
 									</tr>
 
 									<tr>
 										<td>
-											<div class="msg-box" style=" min-width: 300px; max-width: 300px; border: 1px solid; padding: 0px 20px; float: left;margin-bottom: 20px;">
+											<div class="msg-box" style=" min-width: 300px; max-width: 300px;  padding: 0px 20px; float: left;margin-bottom: 20px;">
 												<p>Thank you for your cooperation and your response this
 													letter and look forward to a constructive and fruitful
 													cooperation to serve the patient and healthcare sector.</p>
 												<h5>Contract Expediate Team</h5>
 											</div>
-											<div class="msg-box" style="min-width: 300px; max-width: 300px; border: 1px solid; padding: 0px 20px; float: right;margin-bottom: 20px;">
+											<div class="msg-box" style="min-width: 300px; max-width: 300px;  padding: 0px 20px; float: right;margin-bottom: 20px;">
 												<p dir="rtl" style="text-align: right;">شكرا على حسن تجاوبكم مع هذا الخطاب ونتطلع لتعاون بناء ومثمر لما يخدم المريض والقطاع الصحي.</p>
 												<h5 style="text-align: right;">فريق متابعة العقود
 												</h5>
