@@ -69,7 +69,7 @@ table.table-data {
 													<th><span dir="rtl"></span>	رقم بند نوبكو<br>Nupco Code</th>
 													<th style="width: 154px;"><span dir="rtl"></span>مسمى البند<br>Description</th>
 													<th><span dir="rtl"></span>كمية الدفعة<br>Batch QTY</th>
-													<th><span dir="rtl"></span>نهاية توريد الدفعة<br>Delivery Day</th>
+													<th style="width: 131px;"><span dir="rtl"></span>نهاية توريد الدفعة<br>Delivery Day</th>
 													<th><span dir="rtl"></span>المستودع – الجهة<br>Del.LOCATION</th>
 												</tr>
 
