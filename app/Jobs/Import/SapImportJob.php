@@ -12,6 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class SapImportJob implements ShouldQueue
 {
@@ -81,6 +82,7 @@ class SapImportJob implements ShouldQueue
 
     protected function storeInfo($row){
 
+        $supplyRatio= ((int)Str::replace(',', '', $row[35]) - (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
 
             "document_type"=>$row[0],
@@ -119,7 +121,7 @@ class SapImportJob implements ShouldQueue
             "old_po_item"=>$row[34],
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
-            "supply_ratio"=>((int)$row[34]/(int)$row[24])*100
+            "supply_ratio"=> $supplyRatio
         ];
 
 

@@ -211,7 +211,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     @livewire('reports.deliver-sum-repo-component')
                 </div>
                 <!-- /.card-body -->
@@ -234,7 +234,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     @livewire('reports.item-delivery-status-component')
                 </div>
                 <!-- /.card-body -->
