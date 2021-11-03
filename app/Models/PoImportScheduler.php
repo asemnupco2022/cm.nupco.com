@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use rifrocket\LaravelCms\Models\ModelTraits\UniversalModelTrait;
@@ -9,6 +10,18 @@ use rifrocket\LaravelCms\Models\ModelTraits\UniversalModelTrait;
 class PoImportScheduler extends Model
 {
     use HasFactory, UniversalModelTrait;
+
+    const CONS_COLUMNS=[
+
+        'table_type'=>true,
+        'path'=>false,
+        'total_records'=>true,
+        'total_ex_records'=>true,
+        'start_time'=>true,
+        'end_time'=>true,
+        'created_at'=>true,
+
+    ];
 
     protected $fillable = [
         'table_type',
@@ -24,4 +37,10 @@ class PoImportScheduler extends Model
         'end_time',
         'start_time'
     ];
+
+    public function getCreatedAtAttribute()
+    {
+       $date= $this->attributes['created_at'];
+        return Carbon::parse( $date)->format('Y-m-d');
+    }
 }
