@@ -79,7 +79,7 @@ class PoImportRepoComponent extends Component
 
 
     protected function filterForExport($ColKeys){
-        $query=PoImportScheduler::orderBy('table_type', 'ASC');
+        $query=PoImportScheduler::orderBy('id', 'ASC');
 
         if ($this->searchable_operator=='LIKE'){
                  $query=$query->where($this->searchable_col,"LIKE", '%'.$this->searchable_col_val.'%')->select($ColKeys)->get();
@@ -103,7 +103,7 @@ class PoImportRepoComponent extends Component
 
     public function searchEngine()
     {
-        $query=PoImportScheduler::orderBy('table_type', 'ASC');
+        $query=PoImportScheduler::orderBy('id', 'ASC');
 
         if ($this->searchable_operator=='LIKE'){
                  $query=$query->where($this->searchable_col,"LIKE", '%'.$this->searchable_col_val.'%')->paginate(10);
