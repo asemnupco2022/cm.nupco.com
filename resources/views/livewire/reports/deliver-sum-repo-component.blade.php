@@ -13,21 +13,7 @@
                         <br>
 
                         <div class="row yf_display_inline">
-    {{--                        <div class="col-sm-2">--}}
-    {{--                            <div class="form-group">--}}
-    {{--                                <div class="input-group input-group-sm">--}}
-    {{--                                    <div class="input-group-prepend">--}}
-    {{--                                      <span class="input-group-text">--}}
-    {{--                                        <i class="far fa-calendar-alt"></i>--}}
-    {{--                                      </span>--}}
-    {{--                                    </div>--}}
-    {{--                                    <input type="text" class="form-control float-left" id="reservation" autocomplete="off" >--}}
-    {{--                                    <input wire:model.lazy="dateRangePicker" type="hidden" id="startTime"  class="form-control" name="startDate" readonly>--}}
-    {{--                                </div>--}}
-    {{--                                <!-- /.input group -->--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-
+                                    <!-- put date filter insted of this comment -->
                             <div class="col-sm-8 display-block">
                                 <div class="form-inline">
 
@@ -69,6 +55,15 @@
                                     Select Columns
                                 </button>
 
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
+                                    DOWNLOAD PDF
+                                </button>
+
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
+                                    DOWNLOAD Excel
+                                </button>
+
+
                             </div>
 
                         </div>
@@ -82,7 +77,7 @@
                             <thead>
                             <tr>
                                 @foreach($columns as $colKey => $column)
-                                    <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</th>
+                                    <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }} {{$colKey=='supply_ratio'?'%':''}}</th>
                                 @endforeach
 
                             </tr>
@@ -96,10 +91,10 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'tender_no' )==false?'hide':''}}" >{{$collection->tender_no}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'count_of_items' )==false?'hide':''}}" >{{$collection->count_of_items}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'count_of_line' )==false?'hide':''}}" >{{$collection->count_of_line}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'total_value' )==false?'hide':''}}" >{{$collection->total_value}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivered_value' )==false?'hide':''}}" >{{$collection->delivered_value}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'remaining_delivered_value' )==false?'hide':''}}" >{{$collection->remaining_delivered_value}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'total_value' )==false?'hide':''}}" >{{ round($collection->total_value,2)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivered_value' )==false?'hide':''}}" >{{ round($collection->delivered_value,2)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'remaining_delivered_value' )==false?'hide':''}}" >{{ round($collection->remaining_delivered_value,2)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'supply_ratio' )==false?'hide':''}}" >{{ round($collection->supply_ratio,2)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'total_qty' )==false?'hide':''}}" >{{$collection->total_qty}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'delivered_qty' )==false?'hide':''}}" >{{$collection->delivered_qty}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'remaining_delivered_qty' )==false?'hide':''}}" >{{$collection->remaining_delivered_qty}}</td>
@@ -116,8 +111,13 @@
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer clearfix">
+                        @if($collections)
+                        <span class="right badge badge-danger row-count-badge">{{ $collections->total()}}</span>
+                        @endif
                         <ul class="pagination pagination-sm m-0 float-right">
+                            @if($collections)
                             {{$collections->links()}}
+                            @endif
                         </ul>
                     </div>
 
@@ -190,6 +190,12 @@
         <!-- /.modal -->
 
         {{--    =====================--}}
+
+        <div class="loading" wire:loading >
+            <div class='uil-ring-css' style='transform:scale(0.79);'>
+                <div></div>
+            </div>
+        </div>
 
         @push('scripts')
         <!-- InputMask -->

@@ -525,3 +525,11 @@ button.btn.btn-warning.flat {
     color: #333 !important;
 }
 
+.row-count-badge {
+    border-radius: 0px!important;
+    color: #ffff;
+    background-color: #17a2b8;
+    font-weight: 500;
+    font-size: 20px;
+}
+

@@ -222,11 +222,12 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
+                    @if($collections)
+                    <span class="right badge badge-danger row-count-badge">{{ $collections->total()}}</span>
+                    @endif
                     <ul class="pagination pagination-sm m-0 float-right">
 
                         @if($collections)
-                        <span class="right badge badge-danger">{{ $collections->total()}}</span>
-
                         {{$collections->links()}}
                         @endif
                     </ul>
