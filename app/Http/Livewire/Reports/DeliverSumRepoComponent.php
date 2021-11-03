@@ -94,6 +94,11 @@ class DeliverSumRepoComponent extends Component
     }
 
 
+    public function search_enter()
+    {
+
+        $this->searchEngine();
+    }
 
 
     public function searchEngine()

@@ -19,7 +19,7 @@
 
                                     <div class="form-group input-group-sm">
 
-                                        <select class="form-control select2 " style="width: 100%;" wire:model="searchable_col">
+                                        <select class="form-control select2 " style="width: 100%;" wire:model.defer="searchable_col">
                                             @foreach($columns as $colKey => $column)
                                                 <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</option>
                                             @endforeach
@@ -28,7 +28,7 @@
 
                                     <div class="form-group input-group-sm">
 
-                                        <select class="form-control select2 " style="width: 100%;" wire:model="searchable_operator">
+                                        <select class="form-control select2 " style="width: 100%;" wire:model.defer="searchable_operator">
                                             @foreach($operators as $operatorKey => $operator)
                                                 <option value="{{$operatorKey}}"> {{ $operator }}</option>
                                             @endforeach
@@ -36,10 +36,13 @@
                                     </div>
                                     <div class="input-group input-group-sm" style="width: 250px;">
                                         <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search" wire:model.debounce.500ms="searchable_col_val">
+                                               placeholder="Search" wire:model.defer="searchable_col_val">
 
 
                                         <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default text-capitalize" wire:click="search_enter" title="search">
+                                                <i class="fas fa-search"></i>
+                                            </button>
                                             <button type="submit" class="btn btn-default" wire:click="search_reset">
                                                 <i class="fas fa-sync"></i>
                                             </button>
