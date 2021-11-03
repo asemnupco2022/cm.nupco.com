@@ -55,9 +55,9 @@
                                     Select Columns
                                 </button>
 
-                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
+                                {{-- <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
                                     DOWNLOAD PDF
-                                </button>
+                                </button> --}}
 
                                 <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
                                     DOWNLOAD Excel

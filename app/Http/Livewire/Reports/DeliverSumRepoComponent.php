@@ -39,6 +39,10 @@ class DeliverSumRepoComponent extends Component
     public $operators=LbsConstants::CONST_OPERATOR;
     public $num_rows=LbsConstants::CONST_PAGE_NUMBERS;
 
+    public function mount()
+    {
+       $this->search_reset();
+    }
     public function search_reset()
     {
         $this->dateRangePicker=null;
@@ -52,13 +56,12 @@ class DeliverSumRepoComponent extends Component
 
     public function export_data($type)
     {
-
         $ColKeys = array_keys(array_filter($this->columns));
         // $selectedRows = array_keys(array_filter($this->selectedPo));
         // $collection = DeliverySummaryReport::whereIn('id',$selectedRows)->select($ColKeys)->get();
-        $collection = DeliverySummaryReport::select($ColKeys)->get();
-        $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
+        $collection =$this->filterForExport($ColKeys);
 
+        $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
         if ($type=='PDF'){
             $fileName='delivery-status-reort-'.$dateTime.'.pdf';
             PoHelper::export_pdf($ColKeys,$collection,$fileName);
@@ -72,7 +75,22 @@ class DeliverSumRepoComponent extends Component
             return Storage::disk('local')->download('export/'.$fileName);
         }
         return 1;
+    }
 
+
+    protected function filterForExport($ColKeys){
+        $query=DeliverySummaryReport::orderBy('tender_no', 'ASC');
+
+        if ($this->searchable_operator=='LIKE'){
+                 $query=$query->where($this->searchable_col,"LIKE", '%'.$this->searchable_col_val.'%')->select($ColKeys)->get();
+        }else{
+            if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)) {
+                 $query=$query->where($this->searchable_col, trim("$this->searchable_operator"), $this->searchable_col_val)->select($ColKeys)->get();
+            }else{
+                 $query=$query->where($this->searchable_col,"LIKE", '%'.$this->searchable_col_val.'%')->select($ColKeys)->get();
+            }
+        }
+        return $query;
     }
 
 
