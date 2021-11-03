@@ -82,7 +82,7 @@ class SapImportJob implements ShouldQueue
 
     protected function storeInfo($row){
 
-        $supplyRatio= ((int)Str::replace(',', '', $row[35]) - (int)Str::replace(',', '', $row[25]))*100;
+        $supplyRatio= ((int)Str::replace(',', '', $row[35]) / (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
 
             "document_type"=>$row[0],
