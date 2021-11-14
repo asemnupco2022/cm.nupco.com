@@ -54,8 +54,8 @@ class SapLineMasterComponent extends Component
     public $num_rows=LbsConstants::CONST_PAGE_NUMBERS;
 
     //initial PO search
-    public $initSearch = true;
-    protected $initiateSearch=false;
+    public $initSearch = false;
+    protected $initiateSearch=true;
     public $tender_no = [];
     public $tender_desc = [];
     public $document_type = [];
@@ -76,13 +76,12 @@ class SapLineMasterComponent extends Component
     public $mat_description = [];
     public $cust_gen_code = [];
     public $vendor_name_en = [];
+    public $supplier_comment = [];
 //    ========
 
 
     public function hitSearchInt($query)
     {
-
-
         if (Arr::has($this->tender_no, ['from','to'])){
             $query=$query->whereBetween('tender_no',[$this->tender_no['from'],$this->tender_no['to']]);
         }elseif (Arr::has($this->tender_no, ['from'])){
@@ -183,8 +182,9 @@ class SapLineMasterComponent extends Component
         }elseif (Arr::has($this->vendor_name_en, ['from'])){
             $query=$query->where('vendor_name_en',$this->vendor_name_en['from']);
         }
-        // dd($this->purchasing_group['from']);
-    //    dd($query->getBindings());
+        if(Arr::has($this->supplier_comment, ['from']) and $this->supplier_comment['from'] !='0' ){
+            $query=$query->Saptmp($this->supplier_comment['from']);
+        }
         return $query;
     }
 
@@ -241,7 +241,6 @@ class SapLineMasterComponent extends Component
 
     public function emitMailComposerReq($reqType)
     {
-
         $check=PoSapMaster::whereIn('id',array_keys(array_filter($this->selectedPo)))->pluck('customer_no','vendor_code')->toArray();
 
         if (!$check or count(array_unique($check)) >1){
@@ -255,7 +254,6 @@ class SapLineMasterComponent extends Component
             return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Vendor's Info Not Found, for vendor Code: ".$this->baseInfo->vendor_code]);
         }
 
-        // dd($this->baseInfo);
         $to=$this->baseInfo->vendorInfo->email;
         $sendData=[
             'purchasing_code'=>$this->po_number,
@@ -286,7 +284,6 @@ class SapLineMasterComponent extends Component
         }else{
             return $this->emitNotifications('No Comment Fond From vendor','error');
         }
-
     }
 
 
@@ -298,8 +295,6 @@ class SapLineMasterComponent extends Component
         $this->json_data=$selectedTemplate->json_data;
         $this->json_data_to_string=$selectedTemplate->json_to_string;
     }
-
-
 
 
     public function search_reset()
@@ -346,12 +341,8 @@ class SapLineMasterComponent extends Component
         $getFavFilter=LbsUserSearchSet::OnlyActive()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->where('make_fav','!=', null)->first();
     }
 
-
-
-
     public function search_enter()
     {
-
         $this->searchEngine();
     }
 
@@ -360,12 +351,12 @@ class SapLineMasterComponent extends Component
     public function searchEngine()
     {
         $this->dispatchBrowserEvent('close-edit-vendor-comment');
-        $query=PoSapMaster::orderBy('po_item', 'ASC');
+        $query=PoSapMaster::orderBy('vendor_code', 'ASC');
 
         if ($this->json_data and !empty($this->json_data)){
             $searchableItems=json_decode($this->json_data, true);
             if ($searchableItems and !empty($searchableItems)){
-                $query = PoSapMaster::orderBy('po_item', 'ASC');
+                $query = PoSapMaster::orderBy('vendor_code', 'ASC');
                 foreach ($searchableItems as $key => $searchableItem){
                     $operator=$searchableItem['queryOpr'];
                     $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
@@ -375,12 +366,11 @@ class SapLineMasterComponent extends Component
         }
 
         if (!empty($this->searchable_col) and !empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-            $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('po_item', 'ASC');
+            $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
         }
         $query = $this->hitSearchInt($query);
         // dd($query->toSql());
-        // $this->counter=$query->get()->count();
-        
+        // dd($this->counter=$query->get()->count());
         return $query->paginate($this->number_of_rows);
 
     }

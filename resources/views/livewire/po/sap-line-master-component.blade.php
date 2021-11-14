@@ -11,6 +11,24 @@
             }
 
         </style>
+        <style>
+            .fixTableHead {
+                overflow-y: auto;
+                height: 600px;
+            }
+            .fixTableHead thead th {
+                position: sticky;
+                top: 0;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            thead.data-sticky-header tr th {
+                background: #fff;
+            }
+
+        </style>
     @endpush
     @if(!$initSearch)
     <div class="row">
@@ -138,9 +156,9 @@
 
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
-                        <thead>
+                <div class="card-body table-responsive p-0 fixTableHead">
+                    <table class="table table-hover text-nowrap sap-report-table">
+                        <thead class="data-sticky-header">
                         <tr>
                             <th>
                                 <div class="icheck-primary d-inline">

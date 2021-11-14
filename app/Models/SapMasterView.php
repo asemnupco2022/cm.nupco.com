@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use rifrocket\LaravelCms\Models\ModelTraits\UniversalModelTrait;
 
 class SapMasterView extends Model
 {
-    use HasFactory;
+    use HasFactory ,UniversalModelTrait;
 
     const CONS_COLUMNS = [
         "document_type"=>true,

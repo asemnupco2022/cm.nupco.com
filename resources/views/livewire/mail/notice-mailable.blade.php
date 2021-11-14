@@ -47,13 +47,10 @@
 </head>
 
 <body>
-
-    <h2 style="text-align: center"> {{\App\Helpers\PoHelper::NormalizeColString($msg_subject )}}</h2>
-    <br>
     <p class="text-main "> {!!  $msg_content !!}</p>
     <div class="footer">
-        <p>Sent by &#8226; <a
-                href="{{LaravelCms::lbs_object_key_exists('app_url',Session::get('_LbsAppSession'))}}">{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</a>
+        <p>Sent by &#8226;
+            <a href="{{LaravelCms::lbs_object_key_exists('app_url',Session::get('_LbsAppSession'))}}">{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}</a>
         </p>
     </div>
 

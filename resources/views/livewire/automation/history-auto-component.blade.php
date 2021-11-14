@@ -1,4 +1,5 @@
 <div>
+{{--    {!! $showEmailStructure !!}--}}
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -116,7 +117,7 @@
                             @foreach($columns as $colKey => $column)
                                 <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</th>
                             @endforeach
-
+                            <th>Action</th>
 
                         </tr>
                         </thead>
@@ -141,6 +142,11 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'recipient_email' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->recipient_email)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'msg_subject' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->msg_subject)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{$collection->last_executed_at}}</td>
+
+                                    <td>
+                                        <i class="fas fa-eye"  style="cursor:pointer" title="view" wire:click="view_email({{$collection->id }})"></i> 	&nbsp;	&nbsp;
+{{--                                        <i class="fas fa-download" style="cursor:pointer" title="download mail"  wire:click="download_email({{$collection->id }})"></i>--}}
+                                    </td>
                                  </tr>
                             @endforeach
                         @endif
@@ -221,11 +227,17 @@
     <div class="modal fade" id="show-email-structure"  >
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
-                <div class="modal-body">
+                <div class="modal-header">
+{{--                    <h4 class="modal-title">Email Here</h4>--}}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="print-email">
                    {!! $showEmailStructure !!}
                 </div>
-                <div class="modal-footer justify-content-between">
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success float-lg-right" data-dismiss="modal" onclick="printDiv('print-email')">Print</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -233,6 +245,9 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+
+
 
     {{--    ===================--}}
 
@@ -247,9 +262,37 @@
     @push('scripts')
 
         <script>
+            window.addEventListener('open-mail-views', event => {
+                $('#show-email-structure').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+            })
+
+
+
+
+
             Livewire.on('update-users-filter-template', event => {
                 $('#modal-add-filter-lib').modal('hide');
             })
+        </script>
+
+
+        <script>
+            function printDiv(divName){
+                var printContents = document.getElementById(divName).innerHTML;
+                var originalContents = document.body.innerHTML;
+
+                document.body.innerHTML = printContents;
+
+                window.print();
+                window.onfocus=function(){ window.close();}
+                document.body.innerHTML = originalContents;
+                location.reload();
+
+
+            }
         </script>
 
     @endpush

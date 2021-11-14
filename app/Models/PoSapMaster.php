@@ -127,4 +127,18 @@ class PoSapMaster extends Model
     {
        return  $this->belongsTo(LbsAdmin::class, 'meme', 'vendor_code');
     }
+
+    public function scopeSaptmp($query, $searchString=null)
+    {
+
+        return $query->join('po_sap_master_tmps', function($join) use($searchString)
+                {
+                    $join->on('po_sap_master_tmps.po_number', '=', 'po_sap_masters.po_number');
+                    $join->on('po_sap_master_tmps.po_item','=', 'po_sap_masters.po_item');
+                    if(!empty($searchString)){
+                        $join->where('po_sap_master_tmps.supplier_comment',$searchString);
+                    }
+                });
+
+    }
 }

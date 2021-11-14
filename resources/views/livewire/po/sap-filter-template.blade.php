@@ -88,11 +88,20 @@
           <input type="title" class="form-control"  placeholder="Customer No" wire:model.defer="customer_no.from" >
         </div>
       </div>
-      {{-- <div class="col-md-3">
+      <div class="col-md-6">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Supplier Feedback an per HOS" wire:model.defer="customer_no.from">
+            <select class="form-control"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments">
+                <option value="0" selected  >Please Choose Supplier Comments</option>
+                @if (\App\Models\SupplierCommentTypes::supplierCommets())
+                @foreach (\App\Models\SupplierCommentTypes::supplierCommets() as $key => $supComs)
+                <option value="{{$key}}" <?php if($supplier_comment and $key==$supplier_comment['from'] ){ echo 'selected' ; }?> >{{$supComs}}</option>
+                @endforeach
+
+                @endif
+
+            </select>
         </div>
-      </div> --}}
+      </div>
 
     </div>
     <hr style="margin-top: 0px;">

@@ -6,10 +6,12 @@ use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
 use App\Models\SchedulerNotificationHistory;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
+use PDF;
 
 class HistoryAutoComponent extends Component
 {
@@ -101,6 +103,55 @@ class HistoryAutoComponent extends Component
             PoHelper::excel_export($collection, $fileName);
             return Storage::disk('local')->download('export/'.$fileName);
         }
+
+    }
+
+    public function view_email($id)
+    {
+        $this->showEmailStructure=SchedulerNotificationHistory::find($id)->msg_body;
+        $this->dispatchBrowserEvent('open-mail-views');
+    }
+
+    public function download_email($id)
+    {
+        $data=SchedulerNotificationHistory::find($id)->msg_body;
+        $path = storage_path('app/export');
+        $filename='invoice.pdf';
+
+//        $pdf->loadHTML($data);
+//        $pdf->save($path . '/' . $filename);
+//        return Storage::disk('local')->download('export/'.$filename);
+
+      $pdf =  PDF::loadView('pdf.email-print',['data'=>$data], [], [
+          'mode'                     => '',
+          'format'                   => 'A4',
+          'default_font_size'        => '5',
+          'default_font'             => 'sans-serif',
+          'margin_left'              => 10,
+          'margin_right'             => 10,
+          'margin_top'               => 10,
+          'margin_bottom'            => 10,
+          'margin_header'            => 0,
+          'margin_footer'            => 0,
+          'orientation'              => 'P',
+          'title'                    => 'Laravel mPDF',
+          'author'                   => '',
+          'watermark'                => 'arif',
+          'show_watermark'           => false,
+          'watermark_font'           => 'sans-serif',
+          'display_mode'             => 'fullpage',
+          'watermark_text_alpha'     => 0.1,
+          'custom_font_dir'          => '',
+          'custom_font_data' 	       => [],
+          'auto_language_detection'  => false,
+          'temp_dir'                 => rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR),
+          'pdfa' 			               => false,
+          'pdfaauto' 		             => false,
+          'use_active_forms'         => false,
+      ])->save($path . '/' . $filename);
+
+        return Storage::disk('local')->download('export/'.$filename);
+
 
     }
 

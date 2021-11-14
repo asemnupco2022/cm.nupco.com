@@ -532,4 +532,11 @@ button.btn.btn-warning.flat {
     font-weight: 500;
     font-size: 20px;
 }
-
+/*.sap-report-table tbody {*/
+/*    max-height: 600px;*/
+/*    display: block;*/
+/*    overflow: scroll;*/
+/*}*/
+/*.sap-report-table thead {*/
+/*    display: block;*/
+/*}*/

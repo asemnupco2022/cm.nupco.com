@@ -17,9 +17,9 @@
 
                         <div class="col-sm-2">
                             <div class="form-inline">
-                                <div class="input-group input-group-sm"">
+                                <div class="input-group input-group-sm">
                                     <select class="form-control  " style="width: 13rem;" wire:model="selected_bulk_action" title="Select bulk action">
-                                        <option value="" selected disabled >Bulk Actions</option>
+                                        <option value=" selected disabled >Bulk Actions</option>
                                         @foreach($actions as $actionKey => $action)
                                             <option value="{{$actionKey}}" > {{ \App\Helpers\PoHelper::NormalizeColString($action)  }}</option>
                                         @endforeach
@@ -30,7 +30,7 @@
 
                         <div class="col-sm-1">
                             <div class="form-inline">
-                                <div class="input-group input-group-sm"">
+                                <div class="input-group input-group-sm">
                                     <div class="input-group-append">
                                         <button type="submit" class="btn btn-default text-capitalize" wire:click="bulk_action" title="Reset Current Filter">
                                             <i class="fas fa-check"></i>
@@ -44,7 +44,7 @@
                             <div class="form-inline">
                                 <div class="form-group input-group-sm">
                                     <select class="form-control  " style="width: 13rem;" wire:model="selected_staff" title="Select Search Column">
-                                        <option value="" selected disabled >Filter Staff</option>
+                                        <option value=" selected disabled >Filter Staff</option>
                                         @foreach($staffs as $staff)
                                             <option value="{{$staff->id}}" > {{ \App\Helpers\PoHelper::NormalizeColString($staff->display_name)  }}</option>
                                         @endforeach
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <div class="input-group input-group-sm"">
+                            <div class="input-group input-group-sm">
                                 <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                        placeholder="Search Template" wire:model.debounce.500ms="searchable_col_val">
                                 <div class="input-group-append">

@@ -11,12 +11,14 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use App\Http\Controllers\Controller;
 use App\Jobs\Po\FilterSap;
 use App\Jobs\Po\MigrateSap;
 use App\Jobs\Po\NotifySap;
 use App\Models\PoSapMasterScheduler;
+use App\Models\SupplierCommentTypes;
 use Importer;
 use rifrocket\LaravelCms\Models\LbsMember;
 use Spatie\Permission\Models\Permission;
@@ -31,44 +33,14 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+    //    dd( SupplierCommentTypes::supplierCommets());
 
+        // $fiveStar = PoSapMaster::orderBy('vendor_code', 'ASC')->Saptmp('تم التوريد (يجب ارفاق مذكرة الاستلام)');
+        // dd($fiveStar->get());
+        // dd($fiveStar->toSql());
+//        Carbon::parse('30/05/2021')->format('Y-m-d');
     //    Permission::create(['name' => 'lbs-permission-supplier-comments','display_name'=>'Access To Supplier Comments']);
         return view('LbsViews::admin_views.views.dashboard');
-    }
-
-    public function importCsv()
-    {
-        $baseFile = file(public_path('uploads/vendor_masters.csv')); //dd(count($baseFile));
-//        DB::table('lbs_members')->truncate();
-        foreach ($baseFile as $globalKey => $file) {
-
-            $row =str_getcsv($file, ",");
-            if ($globalKey == 0){
-                continue;
-            }
-
-            if (LbsMember::where('vendor_code',$row[0] )->first()){
-                $insert= LbsMember::where('vendor_code',$row[0] )->first();
-
-            }else{
-                $insert=new LbsMember();
-            }
-            try {
-                $insert->vendor_code=$row[0];
-                $insert->first_name=$row[1];
-                $insert->last_name=$row[2];
-                $insert->username=$row[1];
-                $insert->display_name=$row[1];
-                $insert->email=$row[3];
-                $insert->password=Hash::make($row[3]);
-                $insert->save();
-
-            }catch (\Exception $exception){
-
-                return $exception->getMessage();
-            }
-        }
-        return 'transfer done';
     }
 
 
@@ -85,7 +57,7 @@ class DashboardController extends Controller
 
         $parts = (array_chunk($baseFile, 5000));
 
-        $partPath='uploads/sap_parts/'.Carbon::now()->format('Y_m_d').'/';
+        $partPath='uploads/sap_parts/test_parts/';
 
         foreach ($parts as $key => $part) {
             $total_files++;
@@ -104,7 +76,7 @@ class DashboardController extends Controller
 
     public function readPO()
     {
-        $paths = public_path('uploads/sap_parts/2021_10_24/');
+        $paths = public_path('uploads/sap_parts/test_parts/');
         $path = ($paths.'*.csv');
         $global = glob($path);
         natsort($global);
@@ -117,13 +89,10 @@ class DashboardController extends Controller
             if ( $globalKey ==0 ){
                 $fileOrigin= explode('_',basename($file, '.csv'));
                 if ((int)end($fileOrigin)==0){
-
                     continue;}
             }
             foreach ($data as $key => $row) {
-
                $this->storeInfo($row);
-
             }
 
             if (File::exists($file)) {
@@ -135,6 +104,7 @@ class DashboardController extends Controller
 
     protected function storeInfo($row){
 
+        $supplyRatio= ((int)Str::replace(',', '', $row[35]) / (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
 
             "document_type"=>$row[0],
@@ -173,7 +143,7 @@ class DashboardController extends Controller
             "old_po_item"=>$row[34],
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
-            "supply_ratio"=>((int)$row[35]/(int)$row[25])*100
+            "supply_ratio"=> $supplyRatio
         ];
 
 

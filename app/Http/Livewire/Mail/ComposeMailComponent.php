@@ -102,7 +102,7 @@ class ComposeMailComponent extends Component
                 return redirect()->back()->with('error','mail sending failed, check log for more details');
             }
 
-            $messageBody =view('mail-templates.mail-container',$mailData)->render();
+            $messageBody =view('livewire.mail.notice-mailable',$mailData)->render();
             $vendorDetails=LbsMember::where('vendor_code',$this->mailableData['vendor_code'])->first();
             $ticket_number=LaravelCmsFacade::lbs_random_generator(16,true,false,true,false);
             $ticket_hash=Hash::make($ticket_number);
