@@ -34,54 +34,89 @@ Route::get('/read-po',[DashboardController::class,'readPO'])->name('web.route.po
 
 Route::group(array('middleware'=>'web'), function () {
 
-    Route::get('import-pos',[PoImportController::class,'importPO'])->name('web.route.po.import');
-    Route::get('sap-pos',[PoImportController::class,'SAPTable'])->name('web.route.po.SAPTable');
-    Route::get('mowared-pos',[PoImportController::class,'MawTable'])->name('web.route.po.MawTable');
-    Route::get('sap-line-items-po/{slug}',[PoImportController::class,'SAPTableLineItem'])->name('web.route.po.SAPTableLineItem');
-    Route::get('sap-line-items-po/v2',[PoImportController::class,'SAPTableLineItems'])->name('web.route.po.SAPTableLineItems');
-    Route::get('mow-line-items-po/{slug}',[PoImportController::class,'MawTableLineItem'])->name('web.route.po.MawTableLineItem');
 
-    //LOGS
-    Route::group(['prefix'=>'filters'], function(){
-        Route::get('/',[FilterController::class,'index'])->name('web.route.filters.index');
+
+
+    //DASHBOARD
+    Route::group(['prefix'=>'dashboard'], function(){
+        Route::get('/summary',[DashboardController::class,'summary'])->name('web.route.dashboard.summary');
+        Route::get('/suppliers-performance',[DashboardController::class,'suppliers_performance'])->name('web.route.dashboard.suppliers_performance');
+        Route::get('/tenders',[DashboardController::class,'tenders'])->name('web.route.dashboard.tenders');
+        Route::get('/progress',[DashboardController::class,'progress'])->name('web.route.dashboard.progress');
+        Route::get('/over-due',[DashboardController::class,'over_due'])->name('web.route.dashboard.over_due');
+        Route::get('/contracts-expediting',[DashboardController::class,'contracts_expediting'])->name('web.route.dashboard.contracts_expediting');
     });
 
 
-    //AUTOMATION
-    Route::group(['prefix'=>'automation'], function(){
-        Route::get('/',[AutoController::class,'index'])->name('web.route.automation.list');
-        Route::get('/automation-history',[AutoController::class,'automationHistory'])->name('web.route.automation.history');
-    });
+    //Expediting Management
+    Route::group(['prefix'=>'expediting-management'], function(){
 
-    //LOGS
-    Route::group(['prefix'=>'logs'], function(){
-        Route::get('staff-logs',[UserLogController::class,'index'])->name('web.route.logs.staff.logs');
-    });
+        Route::get('import-pos',[PoImportController::class,'importPO'])->name('web.route.po.import');
+        Route::get('sap-pos',[PoImportController::class,'SAPTable'])->name('web.route.po.SAPTable');
+        Route::get('mowared-pos',[PoImportController::class,'MawTable'])->name('web.route.po.MawTable');
+        Route::get('sap-line-items-po/{slug}',[PoImportController::class,'SAPTableLineItem'])->name('web.route.po.SAPTableLineItem');
+        Route::get('sap-line-items-po/v2',[PoImportController::class,'SAPTableLineItems'])->name('web.route.po.SAPTableLineItems');
+        Route::get('mow-line-items-po/{slug}',[PoImportController::class,'MawTableLineItem'])->name('web.route.po.MawTableLineItem');
 
-    //TICKET MANAGER
-    Route::group(['prefix'=>'ticket-manager'], function(){
-        Route::get('/',[TicketManagerController::class,'index'])->name('web.route.ticket.manager.list');
-        Route::get('chat/{token}',[TicketManagerController::class,'ticketChat'])->name('web.route.ticket.manager.chat');
-        Route::get('/vendor-response-attachment-download',[TicketManagerController::class,'download_attachment'])->name('web.route.hos.vendor.download.attachment');
     });
 
 
-    //STAFF MANAGER
-    Route::group(['prefix'=>'staff-manager'], function(){
-        Route::get('/',[StaffController::class,'index'])->name('web.route.staff.manager.list');
+     //Expediting Requests
+     Route::group(['prefix'=>'expediting-requests'], function(){
+   //TICKET MANAGER
+   Route::group(['prefix'=>'ticket-manager'], function(){
+    Route::get('/',[TicketManagerController::class,'index'])->name('web.route.ticket.manager.list');
+    Route::get('chat/{token}',[TicketManagerController::class,'ticketChat'])->name('web.route.ticket.manager.chat');
+    Route::get('/vendor-response-attachment-download',[TicketManagerController::class,'download_attachment'])->name('web.route.hos.vendor.download.attachment');
+});
+
+     });
+
+
+
+    //Expediting Control
+    Route::group(['prefix'=>'expediting-control'], function(){
+
+
+            //LOGS
+        Route::group(['prefix'=>'filters'], function(){
+            Route::get('/',[FilterController::class,'index'])->name('web.route.filters.index');
+        });
+
+
+        //AUTOMATION
+        Route::group(['prefix'=>'automation'], function(){
+            Route::get('/',[AutoController::class,'index'])->name('web.route.automation.list');
+            Route::get('/automation-history',[AutoController::class,'automationHistory'])->name('web.route.automation.history');
+        });
+
+        //LOGS
+        Route::group(['prefix'=>'logs'], function(){
+            Route::get('staff-logs',[UserLogController::class,'index'])->name('web.route.logs.staff.logs');
+        });
+
+
+
+
+        //STAFF MANAGER
+        Route::group(['prefix'=>'staff-manager'], function(){
+            Route::get('/',[StaffController::class,'index'])->name('web.route.staff.manager.list');
+        });
+
+
+        //VENDOR MANAGER
+        Route::group(['prefix'=>'vendor-manager'], function(){
+            Route::get('/',[VendorController::class,'index'])->name('web.route.vendor.manager.list');
+        });
+
+
+        //PROFILE MANAGER
+        Route::group(['prefix'=>'profile'], function(){
+            Route::get('/',[ProfileController::class,'index'])->name('web.route.profile');
+        });
+
     });
 
-
-    //VENDOR MANAGER
-    Route::group(['prefix'=>'vendor-manager'], function(){
-        Route::get('/',[VendorController::class,'index'])->name('web.route.vendor.manager.list');
-    });
-
-
-    //PROFILE MANAGER
-    Route::group(['prefix'=>'profile'], function(){
-        Route::get('/',[ProfileController::class,'index'])->name('web.route.profile');
-    });
 
 
 

@@ -195,7 +195,6 @@ class SapLineMasterComponent extends Component
 
     public function checknewfilter(){
         $this->initiateSearch=rand(10,10);
-
     }
 
 

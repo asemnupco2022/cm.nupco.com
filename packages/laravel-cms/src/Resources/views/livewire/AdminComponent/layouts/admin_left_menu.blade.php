@@ -22,23 +22,59 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
-                <li class="nav-item text-bold">
-                    <a href="/"  class="nav-link {{ (Request::is('dashboard')?'active':'') }} ">
-                        <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
-                        <img src="{{ asset('img/lt1.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                        <img src="{{ asset('img/light/dk1.svg') }}" alt="job image" title="job image" class="dark_mode_img">
-                        <p class="">
-                            Dashboard
-                        </p>
-                    </a>
-                </li>
 
+                     <li class="nav-item {{ (Request::is('dashboard/*')?'menu-open':'') }} ">
+                        <a href="#" class="nav-link text-bold {{ (Request::is('dashboard')?'active':'') }} {{ (Request::is('dashboard/*')?'active':'') }}">
+                            <img src="{{ asset('img/lt1.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light/dk1.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                          <p>
+                            Dashboard
+                            <i class="right fas fa-angle-left"></i>
+                          </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.summary')}}" class="nav-link {{ (Request::is('dashboard/summary')?'active':'') }}">
+                              {{-- <i class="far fa-circle nav-icon"></i> --}}
+                              <p>Summary Dashboard</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.suppliers_performance')}}" class="nav-link {{ (Request::is('dashboard/suppliers-performance')?'active':'') }}">
+                              {{-- <i class="far fa-circle nav-icon"></i> --}}
+                              <p>Suppliers Performance</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.tenders')}}" class="nav-link {{ (Request::is('dashboard/tenders')?'active':'') }}">
+                              {{-- <i class="far fa-circle nav-icon"></i> --}}
+                              <p>Tenders</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.progress')}}" class="nav-link {{ (Request::is('dashboard/progress')?'active':'') }}">
+                              {{-- <i class="far fa-circle nav-icon"></i> --}}
+                              <p>Progress</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.over_due')}}" class="nav-link {{ (Request::is('dashboard/over-due')?'active':'') }}">
+                              {{-- <i class="far fa-circle nav-icon"></i> --}}
+                              <p>Over Due</p>
+                            </a>
+                          </li>
+                          <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.contracts_expediting')}}" class="nav-link {{ (Request::is('dashboard/contracts_expediting')?'active':'') }}">
+                              {{-- <i class="far fa-circle nav-icon"></i> --}}
+                              <p>Contracts Expediting</p>
+                            </a>
+                          </li>
+                        </ul>
+                      </li>
 
                 @if(auth()->user()->hasAnyPermission(['lbs-permission-sap-po','lbs-permission-import','view_only_po_management','lbs-permission-mawari-po']))
-                <li class="nav-item increase_size  ">
-                    <a href="#" class="nav-link text-bold {{ (Request::is('sap-pos')?'active':'')  }} {{ (Request::is('import-pos')?'active':'')  }}  {{(Request::is('sap-pos')?' menu-is-opening menu-open':'')}}
-                    {{(Request::is('sap-line-items-po/*')?'active':'')}}
-                    ">
+                <li class="nav-item increase_size  {{ (Request::is('expediting-management/*')?'menu-open':'')  }}">
+                    <a href="#" class="nav-link text-bold">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/lt3.svg') }}" alt="job image" title="job image" class="light_mode_img">
                         <img src="{{ asset('img/light/dk3.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -48,10 +84,10 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview "  style="display: {{(Request::is('sap-line-items-po/*')?'block':'')}} {{ Request::is('sap-pos') ? 'block;' : '' }} {{ Request::is('import-pos') ? 'block;' : '' }}" >
+                    <ul class="nav nav-treeview ">
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-sap-po','view_only_po_management']))
                         <li class="nav-item ">
-                            <a href="{{route('web.route.po.SAPTableLineItems')}}" class="nav-link {{ (Request::is('sap-pos')?'active':'')  }}   {{(Request::is('sap-line-items-po/*')?'active':'')}}">
+                            <a href="{{route('web.route.po.SAPTableLineItems')}}" class="nav-link {{ (Request::is('*/sap-pos')?'active':'')  }}   {{(Request::is('*/sap-line-items-po/*')?'active':'')}}">
                             <img src="{{ asset('img/dspa_light.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 21px !important; margin-right: 24px;">
                             <img src="{{ asset('img/light-dropdown-icon/dspa_dark.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 21px !important; margin-right: 24px;">
                             <p>SAP Reports</p>
@@ -70,7 +106,7 @@
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-import']))
                         <li class="nav-item ">
-                            <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('import-pos')?'active':'') }}">
+                            <a href="{{route('web.route.po.import')}}" class="nav-link {{ (Request::is('*/import-pos')?'active':'') }}">
                                 <!-- <i class=" nav-icon fas fa-upload"></i> -->
                                 <img src="{{ asset('img/lt2.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 24px !important; margin-right: 22px;">
                                 <img src="{{ asset('img/light/dk2.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 24px !important; margin-right: 22px;">
@@ -83,7 +119,7 @@
                     </ul>
                 </li>
                 @endif
-                <li class="nav-item increase_size ">
+                <li class="nav-item increase_size  {{ (Request::is('expediting-requests/*')?'menu-open':'')  }}">
                     <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }} text-bold  ">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/management.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 25px !important; ">
@@ -93,19 +129,12 @@
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview" style="display: {{(Request::is('automation')?'block':'')}} {{(Request::is('automation/automation-history')?'block':'')}} ">
+                    <ul class="nav nav-treeview">
 
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="#" class="nav-link">--}}
-{{--                            <img src="{{ asset('img/dropdown-icon/frq.svg') }}" alt="job image" title="job image" class="light_mode_img">--}}
-{{--                            <img src="{{ asset('img/light-dropdown-icon/rfq.svg') }}" alt="job image" title="job image" class="dark_mode_img">--}}
-{{--                            <p>RFQ</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-supplier-comments','who_can-reply_notification']))
                             <li class="nav-item increase_size" >
-                                <a href="{{route('web.route.ticket.manager.list')}}" class="nav-link {{ (Request::is('ticket-manager/*')?'active':'') }}">
+                                <a href="{{route('web.route.ticket.manager.list')}}" class="nav-link {{ (Request::is('*/ticket-manager/*')?'active':'') }} {{ (Request::is('*/ticket-manager')?'active':'') }}">
                                     <!-- <i class=" nav-icon fas fa-upload"></i> -->
                                     <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">
                                     <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -117,13 +146,6 @@
                             </li>
                         @endif
 
-{{--                        <li class="nav-item">--}}
-{{--                            <a href="#" class="nav-link">--}}
-{{--                            <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">--}}
-{{--                            <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">--}}
-{{--                            <p>Supplier Requests</p>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
 
                         <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -141,28 +163,10 @@
                             </a>
                         </li>
 
-
-
-
-
-                       {{-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <img src="{{ asset('img/dropdown-icon/reminders.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 24px !important; margin-right: 22px;">
-                            <img src="{{ asset('img/light-dropdown-icon/reminders.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 24px !important; margin-right: 22px;">
-                            <p>Supplier Reminder</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <img src="{{ asset('img/dropdown-icon/supplier_warning.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                            <img src="{{ asset('img/light-dropdown-icon/supplier_warning.svg') }}" alt="job image" title="job image" class="dark_mode_img">
-                            <p>Supplier Warning</p>
-                            </a>
-                        </li> --}}
                     </ul>
                 </li>
-                <li class="nav-item increase_size ">
-                    <a href="#" class="nav-link {{ (Request::is('')?'active':'')  }} text-bold ">
+                <li class="nav-item increase_size  {{ (Request::is('expediting-control/*')?'menu-open':'')  }} ">
+                    <a href="#" class="nav-link text-bold ">
                         <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                         <img src="{{ asset('img/control-panel.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 25px !important; margin-right: 24px;">
                         <img src="{{ asset('img/light-dropdown-icon/control-panel.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 25px !important; margin-right: 24px;">
@@ -172,18 +176,10 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        {{-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                            <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">
-                            <p>Supplier Requests</p>
-                            </a>
-                        </li> --}}
-
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-notification-history']))
                             <li class="nav-item">
-                                <a href="{{route('web.route.automation.history')}}" class="nav-link {{ (Request::is('automation/automation-history')?'active':'')  }} ">
+                                <a href="{{route('web.route.automation.history')}}" class="nav-link {{ (Request::is('*/automation/automation-history')?'active':'')  }} ">
                                     <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
                                     <img src="{{ asset('img/lt6.svg') }}" alt="job image" title="job image"  class="light_mode_img">
                                     <img src="{{ asset('img/light/dk6.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -196,7 +192,7 @@
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-staff-data']))
                             <li class="nav-item increase_size">
-                                <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('vendor-manager/*')?'active':'')  }}">
+                                <a href="{{route('web.route.staff.manager.list')}}" class="nav-link {{ (Request::is('*/staff-manager/*')?'active':'')  }} {{ (Request::is('*/staff-manager')?'active':'')  }}">
                                     <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
                                     <img src="{{ asset('img/lt9.svg') }}" alt="job image" title="job image" class="light_mode_img">
                                     <img src="{{ asset('img/light/dk9.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -209,7 +205,7 @@
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-logs']))
                             <li class="nav-item ">
-                                <a href="{{route('web.route.logs.staff.logs')}}" class="nav-link {{ (Request::is('logs/staff-logs')?'active':'')  }}">
+                                <a href="{{route('web.route.logs.staff.logs')}}" class="nav-link {{ (Request::is('*/logs/staff-logs')?'active':'')  }}">
                                     <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
                                     <img src="{{ asset('img/lt7.svg') }}" alt="job image" title="job image" class="light_mode_img">
                                     <img src="{{ asset('img/light/dk7.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -222,7 +218,7 @@
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-filters']))
                             <li class="nav-item">
-                                <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('filters')?'active':'')  }}  ">
+                                <a href="{{route('web.route.filters.index')}}" class="nav-link {{ (Request::is('*/filters')?'active':'')  }}  ">
                                     <!-- <i class=" nav-icon fas fa-filter"></i> -->
                                     <img src="{{ asset('img/lt4.svg') }}" alt="job image" title="Filters image" class="light_mode_img">
                                     <img src="{{ asset('img/light/dk4.svg') }}" alt="job image" title="Filters image" class="dark_mode_img">
@@ -236,7 +232,7 @@
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-automation-po']))
                             <li class="nav-item ">
-                                <a href="{{route('web.route.automation.list')}}" class="nav-link {{ (Request::is('automation')?'active':'')  }}">
+                                <a href="{{route('web.route.automation.list')}}" class="nav-link {{ (Request::is('*/automation')?'active':'')  }}">
                                     <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
                                     <img src="{{ asset('img/lt5.svg') }}" alt="job image" title="job image" class="light_mode_img" style=" width: 21px !important;  margin-right: 22px;">
                                     <img src="{{ asset('img/light/dk5.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -251,7 +247,7 @@
 
                         @if(auth()->user()->hasAnyPermission(['lbs-permission-vendor-data']))
                             <li class="nav-item increase_size">
-                                <a href="{{route('web.route.vendor.manager.list')}}" class="nav-link {{ (Request::is('staff-manager/*')?'active':'')  }}">
+                                <a href="{{route('web.route.vendor.manager.list')}}" class="nav-link {{ (Request::is('*/vendor-manager/*')?'active':'')  }} {{ (Request::is('*/vendor-manager')?'active':'')  }}">
                                     <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
                                     <img src="{{ asset('img/lt8.svg') }}" alt="job image" title="job image" class="light_mode_img">
                                     <img src="{{ asset('img/light/dk8.svg') }}" alt="job image" title="job image" class="dark_mode_img">
@@ -261,13 +257,7 @@
                                 </a>
                             </li>
                         @endif
-                        {{-- <li class="nav-item">
-                            <a href="#" class="nav-link">
-                            <img src="{{ asset('img/dropdown-icon/frq.svg') }}" alt="job image" title="job image" class="light_mode_img">
-                            <img src="{{ asset('img/light-dropdown-icon/rfq.svg') }}" alt="job image" title="job image" class="dark_mode_img">
-                            <p>RFQ</p>
-                            </a>
-                        </li> --}}
+
                     </ul>
                 </li>
 
@@ -300,11 +290,54 @@
                 @endif --}}
 
 
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="#" class="nav-link">--}}
+{{--                            <img src="{{ asset('img/dropdown-icon/frq.svg') }}" alt="job image" title="job image" class="light_mode_img">--}}
+{{--                            <img src="{{ asset('img/light-dropdown-icon/rfq.svg') }}" alt="job image" title="job image" class="dark_mode_img">--}}
+{{--                            <p>RFQ</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
 
+{{-- <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/frq.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/rfq.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>RFQ</p>
+                            </a>
+                        </li> --}}
+
+{{-- <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>Supplier Requests</p>
+                            </a>
+                        </li> --}}
 
 
+                       {{-- <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/reminders.svg') }}" alt="job image" title="job image" class="light_mode_img" style="width: 24px !important; margin-right: 22px;">
+                            <img src="{{ asset('img/light-dropdown-icon/reminders.svg') }}" alt="job image" title="job image" class="dark_mode_img" style="width: 24px !important; margin-right: 22px;">
+                            <p>Supplier Reminder</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <img src="{{ asset('img/dropdown-icon/supplier_warning.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                            <img src="{{ asset('img/light-dropdown-icon/supplier_warning.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                            <p>Supplier Warning</p>
+                            </a>
+                        </li> --}}
 
+{{--                        <li class="nav-item">--}}
+{{--                            <a href="#" class="nav-link">--}}
+{{--                            <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">--}}
+{{--                            <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">--}}
+{{--                            <p>Supplier Requests</p>--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
 
             </ul>
         </nav>

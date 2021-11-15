@@ -40,7 +40,49 @@ class DashboardController extends Controller
         // dd($fiveStar->toSql());
 //        Carbon::parse('30/05/2021')->format('Y-m-d');
     //    Permission::create(['name' => 'lbs-permission-supplier-comments','display_name'=>'Access To Supplier Comments']);
-        return view('LbsViews::admin_views.views.dashboard');
+    return redirect()->route('web.route.dashboard.summary');
+    }
+
+
+
+
+    public function summary()
+    {
+        $summary=true;
+        return view('LbsViews::admin_views.views.dashboard',compact('summary'));
+    }
+
+    public function suppliers_performance()
+    {
+        $suppliers_performance=true;
+        return view('LbsViews::admin_views.views.dashboard',compact('suppliers_performance'));
+    }
+
+
+    public function tenders()
+    {
+         $tenders=true;
+        return view('LbsViews::admin_views.views.dashboard',compact('tenders'));
+    }
+
+
+    public function progress()
+    {
+         $progress=true;
+        return view('LbsViews::admin_views.views.dashboard',compact('progress'));
+    }
+
+
+    public function over_due()
+    {
+         $over_due=true;
+        return view('LbsViews::admin_views.views.dashboard',compact('over_due'));
+    }
+
+    public function contracts_expediting()
+    {
+         $contracts_expediting=true;
+        return view('LbsViews::admin_views.views.dashboard',compact('contracts_expediting'));
     }
 
 
