@@ -15,7 +15,7 @@ class CreateLbsMembersTable extends Migration
     {
         Schema::create('lbs_members', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('vendor_code  ')->unique();
+            $table->bigInteger('vendor_code')->unique();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('username');
