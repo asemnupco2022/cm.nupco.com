@@ -19,7 +19,7 @@ class LbsAdminSeeder extends Seeder
     {
         LbsAdmin::truncate();
         DB::table('lbs_admins')->insert([
-            'employee_num '=>rand(10,10),
+            'employee_num'=>rand(10,10),
             'first_name' => 'super',
             'last_name' => 'admin',
             'username' => 'administrator',

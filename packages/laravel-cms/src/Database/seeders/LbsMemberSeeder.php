@@ -19,19 +19,19 @@ class LbsMemberSeeder extends Seeder
     public function run()
     {
         LbsMember::truncate();
-        DB::table('lbs_members')->insert([
-            'first_name' => 'super',
-            'last_name' => 'admin',
-            'username' => 'administrator',
-            'display_name' => 'administrator',
-            'email' => 'developer@gmail.com',
-            'password' => Hash::make('123456789'),
-            'email_verified_at' => now(),
-            'role' => LbsConstants::MEMBER_ROLE,
-            'contact' => null,
-            'avatar' => null,
-            'url' => null,
-            'remember_token' => Str::random(30),
-        ]);
+        // DB::table('lbs_members')->insert([
+        //     'first_name' => 'super',
+        //     'last_name' => 'admin',
+        //     'username' => 'administrator',
+        //     'display_name' => 'administrator',
+        //     'email' => 'developer@gmail.com',
+        //     'password' => Hash::make('123456789'),
+        //     'email_verified_at' => now(),
+        //     'role' => LbsConstants::MEMBER_ROLE,
+        //     'contact' => null,
+        //     'avatar' => null,
+        //     'url' => null,
+        //     'remember_token' => Str::random(30),
+        // ]);
     }
 }
