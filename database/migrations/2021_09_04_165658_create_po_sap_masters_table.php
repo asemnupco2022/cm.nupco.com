@@ -53,8 +53,11 @@ class CreatePoSapMastersTable extends Migration
            $table->string("gr_quantity")->nullable();
            $table->string("gr_amount")->nullable();
            $table->float("supply_ratio")->nullable();
+           $table->string("uniue_line")->unique()->index();
+           $table->string("uniue_line_date")->unique()->index();
            $table->string("supplier_comment")->nullable();
            $table->string("uniue_hash")->nullable();
+           $table->enum("notified",[0,1])->default(0)->comment('0 = no, 1 = yes');
            $table->enum('execution_done',['init','20','15', '5', '0','finish'])->default('init');
            $table->text('meta')->nullable();
            $table->text('json_data')->nullable();

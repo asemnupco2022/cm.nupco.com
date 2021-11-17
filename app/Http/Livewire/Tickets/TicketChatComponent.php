@@ -119,7 +119,7 @@ class TicketChatComponent extends Component
             "contract_team_comment" =>$contract_team_comment,
             "attachment_info"=>[
                 "original_file_name" => $fileName,
-                "file_path"=>$file,
+                "file_path"=>URL($file),
                 ],
         ];
        $response = Http::get($url, $send);

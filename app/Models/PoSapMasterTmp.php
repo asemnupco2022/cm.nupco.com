@@ -17,6 +17,8 @@ class PoSapMasterTmp extends Model
         "unique_hash",
         "execution_done",
         "supplier_comment",
+        "notified",
+        "uniue_line",
         "meta",
         "json_data",
         "status",

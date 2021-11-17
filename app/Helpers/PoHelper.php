@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use PDF;
 use Exporter;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -192,10 +193,9 @@ class PoHelper
 
     public static function sapMasterTmp($requests, $po_number, $po_item)
     {
-        $update =PoSapMasterTmp::where('po_number',$po_number )->where('po_item',$po_item )->first();
+        $update =PoSapMasterTmp::where('uniue_line',$po_number.'_'.$po_item)->first();
 
         if(! $update){
-
             $update = new PoSapMasterTmp();
             $update->po_number=$po_number;
             $update->po_item=$po_item;
@@ -225,6 +225,12 @@ class PoHelper
         return $num;
     }
 
-  
+
+    public static function createLogChennel($fileNae)
+    {
+        Config::set('logging.channels.custom_chennel.path', storage_path('logs').'/'.$fileNae);
+    }
+
+
 
 }

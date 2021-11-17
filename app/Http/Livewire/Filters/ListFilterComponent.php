@@ -57,10 +57,16 @@ class ListFilterComponent extends Component
         }
     }
 
-    public function editUsersTemplate($value)
+    public function editUsersTemplate($value, $template_for_table)
     {
-        $this->emit('open-edit-user-search-template',$value);
-        $this->dispatchBrowserEvent('open-edit-user-search-template');
+        if($template_for_table == LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM){
+            $this->emit('advance-sap-filter-create-edit',$value);
+            $this->dispatchBrowserEvent('advance-sap-filter-create-edit');
+        }else{
+            $this->emit('open-edit-user-search-template',$value);
+            $this->dispatchBrowserEvent('open-edit-user-search-template');
+        }
+
 
     }
 
@@ -104,7 +110,7 @@ class ListFilterComponent extends Component
 
             if ($statusType ==LbsConstants::STATUS_DELETED){
                 $findModel->deleted_at = Carbon::now();
-                $findModel->save();
+                $findModel->delete();
                 return $this->emitNotifications('deleted successfully','success');
             }
             else

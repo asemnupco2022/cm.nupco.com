@@ -56,7 +56,7 @@
                         </div>
 
                         <div class="col-sm-2">
-                            <div class="input-group input-group-sm"">
+                            <div class="input-group input-group-sm">
                                 <input type="text" name="table_search" class="form-control float-right" title="Search String"
                                        placeholder="Search Template" wire:model.debounce.500ms="searchable_col_val">
                                 <div class="input-group-append">
@@ -71,7 +71,8 @@
                             <button type="button" class="btn btn-primary btn-sm flat btn-sm outline_org_btn" data-toggle="modal" data-target="#modal-primary">
                                 Select Columns
                             </button>
-                            <button class="btn btn-sm btn-success float-right flat fill_org_btn" data-toggle="modal" data-target="#select_table_to_create_filter"><i class="fas fa-plus"></i>  Create Filter</button>
+                            {{-- <button class="btn btn-sm btn-success float-right flat fill_org_btn" data-toggle="modal" data-target="#select_table_to_create_filter"><i class="fas fa-plus"></i>  Create Filter</button> --}}
+                            <button class="btn btn-sm btn-success float-right flat fill_org_btn" data-toggle="modal" data-target="#advance_create_filter"><i class="fas fa-plus"></i>  SAP Filter</button>
                         </div>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'query' )==false?'hide':''}}" >{!! $collection->json_to_string !!} </td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'status' )==false?'hide':''}}" >{{$collection->status}}</td>
                                     <td>
-                                        <i class="fas fa-edit" style="cursor:pointer" title="edit" wire:click="editUsersTemplate({{$collection->id}})"></i>
+                                        <i class="fas fa-edit" style="cursor:pointer" title="edit" wire:click="editUsersTemplate({{$collection->id}},'{{$collection->template_for_table}}')"></i>
 
 {{--                                        <i class="fas fa-trash" style="cursor:pointer" title="delete" wire:click="updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)" onclick="confirm_before_delete({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)"></i>--}}
                                         <i class="fas fa-trash" style="cursor:pointer" title="delete" onclick="confirm_before_delete()"></i>
@@ -238,6 +239,20 @@
     </div>
     <!-- /.modal -->
 
+
+    <div class="modal fade"  id="advance_create_filter" >
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @livewire('filters.advance-filter-component')
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
     {{--    ============Extra Large Model=========--}}
 
 
@@ -280,6 +295,10 @@
 
             window.addEventListener('open-edit-user-search-template', event => {
                 $('#edit_model').modal('show');
+            });
+
+            window.addEventListener('advance-sap-filter-create-edit', event => {
+                $('#advance_create_filter').modal('show');
             });
 
             document.addEventListener('livewire:load', function () {

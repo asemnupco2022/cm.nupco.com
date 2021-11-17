@@ -141,6 +141,9 @@
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-filter-sap-po">
                                 <i class="fas fa-filter"></i>
                               </button>
+                              <button type="submit" class="btn btn-warning btn-sm flat btn-sm"  title="Reset Current Filter" wire:click="search_reset">
+                                <i class="fas fa-sync"></i>
+                            </button>
 
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
                                 DOWNLOAD PDF
@@ -333,7 +336,8 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
-                    @livewire('po.user-filters-component',['columns'=>$columns,'template_for_table'=>$tableType])
+                    {{-- @livewire('po.user-filters-component',['columns'=>$columns,'template_for_table'=>$tableType]) --}}
+                    @livewire('filters.advance-filter-component')
                 </div>
                 <div class="modal-footer justify-content-between">
 

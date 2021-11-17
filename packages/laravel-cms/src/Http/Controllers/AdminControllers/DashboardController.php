@@ -2,6 +2,7 @@
 
 namespace rifrocket\LaravelCms\Http\Controllers\AdminControllers;
 
+use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoImportScheduler;
 use App\Models\PoSapMaster;
@@ -18,7 +19,9 @@ use App\Jobs\Po\FilterSap;
 use App\Jobs\Po\MigrateSap;
 use App\Jobs\Po\NotifySap;
 use App\Models\PoSapMasterScheduler;
+use App\Models\PoSapMasterTmp;
 use App\Models\SupplierCommentTypes;
+use Illuminate\Support\Facades\Log;
 use Importer;
 use rifrocket\LaravelCms\Models\LbsMember;
 use Spatie\Permission\Models\Permission;
@@ -33,6 +36,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+        // dd();
     //    dd( SupplierCommentTypes::supplierCommets());
 
         // $fiveStar = PoSapMaster::orderBy('vendor_code', 'ASC')->Saptmp('تم التوريد (يجب ارفاق مذكرة الاستلام)');
@@ -40,7 +44,7 @@ class DashboardController extends Controller
         // dd($fiveStar->toSql());
 //        Carbon::parse('30/05/2021')->format('Y-m-d');
     //    Permission::create(['name' => 'lbs-permission-supplier-comments','display_name'=>'Access To Supplier Comments']);
-    return redirect()->route('web.route.dashboard.summary');
+        return redirect()->route('web.route.dashboard.summary');
     }
 
 
@@ -97,7 +101,7 @@ class DashboardController extends Controller
         $total_files=0;
         $total_records=0;
 
-        $parts = (array_chunk($baseFile, 5000));
+        $parts = (array_chunk($baseFile, 50000));
 
         $partPath='uploads/sap_parts/test_parts/';
 
@@ -142,10 +146,18 @@ class DashboardController extends Controller
             }
         }
 
+        return '(importPO complete)';
+
     }
 
     protected function storeInfo($row){
 
+        $uniqueLine= (int)$row[2].'_'.(int)$row[3];
+        if(PoSapMaster::where('uniue_line',$uniqueLine)->where('uniue_line_date',$uniqueLine.'_'.Carbon::now()->format('Y_m_d'))->first()){
+            PoHelper::createLogChennel('import-sap-job.log');
+           return  Log::channel('custom_chennel')->info("record-already-exist",[$uniqueLine]);
+
+        }
         $supplyRatio= ((int)Str::replace(',', '', $row[35]) / (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
 
@@ -185,11 +197,33 @@ class DashboardController extends Controller
             "old_po_item"=>$row[34],
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
-            "supply_ratio"=> $supplyRatio
+            "supply_ratio"=> $supplyRatio,
+            "uniue_line"=>$uniqueLine,
+            "uniue_line_date"=>$uniqueLine.'_'.Carbon::now()->format('Y_m_d')
         ];
 
+        try {
+            PoSapMaster::create($insertable);
 
-        PoSapMaster::create($insertable);
+            if(! PoSapMasterTmp::where('uniue_line',$uniqueLine)->exists()){
+
+                $insertable=[
+
+                    "table_type"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
+                    "po_number"=>(int)$row[2],
+                    "po_item"=>(int)$row[3],
+                    "uniue_line"=>$uniqueLine,
+                ];
+                PoSapMasterTmp::create($insertable);
+            }
+            
+
+
+        } catch (\Throwable $th) {
+
+            PoHelper::createLogChennel('import-sap-job.log');
+            Log::info("import-sap-job",[$th->getMessage()]);
+        }
 
     }
 

@@ -103,6 +103,8 @@ class PoSapMaster extends Model
         "gr_quantity",
         "gr_amount",
         "supply_ratio",
+        "uniue_line",
+        "uniue_line_date",
         "uniue_hash",
         "supplier_comment",
     ];

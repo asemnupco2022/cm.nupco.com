@@ -35,6 +35,13 @@ return [
     */
 
     'channels' => [
+
+        'custom_chennel' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/laravel.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

@@ -203,7 +203,7 @@ class SapLineMasterComponent extends Component
     {
         if ($value)
         {
-            $this->selectedPo = $this->searchEngine()->pluck('id')->toArray();
+            $this->selectedPo = $this->searchEngineForAll()->pluck('id')->toArray();
             $this->selectedPo =   array_fill_keys($this->selectedPo, true);
         }
         else
@@ -326,7 +326,10 @@ class SapLineMasterComponent extends Component
         $this->mat_description = [];
         $this->cust_gen_code = [];
         $this->vendor_name_en = [];
+        $this->supplier_comment = [];
     }
+
+
 
     public function mount()
     {
@@ -343,6 +346,34 @@ class SapLineMasterComponent extends Component
     public function search_enter()
     {
         $this->searchEngine();
+    }
+
+
+    public function searchEngineForAll()
+    {
+        $this->dispatchBrowserEvent('close-edit-vendor-comment');
+        $query=PoSapMaster::orderBy('vendor_code', 'ASC');
+
+        if ($this->json_data and !empty($this->json_data)){
+            $searchableItems=json_decode($this->json_data, true);
+            if ($searchableItems and !empty($searchableItems)){
+                $query = PoSapMaster::orderBy('vendor_code', 'ASC');
+                foreach ($searchableItems as $key => $searchableItem){
+                    $operator=$searchableItem['queryOpr'];
+                    $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
+                }
+                return  $query->get();
+            }
+        }
+
+        if (!empty($this->searchable_col) and !empty($this->searchable_col_val) and !empty($this->searchable_operator)){
+            $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
+        }
+        $query = $this->hitSearchInt($query);
+        // dd($query->toSql());
+        // dd($this->counter=$query->get()->count());
+        return $query->get();
+
     }
 
 

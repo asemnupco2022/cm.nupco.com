@@ -2,6 +2,7 @@
 
 namespace App\Jobs\Import;
 
+use App\Helpers\PoHelper;
 use App\Models\PoImportScheduler;
 use App\Models\PoSapMaster;
 use Carbon\Carbon;
@@ -12,6 +13,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class SapImportJob implements ShouldQueue
@@ -81,7 +83,13 @@ class SapImportJob implements ShouldQueue
     }
 
     protected function storeInfo($row){
+        $uniqueLine= (int)$row[2].'_'.(int)$row[3].'_'.Carbon::now()->format('Y_m_d');
+        if(PoSapMaster::where('uniue_line',$uniqueLine)->first()){
 
+            PoHelper::createLogChennel('import-sap-job.log');
+           return  Log::channel('custom_chennel')->info("record-already-exist",[$uniqueLine]);
+
+        }
         $supplyRatio= ((int)Str::replace(',', '', $row[35]) / (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
 
@@ -121,11 +129,18 @@ class SapImportJob implements ShouldQueue
             "old_po_item"=>$row[34],
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
-            "supply_ratio"=> $supplyRatio
+            "supply_ratio"=> $supplyRatio,
+            "uniue_line"=>$uniqueLine
         ];
 
+        try {
+            PoSapMaster::create($insertable);
+        } catch (\Throwable $th) {
 
-        PoSapMaster::create($insertable);
+            PoHelper::createLogChennel('import-sap-job.log');
+            Log::info("import-sap-job",[$th->getMessage()]);
+        }
+
 
     }
 }

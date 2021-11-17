@@ -1,5 +1,11 @@
 <div>
 
+    <div class="row"><div class="col-12">
+        <div class="form-group">
+            <input type="title" class="form-control"  placeholder="templateName" wire:model.defer="templateName" >
+            @error('templateName') <span class="error">{{ $message }}</span> @enderror
+          </div>
+    </div></div>
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
@@ -117,21 +123,13 @@
           <input type="title" class="form-control"  placeholder="Supply Ratio"  wire:model.defer="supply_ratio.from" >
         </div>
       </div>
-
     </div>
-
 
     <div class="row">
         <div class="col-md-12 justify-center">
-
-            <button type="button" class="btn btn-success btn-sm flat btn-sm float-right" wire:click="search_enter" >
-                Check Now
+            <button type="button" class="btn btn-success btn-sm flat btn-sm float-right" wire:click="saveTemplateInRepo" >
+                Save Filter
             </button>
-
-            {{-- <button type="submit" class="btn btn-warning btn-sm flat btn-sm"  title="Reset Current Filter" wire:click="search_reset">
-                <i class="fas fa-sync"></i>
-            </button> --}}
-
         </div>
       </div>
 
