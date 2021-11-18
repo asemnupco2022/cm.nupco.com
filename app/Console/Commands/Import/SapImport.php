@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -117,7 +116,7 @@ class SapImport extends Command
         $path = ($paths.'*.csv');
         $global = glob($path);
         natsort($global);
-        $jobs=[];
+
         foreach ($global as $globalKey => $file) {
 
             $fileOrigin=1;
@@ -125,13 +124,12 @@ class SapImport extends Command
                 $fileOrigin= explode('_',basename($file, '.csv'));
                 $fileOrigin=((int)end($fileOrigin));
             }
-            $jobs[] = new SapImportJob($file,$insert->id,$fileOrigin,$globalKey);
-            // dispatch(new SapImportJob($file,$insert->id,$fileOrigin,$globalKey));
+
+            dispatch(new SapImportJob($file,$insert->id,$fileOrigin,$globalKey));
         }
         // Artisan::call('lbs:fetch-vendors');
-        // dispatch(new FetchVendorJob());
-        $jobs[] = new FetchVendorJob();
-        Bus::chain($jobs)->onQueue('sap-import-job')->dispatch();
+        dispatch(new FetchVendorJob());
+
         return 1;
     }
 
