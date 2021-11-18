@@ -56,7 +56,6 @@ class FetchVendorJob implements ShouldQueue
         //
         $fullDiff = array_unique(array_diff($sapVendors, $currentVendors));
         if(empty( $fullDiff)){
-            dd($fullDiff);
             return 0;
         }
         $url=env('HOS_API_BASE').'/HOS_S4/api/get-vendor-master';
