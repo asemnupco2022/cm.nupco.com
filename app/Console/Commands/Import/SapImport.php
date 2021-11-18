@@ -108,7 +108,7 @@ class SapImport extends Command
         $insert->end_time=null;
         $insert->save();
 
-        Artisan::call('backup:run --only-db');
+        // Artisan::call('backup:run --only-db');
         DB::table('po_sap_masters')->truncate();
 
 
