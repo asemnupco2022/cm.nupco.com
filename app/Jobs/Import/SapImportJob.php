@@ -96,8 +96,8 @@ class SapImportJob implements ShouldQueue
 
             "document_type"=>$row[0],
             "document_type_desc"=>$row[1],
-            "po_number"=>ltrim($row[2], "0"),
-            "po_item"=>ltrim($row[3], "0"),
+            "po_number"=>(int)$row[2],
+            "po_item"=>(int)$row[3],
             "material_number"=>$row[4],
             "mat_description"=>$row[5],
             "po_created_on"=>$row[6],
@@ -108,7 +108,7 @@ class SapImportJob implements ShouldQueue
             "customer_name"=>$row[11],
             "tender_no"=>$row[12],
             "tender_desc"=>$row[13],
-            "vendor_code"=>$row[14],
+            "vendor_code"=>ltrim($row[14], "0"),
             "vendor_name_en"=>$row[15],
             "vendor_name_er"=>$row[16],
             "plant"=>$row[17],
@@ -143,8 +143,8 @@ class SapImportJob implements ShouldQueue
                 $insertable=[
 
                     "table_type"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
-                    "po_number"=>ltrim($row[2], "0"),
-                    "po_item"=>ltrim($row[3], "0"),
+                    "po_number"=>(int)$row[2],
+                    "po_item"=>(int)$row[3],
                     "uniue_line"=>$uniqueLine,
                 ];
                 PoSapMasterTmp::create($insertable);
