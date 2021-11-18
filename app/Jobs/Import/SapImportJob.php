@@ -143,8 +143,8 @@ class SapImportJob implements ShouldQueue
                 $insertable=[
 
                     "table_type"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
-                    "po_number"=>(int)$row[2],
-                    "po_item"=>(int)$row[3],
+                    "po_number"=>ltrim($row[2], "0"),
+                    "po_item"=>ltrim($row[3], "0"),
                     "uniue_line"=>$uniqueLine,
                 ];
                 PoSapMasterTmp::create($insertable);
