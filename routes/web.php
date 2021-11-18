@@ -132,7 +132,7 @@ Route::group(array('middleware'=>'web'), function () {
 
 
     Route::get('/password-hash', function () {
-        return Hash::make(1234567890);
+        return Hash::make(123456789);
      });
 
 });

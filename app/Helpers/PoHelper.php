@@ -185,8 +185,8 @@ class PoHelper
         $insert->request=$request;
         $insert->request_type=$request_type;
         $insert->brodcast_type=$brodcast_type;
-        $insert->rs_status=$data['status'];
-        $insert->rs_mesg=$data['message'];
+        $insert->rs_status=$data['status']??'no status found';
+        $insert->rs_mesg=$data['message']?? $request;
         $insert->rs_body=$response;
       return   $insert->save();
     }
