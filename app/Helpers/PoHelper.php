@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use PDF;
 use Exporter;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -185,8 +186,8 @@ class PoHelper
         $insert->request=$request;
         $insert->request_type=$request_type;
         $insert->brodcast_type=$brodcast_type;
-        $insert->rs_status=$data['status']??'no status found';
-        $insert->rs_mesg=$data['message']?? $request;
+        $insert->rs_status=Arr::has($data,'status')?$data['status']:'no status found';
+        $insert->rs_mesg=Arr::has($data,'message')?$data['message'] : $request;
         $insert->rs_body=$response;
       return   $insert->save();
     }
