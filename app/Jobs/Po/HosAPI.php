@@ -104,7 +104,8 @@ class HosAPI implements ShouldQueue
                 Log::info('update sap hash for'.$poItemCol['id'],[$result]);
 
                 $saptmp=[
-                    'unique_hash'=>$unique_hash
+                    'unique_hash'=>$unique_hash,
+                    'notified'=>1,
                 ];
                 $tmpResult=PoHelper::sapMasterTmp($saptmp,$poItemCol['po_number'], $poItemCol['po_item']);
                 Log::info('update sap tmp record'.$poItemCol['id'],[$tmpResult]);

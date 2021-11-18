@@ -122,7 +122,7 @@ class PoSapMaster extends Model
 
     public function vendorInfo()
     {
-      return  $this->belongsTo(LbsMember::class, 'vendor_code', 'vendor_code');
+      return  $this->belongsTo(LbsMember::class,  'vendor_code', 'vendor_code');
     }
 
     public function staffInfo()
@@ -142,5 +142,10 @@ class PoSapMaster extends Model
                     }
                 });
 
+    }
+
+    public function sapMasterTmp()
+    {
+       return $this->hasOne(poSapMasterTmp::class, 'uniue_line', 'uniue_line');
     }
 }

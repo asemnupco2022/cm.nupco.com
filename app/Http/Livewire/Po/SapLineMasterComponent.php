@@ -250,7 +250,7 @@ class SapLineMasterComponent extends Component
         $this->baseInfo=PoSapMaster::find($collections[0]->id);
 
         if (!$this->baseInfo->vendorInfo ){
-            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Vendor's Info Not Found, for vendor Code: ".$this->baseInfo->vendor_code]);
+            return $this->dispatchBrowserEvent('jq-confirm-alert',["message"=>"Vendor's Info Not Found, for vendor Code: ".ltrim($this->baseInfo->vendor_code, "0")]);
         }
 
         $to=$this->baseInfo->vendorInfo->email;

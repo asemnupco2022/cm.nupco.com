@@ -24,4 +24,9 @@ class PoSapMasterTmp extends Model
         "status",
         "suspendReason",
     ];
+
+    public function sapMasterTmp()
+    {
+       return $this->belongsTo(PoSapMaster::class, 'uniue_line', 'uniue_line');
+    }
 }

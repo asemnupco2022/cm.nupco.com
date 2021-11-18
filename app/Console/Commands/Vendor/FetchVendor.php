@@ -88,7 +88,7 @@ class FetchVendor extends Command
                     continue;
                 }
 
-                $insert->vendor_code=$row["vendor_no"];
+                $insert->vendor_code=ltrim($row["vendor_no"], "0");
                 $insert->first_name=$row["en_name"];
                 $insert->last_name=$row["ar_name"];
                 $insert->username=$row["en_name"];
