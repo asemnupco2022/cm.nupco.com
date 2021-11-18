@@ -10,6 +10,7 @@ use App\Http\Controllers\Staffs\StaffController;
 use App\Http\Controllers\TicketManagerController;
 use App\Http\Controllers\Vendors\VendorController;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use rifrocket\LaravelCms\Http\Controllers\AdminControllers\DashboardController;
 
@@ -24,9 +25,7 @@ use rifrocket\LaravelCms\Http\Controllers\AdminControllers\DashboardController;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
 
 Route::get('/import-po',[DashboardController::class,'importPO'])->name('web.route.po.import');
 Route::get('/read-po',[DashboardController::class,'readPO'])->name('web.route.po.read');
@@ -132,7 +131,9 @@ Route::group(array('middleware'=>'web'), function () {
     });
 
 
-
+    Route::get('/password-hash', function () {
+        return Hash::make(1234567890);
+     });
 
 });
 
