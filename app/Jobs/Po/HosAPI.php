@@ -93,22 +93,28 @@ class HosAPI implements ShouldQueue
                 ];
 
 
-                Log::info('whaterver sending',$sendable);
-                $response = Http::get($this->hosUrl,$sendable );
-                Log::info('HOS-API-POST-REQUEST',[$response]);
+                try {
 
-               $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
-                Log::info('HOS-API-LOG',[$hosLog]);
 
-                $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
-                Log::info('update sap hash for'.$poItemCol['id'],[$result]);
+                    $response = Http::get($this->hosUrl,$sendable );
+                    Log::info('HOS-API-POST-REQUEST',[$response]);
 
-                $saptmp=[
-                    'unique_hash'=>$unique_hash,
-                    'notified'=>1,
-                ];
-                $tmpResult=PoHelper::sapMasterTmp($saptmp,$poItemCol['po_number'], $poItemCol['po_item']);
-                Log::info('update sap tmp record'.$poItemCol['id'],[$tmpResult]);
+                    $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
+                    Log::info('HOS-API-LOG',[$hosLog]);
+
+                    $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
+                    Log::info('update sap hash for'.$poItemCol['id'],[$result]);
+
+                    $saptmp=[
+                        'unique_hash'=>$unique_hash,
+                        'notified'=>'yes',
+                    ];
+                    $tmpResult=PoHelper::sapMasterTmp($saptmp,$poItemCol['po_number'], $poItemCol['po_item']);
+                    Log::info('update sap tmp record'.$poItemCol['id'],[$tmpResult]);
+                } catch (\Throwable $th) {
+                    //throw $th;
+                }
+
             }
         }
     }

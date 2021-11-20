@@ -185,6 +185,8 @@
                                         <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model.defer="selectedPo.{{$collection->id}}">
                                     </div>
                                 </td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'notified' )==false?'hide':''}}" >{{$collection->notified}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'asn' )==false?'hide':''}}" >{{$collection->asn}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type_desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_number' )==false?'hide':''}}" >{{$collection->po_number}}</td>

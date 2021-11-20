@@ -21,6 +21,8 @@ class PoSapMaster extends Model
 
     const CONS_COLUMNS = [
 
+            "notified"=>true,
+            "asn"=>true,
             "document_type"=>true,
             "document_type_desc"=>true,
             "po_number"=>true,
@@ -105,6 +107,8 @@ class PoSapMaster extends Model
         "supply_ratio",
         "uniue_line",
         "uniue_line_date",
+        "notified",
+        "asn",
         "uniue_hash",
         "supplier_comment",
     ];

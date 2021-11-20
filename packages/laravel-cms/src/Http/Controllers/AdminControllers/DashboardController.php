@@ -37,7 +37,14 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        // dd();
+        // dd(PoSapMasterTmp::where('uniue_line','4500013398_1390')->first());
+
+        // $saptmp=[
+        //     'unique_hash'=>'4234234324234ss3',
+        //     'notified'=>1,
+        // ];
+        // $tmpResult=PoHelper::sapMasterTmp($saptmp,'4500013398', '1390');
+        // dd($tmpResult);
     //    dd( SupplierCommentTypes::supplierCommets());
 
         // $fiveStar = PoSapMaster::orderBy('vendor_code', 'ASC')->Saptmp('تم التوريد (يجب ارفاق مذكرة الاستلام)');
@@ -152,7 +159,6 @@ class DashboardController extends Controller
     }
 
     protected function storeInfo($row){
-
         $uniqueLine= (int)$row[2].'_'.(int)$row[3];
         if(PoSapMaster::where('uniue_line',$uniqueLine)->where('uniue_line_date',$uniqueLine.'_'.Carbon::now()->format('Y_m_d'))->first()){
             PoHelper::createLogChennel('import-sap-job.log');
@@ -176,7 +182,7 @@ class DashboardController extends Controller
             "customer_name"=>$row[11],
             "tender_no"=>$row[12],
             "tender_desc"=>$row[13],
-            "vendor_code"=>$row[14],
+            "vendor_code"=>ltrim($row[14], "0"),
             "vendor_name_en"=>$row[15],
             "vendor_name_er"=>$row[16],
             "plant"=>$row[17],
@@ -225,7 +231,6 @@ class DashboardController extends Controller
             PoHelper::createLogChennel('import-sap-job.log');
             Log::info("import-sap-job",[$th->getMessage()]);
         }
-
     }
 
 
