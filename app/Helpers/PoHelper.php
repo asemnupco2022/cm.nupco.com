@@ -13,6 +13,7 @@ use App\Models\PoSapMaster;
 use App\Models\PoSapMasterTmp;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use PDF;
@@ -195,15 +196,18 @@ class PoHelper
     public static function sapMasterTmp($requests, $po_number, $po_item)
     {
         $update =PoSapMasterTmp::where('uniue_line',$po_number.'_'.$po_item)->first();
+        $sapMasterUpdate =PoSapMaster::where('uniue_line',$po_number.'_'.$po_item)->where('uniue_line_date',$po_number.'_'.$po_item.'_'.Carbon::now()->format('Y_m-d'))->first();
 
         if(! $update){
             $update = new PoSapMasterTmp();
             $update->po_number=$po_number;
-            $update->po_item=$po_item;
+            $update->po_item=$po_item;  
         }
         foreach ($requests as $key => $value) {
             $update->{$key} = $value;
+            $sapMasterUpdate->{$key} = $value;
         }
+        $sapMasterUpdate->save();
        return $update->save();
     }
 

@@ -27,7 +27,8 @@
         title="Inline Frame Example"
         width="100%"
         height="500px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiYjk5ODZkM2YtMjIyYy00ZDkyLWE1YmItNTlmOTlkYjk5YzQ3IiwidCI6IjE3OTU5ZDQzLWVlNjAtNGI5NC1hNTQ5LWJlMzIzZWIwZjQzNiIsImMiOjl9">
+        frameborder="0" allowfullscreen
+        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Summary%20Dashboard?rs:embed=true">
 </iframe>
 @endif
 
@@ -36,7 +37,8 @@
         title="Inline Frame Example"
         width="100%"
         height="500px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiMTg0YWJiN2EtZGFiMy00ODMxLThjNDUtNGZkY2M3ZWZiOWVlIiwidCI6IjE3OTU5ZDQzLWVlNjAtNGI5NC1hNTQ5LWJlMzIzZWIwZjQzNiIsImMiOjl9">
+        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Suppliers%20Performance?rs:embed=true">
+
 </iframe>
 @endif
 
@@ -46,7 +48,7 @@
         title="Inline Frame Example"
         width="100%"
         height="500px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiMzdlMGYzYjctYzZlNS00MmRmLWJkMjQtODg4ZTQ3OTU1M2IxIiwidCI6IjE3OTU5ZDQzLWVlNjAtNGI5NC1hNTQ5LWJlMzIzZWIwZjQzNiIsImMiOjl9">
+        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Tenders?rs:embed=true">
 </iframe>
 @endif
 
@@ -56,7 +58,7 @@
         title="Inline Frame Example"
         width="100%"
         height="500px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiNTJiZGQxZjEtMTE2OS00NjU2LThmOGEtMDU1YjJmYTg1MThhIiwidCI6IjE3OTU5ZDQzLWVlNjAtNGI5NC1hNTQ5LWJlMzIzZWIwZjQzNiIsImMiOjl9">
+        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Progress?rs:embed=true">
 </iframe>
 @endif
 
@@ -66,7 +68,7 @@
         title="Inline Frame Example"
         width="100%"
         height="500px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiODgyNWVjNWEtMzgwMi00NzIwLThmNTEtY2MwZWZmODlmM2ZkIiwidCI6IjE3OTU5ZDQzLWVlNjAtNGI5NC1hNTQ5LWJlMzIzZWIwZjQzNiIsImMiOjl9">
+        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Over%20Due?rs:embed=true">
 </iframe>
 @endif
 
@@ -76,8 +78,28 @@
         title="Inline Frame Example"
         width="100%"
         height="500px"
-        src="https://app.powerbi.com/view?r=eyJrIjoiOWExMmE0ZGYtYTNjYy00YjNmLThkNzItYTI2MDk0MjA3YWVkIiwidCI6IjE3OTU5ZDQzLWVlNjAtNGI5NC1hNTQ5LWJlMzIzZWIwZjQzNiIsImMiOjl9">
+        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Contracts%20Expediting%20Dashboard?rs:embed=true">
 </iframe>
 @endif
 
+
+
+<script type="text/javascript">
+    var iframeURL = $ifram_url;
+    var iframeID = 'power_bi_ifram';
+
+    function loadIframe(){
+        //pre-authenticate
+        var req = new XMLHttpRequest();
+        req.open("POST",this.iframeURL, false, "cmadmin@nupco.com", "Nup%8090c"); //use POST to safely send combination
+        req.send(null); //here you can pass extra parameters through
+
+        //setiFrame's SRC attribute
+        var iFrameWin = document.getElementById(this.iframeID);
+        iFrameWin.src = this.iframeURL + "?extraParameters=true";
+    }
+
+    //onload, call loadIframe() function
+    loadIframe();
+</script>
 

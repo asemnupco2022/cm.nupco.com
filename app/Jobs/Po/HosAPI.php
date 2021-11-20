@@ -96,11 +96,11 @@ class HosAPI implements ShouldQueue
                 try {
 
 
-                    $response = Http::get($this->hosUrl,$sendable );
-                    Log::info('HOS-API-POST-REQUEST',[$response]);
+                    // $response = Http::get($this->hosUrl,$sendable );
+                    // Log::info('HOS-API-POST-REQUEST',[$response]);
 
-                    $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
-                    Log::info('HOS-API-LOG',[$hosLog]);
+                    // $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
+                    // Log::info('HOS-API-LOG',[$hosLog]);
 
                     $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
                     Log::info('update sap hash for'.$poItemCol['id'],[$result]);

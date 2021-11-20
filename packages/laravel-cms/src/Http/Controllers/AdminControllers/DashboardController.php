@@ -55,48 +55,50 @@ class DashboardController extends Controller
         return redirect()->route('web.route.dashboard.summary');
     }
 
-
-
-
     public function summary()
     {
         $summary=true;
-        return view('LbsViews::admin_views.views.dashboard',compact('summary'));
+        $ifram_url='https://nupcobi.nupco.com/Reports/powerbi/Contract/Summary%20Dashboard';
+        return view('LbsViews::admin_views.views.dashboard',compact('summary','ifram_url'));
     }
 
     public function suppliers_performance()
     {
         $suppliers_performance=true;
-        return view('LbsViews::admin_views.views.dashboard',compact('suppliers_performance'));
+        $ifram_url='https://nupcobi.nupco.com/Reports/powerbi/Contract/Suppliers%20Performance';
+        return view('LbsViews::admin_views.views.dashboard',compact('suppliers_performance','ifram_url'));
     }
 
 
     public function tenders()
     {
          $tenders=true;
-        return view('LbsViews::admin_views.views.dashboard',compact('tenders'));
+         $ifram_url='https://nupcobi.nupco.com/Reports/powerbi/Contract/Tenders';
+        return view('LbsViews::admin_views.views.dashboard',compact('tenders','ifram_url'));
     }
 
 
     public function progress()
     {
          $progress=true;
-        return view('LbsViews::admin_views.views.dashboard',compact('progress'));
+         $ifram_url='https://nupcobi.nupco.com/Reports/powerbi/Contract/Progress';
+        return view('LbsViews::admin_views.views.dashboard',compact('progress','ifram_url'));
     }
 
 
     public function over_due()
     {
          $over_due=true;
-        return view('LbsViews::admin_views.views.dashboard',compact('over_due'));
+         $ifram_url='https://nupcobi.nupco.com/Reports/powerbi/Contract/Over%20Due';
+        return view('LbsViews::admin_views.views.dashboard',compact('over_due','ifram_url'));
     }
 
     public function contracts_expediting()
     {
          $contracts_expediting=true;
-        return view('LbsViews::admin_views.views.dashboard',compact('contracts_expediting'));
+         $ifram_url='https://nupcobi.nupco.com/Reports/powerbi/Contract/Contracts%20Expediting%20Dashboard';
+        return view('LbsViews::admin_views.views.dashboard',compact('contracts_expediting','ifram_url'));
     }
-
 
     public function importPO()
     {
