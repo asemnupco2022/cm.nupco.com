@@ -26,7 +26,7 @@ class CreatePoSapMasterTmpsTable extends Migration
             $table->text('asn_json')->nullable();
             $table->enum("expediting_request",['no','new','approved','rejected','delivered','not_delivered'])->default('no');
             $table->text('expediting_json')->nullable();
-            $table->string('uniue_line')->unique()->index();
+            $table->string('unique_line')->unique()->index();
             $table->text('meta')->nullable();
             $table->text('json_data')->nullable();
             $table->enum('status',['new','active', 'deactivated', 'suspended'])->default('active');

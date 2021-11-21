@@ -105,11 +105,11 @@ class PoSapMaster extends Model
         "gr_quantity",
         "gr_amount",
         "supply_ratio",
-        "uniue_line",
-        "uniue_line_date",
+        "unique_line",
+        "unique_line_date",
         "notified",
         "asn",
-        "uniue_hash",
+        "unique_hash",
         "supplier_comment",
     ];
 
@@ -150,6 +150,6 @@ class PoSapMaster extends Model
 
     public function sapMasterTmp()
     {
-       return $this->hasOne(poSapMasterTmp::class, 'uniue_line', 'uniue_line');
+       return $this->hasOne(poSapMasterTmp::class, 'unique_line', 'unique_line');
     }
 }

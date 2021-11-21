@@ -195,8 +195,8 @@ class PoHelper
 
     public static function sapMasterTmp($requests, $po_number, $po_item)
     {
-        $update =PoSapMasterTmp::where('uniue_line',$po_number.'_'.$po_item)->first();
-        $sapMasterUpdate =PoSapMaster::where('uniue_line',$po_number.'_'.$po_item)->first();
+        $update =PoSapMasterTmp::where('unique_line',$po_number.'_'.$po_item)->first();
+        $sapMasterUpdate =PoSapMaster::where('unique_line',$po_number.'_'.$po_item)->first();
 
         if(! $update){
             $update = new PoSapMasterTmp();

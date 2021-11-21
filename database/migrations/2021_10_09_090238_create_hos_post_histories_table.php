@@ -18,7 +18,7 @@ class CreateHosPostHistoriesTable extends Migration
             $table->string('mail_unique');
             $table->string('mail_hash');
             $table->string('message_type');
-            $table->string('unique_hash');
+            $table->string('unique_hash')->unique();
             $table->string('tender_num');
             $table->string('vendor_num');
             $table->string('po_num');

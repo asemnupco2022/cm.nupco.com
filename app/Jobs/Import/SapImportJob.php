@@ -86,7 +86,7 @@ class SapImportJob implements ShouldQueue
 
     protected function storeInfo($row){
         $uniqueLine= (int)$row[2].'_'.(int)$row[3];
-        if(PoSapMaster::where('uniue_line',$uniqueLine)->where('uniue_line_date',$uniqueLine.'_'.Carbon::now()->format('Y_m_d'))->first()){
+        if(PoSapMaster::where('unique_line',$uniqueLine)->where('unique_line_date',$uniqueLine.'_'.Carbon::now()->format('Y_m_d'))->first()){
             PoHelper::createLogChennel('import-sap-job.log');
            return  Log::channel('custom_chennel')->info("record-already-exist",[$uniqueLine]);
 
@@ -131,21 +131,21 @@ class SapImportJob implements ShouldQueue
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
             "supply_ratio"=> $supplyRatio,
-            "uniue_line"=>$uniqueLine,
-            "uniue_line_date"=>$uniqueLine.'_'.Carbon::now()->format('Y_m_d')
+            "unique_line"=>$uniqueLine,
+            "unique_line_date"=>$uniqueLine.'_'.Carbon::now()->format('Y_m_d')
         ];
 
         try {
             PoSapMaster::create($insertable);
 
-            if(! PoSapMasterTmp::where('uniue_line',$uniqueLine)->exists()){
+            if(! PoSapMasterTmp::where('unique_line',$uniqueLine)->exists()){
 
                 $insertable=[
 
                     "table_type"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
                     "po_number"=>(int)$row[2],
                     "po_item"=>(int)$row[3],
-                    "uniue_line"=>$uniqueLine,
+                    "unique_line"=>$uniqueLine,
                 ];
                 PoSapMasterTmp::create($insertable);
             }

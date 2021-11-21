@@ -68,21 +68,60 @@ class HosController extends Controller
 
             Log::info('HOS-API-LOG',[$insert]);
 
-
             $supplier_comment=PoHelper::NormalizeColString($request->vendor_comment[0]);
-            $result =  PoSapMaster::where('po_number',$hosHistory->po_num)->where('po_item',$hosHistory->po_item_num)->first();
-            $result->supplier_comment=$supplier_comment;
-            $result->save();
-            Log::info('update sap supplier comment update for'.$result->id,[$result]);
 
             $saptmp=[
                 'supplier_comment'=>$supplier_comment
             ];
-            $tmpResult=PoHelper::sapMasterTmp($saptmp,$hosHistory->po_num, $hosHistory->po_item_num);
-            Log::info('update sap tmp record'.$result->id,[$tmpResult]);
+            PoHelper::sapMasterTmp($saptmp,$hosHistory->po_num, $hosHistory->po_item_num);
 
             return response()->json(['status'=>1,'message'=>'data saved successfully!']);
         }
+        return response()->json(['status'=>0,'message'=>'there is something wrong']);
+    }
+
+
+    public function HosAsnManager(Request $request)
+    {
+
+       $v = Validator::make($request->all(), [
+            'po_number' => 'required',
+            'po_item' => 'required',
+            'asn_status'=>'required',
+            'asn_json'=>'required',
+        ]);
+
+        if ($v->fails())
+        {
+            return response()->json(['success'=>false,'message'=>$v->errors()->first()]);
+        }
+        $unique_line =$request->po_number.'_'.$request->po_item;
+        if (!PoSapMaster::where('unique_line', $unique_line)->exists()){
+            return response()->json(['success'=>false,'message'=>'unique hash does not found']);
+        }
+
+        $saptmp=[
+            'asn'=>$request->asn_status,
+            'asn_json'=>$request->asn_json,
+        ];
+
+        $result = PoHelper::sapMasterTmp($saptmp,$request->po_number, $request->po_item);
+        if($result){
+
+            $insert =new HosResponseLog();
+            $insert->request="received ASN information for SAP uniqui line ".$unique_line;
+            $insert->request_type="POST";
+            $insert->brodcast_type='RECEIVED';
+            $insert->rs_status=1;
+            $insert->rs_mesg="DATA RECEIVED";
+            $insert->rs_body=json_encode($request->all());
+            $insert->save();
+            Log::info('HOS-API-LOG',[$insert]);
+            return response()->json(['status'=>1,'message'=>'ASN data saved successfully!']);
+        }
+
+        $hosLog = PoHelper::hosLogs( $request, "received ASN information for SAP uniqui line ","POST", 'RECEIVED');
+        Log::info('HOS-API-LOG',[$hosLog]);
         return response()->json(['status'=>0,'message'=>'there is something wrong']);
     }
 }

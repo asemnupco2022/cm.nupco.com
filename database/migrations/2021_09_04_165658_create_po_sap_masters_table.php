@@ -53,8 +53,8 @@ class CreatePoSapMastersTable extends Migration
            $table->string("gr_quantity")->nullable();
            $table->string("gr_amount")->nullable();
            $table->float("supply_ratio")->nullable();
-           $table->string("uniue_line")->unique()->index();
-           $table->string("uniue_line_date")->unique()->index();
+           $table->string("unique_line")->unique()->index();
+           $table->string("unique_line_date")->unique()->index();
            $table->enum("notified",['no','yes'])->default('no');
            $table->enum("asn",['no','new','approved','rejected','delivered','not_delivered'])->default('no');
            $table->text('asn_json')->nullable();

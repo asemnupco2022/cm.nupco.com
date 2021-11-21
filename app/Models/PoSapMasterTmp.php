@@ -18,7 +18,7 @@ class PoSapMasterTmp extends Model
         "execution_done",
         "supplier_comment",
         "notified",
-        "uniue_line",
+        "unique_line",
         "meta",
         "json_data",
         "status",
@@ -27,6 +27,6 @@ class PoSapMasterTmp extends Model
 
     public function sapMasterTmp()
     {
-       return $this->belongsTo(PoSapMaster::class, 'uniue_line', 'uniue_line');
+       return $this->belongsTo(PoSapMaster::class, 'unique_line', 'unique_line');
     }
 }
