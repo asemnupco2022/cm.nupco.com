@@ -357,7 +357,8 @@ class SapLineMasterComponent extends Component
         $this->userFilterTemplates = LbsUserSearchSet::NotDel()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
         $getFavFilter=LbsUserSearchSet::OnlyActive()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->where('make_fav','!=', null)->first();
 
-        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->firstOrFail();
+        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->first();
+      
         if ( $StaffColumnSet) {
             $this->columns = json_decode($StaffColumnSet->columns, true);
             // dd($this->columns);
