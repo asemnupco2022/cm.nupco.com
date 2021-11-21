@@ -60,7 +60,7 @@ class CreatePoSapMastersTable extends Migration
            $table->text('asn_json')->nullable();
            $table->enum("expediting_request",['no','new','approved','rejected','delivered','not_delivered'])->default('no');
            $table->text('expediting_json')->nullable();
-           $table->string("uniue_hash")->nullable();
+           $table->string("unique_hash")->nullable();
            $table->string("supplier_comment")->nullable();
            $table->enum('execution_done',['init','20','15', '5', '0','finish'])->default('init');
            $table->text('meta')->nullable();

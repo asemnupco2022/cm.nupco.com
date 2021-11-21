@@ -41,9 +41,9 @@ class DashboardController extends Controller
 
         // $saptmp=[
         //     'unique_hash'=>'4234234324234ss3',
-        //     'notified'=>1,
+        //     'notified'=>'yes',
         // ];
-        // $tmpResult=PoHelper::sapMasterTmp($saptmp,'4500013398', '1390');
+        // $tmpResult=PoHelper::sapMasterTmp($saptmp,'4500013398', '1250');
         // dd($tmpResult);
     //    dd( SupplierCommentTypes::supplierCommets());
 

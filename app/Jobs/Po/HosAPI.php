@@ -102,9 +102,6 @@ class HosAPI implements ShouldQueue
                     // $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
                     // Log::info('HOS-API-LOG',[$hosLog]);
 
-                    $result =  PoSapMaster::find($poItemCol['id'])->update(['uniue_hash'=>$unique_hash]);
-                    Log::info('update sap hash for'.$poItemCol['id'],[$result]);
-
                     $saptmp=[
                         'unique_hash'=>$unique_hash,
                         'notified'=>'yes',
