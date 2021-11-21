@@ -27,10 +27,11 @@ class Kernel extends ConsoleKernel
 
 
         //new import schedulers
-        $schedule->command('lbs:import-sap-po')->dailyAt('02:00'); //SAP Import and copy files
+        $schedule->command('lbs:import-sap-po')->dailyAt('01:00'); //SAP Import and copy files
+        $schedule->command('lbs:Sap-master-sync-tmp')->dailyAt('05:00'); //SAP Import and copy files
 
          //Run Notification Scheduler
-         $schedule->command('lbs:notification-scheduler')->everyMinute(); //Execute Notification Scheduler for manual-automation
+        $schedule->command('lbs:notification-scheduler')->everyMinute(); //Execute Notification Scheduler for manual-automation
         //  $schedule->command('lbs:po-scheduler-filter')->daily(); //filter data for sending notification
 
         //  $schedule->command('queue:work')->everyFourMinutes();
@@ -45,7 +46,6 @@ class Kernel extends ConsoleKernel
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
-
         require base_path('routes/console.php');
     }
 }

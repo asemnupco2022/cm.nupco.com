@@ -28,6 +28,14 @@
                 background: #fff;
             }
 
+            .ar-badge {
+            color: #fff;
+            background-color: #e37526 !important;
+            border-color: #e37526 !important;
+            box-shadow: none;
+            font-weight: 400;
+            padding: 3px;
+        }
         </style>
     @endpush
     @if(!$initSearch)
@@ -186,7 +194,7 @@
                                     </div>
                                 </td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'notified' )==false?'hide':''}}" >{{$collection->notified}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'asn' )==false?'hide':''}}" >{{$collection->asn}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type_desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_number' )==false?'hide':''}}" >{{$collection->po_number}}</td>
@@ -246,7 +254,7 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     @if($collections)
-                    <span class="right badge badge-danger row-count-badge">{{ $collections->total()}}</span>
+                    <span class=" badge badge-danger row-count-badge">{{ $collections->total()}}</span>
                     @endif
                     <ul class="pagination pagination-sm m-0 float-right">
 
@@ -286,7 +294,6 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-
                             @foreach($columns as $colKey => $column)
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" id=" {{$colKey}}" {{$column==false?'':'checked'}} wire:model="columns.{{$colKey}}">
@@ -295,8 +302,6 @@
                                     </label>
                                 </div> <br>
                             @endforeach
-
-
                         </div>
                     </div>
                 </div>
@@ -403,275 +408,45 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
-@endif
-    {{--    =====================--}}
-
-    {{--    +++++++++ PRE FILTER ++++++++++++--}}
-    @if($initSearch)
-        <div class="row" >
-            <div class="col-md-12">
-                <h3>Purchase Order (PO) Status Report</h3>
-            </div>
-            <div class="col-md-12">
-
-                <div class="card-body">
-                    <table class="table table-hover text-nowrap">
-                        <tbody>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('tender_no')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="tender_no.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="tender_no.to" >
-                                </div>
-                            </td>
-                            {{--<td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('tender_desc')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="tender_desc.from" >
-                                </div>
-                            </td>
-{{--                            <td>To</td>--}}
-{{--                            <td>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <input type="text" class="form-control"   wire:model.defer="tender_desc.to" >--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
 
 
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('po_type')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="document_type.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="document_type.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
+    <div class="modal" id="modal-asn-info">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">ASN Information   @if ($asnJson and !empty($asnJson)) <span class=" badge badge-info ar-badge">{{$asnJson->asn}}</span> @endif</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                <div class="modal-body">
+                    @if ($asnJson and $asnJson->asn_json and !empty($asnJson))
+                        <table  class="text-center">
+                            @foreach (json_decode($asnJson->asn_json) as $asnKey => $asnValue )
+                            <tr>
+                                <th>{{$asnKey}}</th>
+                                <td>{{$asnValue}}</td>
+                            </tr>
+                            @endforeach
+                        </table>
+                    @else
+                    <h4 class="text-center">NO ASN FOUND</h4>
+                    @endif
 
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('po_type_desc')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="document_type_desc.from" >
-                                </div>
-                            </td>
-{{--                            <td>To</td>--}}
-{{--                            <td>--}}
-{{--                                <div class="form-group">--}}
-{{--                                    <input type="text" class="form-control"   wire:model.defer="document_type_desc.to" >--}}
-{{--                                </div>--}}
-{{--                            </td>--}}
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('po_number')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="init_po_number.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="init_po_number.to" >
-                                </div>
-                            </td>
-                            {{--<td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('purchasing_group')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="purchasing_group.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="purchasing_group.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('purchasing_organization')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="purchasing_organization.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="purchasing_organization.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('customer_number')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="customer_no.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="customer_no.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('nupco_delivery_date')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="date" class="form-control Deliver_Date" id="Deliver_Date" data-date-format="YYYY-MM-DD" wire:model.defer="nupco_delivery_date.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="date" class="form-control Deliver_Date" id="Deliver_Date" data-date-format="YYYY-MM-DD" wire:model.defer="nupco_delivery_date.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary" ><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('po_created_on')  }}</td>
-
-                            <td>
-                                <div class="form-group">
-                                    <input type="date" class="form-control Deliver_Date" id="Deliver_Date" data-date-format="YYYY-MM-DD" wire:model.defer="po_created_on.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="date" class="form-control Deliver_Date" id="Deliver_Date" data-date-format="YYYY-MM-DD" wire:model.defer="po_created_on.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary" ><i class="fas fa-arrow-right"></i></button></td>--}}
-
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('generic_mat_code')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"  wire:model.defer="generic_mat_code.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control"   wire:model.defer="generic_mat_code.to" >
-                                </div>
-                            </td>
-                            {{-- <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('vendor_code')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="document" wire:model.defer="vendor_code.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="document"  wire:model.defer="vendor_code.to">
-                                </div>
-                            </td>
-                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('storage_location')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="Name" wire:model.defer="storage_location.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="Name" wire:model.defer="storage_location.to" >
-                                </div>
-                            </td>
-                            {{--                            <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-                        <tr>
-                            <td>{{ \App\Helpers\PoHelper::NormalizeColString('plant')  }}</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="Name" wire:model.defer="plant.from" >
-                                </div>
-                            </td>
-                            <td>To</td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="Name" wire:model.defer="plant.to" >
-                                </div>
-                            </td>
-                            {{--   <td><button type="button" class="btn btn-primary"><i class="fas fa-arrow-right"></i></button></td>--}}
-                        </tr>
-
-
-                        </tbody>
-                    </table>
                 </div>
-                <!-- /.card-body -->
-
-                <div class="card-footer">
-                    <div wire:loading>
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-primary" wire:click="initSearchFilter">Check Now</button>
-                </div>
-
-
             </div>
+            <!-- /.modal-content -->
         </div>
-    @endif
-    {{--    +++++++++ PRE FILTER ++++++++++++--}}
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 
-    {{--    =====================--}}
+
+@endif
+
+
+
 
 
         <!-- loader -->
@@ -701,6 +476,10 @@
                 $('#modal-xl').modal('hide');
             })
 
+
+            window.addEventListener('modal-asn-info-open', event => {
+                $('#modal-asn-info').modal('show');
+            })
 
             Livewire.on('update-users-filter-template', event => {
                 $('#modal-add-filter-lib').modal('hide');

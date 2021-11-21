@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Po;
 use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoSapMaster;
+use App\Models\PoSapMasterTmp;
 use App\Models\SapMasterView;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
@@ -23,6 +24,7 @@ class SapLineMasterComponent extends Component
 
     public $tableType=LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM;
     public  $counter=0;
+    public  $asnJson=[];
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -273,7 +275,19 @@ class SapLineMasterComponent extends Component
         $this->emit('open-edit-internal-comment', $poNo,$line_item,$tableType);
     }
 
+    public function show_asan_info_modal($poNo, $line_item)
+    {
+        $uniue_line=$poNo.'_'.$line_item;
+        $sapMstrTmp=PoSapMasterTmp::where('unique_line', $uniue_line)->first();
 
+        if($sapMstrTmp and !empty($sapMstrTmp)){
+            $this->asnJson=$sapMstrTmp;
+           $this->dispatchBrowserEvent('modal-asn-info-open');
+        }else{
+            return $this->emitNotifications('No ASN Fond From Po Number: '.$poNo.' and Po Item '.$line_item,'error');
+        }
+
+    }
 
 
     public function open_vendor_comment_modal($poNo,$line_item,$tableType,$hash=null)
