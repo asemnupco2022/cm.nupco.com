@@ -7,6 +7,7 @@ use App\Models\LbsUserSearchSet;
 use App\Models\PoSapMaster;
 use App\Models\PoSapMasterTmp;
 use App\Models\SapMasterView;
+use App\Models\StaffColumnSet;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
@@ -355,6 +356,36 @@ class SapLineMasterComponent extends Component
     {
         $this->userFilterTemplates = LbsUserSearchSet::NotDel()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
         $getFavFilter=LbsUserSearchSet::OnlyActive()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->where('make_fav','!=', null)->first();
+
+        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->firstOrFail();
+        if ( $StaffColumnSet) {
+            $this->columns = json_decode($StaffColumnSet->columns, true);
+            // dd($this->columns);
+        }
+    }
+
+    public function save_staff_col_set()
+    {
+        $uniue_line=$this->tableType.'_'.auth()->user()->id;
+        $attributes=[
+            'unique_line'=>$this->tableType.'_'.auth()->user()->id,
+            'user_id'=>auth()->user()->id,
+            'table_type'=>$this->tableType,
+            'columns'=>json_encode($this->columns),
+        ];
+
+        if (StaffColumnSet::where('unique_line',$uniue_line)->exists()) {
+            $result = StaffColumnSet::where('unique_line',$uniue_line)->first()->update($attributes);
+        }else{
+            $result = StaffColumnSet::create($attributes);
+        }
+
+        // dd($result);
+        if($result){
+            return $this->emitNotifications('colunm set saved' ,'success');
+        }
+        return $this->emitNotifications('There is Something Wrong','error');
+
     }
 
     public function search_enter()

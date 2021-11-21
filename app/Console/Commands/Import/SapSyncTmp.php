@@ -69,11 +69,11 @@ class SapSyncTmp extends Command
                 ]);
 
             } catch (\Throwable $th) {
-                PoHelper::createLogChennel('sync-sap-mastertmp-to-samp-master');
-                Log::info('SAP-LINE-SYNC-WITH-TMP',[$value]);
+                PoHelper::createLogChennel('sync-sap-mastertmp-to-samp-master.log');
+                Log::channel('custom_chennel')->info('SAP-LINE-SYNC-WITH-TMP',[$value]);
             }
         }
-        PoHelper::createLogChennel('sync-sap-mastertmp-to-samp-master');
-        Log::info('SAP-LINE-SYNC-WITH-TMP-FROM-'.$poSapTmp->count().'-TO-'.$counter);
+        PoHelper::createLogChennel('sync-sap-mastertmp-to-samp-master.log');
+        Log::channel('custom_chennel')->info('SAP-LINE-SYNC-WITH-TMP-FROM-'.$poSapTmp->count().'-TO-'.$counter);
     }
 }

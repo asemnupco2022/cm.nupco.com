@@ -306,6 +306,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" wire:click="save_staff_col_set">Save</button>
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
