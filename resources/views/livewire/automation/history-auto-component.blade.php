@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <div class="input-group input-group-sm" >
+                            {{-- <div class="input-group input-group-sm" >
                                 <select class="form-control float-right" title="Select Preset Filter" wire:model="getFilterTemplate">
                                     <option value="" selected disabled>Please Select Filter Template</option>
                                     @if($userFilterTemplates)
@@ -81,7 +81,7 @@
                                         <i class="fas fa-folder-plus"></i>
                                     </button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="col-sm-3 display-block automation">
@@ -91,6 +91,15 @@
                         </div>
 
                         <div class="download_btn">
+
+                        <button type="button" class="btn btn-warning btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-filter-notification-history">
+                            <i class="fas fa-filter"></i>
+                            </button>
+                            <button type="submit" class="btn btn-warning btn-sm flat btn-sm"  title="Reset Current Filter" wire:click="search_reset">
+                            <i class="fas fa-sync"></i>
+                        </button>
+
+
                         <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
                               DOWNLOAD PDF
                             </button>
@@ -155,6 +164,9 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
+                    @if($collections)
+                    <span class=" badge badge-danger row-count-badge">{{ $collections->total()}}</span>
+                    @endif
                     <ul class="pagination pagination-sm m-0 float-right">
                         @if($collections)
                             {{$collections->links()}}
@@ -198,6 +210,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" wire:click="save_staff_col_set">Save</button>
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -247,16 +260,24 @@
     <!-- /.modal -->
 
 
-
-
-    {{--    ===================--}}
-
-
-
-    {{--    ============Extra Large Model=========--}}
-
-
-    {{--    ============Extra Large Model=========--}}
+    <div class="modal" id="modal-filter-notification-history" data-backdrop="false">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Filter Notification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                <div class="modal-body">
+                    @include('livewire.automation.notification-history-filter-template')
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
 
 
     @push('scripts')
@@ -268,9 +289,6 @@
                     keyboard: false
                 })
             })
-
-
-
 
 
             Livewire.on('update-users-filter-template', event => {

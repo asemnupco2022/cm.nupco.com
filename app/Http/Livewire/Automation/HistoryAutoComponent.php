@@ -5,7 +5,9 @@ namespace App\Http\Livewire\Automation;
 use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
 use App\Models\SchedulerNotificationHistory;
+use App\Models\StaffColumnSet;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -15,6 +17,11 @@ use PDF;
 
 class HistoryAutoComponent extends Component
 {
+
+    public function emitNotifications($message, $msgType)
+    {
+        $this->emit('toast-notification-component',$message,$msgType);
+    }
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -49,6 +56,70 @@ class HistoryAutoComponent extends Component
     public $showEmailStructure=null;
 
 
+    public $broadcast_type=[];
+    public $mail_type=[];
+    public $table_type=[];
+    public $sender_name=[];
+    public $recipient_name=[];
+    public $recipient_email=[];
+    public $msg_subject=[];
+    public $last_executed_at=[];
+
+    public function hitSearchInt($query)
+    {
+
+        if (Arr::has($this->broadcast_type, ['from','to'])){
+            $query=$query->whereBetween('broadcast_type',[$this->broadcast_type['from'],$this->broadcast_type['to']]);
+        }elseif (Arr::has($this->broadcast_type, ['from'])){
+            $query=$query->where('broadcast_type',$this->broadcast_type['from']);
+        }
+
+        if (Arr::has($this->mail_type, ['from','to'])){
+            $query=$query->whereBetween('mail_type',[$this->mail_type['from'],$this->mail_type['to']]);
+        }elseif (Arr::has($this->mail_type, ['from'])){
+            $query=$query->where('mail_type',$this->mail_type['from']);
+        }
+
+        if (Arr::has($this->table_type, ['from','to'])){
+            $query=$query->whereBetween('table_type',[$this->table_type['from'],$this->table_type['to']]);
+        }elseif (Arr::has($this->table_type, ['from'])){
+            $query=$query->where('table_type',$this->table_type['from']);
+        }
+
+        if (Arr::has($this->sender_name, ['from','to'])){
+            $query=$query->whereBetween('sender_name',[$this->sender_name['from'],$this->sender_name['to']]);
+        }elseif (Arr::has($this->sender_name, ['from'])){
+            $query=$query->where('sender_name',$this->sender_name['from']);
+        }
+
+
+        if (Arr::has($this->recipient_name, ['from','to'])){
+            $query=$query->whereBetween('recipient_name',[$this->recipient_name['from'],$this->recipient_name['to']]);
+        }elseif (Arr::has($this->recipient_name, ['from'])){
+            $query=$query->where('recipient_name',$this->recipient_name['from']);
+        }
+
+        if (Arr::has($this->recipient_email, ['from','to'])){
+            $query=$query->whereBetween('recipient_email',[$this->recipient_email['from'],$this->recipient_email['to']]);
+        }elseif (Arr::has($this->recipient_email, ['from'])){
+            $query=$query->where('recipient_email',$this->recipient_email['from']);
+        }
+
+        if (Arr::has($this->msg_subject, ['from','to'])){
+            $query=$query->whereBetween('msg_subject',[$this->msg_subject['from'],$this->msg_subject['to']]);
+        }elseif (Arr::has($this->msg_subject, ['from'])){
+            $query=$query->where('msg_subject',$this->msg_subject['from']);
+        }
+
+
+        if (Arr::has($this->last_executed_at, ['from','to'])){
+            $query=$query->whereBetween('last_executed_at',[$this->last_executed_at['from'],$this->last_executed_at['to']]);
+        }elseif (Arr::has($this->last_executed_at, ['from'])){
+            $query=$query->whereDate('last_executed_at',$this->last_executed_at['from']);
+        }
+
+        return $query;
+    }
     public function updatedSelectAll($value)
     {
         if ($value)
@@ -81,6 +152,35 @@ class HistoryAutoComponent extends Component
     public function fetchBaseInfo()
     {
         $this->userFilterTemplates = LbsUserSearchSet::NotDel()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
+
+        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->first();
+        if ( $StaffColumnSet) {
+            $this->columns = json_decode($StaffColumnSet->columns, true);
+        }
+    }
+
+    public function save_staff_col_set()
+    {
+        $uniue_line=$this->tableType.'_'.auth()->user()->id;
+        $attributes=[
+            'unique_line'=>$this->tableType.'_'.auth()->user()->id,
+            'user_id'=>auth()->user()->id,
+            'table_type'=>$this->tableType,
+            'columns'=>json_encode($this->columns),
+        ];
+
+        if (StaffColumnSet::where('unique_line',$uniue_line)->exists()) {
+            $result = StaffColumnSet::where('unique_line',$uniue_line)->first()->update($attributes);
+        }else{
+            $result = StaffColumnSet::create($attributes);
+        }
+
+        // dd($result);
+        if($result){
+            return $this->emitNotifications('colunm set saved' ,'success');
+        }
+        return $this->emitNotifications('There is Something Wrong','error');
+
     }
 
     public function export_data($type)
@@ -155,6 +255,39 @@ class HistoryAutoComponent extends Component
 
     }
 
+    public function search_filter_submit()
+    {
+        $this->searchEngine();
+    }
+
+
+    public function searchEngineForAll()
+    {
+        $query=SchedulerNotificationHistory::NotDel();
+        if (!empty($this->selected_staff)){
+            $query= $query->where('user_id',$this->selected_staff);
+        }
+
+        if ($this->json_data and !empty($this->json_data)){
+            $searchableItems=json_decode($this->json_data, true);
+            if ($searchableItems and !empty($searchableItems)){
+                foreach ($searchableItems as $key => $searchableItem){
+                    $operator=$searchableItem['queryOpr'];
+                    $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
+                }
+                return  $query->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+            }
+        }
+        if ($this->searchable_operator=='LIKE'){
+            return    $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+        }else{
+            if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
+                return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+            }else{
+                return  $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+            }
+        }
+    }
 
     public function searchEngine()
     {

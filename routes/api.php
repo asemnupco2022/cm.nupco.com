@@ -20,3 +20,9 @@ use Illuminate\Support\Facades\Route;
     Route::any('vendor-response-to-line',[HosController::class,'vendorResponse'])->name('web.route.vendor.manager.list');
     Route::any('asn-status',[HosController::class,'HosAsnManager'])->name('web.route.asn.manager.list');
 });
+
+
+Route::group(['prefix'=>'nupco-customer-api'], function(){
+    Route::any('store-expedite-request',[HosController::class,'vendorResponse'])->name('web.route.vendor.manager.list');
+    Route::any('asn-status',[HosController::class,'HosAsnManager'])->name('web.route.asn.manager.list');
+});
