@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerApp\ExpediteController;
 use App\Http\Controllers\HosController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,5 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['prefix'=>'nupco-customer-api'], function(){
-    Route::any('store-expedite-request',[HosController::class,'vendorResponse'])->name('web.route.vendor.manager.list');
-    Route::any('asn-status',[HosController::class,'HosAsnManager'])->name('web.route.asn.manager.list');
+    Route::any('store-expedite-request',[ExpediteController::class,'store_expediet'])->name('nupco-customer-api-store-expedite-request');
 });
