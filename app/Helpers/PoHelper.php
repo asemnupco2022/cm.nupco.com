@@ -21,6 +21,7 @@ use PDF;
 use Exporter;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -237,7 +238,37 @@ class PoHelper
         Config::set('logging.channels.custom_chennel.path', storage_path('logs').'/'.$fileNae);
     }
 
-   
+
+
+    //COLLECTION MANAGER FROM VIEW SQL
+    public static function collection_sap_pur_groups()
+    {
+       return  DB::table('collection_sap_pur_groups')->pluck('purchasing_group','purchasing_group');
+    }
+
+    public static function collection_sap_po_types()
+    {
+       return  DB::table('collection_sap_po_types')->pluck('document_type','document_type');
+    }
+
+    public static function collection_sap_delivery_address()
+    {
+       return  DB::table('collection_sap_delivery_address')->pluck('delivery_address','delivery_address');
+    }
+
+
+    public static function collection_sap_plnts()
+    {
+       return  DB::table('collection_sap_plnts')->pluck('plant','plant');
+    }
+
+
+    public static function collection_vendor_codes()
+    {
+       return  DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
+    }
+
+
 
 
 

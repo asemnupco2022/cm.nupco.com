@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Pur. Goup" wire:model.defer="purchasing_group.from" >
+          <input type="title" class="form-control"  placeholder="Pur. Group" wire:model.defer="purchasing_group.from" >
         </div>
       </div>
       <div class="col-md-3">
