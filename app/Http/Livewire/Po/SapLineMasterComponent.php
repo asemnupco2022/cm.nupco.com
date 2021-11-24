@@ -3,6 +3,8 @@
 namespace App\Http\Livewire\Po;
 
 use App\Helpers\PoHelper;
+use App\Jobs\Export\PdfExcelExportJob;
+use App\Jobs\Export\pdfExportJob;
 use App\Models\LbsUserSearchSet;
 use App\Models\PoSapMaster;
 use App\Models\PoSapMasterTmp;
@@ -14,6 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Monolog\Handler\IFTTTHandler;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 
 class SapLineMasterComponent extends Component
@@ -209,7 +212,7 @@ class SapLineMasterComponent extends Component
     {
         if ($value)
         {
-            $this->selectedPo =$this->searchEngine()->pluck('id')->toArray();;
+            $this->selectedPo =$this->searchEngine()->paginate($this->number_of_rows)->pluck('id')->toArray();;
             $this->selectedPo =   array_fill_keys($this->selectedPo, true);
         }
         else
@@ -225,9 +228,16 @@ class SapLineMasterComponent extends Component
 
         $ColKeys = array_keys(array_filter($this->columns));
         $selectedRows = array_keys(array_filter($this->selectedPo));
-        $collection = PoSapMaster::whereIn('id',$selectedRows)->select($ColKeys)->get();
-        $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
+        $collectionCount = PoSapMaster::whereIn('id',$selectedRows)->select($ColKeys)->count();
 
+        if ($collectionCount == 0  and count($this->selectedPo) == 0) {
+            $collection =  $this->searchEngine();
+            PoHelper::sendJobSAp($ColKeys,$collection, $type);
+            return $this->emitNotifications('Export Job is in Progress...' ,'success');
+        }
+
+        $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
+        $collection = PoSapMaster::whereIn('id',$selectedRows)->select($ColKeys)->get();
         if ($type=='PDF'){
             $fileName=$this->po_number.'-'.$dateTime.'.pdf';
             PoHelper::export_pdf($ColKeys,$collection,$fileName);
@@ -351,6 +361,7 @@ class SapLineMasterComponent extends Component
 
     public function mount()
     {
+        // dd($this->searchEngine()->count());
         $this->fetchBaseInfo();
     }
 
@@ -392,7 +403,6 @@ class SapLineMasterComponent extends Component
 
     public function search_enter()
     {
-        // dd($this->document_type);
         $this->searchEngine();
     }
 

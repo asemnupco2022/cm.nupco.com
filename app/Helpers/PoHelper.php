@@ -3,7 +3,7 @@
 
 namespace App\Helpers;
 
-
+use App\Jobs\Export\PdfExcelExportJob;
 use App\Jobs\Po\HosAPI;
 use App\Models\HosPostHistory;
 use App\Models\HosResponseLog;
@@ -161,11 +161,11 @@ class PoHelper
 
 
     public static function lastVendorComment($po_number, $po_item, $tableType=null){
+        // $unique_line=$po_number.'_'.$po_item;
             if(HosPostHistory::where('po_num',$po_number)->where('po_item_num',$po_item)->orderBy('id','DESC')->first()){
 
               $uniqueHash =  HosPostHistory::where('po_num',$po_number)->where('po_item_num',$po_item)->orderBy('id','DESC')->first()->unique_hash;
               if($uniqueHash){
-
                 return  $tickets= TicketManager::where('ticket_hash',$uniqueHash)->get()->count();
               }
             }
@@ -318,6 +318,17 @@ class PoHelper
     public static function collection_sap_customer_nos()
     {
        return  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
+    }
+
+
+    public static function sendJobSAp($ColKeys,$collection, $type)
+    {
+        if ($type=='PDF'){
+                 dispatch(new PdfExcelExportJob($ColKeys,$collection,'PDF'));
+            }
+            if ($type=='EXCEL'){
+                dispatch(new PdfExcelExportJob($ColKeys,$collection,'EXCEL'));
+            }
     }
 
 

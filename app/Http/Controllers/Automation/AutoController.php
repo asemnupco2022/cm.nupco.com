@@ -18,6 +18,8 @@ class AutoController extends Controller
         return view('automation.list-automates');
     }
 
+    
+
     public function automationHistory()
     {
         return view('automation.history-automates');

@@ -37,6 +37,16 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
+        // $collectionCount = PoSapMaster::where('id',0)->count();
+        // $ColKeys=['a','b','c'];
+
+        // if ($collectionCount == 0  ) {
+        //     $collection =  PoSapMaster::whereIn('id',[1,2,3,4,5]);
+
+        //     PoHelper::sendJobSAp($ColKeys,$collection,'EXCEL');
+        //     return 3434;
+        // }
+
         // return PoHelper::collection_vendor_codes();
         // dd(PoSapMasterTmp::where('unique_line','4500013398_1390')->first());
 

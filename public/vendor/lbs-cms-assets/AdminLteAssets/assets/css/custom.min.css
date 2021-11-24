@@ -532,6 +532,32 @@ button.btn.btn-warning.flat {
     font-weight: 500;
     font-size: 20px;
 }
+button.btn.dropdown-toggle.btn-light.bs-placeholder {
+    background: #fff !important;
+    padding: 0.375rem0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+button.btn.dropdown-toggle.btn-light {
+    background: #fff !important;
+    padding: 0.375rem0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+
 /*.sap-report-table tbody {*/
 /*    max-height: 600px;*/
 /*    display: block;*/
