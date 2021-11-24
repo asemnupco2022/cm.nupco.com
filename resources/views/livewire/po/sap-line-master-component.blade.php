@@ -542,5 +542,7 @@
 </script>
     @endpush
 
+    @stack('livewire-parent')
+
     @livewire('livewire.CoreHelpers.core-helper-toaster-component')
 </div>

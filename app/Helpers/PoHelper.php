@@ -268,6 +268,20 @@ class PoHelper
        return  DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
     }
 
+    public static function collection_sap_tender_nos()
+    {
+       return  DB::table('collection_sap_tender_nos')->pluck('tender_no','tender_no');
+    }
+
+    public static function collection_sap_customer_names()
+    {
+       return  DB::table('collection_sap_customer_names')->pluck('customer_name','customer_name');
+    }
+
+    public static function collection_sap_vendor_name_ens()
+    {
+       return  DB::table('collection_sap_vendor_name_ens')->pluck('vendor_name_en','vendor_name_en');
+    }
 
 
 

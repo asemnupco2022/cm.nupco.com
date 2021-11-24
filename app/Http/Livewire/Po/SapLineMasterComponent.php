@@ -98,6 +98,7 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->document_type, ['from','to'])){
             $query=$query->whereBetween('document_type',[$this->document_type['from'],$this->document_type['to']]);
         }elseif (Arr::has($this->document_type, ['from'])){
+
             $query=$query->where('document_type',$this->document_type['from']);
         }
         if (Arr::has($this->document_type_desc, ['from','to'])){
@@ -192,6 +193,7 @@ class SapLineMasterComponent extends Component
     }
 
     public function initSearchFilter(){
+
        $this->initiateSearch=true;
        $this->initSearch=false;
     }
@@ -389,6 +391,7 @@ class SapLineMasterComponent extends Component
 
     public function search_enter()
     {
+        // dd($this->document_type);
         $this->searchEngine();
     }
 
@@ -443,7 +446,10 @@ class SapLineMasterComponent extends Component
             $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
         }
         $query = $this->hitSearchInt($query);
+        // dd($this->customer_name);
+        // dd($this->document_type);
         // dd($query->toSql());
+        Log::info("sql log",[$query->toSql()]);
         // dd($this->counter=$query->get()->count());
         return $query->paginate($this->number_of_rows);
 

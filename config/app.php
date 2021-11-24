@@ -233,6 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'TranslationHelper' => App\Helpers\TranslationHelper::class,
         'DashboardHelper' => App\Helpers\DashboardHelper::class,
+        'PoHelper' => App\Helpers\PoHelper::class,
 
     ],
 
