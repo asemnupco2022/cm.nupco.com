@@ -22,7 +22,7 @@ class PoSapMaster extends Model
     const CONS_COLUMNS = [
 
             "notified"=>true,
-            "asn"=>true,
+            // "asn"=>true,
             "document_type"=>true,
             "document_type_desc"=>true,
             "po_number"=>true,

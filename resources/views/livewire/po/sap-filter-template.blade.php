@@ -59,8 +59,14 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Tender Description" wire:model.defer="tender_desc.from" >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Tender Description" wire:model.defer="tender_desc.from" > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_desc"   wire:model.defer="tender_desc.from">
+            <option value="">Tender Description</option>
+            @foreach (PoHelper::collection_sap_tender_descs() as  $tender_descs )
+            <option value="{{$tender_descs}}">{{$tender_descs}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
       <div class="col-md-3">
@@ -68,20 +74,32 @@
           {{-- <input type="title" class="form-control"  placeholder="Vendor Name"  wire:model.defer="vendor_name_en.from" > --}}
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_name_en"   wire:model.defer="vendor_name_en.from">
             <option value="">Vendor Name</option>
-            @foreach (PoHelper::collection_sap_vendor_name_ens  () as  $vendor_name_ens )
+            @foreach (PoHelper::collection_sap_vendor_name_ens() as  $vendor_name_ens )
             <option value="{{$vendor_name_ens}}">{{$vendor_name_ens}}</option>
             @endforeach
          </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="init_po_number.from" >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="init_po_number.from" > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" init_po_number"   wire:model.defer="init_po_number.from">
+            <option value="">Puchasing Document</option>
+            @foreach (PoHelper::collection_sap_po_numbers() as  $po_numbers )
+            <option value="{{$po_numbers}}">{{$po_numbers}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Generic Mat Code" wire:model.defer="generic_mat_code.from" >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Generic Mat Code" wire:model.defer="generic_mat_code.from" > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" generic_mat_code"   wire:model.defer="generic_mat_code.from">
+            <option value="">Generic Mat Code</option>
+            @foreach (PoHelper::collection_sap_generic_mat_codes() as  $generic_mat_codes )
+            <option value="{{$generic_mat_codes}}">{{$generic_mat_codes}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
 
@@ -91,13 +109,25 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="CUST Gen Code"  wire:model.defer="cust_gen_code.from"  >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="CUST Gen Code"  wire:model.defer="cust_gen_code.from"  > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" cust_gen_code"   wire:model.defer="cust_gen_code.from">
+            <option value="">CUST Gen Code</option>
+            @foreach (PoHelper::collection_sap_cust_gen_codes() as  $cust_gen_codes )
+            <option value="{{$cust_gen_codes}}">{{$cust_gen_codes}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Mat Description" wire:model.defer="mat_description.from"  >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Mat Description" wire:model.defer="mat_description.from"  > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" mat_description"   wire:model.defer="mat_description.from">
+            <option value="">Mat Description</option>
+            @foreach (PoHelper::collection_sap_mat_descriptions() as  $mat_descriptions )
+            <option value="{{$mat_descriptions}}">{{$mat_descriptions}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
       <div class="col-md-3">
@@ -128,18 +158,30 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Storage Location"   wire:model.defer="storage_location.from" >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Storage Location"   wire:model.defer="storage_location.from" > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" storage_location"   wire:model.defer="storage_location.from">
+            <option value="">Storage Location</option>
+            @foreach (PoHelper::collection_sap_storage_locations() as  $storage_locations )
+            <option value="{{$storage_locations}}">{{$storage_locations}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Customer No" wire:model.defer="customer_no.from" >
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Customer No" wire:model.defer="customer_no.from" > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_no"   wire:model.defer="customer_no.from">
+            <option value="">Customer No</option>
+            @foreach (PoHelper::collection_sap_customer_nos() as  $customer_nos )
+            <option value="{{$customer_nos}}">{{$customer_nos}}</option>
+            @endforeach
+         </select>
         </div>
       </div>
       <div class="col-md-6">
-        <div class="form-group">
-            <select class="form-control"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments">
+        <div class="form-group" wire:ignore>
+            <select class="form-control selectpicker"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments">
                 <option value="0" selected  >Please Choose Supplier Comments</option>
                 @if (\App\Models\SupplierCommentTypes::supplierCommets())
                 @foreach (\App\Models\SupplierCommentTypes::supplierCommets() as $key => $supComs)
@@ -169,7 +211,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Supply Ratio"  wire:model.defer="supply_ratio.from" >
+          <input type="number" class="form-control selectpicker" min="0" max="100" placeholder="Supply Ratio"  id="numberbox" wire:model.defer="supply_ratio.from"  >
         </div>
       </div>
 
@@ -197,10 +239,18 @@
 
 <script>
     $('.selectpicker').selectpicker(
-  {
-    liveSearchPlaceholder: 'Select Po Type'
+        {
+            liveSearchPlaceholder: 'Select Po Type'
+        }
+    );
+
+
+    $('#numberbox').keyup(function(){
+  if ($(this).val() > 100){
+    alert("No numbers above 100");
+    $(this).val('100');
   }
-);
+});
 </script>
 @endpush
 

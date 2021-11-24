@@ -283,7 +283,42 @@ class PoHelper
        return  DB::table('collection_sap_vendor_name_ens')->pluck('vendor_name_en','vendor_name_en');
     }
 
+    public static function collection_sap_tender_descs()
+    {
+       return  DB::table('collection_sap_tender_descs')->pluck('tender_desc','tender_desc');
+    }
 
+    public static function collection_sap_po_numbers()
+    {
+       return  DB::table('collection_sap_po_numbers')->pluck('po_number','po_number');
+    }
+
+    public static function collection_sap_generic_mat_codes()
+    {
+       return  DB::table('collection_sap_generic_mat_codes')->pluck('generic_mat_code','generic_mat_code');
+    }
+
+    public static function collection_sap_cust_gen_codes()
+    {
+       return  DB::table('collection_sap_cust_gen_codes')->pluck('cust_gen_code','cust_gen_code');
+    }
+
+
+    public static function collection_sap_mat_descriptions()
+    {
+       return  DB::table('collection_sap_mat_descriptions')->pluck('mat_description','mat_description');
+    }
+
+
+    public static function collection_sap_storage_locations()
+    {
+       return  DB::table('collection_sap_storage_locations')->pluck('storage_location','storage_location');
+    }
+
+    public static function collection_sap_customer_nos()
+    {
+       return  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
+    }
 
 
 }

@@ -193,8 +193,8 @@
                                         <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model.defer="selectedPo.{{$collection->id}}">
                                     </div>
                                 </td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'notified' )==false?'hide':''}}" >{{$collection->notified}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'notified' )==false?'hide':''}}" ><span class=" badge badge-info ar-badge">{{$collection->notified}}</span></td>
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td> --}}
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'document_type_desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'po_number' )==false?'hide':''}}" >{{$collection->po_number}}</td>

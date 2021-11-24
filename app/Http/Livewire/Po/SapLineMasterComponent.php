@@ -45,6 +45,7 @@ class SapLineMasterComponent extends Component
 
     public $selectedPo=[];
     public $selectAll=false;
+    public $selectAllTmp=[];
 
 
     public $number_of_rows=10;
@@ -208,7 +209,7 @@ class SapLineMasterComponent extends Component
     {
         if ($value)
         {
-            $this->selectedPo = $this->searchEngineForAll()->pluck('id')->toArray();
+            $this->selectedPo =$this->searchEngine()->pluck('id')->toArray();;
             $this->selectedPo =   array_fill_keys($this->selectedPo, true);
         }
         else
@@ -396,35 +397,6 @@ class SapLineMasterComponent extends Component
     }
 
 
-    public function searchEngineForAll()
-    {
-        $this->dispatchBrowserEvent('close-edit-vendor-comment');
-        $query=PoSapMaster::orderBy('vendor_code', 'ASC');
-
-        if ($this->json_data and !empty($this->json_data)){
-            $searchableItems=json_decode($this->json_data, true);
-            if ($searchableItems and !empty($searchableItems)){
-                $query = PoSapMaster::orderBy('vendor_code', 'ASC');
-                foreach ($searchableItems as $key => $searchableItem){
-                    $operator=$searchableItem['queryOpr'];
-                    $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
-                }
-                return  $query->get();
-            }
-        }
-
-        if (!empty($this->searchable_col) and !empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-            $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
-        }
-        $query = $this->hitSearchInt($query);
-        // dd($query->toSql());
-        // dd($this->counter=$query->get()->count());
-        return $query->get();
-
-    }
-
-
-
     public function searchEngine()
     {
         $this->dispatchBrowserEvent('close-edit-vendor-comment');
@@ -438,7 +410,7 @@ class SapLineMasterComponent extends Component
                     $operator=$searchableItem['queryOpr'];
                     $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
                 }
-                return  $query->paginate($this->number_of_rows);
+                return  $query;
             }
         }
 
@@ -446,19 +418,20 @@ class SapLineMasterComponent extends Component
             $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
         }
         $query = $this->hitSearchInt($query);
+
         // dd($this->customer_name);
         // dd($this->document_type);
         // dd($query->toSql());
-        Log::info("sql log",[$query->toSql()]);
-        // dd($this->counter=$query->get()->count());
-        return $query->paginate($this->number_of_rows);
+
+        return $query;
 
     }
 
 
     public function render()
     {
-        $collections= $this->searchEngine();
+        $collections= $this->searchEngine()->paginate($this->number_of_rows);
+
         return view('livewire.po.sap-line-master-component')->with('collections', $collections);
     }
 }
