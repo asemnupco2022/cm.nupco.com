@@ -54,6 +54,7 @@ class HistoryAutoComponent extends Component
     public $selectAll=false;
 
     public $showEmailStructure=null;
+    public $showEmailStructureDate=null;
 
 
     public $broadcast_type=[];
@@ -208,51 +209,10 @@ class HistoryAutoComponent extends Component
 
     public function view_email($id)
     {
-        $this->showEmailStructure=SchedulerNotificationHistory::find($id)->msg_body;
+        $notificationHistoryData=SchedulerNotificationHistory::find($id);
+        $this->showEmailStructure=$notificationHistoryData->msg_body;
+        $this->showEmailStructureDate=$notificationHistoryData->created_at;
         $this->dispatchBrowserEvent('open-mail-views');
-    }
-
-    public function download_email($id)
-    {
-        $data=SchedulerNotificationHistory::find($id)->msg_body;
-        $path = storage_path('app/export');
-        $filename='invoice.pdf';
-
-//        $pdf->loadHTML($data);
-//        $pdf->save($path . '/' . $filename);
-//        return Storage::disk('local')->download('export/'.$filename);
-
-      $pdf =  PDF::loadView('pdf.email-print',['data'=>$data], [], [
-          'mode'                     => '',
-          'format'                   => 'A4',
-          'default_font_size'        => '5',
-          'default_font'             => 'sans-serif',
-          'margin_left'              => 10,
-          'margin_right'             => 10,
-          'margin_top'               => 10,
-          'margin_bottom'            => 10,
-          'margin_header'            => 0,
-          'margin_footer'            => 0,
-          'orientation'              => 'P',
-          'title'                    => 'Laravel mPDF',
-          'author'                   => '',
-          'watermark'                => 'arif',
-          'show_watermark'           => false,
-          'watermark_font'           => 'sans-serif',
-          'display_mode'             => 'fullpage',
-          'watermark_text_alpha'     => 0.1,
-          'custom_font_dir'          => '',
-          'custom_font_data' 	       => [],
-          'auto_language_detection'  => false,
-          'temp_dir'                 => rtrim(sys_get_temp_dir(), DIRECTORY_SEPARATOR),
-          'pdfa' 			               => false,
-          'pdfaauto' 		             => false,
-          'use_active_forms'         => false,
-      ])->save($path . '/' . $filename);
-
-        return Storage::disk('local')->download('export/'.$filename);
-
-
     }
 
     public function search_filter_submit()

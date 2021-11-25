@@ -1,6 +1,8 @@
 @push('styles')
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css" />
+<link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+<link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/select2/css/select2.min.css')}}">
 @endpush
 
 <div>
@@ -198,7 +200,7 @@
     <hr style="margin-top: 0px;">
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Vendor NO"  wire:model.defer="vendor_code.from" > --}}
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_code"   wire:model.defer="vendor_code.from">
@@ -209,11 +211,46 @@
          </select>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-3">
         <div class="form-group">
           <input type="number" class="form-control selectpicker" min="0" max="100" placeholder="Supply Ratio"  id="numberbox" wire:model.defer="supply_ratio.from"  >
         </div>
       </div>
+
+
+      <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control float-right" id="deliveryDate" placeholder="Nupco Delivery Date" >
+              <input type="hidden"  id="startnupco_delivery_date" wire:model.defe="nupco_delivery_date.from">
+            <input type="hidden"  id="endnupco_delivery_date" wire:model.defe="nupco_delivery_date.to">
+            </div>
+            <!-- /.input group -->
+          </div>
+      </div>
+
+
+      <div class="col-md-3">
+        <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="far fa-calendar-alt"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control float-right" id="createDate" placeholder="Po Created On">
+              <input type="hidden"  id="startpo_created_on" wire:model.defe="po_created_on.from">
+                <input type="hidden"  id="endpo_created_on" wire:model.defe="po_created_on.to">
+            </div>
+            <!-- /.input group -->
+          </div>
+      </div>
+
 
     </div>
 
@@ -234,8 +271,11 @@
 
   </div>
 @push('scripts')
-{{-- <script src=" {{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/select2/js/select2.full.min.js')}}"></script> --}}
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/moment/moment.min.js')}}"></script>
+<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/inputmask/jquery.inputmask.min.js')}}"></script>
+<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 
 <script>
     $('.selectpicker').selectpicker(
@@ -246,14 +286,61 @@
 
 
     $('#numberbox').keyup(function(){
-  if ($(this).val() > 100){
-    alert("No numbers above 100");
-    $(this).val('100');
-  }
+        if ($(this).val() > 100){
+            alert("No numbers above 100");
+            $(this).val('100');
+        }
+    });
+
+
+$(document).ready(function() {
+
+    var startpo_created_on;
+            var endpo_created_on;
+            $('#createDate').daterangepicker(
+           {
+              format: 'YYYY-MM-DD',
+           },
+           function(start, end) {
+            startpo_created_on = start;
+             endpo_created_on = end;
+
+           }
+        );
+            $('#createDate').val("");
+            $('#createDate').change(function () {
+                @this.set('po_created_on.from', startpo_created_on.format('YYYY-MM-DD'));
+                @this.set('po_created_on.to', endpo_created_on.format('YYYY-MM-DD'));
+
+            })
+
+
+
+
+            var startnupco_delivery_date;
+            var endnupco_delivery_date;
+            $('#deliveryDate').daterangepicker(
+           {
+              format: 'YYYY-MM-DD',
+           },
+           function(start, end) {
+            startnupco_delivery_date = start;
+             endnupco_delivery_date = end;
+
+           }
+        );
+            $('#deliveryDate').val("");
+            $('#deliveryDate').change(function () {
+                @this.set('nupco_delivery_date.from', startnupco_delivery_date.format('YYYY-MM-DD'));
+                @this.set('nupco_delivery_date.to', endnupco_delivery_date.format('YYYY-MM-DD'));
+            })
+
 });
+
+
 </script>
+
 @endpush
 
 @push('livewire-parent')
-
 @endpush

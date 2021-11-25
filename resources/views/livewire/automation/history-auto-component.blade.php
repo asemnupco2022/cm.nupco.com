@@ -1,5 +1,11 @@
 <div>
 {{--    {!! $showEmailStructure !!}--}}
+@push('styles')
+<style>
+    @page { size: auto;  margin-top: 1mm; }
+</style>
+@endpush
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -247,6 +253,7 @@
                     </button>
                 </div>
                 <div class="modal-body" id="print-email">
+                    <div><h6>{{$showEmailStructureDate}}</h6></div>
                    {!! $showEmailStructure !!}
                 </div>
                 <div class="modal-footer">
@@ -308,8 +315,6 @@
                 window.onfocus=function(){ window.close();}
                 document.body.innerHTML = originalContents;
                 location.reload();
-
-
             }
         </script>
 

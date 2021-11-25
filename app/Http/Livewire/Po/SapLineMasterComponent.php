@@ -12,6 +12,7 @@ use App\Models\SapMasterView;
 use App\Models\StaffColumnSet;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -51,7 +52,7 @@ class SapLineMasterComponent extends Component
     public $selectAllTmp=[];
 
 
-    public $number_of_rows=100;
+    public $number_of_rows=10;
 
 
     protected $queryString = ['searchable_col_val'];
@@ -131,16 +132,6 @@ class SapLineMasterComponent extends Component
         }elseif (Arr::has($this->customer_no, ['from'])){
             $query=$query->where('customer_no',$this->customer_no['from']);
         }
-        if (Arr::has($this->nupco_delivery_date, ['from','to'])){
-            $query=$query->whereDate('nupco_delivery_date','<=',Carbon::parse($this->nupco_delivery_date['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->nupco_delivery_date['to'])->format('Y-m-d'));
-        }elseif (Arr::has($this->nupco_delivery_date, ['from'])){
-            $query=$query->where('nupco_delivery_date',Carbon::parse($this->nupco_delivery_date['from']));
-        }
-        if (Arr::has($this->po_created_on, ['from','to'])){
-            $query=$query->whereDate('po_created_on','<=',Carbon::parse($this->po_created_on['from'])->format('Y-m-d'))->whereDate('trade_date','>=',Carbon::parse($this->po_created_on['to'])->format('Y-m-d'));
-        }elseif (Arr::has($this->po_created_on, ['from'])){
-            $query=$query->where('po_created_on',Carbon::parse($this->nupco_delivery_date['from']));
-        }
         if (Arr::has($this->generic_mat_code, ['from','to'])){
             $query=$query->whereBetween('generic_mat_code',[$this->generic_mat_code['from'],$this->generic_mat_code['to']]);
         }elseif (Arr::has($this->generic_mat_code, ['from'])){
@@ -162,38 +153,47 @@ class SapLineMasterComponent extends Component
             $query=$query->where('plant',$this->plant['from']);
         }
         if (Arr::has($this->customer_name, ['from','to'])){
-            $query=$query->whereBetween('customer_name',[$this->plant['from'],$this->plant['to']]);
+            $query=$query->whereBetween('customer_name',[$this->customer_name['from'],$this->customer_name['to']]);
         }elseif (Arr::has($this->customer_name, ['from'])){
             $query=$query->where('customer_name',$this->customer_name['from']);
         }
         if (Arr::has($this->supply_ratio, ['from','to'])){
-            $query=$query->whereBetween('supply_ratio',[$this->plant['from'],$this->plant['to']]);
+            $query=$query->whereBetween('supply_ratio',[$this->supply_ratio['from'],$this->supply_ratio['to']]);
         }elseif (Arr::has($this->supply_ratio, ['from'])){
             $query=$query->where('supply_ratio',$this->supply_ratio['from']);
         }
         if (Arr::has($this->delivery_address, ['from','to'])){
-            $query=$query->whereBetween('delivery_address',[$this->plant['from'],$this->plant['to']]);
+            $query=$query->whereBetween('delivery_address',[$this->delivery_address['from'],$this->delivery_address['to']]);
         }elseif (Arr::has($this->delivery_address, ['from'])){
             $query=$query->where('delivery_address',$this->delivery_address['from']);
         }
         if (Arr::has($this->mat_description, ['from','to'])){
-            $query=$query->whereBetween('mat_description',[$this->plant['from'],$this->plant['to']]);
+            $query=$query->whereBetween('mat_description',[$this->mat_description['from'],$this->mat_description['to']]);
         }elseif (Arr::has($this->mat_description, ['from'])){
             $query=$query->where('mat_description','LIKE',$this->mat_description['from']);
         }
         if (Arr::has($this->cust_gen_code, ['from','to'])){
-            $query=$query->whereBetween('cust_gen_code',[$this->plant['from'],$this->plant['to']]);
+            $query=$query->whereBetween('cust_gen_code',[$this->cust_gen_code['from'],$this->cust_gen_code['to']]);
         }elseif (Arr::has($this->cust_gen_code, ['from'])){
             $query=$query->where('cust_gen_code',$this->cust_gen_code['from']);
         }
         if (Arr::has($this->vendor_name_en, ['from','to'])){
-            $query=$query->whereBetween('vendor_name_en',[$this->plant['from'],$this->plant['to']]);
+            $query=$query->whereBetween('vendor_name_en',[$this->vendor_name_en['from'],$this->vendor_name_en['to']]);
         }elseif (Arr::has($this->vendor_name_en, ['from'])){
             $query=$query->where('vendor_name_en',$this->vendor_name_en['from']);
         }
         if(Arr::has($this->supplier_comment, ['from']) and $this->supplier_comment['from'] !='0' ){
             $query=$query->Saptmp($this->supplier_comment['from']);
         }
+
+
+        if (Arr::has($this->nupco_delivery_date, ['from'])){
+            $query=$query->whereBetween('nupco_delivery_date',[$this->nupco_delivery_date['from'],$this->nupco_delivery_date['to']]);
+        }
+        if (Arr::has($this->po_created_on, ['from'])){
+            $query=$query->whereBetween('po_created_on',[$this->po_created_on['from'],$this->po_created_on['to']]);
+        }
+
         return $query;
     }
 
@@ -227,8 +227,9 @@ class SapLineMasterComponent extends Component
     {
 
         $ColKeys = array_keys(array_filter($this->columns));
+
         $selectedRows = array_keys(array_filter($this->selectedPo));
-        $collectionCount = PoSapMaster::whereIn('id',$selectedRows)->select($ColKeys)->count();
+        $collectionCount = PoSapMaster::whereIn('id',$selectedRows)->count();
 
         if ($collectionCount == 0  and count($this->selectedPo) == 0) {
             $collection =  $this->searchEngine();
@@ -236,7 +237,7 @@ class SapLineMasterComponent extends Component
 
             if ($type=='PDF'){
 
-                    return $this->emitNotifications('Please Select Line items not more Than 1000', 'error');
+                return $this->emitNotifications('Please Select Line items not more Than 1000', 'error');
 
             dispatch(new PdfExcelExportJob($ColKeys,$queryString,'PDF',auth()->user()->id, 'rifrocket\\LaravelCms\\Models\\LbsUserMeta',LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM));
             }
@@ -249,7 +250,7 @@ class SapLineMasterComponent extends Component
         }
 
         $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
-        $collection = PoSapMaster::whereIn('id',$selectedRows)->select($ColKeys)->get();
+        $collection = PoSapMaster::whereIn('id',$selectedRows)->select(PoHelper::DeNormalizeColString(null,$ColKeys))->get();
         if ($type=='PDF'){
             if ($collectionCount > 1000) {
 
@@ -260,7 +261,7 @@ class SapLineMasterComponent extends Component
             return Storage::disk('local')->download('export/'.$fileName);
         }
         if ($type=='EXCEL'){
-            $ColKeys= PoHelper::NormalizeColString(null, $ColKeys);
+            $ColKeys= $ColKeys;
             $collection=collect(array_merge([$ColKeys],$collection->toArray()));
             $fileName=$this->po_number.'-'.$dateTime.'.xlsx';
             PoHelper::excel_export($collection, $fileName);
@@ -427,6 +428,7 @@ class SapLineMasterComponent extends Component
 
     public function search_enter()
     {
+
         $this->searchEngine();
     }
 
@@ -456,6 +458,7 @@ class SapLineMasterComponent extends Component
         // dd($this->customer_name);
         // dd($this->document_type);
         // dd($query->toSql());
+        Log::info("message",[$this->po_created_on]);
 
         return $query;
 
@@ -466,21 +469,21 @@ class SapLineMasterComponent extends Component
     {
         $collections= $this->searchEngine()->paginate($this->number_of_rows);
         $this->selectAllTmp=$collections->pluck('id')->toArray();
-        $collection_sap_po_types= PoHelper::collection_sap_po_types();
-        $collection_sap_pur_groups= PoHelper::collection_sap_pur_groups();
-        $collection_sap_customer_names= PoHelper::collection_sap_customer_names();
-        $collection_sap_tender_nos= PoHelper::collection_sap_tender_nos();
-        $collection_sap_tender_descs= PoHelper::collection_sap_tender_descs();
-        $collection_sap_vendor_name_ens= PoHelper::collection_sap_vendor_name_ens();
-        $collection_sap_po_numbers= PoHelper::collection_sap_po_numbers();
-        $collection_sap_generic_mat_codes= PoHelper::collection_sap_generic_mat_codes();
-        $collection_sap_cust_gen_codes= PoHelper::collection_sap_cust_gen_codes();
-        $collection_sap_mat_descriptions= PoHelper::collection_sap_mat_descriptions();
-        $collection_sap_delivery_address= PoHelper::collection_sap_delivery_address();
-        $collection_sap_storage_locations= PoHelper::collection_sap_storage_locations();
-        $collection_sap_customer_nos= PoHelper::collection_sap_customer_nos();
-        $collection_vendor_codes= PoHelper::collection_vendor_codes();
-        $collection_sap_plnts= PoHelper::collection_sap_plnts();
+        $collection_sap_po_types= DB::table('collection_sap_po_types')->pluck('document_type','document_type');
+        $collection_sap_pur_groups=  DB::table('collection_sap_pur_groups')->pluck('purchasing_group','purchasing_group');
+        $collection_sap_customer_names= DB::table('collection_sap_customer_names')->pluck('customer_name','customer_name');
+        $collection_sap_tender_nos=  DB::table('collection_sap_tender_nos')->pluck('tender_no','tender_no');
+        $collection_sap_tender_descs= DB::table('collection_sap_tender_descs')->pluck('tender_desc','tender_desc');
+        $collection_sap_vendor_name_ens= DB::table('collection_sap_vendor_name_ens')->pluck('vendor_name_en','vendor_name_en');
+        $collection_sap_po_numbers= DB::table('collection_sap_po_numbers')->pluck('po_number','po_number');
+        $collection_sap_generic_mat_codes= DB::table('collection_sap_generic_mat_codes')->pluck('generic_mat_code','generic_mat_code');
+        $collection_sap_cust_gen_codes= DB::table('collection_sap_cust_gen_codes')->pluck('cust_gen_code','cust_gen_code');
+        $collection_sap_mat_descriptions= DB::table('collection_sap_mat_descriptions')->pluck('mat_description','mat_description');
+        $collection_sap_delivery_address=  DB::table('collection_sap_delivery_address')->pluck('delivery_address','delivery_address');
+        $collection_sap_storage_locations= DB::table('collection_sap_storage_locations')->pluck('storage_location','storage_location');
+        $collection_sap_customer_nos=  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
+        $collection_vendor_codes= DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
+        $collection_sap_plnts= DB::table('collection_sap_plnts')->pluck('plant','plant');
 
         return view('livewire.po.sap-line-master-component',compact(
             'collection_sap_po_types',

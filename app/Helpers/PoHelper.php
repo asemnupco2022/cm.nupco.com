@@ -43,6 +43,18 @@ class PoHelper
         return ucwords(trans($string));
     }
 
+
+    public static function DeNormalizeColString($string = null, array $keyCollection = null)
+    {
+        if ($keyCollection) {
+            foreach ($keyCollection as $key => $collection) {
+                $collection = Str::replace(' ', '_', $collection);
+                $keyCollection[$key] = strtolower(trans($collection));
+            }
+            return $keyCollection;
+        }
+    }
+
     public static function excel_export($collection, $filename)
     {
 
@@ -320,6 +332,6 @@ class PoHelper
        return  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
     }
 
-   
+
 
 }

@@ -295,6 +295,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             @foreach($columnsNormalized as $colKey => $column)
+
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" id=" {{$colKey}}" {{$column==false?'':'checked'}} wire:model="columns.{{$colKey}}">
                                     <label for="checkboxPrimary3">
