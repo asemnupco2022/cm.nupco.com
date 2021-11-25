@@ -49,6 +49,8 @@ class LbsConstants
         "50"=>50,
         "100"=>100,
         "200"=>200,
+        "500"=>500,
+        "1000"=>1000,
     ];
 
     const CONST_MAIL_TEMPLATES=[

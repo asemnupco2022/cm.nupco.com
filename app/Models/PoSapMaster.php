@@ -64,6 +64,50 @@ class PoSapMaster extends Model
             "supplier_comment"=>false,
         ];
 
+        const CONS_COLUMNS_NORMALIZED =[
+            "Notified"=>true,
+            // "Asn"=>true,
+            "Document Type"=>true,
+            "Document Type Desc"=>true,
+            "Po Number"=>true,
+            "Po Item"=>true,
+            "Material Number"=>true,
+            "Mat Description"=>true,
+            "Po Created On"=>true,
+            "Purchasing Organization"=>true,
+            "Purchasing Group"=>true,
+            "Currency"=>true,
+            "Customer No"=>true,
+            "Customer Name"=>true,
+            "Tender No"=>true,
+            "Tender Desc"=>true,
+            "Vendor Code"=>true,
+            "Vendor Name En"=>true,
+            "Vendor Name Er"=>true,
+            "Plant"=>true,
+            "Storage Location"=>true,
+            "Uo M"=>true,
+            "Net Price"=>true,
+            "Price Unit"=>true,
+            "Net Value"=>true,
+            "Nupco Trade Code"=>true,
+            "Nupco Delivery Date"=>true,
+            "Ordered Quantity"=>true,
+            "Open Quantity"=>true,
+            "Item Status"=>true,
+            "Delivery Address"=>true,
+            "Delivery No"=>true,
+            "Cust Cont Trade Numb"=>true,
+            "Cust Gen Code"=>true,
+            "Generic Mat Code"=>true,
+            "Old New Po Number"=>true,
+            "Old Po Item"=>true,
+            "Gr Quantity"=>true,
+            "Gr Amount"=>true,
+            "Supply Ratio"=>true,
+            "Supplier Comment"=>false,
+        ];
+
 
     protected $fillable = [
 
@@ -112,6 +156,24 @@ class PoSapMaster extends Model
         "unique_hash",
         "supplier_comment",
     ];
+
+
+    public function getInternalComentCountAttribute()
+    {
+        $po_number =$this->attributes['po_number'];
+        $po_item =$this->attributes['po_item'];
+
+        return InternalComment::where('table_type', 'sap_line_item')->where('purchasing_doc_no', $po_number)->where('line_item_no', $po_item)->count();
+    }
+
+    public function getVendorlComentCountAttribute()
+    {
+        $unique_hash =$this->attributes['unique_hash'];
+        if ($unique_hash) {
+            return  $tickets= TicketManager::where('ticket_hash',$unique_hash)->get()->count();
+        }return 0;
+
+    }
 
     public function setPoCreatedOnAttribute($value)
     {

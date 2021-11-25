@@ -26,11 +26,11 @@ class LbsHeaderMiddleware
 //        $response->header("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
 
 //         $response->header('Access-Control-Allow-Origin','http://localhost:8080');
-         $response->header('Access-Control-Allow-Origin','http://localhost:8080');
+        //  $response->header('Access-Control-Allow-Origin','http://localhost:8080');
 //        $response->header('Access-Control-Allow-Origin','http://crmfront.projectdemotest.com');
-        $response->header('Access-Control-Allow-Credentials','true');
-        $response->header('Access-Control-Allow-Headers','*');
-        $response->header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,observe,access-control-allow-origin");
+        // $response->header('Access-Control-Allow-Credentials','true');
+        // $response->header('Access-Control-Allow-Headers','*');
+        // $response->header("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With,observe,access-control-allow-origin");
         return $response;
     }
 }

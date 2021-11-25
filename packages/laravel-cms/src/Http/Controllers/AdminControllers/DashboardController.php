@@ -21,6 +21,7 @@ use App\Jobs\Po\NotifySap;
 use App\Models\PoSapMasterScheduler;
 use App\Models\PoSapMasterTmp;
 use App\Models\SupplierCommentTypes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Importer;
 use rifrocket\LaravelCms\Models\LbsMember;
@@ -37,7 +38,10 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        // $collectionCount = PoSapMaster::where('id',0)->count();
+        // return PoHelper::NormalizeColString(null,PoSapMaster::CONS_COLUMNS_NORMALIZED);
+
+        // $query=PoSapMaster::orderBy('vendor_code', 'ASC')->pluck('id')->toArray();
+        // dd($query);
         // $ColKeys=['a','b','c'];
 
         // if ($collectionCount == 0  ) {

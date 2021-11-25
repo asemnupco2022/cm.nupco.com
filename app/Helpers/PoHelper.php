@@ -320,16 +320,6 @@ class PoHelper
        return  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
     }
 
-
-    public static function sendJobSAp($ColKeys,$collection, $type)
-    {
-        if ($type=='PDF'){
-                 dispatch(new PdfExcelExportJob($ColKeys,$collection,'PDF'));
-            }
-            if ($type=='EXCEL'){
-                dispatch(new PdfExcelExportJob($ColKeys,$collection,'EXCEL'));
-            }
-    }
-
+   
 
 }

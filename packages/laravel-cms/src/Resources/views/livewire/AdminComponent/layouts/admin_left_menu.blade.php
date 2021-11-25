@@ -258,6 +258,19 @@
                             </li>
                         @endif
 
+
+                        <li class="nav-item increase_size">
+                            <a href="{{route('web.route.export')}}" class="nav-link {{ (Request::is('*/export/*')?'active':'')  }} {{ (Request::is('*/export')?'active':'')  }}">
+                                <!-- <i class=" nav-icon fas fa-clipboard-list"></i> -->
+                                <img src="{{ asset('img/lt2.svg') }}" alt="job image" title="job image" class="light_mode_img">
+                                <img src="{{ asset('img/light/Group 70.svg') }}" alt="job image" title="job image" class="dark_mode_img">
+                                <p>
+                                    Exports
+                                    <span class="right badge badge-danger">{{\App\Models\UserExportFiles::getCountOFUnread()}}</span>
+                                </p>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
 

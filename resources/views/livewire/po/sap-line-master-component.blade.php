@@ -75,8 +75,8 @@
                                 <div class="form-group input-group-sm">
 
                                     <select class="form-control select2 " style="width: 100%;" wire:model.defer="searchable_col" title="Select Search Column">
-                                        @foreach($columns as $colKey => $column)
-                                            <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</option>
+                                        @foreach($columnsNormalized as $colKey => $column)
+                                            <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ $colKey }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -176,8 +176,8 @@
                                     <input type="checkbox" autocomplete="off" wire:model="selectAll">
                                 </div>
                             </th>
-                            @foreach($columns as $colKey => $column)
-                                <th class="{{$column==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</th>
+                            @foreach($columnsNormalized as $colKey => $column)
+                                <th class="{{$column==false?'hide':''}}"> {{ $colKey  }}</th>
                             @endforeach
                             <th>Internal</th>
                             <th>Vendor</th>
@@ -236,13 +236,13 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'supplier_comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td>
                                 <td>
                                     <a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
-                                        <span class="badge bg-teal">{{\App\Helpers\PoHelper::getInternalCommentCount($collection->po_number,$collection->po_item, 'sap_line_item' )}}</span>
+                                        <span class="badge bg-teal">{{$collection->InternalComentCount}}</span>
                                         <i class="far fa-comment-alt"></i>
                                     </a>
                                 </td>
                                 <td>
                                     <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->uniue_hash??"null" }}')">
-                                        <span class="badge bg-teal bg-maroon">{{\App\Helpers\PoHelper::lastVendorComment($collection->po_number,$collection->po_item, 'sap_line_item' )}}</span>
+                                        <span class="badge bg-teal bg-maroon">{{$collection->VendorlComentCount}}</span>
                                         <i class="far fa-comment-alt"></i>
                                     </a>
                                 </td>
@@ -294,11 +294,11 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            @foreach($columns as $colKey => $column)
+                            @foreach($columnsNormalized as $colKey => $column)
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" id=" {{$colKey}}" {{$column==false?'':'checked'}} wire:model="columns.{{$colKey}}">
                                     <label for="checkboxPrimary3">
-                                        {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}
+                                        {{ $colKey  }}
                                     </label>
                                 </div> <br>
                             @endforeach

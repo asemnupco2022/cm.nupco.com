@@ -51,12 +51,13 @@ class SapLineMasterComponent extends Component
     public $selectAllTmp=[];
 
 
-    public $number_of_rows=10;
+    public $number_of_rows=100;
 
 
     protected $queryString = ['searchable_col_val'];
 
     public $columns=PoSapMaster::CONS_COLUMNS;
+    public $columnsNormalized=PoSapMaster::CONS_COLUMNS_NORMALIZED;
     public $operators=LbsConstants::CONST_OPERATOR;
     public $num_rows=LbsConstants::CONST_PAGE_NUMBERS;
 
@@ -212,12 +213,11 @@ class SapLineMasterComponent extends Component
     {
         if ($value)
         {
-            $this->selectedPo =$this->searchEngine()->paginate($this->number_of_rows)->pluck('id')->toArray();;
+            $this->selectedPo = $this->selectAllTmp;
             $this->selectedPo =   array_fill_keys($this->selectedPo, true);
         }
         else
         {
-            // $this->selectedPo =   array_fill_keys($this->selectedPo, false);
             $this->selectedPo = [];
         }
     }
@@ -232,13 +232,29 @@ class SapLineMasterComponent extends Component
 
         if ($collectionCount == 0  and count($this->selectedPo) == 0) {
             $collection =  $this->searchEngine();
-            PoHelper::sendJobSAp($ColKeys,$collection, $type);
-            return $this->emitNotifications('Export Job is in Progress...' ,'success');
+              $queryString= $this->getEloquentSqlWithBindings($collection);
+
+            if ($type=='PDF'){
+
+                    return $this->emitNotifications('Please Select Line items not more Than 1000', 'error');
+
+            dispatch(new PdfExcelExportJob($ColKeys,$queryString,'PDF',auth()->user()->id, 'rifrocket\\LaravelCms\\Models\\LbsUserMeta',LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM));
+            }
+            if ($type=='EXCEL'){
+                dispatch(new PdfExcelExportJob($ColKeys,$queryString,'EXCEL',auth()->user()->id, 'rifrocket\\LaravelCms\\Models\\LbsUserMeta',LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM));
+            }
+
+         return $this->emitNotifications('Export Job is in Progress...' ,'success');
+
         }
 
         $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
         $collection = PoSapMaster::whereIn('id',$selectedRows)->select($ColKeys)->get();
         if ($type=='PDF'){
+            if ($collectionCount > 1000) {
+
+                return $this->emitNotifications('Only 1000 line can be export as PDF at a time', 'error');
+            }
             $fileName=$this->po_number.'-'.$dateTime.'.pdf';
             PoHelper::export_pdf($ColKeys,$collection,$fileName);
             return Storage::disk('local')->download('export/'.$fileName);
@@ -253,6 +269,13 @@ class SapLineMasterComponent extends Component
         return 1;
 
     }
+
+    public  function getEloquentSqlWithBindings($query)
+{
+    return vsprintf(str_replace('?', '%s', $query->toSql()), collect($query->getBindings())->map(function ($binding) {
+        return is_numeric($binding) ? $binding : "'{$binding}'";
+    })->toArray());
+}
 
     public function emitMailComposerReq($reqType)
     {
@@ -326,6 +349,7 @@ class SapLineMasterComponent extends Component
 
     public function search_reset()
     {
+        $this->selectAll=false;
         $this->getFilterTemplate='';
         $this->json_data=null;
         $this->json_data_to_string='';
@@ -441,7 +465,41 @@ class SapLineMasterComponent extends Component
     public function render()
     {
         $collections= $this->searchEngine()->paginate($this->number_of_rows);
+        $this->selectAllTmp=$collections->pluck('id')->toArray();
+        $collection_sap_po_types= PoHelper::collection_sap_po_types();
+        $collection_sap_pur_groups= PoHelper::collection_sap_pur_groups();
+        $collection_sap_customer_names= PoHelper::collection_sap_customer_names();
+        $collection_sap_tender_nos= PoHelper::collection_sap_tender_nos();
+        $collection_sap_tender_descs= PoHelper::collection_sap_tender_descs();
+        $collection_sap_vendor_name_ens= PoHelper::collection_sap_vendor_name_ens();
+        $collection_sap_po_numbers= PoHelper::collection_sap_po_numbers();
+        $collection_sap_generic_mat_codes= PoHelper::collection_sap_generic_mat_codes();
+        $collection_sap_cust_gen_codes= PoHelper::collection_sap_cust_gen_codes();
+        $collection_sap_mat_descriptions= PoHelper::collection_sap_mat_descriptions();
+        $collection_sap_delivery_address= PoHelper::collection_sap_delivery_address();
+        $collection_sap_storage_locations= PoHelper::collection_sap_storage_locations();
+        $collection_sap_customer_nos= PoHelper::collection_sap_customer_nos();
+        $collection_vendor_codes= PoHelper::collection_vendor_codes();
+        $collection_sap_plnts= PoHelper::collection_sap_plnts();
 
-        return view('livewire.po.sap-line-master-component')->with('collections', $collections);
+        return view('livewire.po.sap-line-master-component',compact(
+            'collection_sap_po_types',
+            'collection_sap_pur_groups',
+            'collection_sap_customer_names',
+            'collection_sap_tender_nos',
+            'collection_sap_tender_descs',
+            'collection_sap_vendor_name_ens',
+            'collection_sap_po_numbers',
+            'collection_sap_generic_mat_codes',
+            'collection_sap_cust_gen_codes',
+            'collection_sap_mat_descriptions',
+            'collection_sap_delivery_address',
+            'collection_sap_storage_locations',
+            'collection_sap_customer_nos',
+            'collection_vendor_codes',
+            'collection_sap_plnts',
+            'collections'
+
+            ));
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Po\PoImportController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Staffs\StaffController;
 use App\Http\Controllers\TicketManagerController;
+use App\Http\Controllers\UserExportController;
 use App\Http\Controllers\Vendors\VendorController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Hash;
@@ -104,6 +105,13 @@ Route::group(array('middleware'=>'web'), function () {
         //PROFILE MANAGER
         Route::group(['prefix'=>'profile'], function(){
             Route::get('/',[ProfileController::class,'index'])->name('web.route.profile');
+        });
+
+
+         //PROFILE MANAGER
+         Route::group(['prefix'=>'export'], function(){
+            Route::get('/',[UserExportController::class,'index'])->name('web.route.export');
+            Route::get('/downlaod',[UserExportController::class,'downloadFile'])->name('web.route.export.downloadFile');
         });
 
     });
