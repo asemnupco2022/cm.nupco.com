@@ -557,6 +557,15 @@ button.btn.dropdown-toggle.btn-light {
     border-radius: 0.25rem;
 }
 
+div.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(16, 16, 16, 0.5);
+    z-index: 9999 !important;
+}
 
 /*.sap-report-table tbody {*/
 /*    max-height: 600px;*/

@@ -415,7 +415,7 @@
 
                     @push('scripts2')
                     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-                    
+
                     <script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/inputmask/jquery.inputmask.min.js')}}"></script>
                     <script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 
@@ -531,7 +531,7 @@
 
 
         <!-- loader -->
-        <div class="loading" wire:loading >
+        <div class="loading" wire:loading>
             <div class='uil-ring-css' style='transform:scale(0.79);'>
                 <div></div>
             </div>
