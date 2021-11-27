@@ -412,7 +412,7 @@ class SapLineMasterComponent extends Component
         }
 
         if (!empty($this->searchable_col) and !empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-            $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
+            $query = $query->where(trim(PoHelper::DeNormalizeColString($this->searchable_col, null)),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
         }
         $query = $this->hitSearchInt($query);
         return $query;

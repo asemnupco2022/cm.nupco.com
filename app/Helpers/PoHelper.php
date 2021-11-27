@@ -53,6 +53,9 @@ class PoHelper
             }
             return $keyCollection;
         }
+
+        $string = Str::replace(' ', '_', $string);;
+        return ucwords(trans($string));
     }
 
     public static function excel_export($collection, $filename)
