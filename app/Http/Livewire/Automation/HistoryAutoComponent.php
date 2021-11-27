@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Automation;
 
 use App\Helpers\PoHelper;
+use App\Models\HosPostHistory;
 use App\Models\LbsUserSearchSet;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\StaffColumnSet;
@@ -57,70 +58,48 @@ class HistoryAutoComponent extends Component
     public $showEmailStructureDate=null;
 
 
-    public $broadcast_type=[];
-    public $mail_type=[];
-    public $table_type=[];
-    public $sender_name=[];
-    public $recipient_name=[];
-    public $recipient_email=[];
-    public $msg_subject=[];
-    public $last_executed_at=[];
+    public $tender_num=[];
+    public $vendor_num=[];
+    public $po_num=[];
+    public $cust_code=[];
+    public $po_item_num=[];
+    public $uom=[];
+    public $plant=[];
+    public $mat_num=[];
+
+    public $mailHash;
+
 
     public function hitSearchInt($query)
     {
-
-        if (Arr::has($this->broadcast_type, ['from','to'])){
-            $query=$query->whereBetween('broadcast_type',[$this->broadcast_type['from'],$this->broadcast_type['to']]);
-        }elseif (Arr::has($this->broadcast_type, ['from'])){
-            $query=$query->where('broadcast_type',$this->broadcast_type['from']);
+        if (Arr::has($this->tender_num, ['from'])){
+            $query=$query->where('tender_num',$this->tender_num['from']);
         }
-
-        if (Arr::has($this->mail_type, ['from','to'])){
-            $query=$query->whereBetween('mail_type',[$this->mail_type['from'],$this->mail_type['to']]);
-        }elseif (Arr::has($this->mail_type, ['from'])){
-            $query=$query->where('mail_type',$this->mail_type['from']);
+        if (Arr::has($this->vendor_num, ['from'])){
+            $query=$query->where('vendor_num',$this->vendor_num['from']);
         }
-
-        if (Arr::has($this->table_type, ['from','to'])){
-            $query=$query->whereBetween('table_type',[$this->table_type['from'],$this->table_type['to']]);
-        }elseif (Arr::has($this->table_type, ['from'])){
-            $query=$query->where('table_type',$this->table_type['from']);
+        if (Arr::has($this->po_num, ['from'])){
+            $query=$query->where('po_num',$this->po_num['from']);
         }
-
-        if (Arr::has($this->sender_name, ['from','to'])){
-            $query=$query->whereBetween('sender_name',[$this->sender_name['from'],$this->sender_name['to']]);
-        }elseif (Arr::has($this->sender_name, ['from'])){
-            $query=$query->where('sender_name',$this->sender_name['from']);
+        if (Arr::has($this->cust_code, ['from'])){
+            $query=$query->where('cust_code',$this->cust_code['from']);
         }
-
-
-        if (Arr::has($this->recipient_name, ['from','to'])){
-            $query=$query->whereBetween('recipient_name',[$this->recipient_name['from'],$this->recipient_name['to']]);
-        }elseif (Arr::has($this->recipient_name, ['from'])){
-            $query=$query->where('recipient_name',$this->recipient_name['from']);
+        if (Arr::has($this->po_item_num, ['from'])){
+            $query=$query->where('po_item_num',$this->po_item_num['from']);
         }
-
-        if (Arr::has($this->recipient_email, ['from','to'])){
-            $query=$query->whereBetween('recipient_email',[$this->recipient_email['from'],$this->recipient_email['to']]);
-        }elseif (Arr::has($this->recipient_email, ['from'])){
-            $query=$query->where('recipient_email',$this->recipient_email['from']);
+        if (Arr::has($this->uom, ['from'])){
+            $query=$query->where('uom',$this->uom['from']);
         }
-
-        if (Arr::has($this->msg_subject, ['from','to'])){
-            $query=$query->whereBetween('msg_subject',[$this->msg_subject['from'],$this->msg_subject['to']]);
-        }elseif (Arr::has($this->msg_subject, ['from'])){
-            $query=$query->where('msg_subject',$this->msg_subject['from']);
+        if (Arr::has($this->plant, ['from'])){
+            $query=$query->where('plant',$this->plant['from']);
         }
-
-
-        if (Arr::has($this->last_executed_at, ['from','to'])){
-            $query=$query->whereBetween('last_executed_at',[$this->last_executed_at['from'],$this->last_executed_at['to']]);
-        }elseif (Arr::has($this->last_executed_at, ['from'])){
-            $query=$query->whereDate('last_executed_at',$this->last_executed_at['from']);
+        if (Arr::has($this->mat_num, ['from'])){
+            $query=$query->whereDate('mat_num',$this->mat_num['from']);
         }
 
         return $query;
     }
+
     public function updatedSelectAll($value)
     {
         if ($value)
@@ -130,7 +109,6 @@ class HistoryAutoComponent extends Component
         }
         else
         {
-            // $this->selectedPo =   array_fill_keys($this->selectedPo, false);
             $this->selectedPo = [];
         }
     }
@@ -217,7 +195,10 @@ class HistoryAutoComponent extends Component
 
     public function search_filter_submit()
     {
-        $this->searchEngine();
+
+        $HosHistoryQuery =HosPostHistory::orderBy('unique_hash', 'DESC');
+        $this->mailHash = $this->hitSearchInt($HosHistoryQuery)->select('mail_hash')->get()->toArray();
+
     }
 
 
@@ -251,6 +232,7 @@ class HistoryAutoComponent extends Component
 
     public function searchEngine()
     {
+
         $query=SchedulerNotificationHistory::NotDel();
         if (!empty($this->selected_staff)){
             $query= $query->where('user_id',$this->selected_staff);
@@ -266,15 +248,24 @@ class HistoryAutoComponent extends Component
                 return  $query->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
             }
         }
+
+        if ( $this->mailHash) {
+            $query =$query->whereIn('mail_ticket_hash', $this->mailHash)->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%');
+        }
+
         if ($this->searchable_operator=='LIKE'){
-            return    $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+               $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+               return $query;
         }else{
             if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
                 return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('id', 'DESC')->paginate($this->number_of_rows);
             }else{
-                return  $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+                 $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+                return  $query;
             }
         }
+
+
     }
 
     public function render()

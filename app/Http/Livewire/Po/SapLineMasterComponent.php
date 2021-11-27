@@ -91,102 +91,64 @@ class SapLineMasterComponent extends Component
 
     public function hitSearchInt($query)
     {
-        if (Arr::has($this->tender_no, ['from','to'])){
-            $query=$query->whereBetween('tender_no',[$this->tender_no['from'],$this->tender_no['to']]);
-        }elseif (Arr::has($this->tender_no, ['from'])){
+       if (Arr::has($this->tender_no, ['from'])){
             $query=$query->where('tender_no',$this->tender_no['from']);
         }
-        if (Arr::has($this->tender_desc, ['from','to'])){
-            $query=$query->whereBetween('tender_desc',[$this->tender_desc['from'],$this->tender_desc['to']]);
-        }elseif (Arr::has($this->tender_desc, ['from'])){
+        if (Arr::has($this->tender_desc, ['from'])){
             $query=$query->where('tender_desc','LIKE',$this->tender_desc['from']);
         }
-        if (Arr::has($this->document_type, ['from','to'])){
-            $query=$query->whereBetween('document_type',[$this->document_type['from'],$this->document_type['to']]);
-        }elseif (Arr::has($this->document_type, ['from'])){
+        if (Arr::has($this->document_type, ['from'])){
 
             $query=$query->where('document_type',$this->document_type['from']);
         }
-        if (Arr::has($this->document_type_desc, ['from','to'])){
-            $query=$query->whereBetween('document_type_desc',[$this->document_type_desc['from'],$this->document_type_desc['to']]);
-        }elseif (Arr::has($this->document_type_desc, ['from'])){
+       if (Arr::has($this->document_type_desc, ['from'])){
             $query=$query->where('document_type_desc','LIKE',$this->document_type_desc['from']);
         }
-        if (Arr::has($this->init_po_number, ['from','to'])){
-            $query=$query->whereBetween('po_number',[$this->init_po_number['from'],$this->init_po_number['to']]);
-        }elseif (Arr::has($this->init_po_number, ['from'])){
+       if (Arr::has($this->init_po_number, ['from'])){
             $query=$query->where('po_number',$this->init_po_number['from']);
         }
-        if (Arr::has($this->purchasing_group, ['from','to'])){
-            $query=$query->whereBetween('total_recived_qty',[$this->purchasing_group['from'],$this->purchasing_group['to']]);
-        }elseif (Arr::has($this->purchasing_group, ['from'])){
+       if (Arr::has($this->purchasing_group, ['from'])){
             $query=$query->where('purchasing_group',$this->purchasing_group['from']);
         }
-        if (Arr::has($this->purchasing_organization, ['from','to'])){
-            $query=$query->whereBetween('purchasing_organization',[$this->purchasing_organization['from'],$this->purchasing_organization['to']]);
-        }elseif (Arr::has($this->purchasing_organization, ['from'])){
+       if (Arr::has($this->purchasing_organization, ['from'])){
             $query=$query->where('purchasing_organization',$this->purchasing_organization['from']);
         }
-        if (Arr::has($this->customer_no, ['from','to'])){
-            $query=$query->whereBetween('customer_no',[$this->customer_no['from'],$this->customer_no['to']]);
-        }elseif (Arr::has($this->customer_no, ['from'])){
+        if (Arr::has($this->customer_no, ['from'])){
             $query=$query->where('customer_no',$this->customer_no['from']);
         }
-        if (Arr::has($this->generic_mat_code, ['from','to'])){
-            $query=$query->whereBetween('generic_mat_code',[$this->generic_mat_code['from'],$this->generic_mat_code['to']]);
-        }elseif (Arr::has($this->generic_mat_code, ['from'])){
+        if (Arr::has($this->generic_mat_code, ['from'])){
             $query=$query->where('generic_mat_code',$this->generic_mat_code['from']);
         }
-        if (Arr::has($this->vendor_code, ['from','to'])){
-            $query=$query->whereBetween('vendor_code',[$this->vendor_code['from'],$this->vendor_code['to']]);
-        }elseif (Arr::has($this->vendor_code, ['from'])){
+        if (Arr::has($this->vendor_code, ['from'])){
             $query=$query->where('vendor_code',$this->vendor_code['from']);
         }
-        if (Arr::has($this->storage_location, ['from','to'])){
-            $query=$query->whereBetween('storage_location',[$this->storage_location['from'],$this->storage_location['to']]);
-        }elseif (Arr::has($this->storage_location, ['from'])){
+       if (Arr::has($this->storage_location, ['from'])){
             $query=$query->where('storage_location',$this->storage_location['from']);
         }
-        if (Arr::has($this->plant, ['from','to'])){
-            $query=$query->whereBetween('plant',[$this->plant['from'],$this->plant['to']]);
-        }elseif (Arr::has($this->plant, ['from'])){
+        if (Arr::has($this->plant, ['from'])){
             $query=$query->where('plant',$this->plant['from']);
         }
-        if (Arr::has($this->customer_name, ['from','to'])){
-            $query=$query->whereBetween('customer_name',[$this->customer_name['from'],$this->customer_name['to']]);
-        }elseif (Arr::has($this->customer_name, ['from'])){
+        if (Arr::has($this->customer_name, ['from'])){
             $query=$query->where('customer_name',$this->customer_name['from']);
         }
-        if (Arr::has($this->supply_ratio, ['from','to'])){
-            $query=$query->whereBetween('supply_ratio',[$this->supply_ratio['from'],$this->supply_ratio['to']]);
-        }elseif (Arr::has($this->supply_ratio, ['from'])){
+        if (Arr::has($this->supply_ratio, ['from'])){
             $query=$query->where('supply_ratio',$this->supply_ratio['from']);
         }
-        if (Arr::has($this->delivery_address, ['from','to'])){
-            $query=$query->whereBetween('delivery_address',[$this->delivery_address['from'],$this->delivery_address['to']]);
-        }elseif (Arr::has($this->delivery_address, ['from'])){
+        if (Arr::has($this->delivery_address, ['from'])){
             $query=$query->where('delivery_address',$this->delivery_address['from']);
         }
-        if (Arr::has($this->mat_description, ['from','to'])){
-            $query=$query->whereBetween('mat_description',[$this->mat_description['from'],$this->mat_description['to']]);
-        }elseif (Arr::has($this->mat_description, ['from'])){
+       if (Arr::has($this->mat_description, ['from'])){
             $query=$query->where('mat_description','LIKE',$this->mat_description['from']);
         }
-        if (Arr::has($this->cust_gen_code, ['from','to'])){
-            $query=$query->whereBetween('cust_gen_code',[$this->cust_gen_code['from'],$this->cust_gen_code['to']]);
-        }elseif (Arr::has($this->cust_gen_code, ['from'])){
+       if (Arr::has($this->cust_gen_code, ['from'])){
             $query=$query->where('cust_gen_code',$this->cust_gen_code['from']);
         }
-        if (Arr::has($this->vendor_name_en, ['from','to'])){
-            $query=$query->whereBetween('vendor_name_en',[$this->vendor_name_en['from'],$this->vendor_name_en['to']]);
-        }elseif (Arr::has($this->vendor_name_en, ['from'])){
+        if (Arr::has($this->vendor_name_en, ['from'])){
             $query=$query->where('vendor_name_en',$this->vendor_name_en['from']);
         }
         if(Arr::has($this->supplier_comment, ['from']) and $this->supplier_comment['from'] !='0' ){
             $query=$query->Saptmp($this->supplier_comment['from']);
         }
-
-
         if (Arr::has($this->nupco_delivery_date, ['from'])){
             $query=$query->whereBetween('nupco_delivery_date',[$this->nupco_delivery_date['from'],$this->nupco_delivery_date['to']]);
         }
@@ -386,7 +348,6 @@ class SapLineMasterComponent extends Component
 
     public function mount()
     {
-        // dd($this->searchEngine()->count());
         $this->fetchBaseInfo();
     }
 
@@ -428,8 +389,8 @@ class SapLineMasterComponent extends Component
 
     public function search_enter()
     {
-
-        $this->searchEngine();
+         $this->searchEngine();
+        // return $this->hitSearchInt($query);
     }
 
 
@@ -454,12 +415,6 @@ class SapLineMasterComponent extends Component
             $query = $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('vendor_code', 'ASC');
         }
         $query = $this->hitSearchInt($query);
-
-        // dd($this->customer_name);
-        // dd($this->document_type);
-        // dd($query->toSql());
-        Log::info("message",[$this->po_created_on]);
-
         return $query;
 
     }
@@ -468,39 +423,39 @@ class SapLineMasterComponent extends Component
     public function render()
     {
         $collections= $this->searchEngine()->paginate($this->number_of_rows);
-        $this->selectAllTmp=$collections->pluck('id')->toArray();
-        $collection_sap_po_types= DB::table('collection_sap_po_types')->pluck('document_type','document_type');
-        $collection_sap_pur_groups=  DB::table('collection_sap_pur_groups')->pluck('purchasing_group','purchasing_group');
-        $collection_sap_customer_names= DB::table('collection_sap_customer_names')->pluck('customer_name','customer_name');
-        $collection_sap_tender_nos=  DB::table('collection_sap_tender_nos')->pluck('tender_no','tender_no');
-        $collection_sap_tender_descs= DB::table('collection_sap_tender_descs')->pluck('tender_desc','tender_desc');
-        $collection_sap_vendor_name_ens= DB::table('collection_sap_vendor_name_ens')->pluck('vendor_name_en','vendor_name_en');
-        $collection_sap_po_numbers= DB::table('collection_sap_po_numbers')->pluck('po_number','po_number');
-        $collection_sap_generic_mat_codes= DB::table('collection_sap_generic_mat_codes')->pluck('generic_mat_code','generic_mat_code');
-        $collection_sap_cust_gen_codes= DB::table('collection_sap_cust_gen_codes')->pluck('cust_gen_code','cust_gen_code');
-        $collection_sap_mat_descriptions= DB::table('collection_sap_mat_descriptions')->pluck('mat_description','mat_description');
-        $collection_sap_delivery_address=  DB::table('collection_sap_delivery_address')->pluck('delivery_address','delivery_address');
-        $collection_sap_storage_locations= DB::table('collection_sap_storage_locations')->pluck('storage_location','storage_location');
-        $collection_sap_customer_nos=  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
-        $collection_vendor_codes= DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
-        $collection_sap_plnts= DB::table('collection_sap_plnts')->pluck('plant','plant');
+        // $this->selectAllTmp=$collections->pluck('id')->toArray();
+        // $collection_sap_po_types= DB::table('collection_sap_po_types')->pluck('document_type','document_type');
+        // $collection_sap_pur_groups=  DB::table('collection_sap_pur_groups')->pluck('purchasing_group','purchasing_group');
+        // $collection_sap_customer_names= DB::table('collection_sap_customer_names')->pluck('customer_name','customer_name');
+        // $collection_sap_tender_nos=  DB::table('collection_sap_tender_nos')->pluck('tender_no','tender_no');
+        // $collection_sap_tender_descs= DB::table('collection_sap_tender_descs')->pluck('tender_desc','tender_desc');
+        // $collection_sap_vendor_name_ens= DB::table('collection_sap_vendor_name_ens')->pluck('vendor_name_en','vendor_name_en');
+        // $collection_sap_po_numbers= DB::table('collection_sap_po_numbers')->pluck('po_number','po_number');
+        // $collection_sap_generic_mat_codes= DB::table('collection_sap_generic_mat_codes')->pluck('generic_mat_code','generic_mat_code');
+        // $collection_sap_cust_gen_codes= DB::table('collection_sap_cust_gen_codes')->pluck('cust_gen_code','cust_gen_code');
+        // $collection_sap_mat_descriptions= DB::table('collection_sap_mat_descriptions')->pluck('mat_description','mat_description');
+        // $collection_sap_delivery_address=  DB::table('collection_sap_delivery_address')->pluck('delivery_address','delivery_address');
+        // $collection_sap_storage_locations= DB::table('collection_sap_storage_locations')->pluck('storage_location','storage_location');
+        // $collection_sap_customer_nos=  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
+        // $collection_vendor_codes= DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
+        // $collection_sap_plnts= DB::table('collection_sap_plnts')->pluck('plant','plant');
 
         return view('livewire.po.sap-line-master-component',compact(
-            'collection_sap_po_types',
-            'collection_sap_pur_groups',
-            'collection_sap_customer_names',
-            'collection_sap_tender_nos',
-            'collection_sap_tender_descs',
-            'collection_sap_vendor_name_ens',
-            'collection_sap_po_numbers',
-            'collection_sap_generic_mat_codes',
-            'collection_sap_cust_gen_codes',
-            'collection_sap_mat_descriptions',
-            'collection_sap_delivery_address',
-            'collection_sap_storage_locations',
-            'collection_sap_customer_nos',
-            'collection_vendor_codes',
-            'collection_sap_plnts',
+            // 'collection_sap_po_types',
+            // 'collection_sap_pur_groups',
+            // 'collection_sap_customer_names',
+            // 'collection_sap_tender_nos',
+            // 'collection_sap_tender_descs',
+            // 'collection_sap_vendor_name_ens',
+            // 'collection_sap_po_numbers',
+            // 'collection_sap_generic_mat_codes',
+            // 'collection_sap_cust_gen_codes',
+            // 'collection_sap_mat_descriptions',
+            // 'collection_sap_delivery_address',
+            // 'collection_sap_storage_locations',
+            // 'collection_sap_customer_nos',
+            // 'collection_vendor_codes',
+            // 'collection_sap_plnts',
             'collections'
 
             ));

@@ -271,77 +271,7 @@
       </div>
 
   </div>
-@push('scripts')
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/moment/moment.min.js')}}"></script>
-<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/inputmask/jquery.inputmask.min.js')}}"></script>
-<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-
-<script>
-    $('.selectpicker').selectpicker(
-        {
-            liveSearchPlaceholder: 'Select Po Type'
-        }
-    );
-
-
-    $('#numberbox').keyup(function(){
-        if ($(this).val() > 100){
-            alert("No numbers above 100");
-            $(this).val('100');
-        }
-    });
-
-
-$(document).ready(function() {
-
-    var startpo_created_on;
-            var endpo_created_on;
-            $('#createDate').daterangepicker(
-           {
-              format: 'YYYY-MM-DD',
-           },
-           function(start, end) {
-            startpo_created_on = start;
-             endpo_created_on = end;
-
-           }
-        );
-            $('#createDate').val("");
-            $('#createDate').change(function () {
-                @this.set('po_created_on.from', startpo_created_on.format('YYYY-MM-DD'));
-                @this.set('po_created_on.to', endpo_created_on.format('YYYY-MM-DD'));
-
-            })
-
-
-
-
-            var startnupco_delivery_date;
-            var endnupco_delivery_date;
-            $('#deliveryDate').daterangepicker(
-           {
-              format: 'YYYY-MM-DD',
-           },
-           function(start, end) {
-            startnupco_delivery_date = start;
-             endnupco_delivery_date = end;
-
-           }
-        );
-            $('#deliveryDate').val("");
-            $('#deliveryDate').change(function () {
-                @this.set('nupco_delivery_date.from', startnupco_delivery_date.format('YYYY-MM-DD'));
-                @this.set('nupco_delivery_date.to', endnupco_delivery_date.format('YYYY-MM-DD'));
-            })
-
-});
-
-
-</script>
-
-@endpush
 
 @push('livewire-parent')
 @endpush

@@ -7,22 +7,22 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('broadcast_type')}}" wire:model.defer="broadcast_type.from" >
+          <input type="title" class="form-control"  placeholder="Tender Num" wire:model.defer="tender_num.from" >
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('mail_type')}}" wire:model.defer="mail_type.from" >
+          <input type="title" class="form-control"  placeholder="Vendor No" wire:model.defer="vendor_num.from" >
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('table_type')}}"  wire:model.defer="table_type.from" >
+          <input type="title" class="form-control"  placeholder="Po Number"  wire:model.defer="po_num.from" >
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('sender_name')}}" wire:model.defer="sender_name.from" >
+          <input type="title" class="form-control"  placeholder="Customer Code" wire:model.defer="cust_code.from" >
         </div>
       </div>
 
@@ -33,28 +33,24 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('recipient_name')}}" wire:model.defer="recipient_name.from" >
+          <input type="title" class="form-control"  placeholder="Po Item No" wire:model.defer="po_item_num.from" >
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('recipient_email')}}"  wire:model.defer="recipient_email.from" >
+          <input type="title" class="form-control"  placeholder="Uom"  wire:model.defer="uom.from" >
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="{{\App\Helpers\PoHelper::NormalizeColString('msg_subject')}}" wire:model.defer="msg_subject.from" >
+          <input type="title" class="form-control"  placeholder="Plant" wire:model.defer="plant.from" >
         </div>
       </div>
       <div class="col-md-3">
-        <div class="input-group date" id="reservationdate" data-target-input="nearest">
-            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" placeholder="{{\App\Helpers\PoHelper::NormalizeColString('last_executed_at')}}" wire:model.defer="last_executed_at.from">
-            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-            </div>
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Mat No" wire:model.defer="mat_num.from" >
         </div>
       </div>
-
     </div>
 
     <hr style="margin-top: 0px;">
@@ -79,14 +75,5 @@
   </div>
 
   @push('scripts')
-  <script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/daterangepicker/daterangepicker.js')}}"></script>
 
-  <script type="text/javascript">
-    $(function () {
-        //Date picker
-        $('#reservationdate').datetimepicker({
-            format: 'L'
-        });
-    });
- </script>
   @endpush

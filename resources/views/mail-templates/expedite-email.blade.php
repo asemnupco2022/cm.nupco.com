@@ -42,16 +42,16 @@ table.table-data {
                                     </tr>
 									<tr>
 										<td>
-											<div class="two_col" style="width: 60%;">
-                                                <h3>Subject: EXPEDITING LETTER.</h3>
+											{{-- <div class="two_col" style="width: 60%;"> --}}
+                                                {{-- <h3>Subject: EXPEDITING LETTER.</h3>
 												<p>Dear’ {{$mail_data['vendor_name_en']}}.</p>
 												<p style="padding-right: 20%;">Reference to Nupco Tender we hereby inform that delivery due
 													date for below list is approaching (5/Days from today). Kindly
 													expedite your efforts to submit the ASN enough time before the
-													due date based on below infomation:</p>
-											</div>
+													due date based on below infomation:</p> --}}
+											{{-- </div> --}}
 
-											<div class="two_col" style="width: 40%;">
+											<div class="two_col" style="width: 40%;float: right;">
 												<h3 dir="rtl" style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;">الموضوع: الحث على توريد  </h3>
 												<p dir="rtl">السادة / {{$mail_data['vendor_name_er']}} </p>
 												<p dir="rtl">إشارة لمنافسة نحيطكم علما بقرب انتهاء توريد الدفعة للبنود المذكورة أدناة (خلال 5 ايام من تاريخ اليوم) لذا نرجو منكم سرعة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية بناء على المعلومات ادناة:</p>
@@ -94,13 +94,13 @@ table.table-data {
 									<tr>
 										<td>
 											<div class="msg-box" style=" min-width: 300px; max-width: 300px;  padding: 0px 20px; float: left;margin-bottom: 20px;">
-												<p>In order to respond to this
+												{{-- <p>In order to respond to this
 													notification, you need to visit
-													Expediting portal:  <a href="https://sapeq1ap1.nupco.com:52601/irj/portal" target="_blank">HOS PORTAL</a></p>
+													Expediting portal:  <a href="https://sapeq1ap1.nupco.com:52601/irj/portal" target="_blank">HOS PORTAL</a></p> --}}
 
 											</div>
 											<div class="msg-box" style="min-width: 300px; max-width: 300px;  padding: 0px 20px; float: right; margin-bottom: 20px;">
-												<p dir="rtl" style="text-align: right;">للرد على هذا الاشعار يتوجب عليك زيارة موقع متابعة العقود على الرابط الاتي:  <a href="https://sapeq1ap1.nupco.com:52601/irj/portal" target="_blank">HOS PORTAL</a></p>
+												<p dir="rtl" style="text-align: right;">للرد على هذا الاشعار يتوجب عليك زيارة موقع متابعة العقود على الرابط الاتي:  <a href="https://tenders.nupco.com/irj/portal" target="_blank">HOS PORTAL</a></p>
 											</div>
 										</td>
 									</tr>
@@ -108,10 +108,10 @@ table.table-data {
 									<tr>
 										<td>
 											<div class="msg-box" style=" min-width: 300px; max-width: 300px;  padding: 0px 20px; float: left;margin-bottom: 20px;">
-												<p>Thank you for your cooperation and your response this
+												{{-- <p>Thank you for your cooperation and your response this
 													letter and look forward to a constructive and fruitful
 													cooperation to serve the patient and healthcare sector.</p>
-												<h5>Contract Expediate Team</h5>
+												<h5>Contract Expediate Team</h5> --}}
 											</div>
 											<div class="msg-box" style="min-width: 300px; max-width: 300px;  padding: 0px 20px; float: right;margin-bottom: 20px;">
 												<p dir="rtl" style="text-align: right;">شكرا على حسن تجاوبكم مع هذا الخطاب ونتطلع لتعاون بناء ومثمر لما يخدم المريض والقطاع الصحي.</p>

@@ -96,7 +96,7 @@
       </div>
       <div class="col-md-6">
         <div class="form-group">
-            <select class="form-control"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments">
+            <select class="form-control"  wire:model.defer="supplier_comment.from" style="text-align: right " placeholder="Please Choose Supplier Comments">
                 <option value="0" selected  >Please Choose Supplier Comments</option>
                 @if (\App\Models\SupplierCommentTypes::supplierCommets())
                 @foreach (\App\Models\SupplierCommentTypes::supplierCommets() as $key => $supComs)
