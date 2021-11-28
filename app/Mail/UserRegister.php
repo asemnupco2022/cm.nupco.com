@@ -31,6 +31,6 @@ class UserRegister extends Mailable
     {
         $email=$this->username;
         $password=$this->password;
-        return $this->view('mail.user-register',compact('email','password'));
+        return $this->markdown('mail.user-register',compact('email','password'));
     }
 }

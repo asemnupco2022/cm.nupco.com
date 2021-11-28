@@ -4,6 +4,7 @@
 Your Login Credencials are:
 
 Login ID: {{$email}}
+
 Login Password: {{$password}}
 
 @component('mail::button', ['url' =>  config('app.url') ])

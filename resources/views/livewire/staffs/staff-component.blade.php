@@ -101,7 +101,9 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'status' )==false?'hide':''}}" >
                                         <?php if($collection->status =='suspended'){ echo 'Deleted'; } else { echo \App\Helpers\PoHelper::NormalizeColString($collection->status); }?>
                                     <td>
+                                        @if ($collection->status !='suspended')
                                         <i class="fas fa-trash" style="cursor:pointer" title="delete" wire:click="updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)"></i>&nbsp;&nbsp;&nbsp;
+                                        @endif
                                         <i class="fas fa-edit" style="cursor:pointer" title="delete" wire:click="editStaff({{$collection->id}})"></i>
                                     </td>
 
@@ -167,7 +169,13 @@
 
     {{--    ===================--}}
 
-
+  <!-- loader -->
+  <div class="loading" wire:loading>
+    <div class='uil-ring-css' style='transform:scale(0.79);'>
+        <div></div>
+    </div>
+</div>
+<!-- loader -->
 
     {{--    ============Extra Large Model=========--}}
 

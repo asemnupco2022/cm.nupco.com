@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire\Staffs;
 
+use App\Mail\UserRegister;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 use rifrocket\LaravelCms\Models\LbsAdmin;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Str;
 
 class CreateStaffComponent extends Component
 {
@@ -35,14 +38,14 @@ class CreateStaffComponent extends Component
     public function updatedFirstName($value)
     {
         if ($this->first_name and $this->last_name){
-            $this->username=$this->first_name.$this->last_name;
+            $this->username=Str::replace(' ', '', ($this->first_name.$this->last_name));
         }
     }
 
     public function updatedLastName($value)
     {
         if ($this->first_name and $this->last_name){
-            $this->username=$this->first_name.$this->last_name;
+            $this->username=Str::replace(' ', '', ($this->first_name.$this->last_name));
         }
     }
 
@@ -68,6 +71,7 @@ class CreateStaffComponent extends Component
         $saveStaff->phone = $this->phone;
 
         if ($saveStaff->save()){
+            Mail::to($saveStaff)->send(new UserRegister($this->email, $this->username));
             $saveStaff->syncPermissions($this->permissions);
             $this->search_reset();
             return $this->emitNotifications('data updated successfully','success');

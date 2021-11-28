@@ -14,7 +14,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="exampleInputEmail1">Employee Number</label>
-                <input type="title" class="form-control"  placeholder="Enter Employee Number" wire:model="employee_num">
+                <input type="title" class="form-control"  placeholder="Enter Employee Number" wire:model.defer="employee_num">
                 @error('employee_num') <span class="error-msg">{{ $message  }}</span> @enderror
 
             </div>
@@ -42,7 +42,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control"  placeholder="Enter Email" wire:model="email">
+                <input type="email" class="form-control"  placeholder="Enter Email" wire:model.defer="email">
                 @error('email') <span class="erro-msg">{{ $message  }}</span> @enderror
             </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Contact</label>
-                <input type="title" class="form-control"  placeholder="Enter Contact No" wire:model="phone">
+                <input type="title" class="form-control"  placeholder="Enter Contact No" wire:model.defer="phone">
                 @error('phone') <span class="erro-msg">{{ $message  }}</span> @enderror
             </div>
         </div>
@@ -59,7 +59,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
-                <input type="title" class="form-control"  placeholder="Enter Username" wire:model="username" readonly disabled>
+                <input type="title" class="form-control"  placeholder="Enter Username" wire:model.defer="username" readonly disabled>
                 @error('username') <span class="erro-msg">{{ $message  }}</span> @enderror
             </div>
         </div>
@@ -86,6 +86,14 @@
 
 
     </div>
+
+      <!-- loader -->
+  <div class="loading"  wire:loading wire:target="saveStaff">
+    <div class='uil-ring-css' style='transform:scale(0.79);'>
+        <div></div>
+    </div>
+</div>
+<!-- loader -->
 
     @push('scripts')
 
