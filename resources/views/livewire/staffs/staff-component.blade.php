@@ -98,7 +98,8 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'role' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->role)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'phone' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->phone)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'permissions' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->getPermissionDisplayNames())}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'status' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->status)}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'status' )==false?'hide':''}}" >
+                                        <?php if($collection->status =='suspended'){ echo 'Deleted'; } else { echo \App\Helpers\PoHelper::NormalizeColString($collection->status); }?>
                                     <td>
                                         <i class="fas fa-trash" style="cursor:pointer" title="delete" wire:click="updateModelStatus({{$collection->id}},'{{ LbsConstants::STATUS_DELETED}}',1)"></i>&nbsp;&nbsp;&nbsp;
                                         <i class="fas fa-edit" style="cursor:pointer" title="delete" wire:click="editStaff({{$collection->id}})"></i>

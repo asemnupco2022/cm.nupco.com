@@ -150,7 +150,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Password</label>
-                <input type="title" class="form-control"  placeholder="Enter First Name" wire:model="password">
+                <input type="title" class="form-control"  placeholder="Enter Password" wire:model="password">
                 @error('password') <span class="error-msg">{{ $message  }}</span> @enderror
             </div>
         </div>
@@ -158,7 +158,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="exampleInputEmail1">Confirm Password</label>
-                <input type="title" class="form-control"  placeholder="Enter First Name" wire:model="password_confirmation">
+                <input type="title" class="form-control"  placeholder="Confirm Password" wire:model="password_confirmation">
                 @error('password_confirmation') <span class="error-msg">{{ $message  }}</span> @enderror
             </div>
         </div>

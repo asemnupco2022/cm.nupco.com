@@ -37,6 +37,7 @@ class StaffComponent extends Component
 
     public $staffs=[];
     public $selectAll=false;
+    public $selectedPo=[];
 
     public function mount()
     {
@@ -96,10 +97,12 @@ class StaffComponent extends Component
 
             if ($statusType == LbsConstants::STATUS_DELETED) {
                 $findModel->deleted_at = Carbon::now();
+                $findModel->status = 'suspended';
                 $findModel->save();
                 return $this->emitNotifications('deleted successfully', 'success');
             } else {
                 $findModel->status = $this->selected_bulk_action;
+                $findModel->deleted_at = null;
                 $findModel->save();
             }
         }
@@ -115,7 +118,7 @@ class StaffComponent extends Component
 
     public function searchEngine()
     {
-        $query=LbsAdmin::NotDel()->where('role', '!=' , LbsConstants::SUPER_ADMIN_ROLE);
+        $query=LbsAdmin::where('role', '!=' , LbsConstants::SUPER_ADMIN_ROLE);
 
         if (!empty($this->selected_staff)){
             $query= $query->where('user_id',$this->selected_staff);
