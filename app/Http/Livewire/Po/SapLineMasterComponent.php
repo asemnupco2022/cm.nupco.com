@@ -313,6 +313,7 @@ class SapLineMasterComponent extends Component
     public function search_reset()
     {
         return redirect()->route('web.route.po.SAPTableLineItems');
+
         $this->selectAll=false;
         $this->getFilterTemplate='';
         $this->json_data=null;
