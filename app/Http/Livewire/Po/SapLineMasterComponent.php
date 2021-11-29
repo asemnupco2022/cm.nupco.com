@@ -188,7 +188,7 @@ class SapLineMasterComponent extends Component
     public function export_data($type)
     {
 
-        $ColKeys = array_keys(array_filter($this->columns));
+        $ColKeys = array_keys(array_filter($this->columnsNormalized));
 
         $selectedRows = array_keys(array_filter($this->selectedPo));
         $collectionCount = PoSapMaster::whereIn('id',$selectedRows)->count();
@@ -359,7 +359,7 @@ class SapLineMasterComponent extends Component
 
         $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->first();
         if ( $StaffColumnSet) {
-            $this->columns = json_decode($StaffColumnSet->columns, true);
+            $this->columnsNormalized = json_decode($StaffColumnSet->columns, true);
         }
     }
 
@@ -370,7 +370,7 @@ class SapLineMasterComponent extends Component
             'unique_line'=>$this->tableType.'_'.auth()->user()->id,
             'user_id'=>auth()->user()->id,
             'table_type'=>$this->tableType,
-            'columns'=>json_encode($this->columns),
+            'columns'=>json_encode($this->columnsNormalized),
         ];
 
         if (StaffColumnSet::where('unique_line',$uniue_line)->exists()) {
@@ -423,39 +423,11 @@ class SapLineMasterComponent extends Component
     public function render()
     {
         $collections= $this->searchEngine()->paginate($this->number_of_rows);
-        // $this->selectAllTmp=$collections->pluck('id')->toArray();
-        // $collection_sap_po_types= DB::table('collection_sap_po_types')->pluck('document_type','document_type');
-        // $collection_sap_pur_groups=  DB::table('collection_sap_pur_groups')->pluck('purchasing_group','purchasing_group');
-        // $collection_sap_customer_names= DB::table('collection_sap_customer_names')->pluck('customer_name','customer_name');
-        // $collection_sap_tender_nos=  DB::table('collection_sap_tender_nos')->pluck('tender_no','tender_no');
-        // $collection_sap_tender_descs= DB::table('collection_sap_tender_descs')->pluck('tender_desc','tender_desc');
-        // $collection_sap_vendor_name_ens= DB::table('collection_sap_vendor_name_ens')->pluck('vendor_name_en','vendor_name_en');
-        // $collection_sap_po_numbers= DB::table('collection_sap_po_numbers')->pluck('po_number','po_number');
-        // $collection_sap_generic_mat_codes= DB::table('collection_sap_generic_mat_codes')->pluck('generic_mat_code','generic_mat_code');
-        // $collection_sap_cust_gen_codes= DB::table('collection_sap_cust_gen_codes')->pluck('cust_gen_code','cust_gen_code');
-        // $collection_sap_mat_descriptions= DB::table('collection_sap_mat_descriptions')->pluck('mat_description','mat_description');
-        // $collection_sap_delivery_address=  DB::table('collection_sap_delivery_address')->pluck('delivery_address','delivery_address');
-        // $collection_sap_storage_locations= DB::table('collection_sap_storage_locations')->pluck('storage_location','storage_location');
-        // $collection_sap_customer_nos=  DB::table('collection_sap_customer_nos')->pluck('customer_no','customer_no');
-        // $collection_vendor_codes= DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
-        // $collection_sap_plnts= DB::table('collection_sap_plnts')->pluck('plant','plant');
+        $this->selectAllTmp=$collections->pluck('id')->toArray();
+
 
         return view('livewire.po.sap-line-master-component',compact(
-            // 'collection_sap_po_types',
-            // 'collection_sap_pur_groups',
-            // 'collection_sap_customer_names',
-            // 'collection_sap_tender_nos',
-            // 'collection_sap_tender_descs',
-            // 'collection_sap_vendor_name_ens',
-            // 'collection_sap_po_numbers',
-            // 'collection_sap_generic_mat_codes',
-            // 'collection_sap_cust_gen_codes',
-            // 'collection_sap_mat_descriptions',
-            // 'collection_sap_delivery_address',
-            // 'collection_sap_storage_locations',
-            // 'collection_sap_customer_nos',
-            // 'collection_vendor_codes',
-            // 'collection_sap_plnts',
+
             'collections'
 
             ));
