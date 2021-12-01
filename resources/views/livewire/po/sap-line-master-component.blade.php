@@ -241,7 +241,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->uniue_hash??"null" }}')">
+                                    <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
                                         <span class="badge bg-teal bg-maroon">{{$collection->VendorlComentCount}}</span>
                                         <i class="far fa-comment-alt"></i>
                                     </a>
