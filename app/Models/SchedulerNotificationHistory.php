@@ -36,4 +36,30 @@ class SchedulerNotificationHistory extends Model
         return $this->belongsTo(LbsMember::class, 'recipient_user_id','id');
     }
 
+
+    public function getAllTicketCountAttribute()
+    {
+        $mail_hash =$this->attributes['mail_ticket_hash'];
+        $unique_hash =  HosPostHistory::where('mail_hash',$mail_hash )->first();
+
+        if($unique_hash){
+        $unique_hash=$unique_hash->unique_hash;
+          return  TicketManager::where('ticket_hash',$unique_hash)->get()->count();
+        }
+        return 0;
+    }
+
+
+    public function getReadTicketCountAttribute()
+    {
+        $mail_hash =$this->attributes['mail_ticket_hash'];
+        $unique_hash =  HosPostHistory::where('mail_hash',$mail_hash )->first();
+
+        if($unique_hash){
+        $unique_hash=$unique_hash->unique_hash;
+          return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
+        }
+        return 0;
+    }
+
 }

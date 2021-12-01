@@ -140,8 +140,8 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->last_executed_at)}}</td>
                                     <td>
                                         <a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a>&nbsp;
-                                        <span class="right badge badge-success" title="total coments">{{\App\Helpers\PoHelper::unreadMessages('middle-all',$collection->mail_ticket_hash)}}</span>&nbsp;
-                                        <span class="right badge badge-danger" title="unread comments">{{\App\Helpers\PoHelper::unreadMessages('middle',$collection->mail_ticket_hash)}}</span>
+                                        <span class="right badge badge-success" title="total coments">{{$collection->AllTicketCount}}</span>&nbsp;
+                                        <span class="right badge badge-danger" title="unread comments">{{$collection->ReadTicketCount}}</span>
 
                                     </td>
                                 </tr>

@@ -140,7 +140,6 @@ class PoHelper
 
     public static function unreadMessages( $level, $data=null)
     {
-
         if ($level=='top'){
             return   TicketManager::where('msg_read_at', null)->get()->count();
         }
