@@ -71,7 +71,8 @@ class HosController extends Controller
             $supplier_comment=PoHelper::NormalizeColString($request->vendor_comment[0]);
 
             $saptmp=[
-                'supplier_comment'=>$supplier_comment
+                'supplier_comment'=>$supplier_comment,
+                "unique_hash"=>$hosHistory->unique_hash,
             ];
             PoHelper::sapMasterTmp($saptmp,$hosHistory->po_num, $hosHistory->po_item_num);
 
