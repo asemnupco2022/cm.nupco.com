@@ -116,16 +116,16 @@ class TicketManagerComponent extends Component
                     $operator=$searchableItem['queryOpr'];
                     $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
                 }
-                return  $query->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+                return  $query->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
             }
         }
         if ($this->searchable_operator=='LIKE'){
-            return    $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+            return    $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
         }else{
             if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-                return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+                return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
             }else{
-                return  $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+                return  $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
             }
         }
     }

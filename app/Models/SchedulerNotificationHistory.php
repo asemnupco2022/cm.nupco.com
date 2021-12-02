@@ -30,6 +30,9 @@ class SchedulerNotificationHistory extends Model
         'last_executed_at' => true,
     ];
 
+    protected $fillable = [
+        'updated_at',
+    ];
 
     public function venodInfo()
     {

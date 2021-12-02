@@ -97,7 +97,7 @@ class TicketChatComponent extends Component
         $insert->msg_read_at=Carbon::now();
         if ($insert->save()){
 
-
+            SchedulerNotificationHistory::where('mail_ticket_hash',base64_decode($this->mail_ticket_hash))->first()->update(['updated_at'=>Carbon::now()]);
 
             $this->sendToHos($this->ticketParent->VendorData->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
 

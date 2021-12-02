@@ -6,7 +6,9 @@ use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
 use App\Models\HosResponseLog;
 use App\Models\PoSapMaster;
+use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -67,6 +69,8 @@ class HosController extends Controller
             $insert->save();
 
             Log::info('HOS-API-LOG',[$insert]);
+
+            SchedulerNotificationHistory::where('mail_ticket_hash',$hosHistory->hasNotificationHistory->mail_ticket_hash)->first()->update(['updated_at'=>Carbon::now()]);
 
             $supplier_comment=PoHelper::NormalizeColString($request->vendor_comment[0]);
 
