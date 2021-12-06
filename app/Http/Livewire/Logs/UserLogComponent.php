@@ -23,7 +23,7 @@ class UserLogComponent extends Component
 
     public $columns=[
         "log_name"=>true,
-        "description"=>false,
+        "description"=>true,
         "subject_type"=>true,
         "subject_id"=>true,
         "causer_type"=>true,
@@ -32,6 +32,11 @@ class UserLogComponent extends Component
         "created_at"=>true,
         "updated_at"=>false,
     ];
+
+    public function mount()
+    {
+        // $lastcLoggedActivity->description);
+    }
 
     public $selectedPo=[];
     public $selectAll=false;

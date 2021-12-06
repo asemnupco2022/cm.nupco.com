@@ -159,8 +159,10 @@
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{$collection->last_executed_at}}</td>
 
                                     <td>
-                                        <i class="fas fa-eye"  style="cursor:pointer" title="view" wire:click="view_email({{$collection->id }})"></i> 	&nbsp;	&nbsp;
-{{--                                        <i class="fas fa-download" style="cursor:pointer" title="download mail"  wire:click="download_email({{$collection->id }})"></i>--}}
+                                        <i class="fas fa-print"  style="cursor:pointer" title="view" wire:click="view_email({{$collection->id }})"></i> 	&nbsp;	&nbsp;
+                                    {{-- <a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a>&nbsp;
+                                    <span class="right badge badge-success" title="total coments">{{$collection->AllTicketCount}}</span>&nbsp;
+                                    <span class="right badge badge-danger" title="unread comments">{{$collection->ReadTicketCount}}</span> --}}
                                     </td>
                                  </tr>
                             @endforeach

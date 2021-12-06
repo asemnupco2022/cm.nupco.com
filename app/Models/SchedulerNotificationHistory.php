@@ -13,10 +13,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class SchedulerNotificationHistory extends Model
 {
-    use LogsActivity,UniversalModelTrait, HasFactory;
+    use UniversalModelTrait, HasFactory;
 
-    const LOG_NAME='LOG_SCHEDULE_HISTORY';
+    use LogsActivity;
+    const LOG_NAME='LOG SCHEDULE HISTORY';
     protected static $logName = SchedulerNotificationHistory::LOG_NAME;
+    protected static $recordEvents = ['created'];
+
     public $operators=LbsConstants::CONST_OPERATOR;
 
     const CONS_COLUMNS = [

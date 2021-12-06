@@ -245,7 +245,7 @@ class HistoryAutoComponent extends Component
                     $operator=$searchableItem['queryOpr'];
                     $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
                 }
-                return  $query->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+                return  $query->orderBy('id', 'DESC')->paginate($this->number_of_rows);
             }
         }
 

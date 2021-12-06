@@ -14,7 +14,9 @@ class LbsUserSearchSet extends Model
 {
     use HasFactory,UniversalModelTrait, LogsActivity;
 
-    const LOG_NAME='LOG_SEARCH_TEMPLATE';
+    const LOG_NAME='LOG SEARCH TEMPLATE';
+    protected static $logName = LbsUserSearchSet::LOG_NAME;
+
     const TEMPLATE_ALL='all';
     const TEMPLATE_NOTIFICATION_HISTORY='notification_history';
 
@@ -38,7 +40,7 @@ class LbsUserSearchSet extends Model
     ];
 
     public $operators=LbsConstants::CONST_OPERATOR;
-    protected static $logName = LbsUserSearchSet::LOG_NAME;
+
 
 
 

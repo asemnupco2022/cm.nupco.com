@@ -13,11 +13,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class PoSapMaster extends Model
 {
-    use HasFactory, UniversalModelTrait, LogsActivity;
+    use HasFactory, UniversalModelTrait;
 
 
-    const LOG_NAME='LOG_PO_SAP';
-    protected static $logName = PoSapMaster::LOG_NAME;
 
     const CONS_COLUMNS = [
 

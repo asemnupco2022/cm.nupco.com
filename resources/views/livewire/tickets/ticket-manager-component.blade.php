@@ -137,7 +137,7 @@
                                     @endif
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'recipient_email' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->recipient_email)}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'msg_subject' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->msg_subject)}}</td>
-                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->updated_at)}}4</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columns, 'last_executed_at' )==false?'hide':''}}" >{{$collection->last_executed_at}}</td>
                                     <td>
                                         <a href="{{route('web.route.ticket.manager.chat',['token'=>base64_encode($collection->mail_ticket_hash )])}}"><i class="fas fa-eye"></i></a>&nbsp;
                                         <span class="right badge badge-success" title="total coments">{{$collection->AllTicketCount}}</span>&nbsp;

@@ -9,10 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class PoMowaredMaster extends Model
 {
-    use HasFactory , UniversalModelTrait, LogsActivity;
+    use HasFactory , UniversalModelTrait;
 
 
-    const LOG_NAME='LOG_PO_MOWARE';
-
-    protected static $logName = PoMowaredMaster::LOG_NAME;
 }

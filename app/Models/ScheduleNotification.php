@@ -14,7 +14,7 @@ class ScheduleNotification extends Model
 {
 use LogsActivity,UniversalModelTrait, HasFactory;
 
-    const LOG_NAME='LOG_SCHEDULE_AUTOMATE';
+    const LOG_NAME='LOG SCHEDULE AUTOMATE';
     protected static $logName = ScheduleNotification::LOG_NAME;
     public $operators=LbsConstants::CONST_OPERATOR;
 

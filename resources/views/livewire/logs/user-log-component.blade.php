@@ -30,7 +30,7 @@
 
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_col" title="Select Search Column">
                                         @foreach($columns as $colKey => $column)
-                                            <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ \App\Helpers\PoHelper::NormalizeColString($colKey)  }}</option>
+                                            <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{\App\Helpers\PoHelper::NormalizeColString($colKey)}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -135,7 +135,7 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'description' )==false?'hide':''}}" >{{$collection->description}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_type' )==false?'hide':''}}" >{{$collection->subject_type}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_id' )==false?'hide':''}}" >{{$collection->subject_id}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_type' )==false?'hide':''}}" >{{$collection->causer_type}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_type' )==false?'hide':''}}" >{{$collection->causer->username}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_id' )==false?'hide':''}}" >{{$collection->causer_id}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'properties' )==false?'hide':''}}" >{{$collection->properties}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'created_at' )==false?'hide':''}}" >{{$collection->created_at}}</td>
