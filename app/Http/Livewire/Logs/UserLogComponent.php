@@ -23,14 +23,14 @@ class UserLogComponent extends Component
 
     public $columns=[
         "log_name"=>true,
-        "description"=>true,
-        "subject_type"=>true,
-        "subject_id"=>true,
         "causer_type"=>true,
-        "causer_id"=>true,
-        "properties"=>true,
+        "description"=>true,
+        // "subject_type"=>true,
+        // "subject_id"=>true,
+        // "causer_id"=>true,
+        // "properties"=>true,
         "created_at"=>true,
-        "updated_at"=>false,
+        // "updated_at"=>false,
     ];
 
     public function mount()

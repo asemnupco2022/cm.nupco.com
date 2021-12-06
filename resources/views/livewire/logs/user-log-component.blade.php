@@ -132,14 +132,15 @@
                                     </div>
                                 </td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'log_name' )==false?'hide':''}}" >{{$collection->log_name}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'description' )==false?'hide':''}}" >{{$collection->description}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_type' )==false?'hide':''}}" >{{$collection->subject_type}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_id' )==false?'hide':''}}" >{{$collection->subject_id}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_type' )==false?'hide':''}}" >{{$collection->causer->username}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_id' )==false?'hide':''}}" >{{$collection->causer_id}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'properties' )==false?'hide':''}}" >{{$collection->properties}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'description' )==false?'hide':''}}" >{{$collection->description}}</td>
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_type' )==false?'hide':''}}" >{{$collection->subject_type}}</td> --}}
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_id' )==false?'hide':''}}" >{{$collection->subject_id}}</td> --}}
+
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_id' )==false?'hide':''}}" >{{$collection->causer_id}}</td> --}}
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'properties' )==false?'hide':''}}" >{{$collection->properties}}</td> --}}
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'created_at' )==false?'hide':''}}" >{{$collection->created_at}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'updated_at' )==false?'hide':''}}" >{{$collection->updated_at}}</td>
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'updated_at' )==false?'hide':''}}" >{{$collection->updated_at}}</td> --}}
 
                             </tr>
                         @endforeach
