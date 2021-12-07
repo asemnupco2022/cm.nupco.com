@@ -35,5 +35,7 @@ class CustomerReport extends Model
         'json_data',
         'status',
         'suspendReason',
+        'customer_email',
+        'customer_phone',
     ];
 }

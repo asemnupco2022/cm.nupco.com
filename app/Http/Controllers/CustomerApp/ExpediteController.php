@@ -35,6 +35,8 @@ class ExpediteController extends Controller
             'json_data'=>$request->json_data,
             'status'=>$request->status,
             'suspendReason'=>$request->suspendReason,
+            'customer_email'=>$request->customer_email,
+            'customer_phone'=>$request->customer_phone,
         ];
 
         try {
