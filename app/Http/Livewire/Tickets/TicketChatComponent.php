@@ -45,7 +45,7 @@ class TicketChatComponent extends Component
     public function fetchBaseInfo(){
 
         $this->notificationHistory =SchedulerNotificationHistory::where('mail_ticket_hash',base64_decode($this->mail_ticket_hash))->first();
-        $this->allLineItems=HosPostHistory::where('mail_hash',base64_decode($this->mail_ticket_hash))->get();
+        $this->allLineItems=HosPostHistory::where('mail_hash',base64_decode($this->mail_ticket_hash))->orderBy('updated_at', 'DESC')->get();
     }
 
     public function fetchChat($value)

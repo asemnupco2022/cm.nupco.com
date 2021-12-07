@@ -71,7 +71,7 @@ class HosController extends Controller
             Log::info('HOS-API-LOG',[$insert]);
 
             SchedulerNotificationHistory::where('mail_ticket_hash',$hosHistory->hasNotificationHistory->mail_ticket_hash)->first()->update(['updated_at'=>Carbon::now()]);
-
+            HosPostHistory::where('unique_hash',$hosHistory->unique_hash)->first()->update(['updated_at'=>Carbon::now()]);
             $supplier_comment=PoHelper::NormalizeColString($request->vendor_comment[0]);
 
             $saptmp=[

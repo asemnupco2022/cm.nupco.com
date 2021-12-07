@@ -10,6 +10,10 @@ class HosPostHistory extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'updated_at',
+    ];
+    
     public function hasNotificationHistory()
     {
         return $this->belongsTo(SchedulerNotificationHistory::class,'mail_hash','mail_ticket_hash');
