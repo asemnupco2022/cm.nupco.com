@@ -46,26 +46,38 @@ class SchedulerNotificationHistory extends Model
     public function getAllTicketCountAttribute()
     {
         $mail_hash =$this->attributes['mail_ticket_hash'];
-        $unique_hash =  HosPostHistory::where('mail_hash',$mail_hash )->first();
+        $unique_hash =  HosPostHistory::where('mail_hash',$mail_hash )->get();
+$counter =0;
+        if($unique_hash and ! $unique_hash->isEmpty()){
 
-        if($unique_hash){
-        $unique_hash=$unique_hash->unique_hash;
-          return  TicketManager::where('ticket_hash',$unique_hash)->get()->count();
+            foreach ($unique_hash as $key => $value) {
+
+
+        $unique_hash_=$value->unique_hash;
+          $counter =$counter +  TicketManager::where('ticket_hash',$unique_hash_)->get()->count();
+
         }
-        return 0;
+        }
+        return $counter;
     }
 
 
     public function getReadTicketCountAttribute()
     {
         $mail_hash =$this->attributes['mail_ticket_hash'];
-        $unique_hash =  HosPostHistory::where('mail_hash',$mail_hash )->first();
+        $unique_hash =  HosPostHistory::where('mail_hash',$mail_hash )->get();
+$counter =0;
+        if($unique_hash and ! $unique_hash->isEmpty()){
 
-        if($unique_hash){
-        $unique_hash=$unique_hash->unique_hash;
-          return  TicketManager::where('ticket_hash',$unique_hash)->where('msg_read_at', null)->get()->count();
+            foreach ($unique_hash as $key => $value) {
+
+
+        $unique_hash_=$value->unique_hash;
+          $counter =$counter +  TicketManager::where('ticket_hash',$unique_hash_)->where('msg_read_at', null)->get()->count();
+
         }
-        return 0;
+        }
+        return $counter;
     }
 
 }
