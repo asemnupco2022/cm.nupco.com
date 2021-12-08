@@ -132,7 +132,7 @@
                                     </div>
                                 </td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'log_name' )==false?'hide':''}}" >{{$collection->log_name}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_type' )==false?'hide':''}}" >{{$collection->causer->username}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columns, 'causer_type' )==false?'hide':''}}" >{{$collection->causer_type == null ?'AutoMated':$collection->causer->username}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columns, 'description' )==false?'hide':''}}" >{{$collection->description}}</td>
                                 {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_type' )==false?'hide':''}}" >{{$collection->subject_type}}</td> --}}
                                 {{-- <td  class="{{\Illuminate\Support\Arr::get($columns, 'subject_id' )==false?'hide':''}}" >{{$collection->subject_id}}</td> --}}
