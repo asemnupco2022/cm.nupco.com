@@ -45,7 +45,7 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="init_po_number.from" >
+          <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="po_number.from" >
         </div>
       </div>
       <div class="col-md-3">

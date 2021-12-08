@@ -22,7 +22,7 @@ class AdvanceFilterComponent extends Component
     public $tender_desc = [];
     public $document_type = [];
     public $document_type_desc = [];  //string
-    public $init_po_number = [];
+    public $po_number = [];
     public $purchasing_group = [];
     public $purchasing_organization = [];
     public $customer_no = [];
@@ -78,8 +78,8 @@ class AdvanceFilterComponent extends Component
         if (Arr::has($this->document_type_desc, ['from'])){
             array_push($holdArray,['queryCol'=>'document_type_desc' , 'queryOpr'=>'LIKE' , 'queryVal'=>$this->document_type_desc['from']]);
         }
-        if (Arr::has($this->init_po_number, ['from'])){
-             array_push($holdArray,['queryCol'=>'init_po_number' , 'queryOpr'=>'=' , 'queryVal'=>$this->init_po_number['from']]);
+        if (Arr::has($this->po_number, ['from'])){
+             array_push($holdArray,['queryCol'=>'po_number' , 'queryOpr'=>'=' , 'queryVal'=>$this->po_number['from']]);
         }
         if (Arr::has($this->purchasing_group, ['from'])){
              array_push($holdArray,['queryCol'=>'purchasing_group' , 'queryOpr'=>'=' , 'queryVal'=>$this->purchasing_group['from']]);
@@ -179,7 +179,7 @@ class AdvanceFilterComponent extends Component
         $this->tender_desc = [];
         $this->document_type = [];
         $this->document_type_desc = [];  //string
-        $this->init_po_number = [];
+        $this->po_number = [];
         $this->purchasing_group = [];
         $this->purchasing_organization = [];
         $this->customer_no = [];
