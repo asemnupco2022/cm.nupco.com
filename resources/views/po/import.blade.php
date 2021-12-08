@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Impport PO</h3>
+            <h3 class="card-title">Import PO</h3>
 
             <div class="card-tools">
 {{--           add something--}}

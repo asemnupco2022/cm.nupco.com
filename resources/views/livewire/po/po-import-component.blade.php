@@ -18,7 +18,7 @@
 
         <div class="col-md-6">
             <div class="form-group">
-                <label>Chose PO System</label>
+                <label>Choose PO System</label>
                 <select class="form-control select2bs4" style="width: 100%;" wire:model="selectedPO">
                     <option value="0">Please Select PO</option>
                     <option value="sap">SAP</option>
