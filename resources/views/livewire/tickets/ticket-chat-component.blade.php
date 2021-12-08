@@ -269,7 +269,7 @@
                 <div class="input-group chat_send_btn">
 
                     <input type="text" name="message" placeholder="Type Message ..." class="form-control"
-                           wire:model="msg_body">
+                           wire:model.defer="msg_body">
                     <div class="upload_file_chat">
                         <div class="btn btn-default btn-file">
                             <i class="fas fa-paperclip"></i>
@@ -296,12 +296,21 @@
 </div>
 <!-- /.row -->
 
+        <!-- loader -->
+        <div class="loading" wire:loading>
+            <div class='uil-ring-css' style='transform:scale(0.79);'>
+                <div></div>
+            </div>
+        </div>
+        <!-- loader -->
+
     <script>
         window.addEventListener('load', event => {
             $('.direct-chat-messages').animate({scrollTop: document.body.scrollHeight},"fast");
         })
 
         window.addEventListener('scroll-down-chat', event => {
+
             $('.direct-chat-messages').animate({scrollTop: document.body.scrollHeight},"fast");
         })
     </script>

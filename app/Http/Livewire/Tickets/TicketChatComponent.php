@@ -133,8 +133,8 @@ class TicketChatComponent extends Component
     public function restInputs()
     {
         $this->msg_body=null;
-        $this->ticketHash=null;
-        $this->ticketParent=null;
+        // $this->ticketHash=null;
+        // $this->ticketParent=null;
         $this->attachment=null;
         $this->attachmentName =null;
     }
