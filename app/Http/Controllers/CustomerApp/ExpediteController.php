@@ -11,11 +11,13 @@ class ExpediteController extends Controller
 {
    public function store_expediet(Request $request)
    {
+
+
         $v = Validator::make($request->all(), [
             'customer_name_en' => 'required',
             'region' => 'required',
-            'po_number' => 'required',
-            'item_details' => 'required',
+            //'po_number' => 'required',
+            //'item_details' => 'required',
         ]);
 
         if ($v->fails())
@@ -28,20 +30,16 @@ class ExpediteController extends Controller
             'customer_name_en'=>$request->customer_name_en,
             'customer_name_ar'=>$request->customer_name_ar,
             'region'=>$request->region,
-            'tendor_no'=>$request->tendor_no,
             'tendor_description'=>$request->tendor_description,
-            'po_number'=>$request->po_number,
-            'item_details'=>$request->item_details,
-            'json_data'=>$request->json_data,
-            'status'=>$request->status,
-            'suspendReason'=>$request->suspendReason,
             'customer_email'=>$request->customer_email,
             'customer_phone'=>$request->customer_phone,
+	    'file_name'=>$request->file_name,
+	    'file_path'=>$request->file_path,
         ];
 
         try {
 
-            $insert = CustomerReport::created($inserData);
+            $insert = CustomerReport::create($inserData);
             return response()->json(['status'=>1,'message'=>'data saved successfully!']);
         } catch (\Throwable $th) {
             return response()->json(['status'=>0,'message'=>'there is something wrong: '.$th->getMessage()]);

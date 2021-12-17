@@ -37,5 +37,7 @@ class CustomerReport extends Model
         'suspendReason',
         'customer_email',
         'customer_phone',
+        'file_name',
+        'file_path',
     ];
 }
