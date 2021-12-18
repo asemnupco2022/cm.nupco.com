@@ -55,11 +55,11 @@ return [
         'nupco_remote_dev'=>[
 
             'driver' => 'sftp',
-            'host' => '10.1.12.92',
+            'host' => 'saphp1ap1',
             'port' => 22,
-            'username' => 'cm_sftp_user',
-            'password' => 'Nup$2030cm',
-            'root' => '/var/ftp/CM_Portal_Data/QA',
+            'username' => 'sftp.user',
+            'password' => 'Nup_4050f',
+            'root' => '/software/CM_Portal_Data/QA',
             'timeout' => 10,
 
         ],
