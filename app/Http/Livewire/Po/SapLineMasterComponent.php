@@ -50,6 +50,7 @@ class SapLineMasterComponent extends Component
     public $selectedPo=[];
     public $selectAll=false;
     public $selectAllTmp=[];
+    public $selectAllCols=false;
 
 
     public $number_of_rows=10;
@@ -181,6 +182,25 @@ class SapLineMasterComponent extends Component
         else
         {
             $this->selectedPo = [];
+        }
+    }
+
+    public function updatedSelectAllCols($value)
+    {
+
+        if ($value)
+        {
+
+            $this->columnsNormalized = array_keys($this->columnsNormalized);
+
+            $this->columnsNormalized = array_fill_keys($this->columnsNormalized, true);
+
+        }
+        else
+        {
+            $this->columnsNormalized = array_keys($this->columnsNormalized);
+
+            $this->columnsNormalized = array_fill_keys($this->columnsNormalized, false);
         }
     }
 

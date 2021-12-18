@@ -88,6 +88,14 @@
                             </button>
                         </div>
                         <div class="download_btn">
+
+                            <button type="button" class="btn btn-warning btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-filter-notification-history">
+                                <i class="fas fa-filter"></i>
+                                </button>
+                                <button type="submit" class="btn btn-warning btn-sm flat btn-sm"  title="Reset Current Filter" wire:click="search_reset">
+                                <i class="fas fa-sync"></i>
+                            </button>
+
                         <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
                                 DOWNLOAD PDF
                             </button>
@@ -221,6 +229,26 @@
     </div>
     <!-- /.modal -->
 
+
+    <div class="modal" id="modal-filter-notification-history" data-backdrop="false">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Filter Notification</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                    </button>
+                  </div>
+                <div class="modal-body">
+                    @include('livewire.tickets.notification-history-filter-template')
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
     {{--    ===================--}}
 
 
@@ -229,7 +257,13 @@
 
 
     {{--    ============Extra Large Model=========--}}
-
+  <!-- loader -->
+  <div class="loading" wire:loading>
+    <div class='uil-ring-css' style='transform:scale(0.79);'>
+        <div></div>
+    </div>
+</div>
+<!-- loader -->
 
     @push('scripts')
 

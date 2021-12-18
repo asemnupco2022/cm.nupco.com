@@ -101,14 +101,16 @@ class PoHelper
         $schedulerHistory->recipient_user_id = $notifiable['recipient_user_id'];
         $schedulerHistory->recipient_user_model = $notifiable['recipient_user_model'];
         $schedulerHistory->recipient_email = $notifiable['recipient_email'];
+        $schedulerHistory->recipient_name = $notifiable['recipient_name'];
         $schedulerHistory->msg_subject = $notifiable['msg_subject'];
         $schedulerHistory->msg_body = $notifiable['msg_body'];
         $schedulerHistory->execute_at_date = $notifiable['execute_at_date'];
         $schedulerHistory->execute_at_time = $notifiable['execute_at_time'];
         $schedulerHistory->last_executed_at = $notifiable['last_executed_at'];
         $schedulerHistory->meta = $notifiable['meta'];
+        $schedulerHistory->importance = $notifiable['importance'];
         $schedulerHistory->json_data = $notifiable['json_data'];
-        dispatch(new HosAPI($mailableData['vendor_code'], $notifiable['mail_type'], $mailableData['sap_object'], $notifiable['mail_ticket_number'], $ticket_hash));
+        dispatch(new HosAPI($mailableData['vendor_code'], $notifiable['mail_type'], $mailableData['sap_object'], $notifiable['mail_ticket_number'], $ticket_hash,$mailableData['mail_objects']));
         return $schedulerHistory->save();
     }
 

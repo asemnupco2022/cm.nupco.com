@@ -19,13 +19,13 @@ class HosAPI implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $hosUrl, $vendor_code,$mail_type,$collection, $email_unique, $email_hash;
+    public $hosUrl, $vendor_code,$mail_type,$collection, $email_unique, $email_hash ,$mail_objects;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($vendor_code, $mail_type, $collection, $email_unique, $email_hash)
+    public function __construct($vendor_code, $mail_type, $collection, $email_unique, $email_hash, $mail_objects)
     {
         $this->hosUrl=env('HOS_API_BASE').'/HOS_S4/api/add-supplier-comment';
         $this->vendor_code=$vendor_code;
@@ -33,6 +33,7 @@ class HosAPI implements ShouldQueue
         $this->email_unique=$email_unique;
         $this->email_hash=$email_hash;
         $this->mail_type=$mail_type;
+        $this->mail_objects=$mail_objects;
     }
 
 
@@ -68,6 +69,10 @@ class HosAPI implements ShouldQueue
                 $insertToHos->delivery_date=$poItemCol['nupco_delivery_date'];
                 $insertToHos->item_desc=$poItemCol['mat_description'];
                 $insertToHos->mat_num=$poItemCol['material_number'];
+                $insertToHos->tender_desc=$poItemCol['tender_desc'];
+                $insertToHos->customer_po_no=$poItemCol['customer_po_no'];
+                $insertToHos->customer_po_item=$poItemCol['customer_po_item'];
+                $insertToHos->importance=$this->mail_objects['importance'];
                 $insertToHos->save();
 
 
@@ -90,6 +95,10 @@ class HosAPI implements ShouldQueue
                     'delivery_date'=>$poItemCol['nupco_delivery_date'],
                     "item_desc"=>  $poItemCol['mat_description'],
                     "mat_num"=> $poItemCol['material_number'],
+                    "tender_desc"=>$poItemCol['tender_desc'],
+                    "customer_po_no"=>$poItemCol['customer_po_no'],
+                    "customer_po_item"=>$poItemCol['customer_po_item'],
+                    "importance"=>$this->mail_objects['importance'],
                 ];
 
 

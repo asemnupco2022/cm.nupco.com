@@ -3,16 +3,27 @@
 namespace App\Http\Livewire\Tickets;
 
 use App\Helpers\PoHelper;
+use App\Models\HosPostHistory;
 use App\Models\LbsUserSearchSet;
 use App\Models\SchedulerNotificationHistory;
+use App\Models\StaffColumnSet;
 use Carbon\Carbon;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\WithPagination;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
+use PDF;
 
 class TicketManagerComponent extends Component
 {
+
+    public function emitNotifications($message, $msgType)
+    {
+        $this->emit('toast-notification-component',$message,$msgType);
+    }
+
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['update-users-filter-template' => 'fetchBaseInfo'];
@@ -43,6 +54,68 @@ class TicketManagerComponent extends Component
     public $selectedPo=[];
     public $selectAll=false;
 
+    public $showEmailStructure=null;
+    public $showEmailStructureDate=null;
+
+
+    public $tender_num=[];
+    public $vendor_num=[];
+    public $po_num=[];
+    public $cust_code=[];
+    public $po_item_num=[];
+    public $uom=[];
+    public $plant=[];
+    public $mat_num=[];
+    public $last_executed_at=[];
+    public $supplier_comment=[];
+    public $customer_name=[];
+
+    public $mailHash;
+
+
+    public function hitSearchInt($query)
+    {
+        if (Arr::has($this->tender_num, ['from'])){
+            $query=$query->where('tender_num',$this->tender_num['from']);
+        }
+        if (Arr::has($this->vendor_num, ['from'])){
+            $query=$query->where('vendor_num',$this->vendor_num['from']);
+        }
+        if (Arr::has($this->po_num, ['from'])){
+            $query=$query->where('po_num',$this->po_num['from']);
+        }
+        if (Arr::has($this->cust_code, ['from'])){
+            $query=$query->where('cust_code',$this->cust_code['from']);
+        }
+        if (Arr::has($this->po_item_num, ['from'])){
+            $query=$query->where('po_item_num',$this->po_item_num['from']);
+        }
+        if (Arr::has($this->uom, ['from'])){
+            $query=$query->where('uom',$this->uom['from']);
+        }
+        if (Arr::has($this->plant, ['from'])){
+            $query=$query->where('plant',$this->plant['from']);
+        }
+        if (Arr::has($this->mat_num, ['from'])){
+            $query=$query->whereDate('mat_num',$this->mat_num['from']);
+        }
+        if (Arr::has($this->supplier_comment, ['from'])){
+            $query= $query->whereHas('hasTicket', function($query) {
+                $query->where('msg_body','LIKE', '%'.$this->supplier_comment['from'].'%');
+            });
+        }
+        if (Arr::has($this->customer_name, ['from'])){
+            $query=$query->where('customer_name','LIKE','%'.$this->customer_name['from'].'%');
+        }
+        // if (Arr::has($this->vendor_name, ['from'])){
+        //     $query= $query->whereHas('hasTicket', function($query) {
+        //         $query->where('display_name','LIKE', '%'.$this->vendor_name['from'].'%');
+        //     });
+        // }
+
+
+        return $query;
+    }
 
     public function updatedSelectAll($value)
     {
@@ -53,13 +126,13 @@ class TicketManagerComponent extends Component
         }
         else
         {
-            // $this->selectedPo =   array_fill_keys($this->selectedPo, false);
             $this->selectedPo = [];
         }
     }
 
     public function search_reset()
     {
+        return redirect()->route('web.route.ticket.manager.list');
         $this->selected_bulk_action='';
         $this->searchable_col='id';
         $this->searchable_operator='LIKE';
@@ -76,6 +149,35 @@ class TicketManagerComponent extends Component
     public function fetchBaseInfo()
     {
         $this->userFilterTemplates = LbsUserSearchSet::NotDel()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
+
+        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->first();
+        if ( $StaffColumnSet) {
+            $this->columns = json_decode($StaffColumnSet->columns, true);
+        }
+    }
+
+    public function save_staff_col_set()
+    {
+        $uniue_line=$this->tableType.'_'.auth()->user()->id;
+        $attributes=[
+            'unique_line'=>$this->tableType.'_'.auth()->user()->id,
+            'user_id'=>auth()->user()->id,
+            'table_type'=>$this->tableType,
+            'columns'=>json_encode($this->columns),
+        ];
+
+        if (StaffColumnSet::where('unique_line',$uniue_line)->exists()) {
+            $result = StaffColumnSet::where('unique_line',$uniue_line)->first()->update($attributes);
+        }else{
+            $result = StaffColumnSet::create($attributes);
+        }
+
+        // dd($result);
+        if($result){
+            return $this->emitNotifications('colunm set saved' ,'success');
+        }
+        return $this->emitNotifications('There is Something Wrong','error');
+
     }
 
     public function export_data($type)
@@ -101,9 +203,55 @@ class TicketManagerComponent extends Component
 
     }
 
+    public function view_email($id)
+    {
+        $notificationHistoryData=SchedulerNotificationHistory::find($id);
+        $this->showEmailStructure=$notificationHistoryData->msg_body;
+        $this->showEmailStructureDate=$notificationHistoryData->created_at;
+        $this->dispatchBrowserEvent('open-mail-views');
+    }
+
+    public function search_filter_submit()
+    {
+
+        $HosHistoryQuery =HosPostHistory::orderBy('unique_hash', 'DESC');
+        $this->mailHash = $this->hitSearchInt($HosHistoryQuery)->select('mail_hash')->get();
+
+
+    }
+
+
+    public function searchEngineForAll()
+    {
+        $query=SchedulerNotificationHistory::NotDel();
+        if (!empty($this->selected_staff)){
+            $query= $query->where('user_id',$this->selected_staff);
+        }
+
+        if ($this->json_data and !empty($this->json_data)){
+            $searchableItems=json_decode($this->json_data, true);
+            if ($searchableItems and !empty($searchableItems)){
+                foreach ($searchableItems as $key => $searchableItem){
+                    $operator=$searchableItem['queryOpr'];
+                    $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
+                }
+                return  $query->orderBy('po_item', 'DESC')->paginate($this->number_of_rows);
+            }
+        }
+        if ($this->searchable_operator=='LIKE'){
+            return    $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+        }else{
+            if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
+                return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+            }else{
+                return  $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('id', 'DESC')->paginate($this->number_of_rows);
+            }
+        }
+    }
 
     public function searchEngine()
     {
+
         $query=SchedulerNotificationHistory::NotDel();
         if (!empty($this->selected_staff)){
             $query= $query->where('user_id',$this->selected_staff);
@@ -119,15 +267,32 @@ class TicketManagerComponent extends Component
                 return  $query->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
             }
         }
+
+        if ( $this->mailHash) {
+            $query =$query->whereIn('mail_ticket_hash', $this->mailHash->toArray());
+        }
+
+
+
+
+        if (Arr::has($this->last_executed_at, ['from']) ) {
+
+           return $query=$query->whereBetween('last_executed_at',[$this->last_executed_at['from'],$this->last_executed_at['to']])->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
+        }
+
         if ($this->searchable_operator=='LIKE'){
-            return    $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
+               $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
+               return $query;
         }else{
             if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
                 return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
             }else{
-                return  $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
+                 $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
+                return  $query;
             }
         }
+
+
     }
 
     public function render()

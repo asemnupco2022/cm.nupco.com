@@ -63,6 +63,10 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
+            <div class="form-check float-left ">
+                <input type="checkbox" class="form-check-input" wire:model="importance" id="importance">
+                <label class="form-check-label" for="importance">Important</label>
+            </div>
             <div class="float-right">
                 <button type="button" class="btn btn-primary" wire:click="sendEmail" wire:loading.attr="disabled"><i class="far fa-envelope" ></i> Send</button>
             </div>
