@@ -38,35 +38,6 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        // return PoHelper::NormalizeColString(null,PoSapMaster::CONS_COLUMNS_NORMALIZED);
-
-        // $query=PoSapMaster::orderBy('vendor_code', 'ASC')->pluck('id')->toArray();
-        // dd($query);
-        // $ColKeys=['a','b','c'];
-
-        // if ($collectionCount == 0  ) {
-        //     $collection =  PoSapMaster::whereIn('id',[1,2,3,4,5]);
-
-        //     PoHelper::sendJobSAp($ColKeys,$collection,'EXCEL');
-        //     return 3434;
-        // }
-
-        // return PoHelper::collection_vendor_codes();
-        // dd(PoSapMasterTmp::where('unique_line','4500013398_1390')->first());
-
-        // $saptmp=[
-        //     'unique_hash'=>'4234234324234ss3',
-        //     'notified'=>'yes',
-        // ];
-        // $tmpResult=PoHelper::sapMasterTmp($saptmp,'4500013398', '1250');
-        // dd($tmpResult);
-    //    dd( SupplierCommentTypes::supplierCommets());
-
-        // $fiveStar = PoSapMaster::orderBy('vendor_code', 'ASC')->Saptmp('تم التوريد (يجب ارفاق مذكرة الاستلام)');
-        // dd($fiveStar->get());
-        // dd($fiveStar->toSql());
-//        Carbon::parse('30/05/2021')->format('Y-m-d');
-    //    Permission::create(['name' => 'lbs-permission-supplier-comments','display_name'=>'Access To Supplier Comments']);
         return redirect()->route('web.route.dashboard.summary');
     }
 
@@ -163,7 +134,9 @@ class DashboardController extends Controller
                     continue;}
             }
             foreach ($data as $key => $row) {
+
                $this->storeInfo($row);
+
             }
 
             if (File::exists($file)) {
@@ -184,7 +157,6 @@ class DashboardController extends Controller
         }
         $supplyRatio= ((int)Str::replace(',', '', $row[35]) / (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
-
             "document_type"=>$row[0],
             "document_type_desc"=>$row[1],
             "po_number"=>(int)$row[2],
@@ -221,6 +193,9 @@ class DashboardController extends Controller
             "old_po_item"=>$row[34],
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
+            "customer_po_no"=>$row[37],
+            "customer_po_item"=>$row[38],
+            "pur_grp_name"=>$row[39],
             "supply_ratio"=> $supplyRatio,
             "unique_line"=>$uniqueLine,
             "unique_line_date"=>$uniqueLine.'_'.Carbon::now()->format('Y_m_d')
@@ -232,7 +207,6 @@ class DashboardController extends Controller
             if(! PoSapMasterTmp::where('unique_line',$uniqueLine)->exists()){
 
                 $insertable=[
-
                     "table_type"=>LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM,
                     "po_number"=>(int)$row[2],
                     "po_item"=>(int)$row[3],

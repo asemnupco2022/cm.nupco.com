@@ -143,7 +143,7 @@
 
                 @if($headerInfo)
                 <h3 class="card-title pl-2">vendor #:
-                 {{$headerInfo->vendor_num}}
+                 {{$headerInfo->vendor_num}} | {{$headerInfo->VendorData->display_name}}
                 </h3>
                 @endif
             </div>

@@ -28,8 +28,8 @@ use rifrocket\LaravelCms\Http\Controllers\AdminControllers\DashboardController;
 
 
 
-Route::get('/import-po',[DashboardController::class,'importPO'])->name('web.route.po.import');
-Route::get('/read-po',[DashboardController::class,'readPO'])->name('web.route.po.read');
+// Route::get('/import-po',[DashboardController::class,'importPO'])->name('web.route.po.import');
+// Route::get('/read-po',[DashboardController::class,'readPO'])->name('web.route.po.read');
 
 
 Route::group(array('middleware'=>'web'), function () {

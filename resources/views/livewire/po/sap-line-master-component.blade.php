@@ -232,6 +232,9 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Old Po Item' )==false?'hide':''}}" >{{$collection->old_po_item}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Quantity' )==false?'hide':''}}" >{{$collection->gr_quantity}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO No' )==false?'hide':''}}" >{{$collection->customer_po_no}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO Item' )==false?'hide':''}}" >{{$collection->customer_po_item}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Pur. Grp Name' )==false?'hide':''}}" >{{$collection->pur_grp_name}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supply Ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td>
                                 <td>
@@ -290,6 +293,10 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="icheck-primary d-inline ">
+                                <input type="checkbox" wire:model="selectAllCols" id="select_all_Call">
+                                <label for="select_all_Call">Select All</label>
+                            </div><br>
                             @foreach($columnsNormalized as $colKey => $column)
 
                                 <div class="icheck-primary d-inline">

@@ -41,6 +41,7 @@ class CreateSchedulerNotificationHistoriesTable extends Migration
             $table->time('execute_at_time')->nullable();
             $table->timestamp('last_executed_at')->nullable();
             $table->text('meta')->nullable();
+            $table->text('importance')->nullable();
             $table->text('json_data')->nullable();
             $table->enum('status',['new','active', 'deactivated', 'suspended'])->default('active');
             $table->text('suspendReason')->nullable();

@@ -21,7 +21,7 @@ class ComposeMailComponent extends Component
         $this->emit('toast-notification-component',$message,$msgType);
     }
 
-    public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType, $mailableData;
+    public $mail_to, $mail_subject, $mail_content,$mailType_pro,$tableType, $mailableData, $importance;
 
 
 
@@ -118,15 +118,19 @@ class ComposeMailComponent extends Component
                 'sender_email'=>auth()->user()->email,
                 'recipient_user_id'=>$vendorDetails?$vendorDetails->id:null,
                 'recipient_user_model'=>"rifrocket\\LaravelCms\\Models\\LbsMember",
+                'recipient_name'=>$vendorDetails?$vendorDetails->display_name:null,
                 'recipient_email'=>$this->mail_to,
                 'msg_subject'=>$this->mail_subject,
                 'msg_body'=>$messageBody,
                 'execute_at_date'=>Carbon::now()->format('Y-m-d'),
                 'execute_at_time'=>Carbon::now()->format('h:m'),
                 'last_executed_at'=>Carbon::now(),
+                'importance'=>$this->importance,
                 'meta'=>null,
                 'json_data'=>null,
             ];
+            $this->mailableData['mail_objects']['importance']=$this->importance;
+
             PoHelper::SaveNotificationHistory($notifiable, $this->mailableData);
 
             $this->clearData();

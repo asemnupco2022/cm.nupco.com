@@ -567,6 +567,10 @@ div.loading {
     z-index: 9999 !important;
 }
 
+td, th {
+    border: 1px solid #dee2e6;
+}
+
 /*.sap-report-table tbody {*/
 /*    max-height: 600px;*/
 /*    display: block;*/

@@ -93,7 +93,6 @@ class SapImportJob implements ShouldQueue
         }
         $supplyRatio= ((int)Str::replace(',', '', $row[35]) / (int)Str::replace(',', '', $row[25]))*100;
         $insertable=[
-
             "document_type"=>$row[0],
             "document_type_desc"=>$row[1],
             "po_number"=>(int)$row[2],
@@ -130,6 +129,9 @@ class SapImportJob implements ShouldQueue
             "old_po_item"=>$row[34],
             "gr_quantity"=>$row[35],
             "gr_amount"=>$row[36],
+            "customer_po_no"=>$row[37],
+            "customer_po_item"=>$row[38],
+            "pur_grp_name"=>$row[39],
             "supply_ratio"=> $supplyRatio,
             "unique_line"=>$uniqueLine,
             "unique_line_date"=>$uniqueLine.'_'.Carbon::now()->format('Y_m_d')

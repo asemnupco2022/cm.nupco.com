@@ -13,12 +13,13 @@ class HosPostHistory extends Model
     protected $fillable = [
         'updated_at',
     ];
-    
+
     public function hasNotificationHistory()
     {
         return $this->belongsTo(SchedulerNotificationHistory::class,'mail_hash','mail_ticket_hash');
     }
 
+   
     public function VendorData()
     {
         return $this->belongsTo(LbsMember::class, 'vendor_num', 'vendor_code');
