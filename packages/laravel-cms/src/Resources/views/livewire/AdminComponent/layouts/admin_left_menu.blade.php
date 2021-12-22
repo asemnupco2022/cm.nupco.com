@@ -33,39 +33,38 @@
                           </p>
                         </a>
                         <ul class="nav nav-treeview">
-                          <li class="nav-item">
-                            <a href="{{route('web.route.dashboard.summary')}}" class="nav-link {{ (Request::is('dashboard/summary')?'active':'') }}">
-                              {{-- <i class="far fa-circle nav-icon"></i> --}}
-                              <p>Summary Dashboard</p>
+                            <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.ces_dashboard')}}" class="nav-link {{ (Request::is('dashboard/ces-dashboard')?'active':'') }}">
+                              <p>Ces Dashboard</p>
                             </a>
                           </li>
+                          {{-- <li class="nav-item">
+                            <a href="{{route('web.route.dashboard.summary')}}" class="nav-link {{ (Request::is('dashboard/summary')?'active':'') }}">
+                              <p>Summary Dashboard</p>
+                            </a>
+                          </li> --}}
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.suppliers_performance')}}" class="nav-link {{ (Request::is('dashboard/suppliers-performance')?'active':'') }}">
-                              {{-- <i class="far fa-circle nav-icon"></i> --}}
                               <p>Suppliers Performance</p>
                             </a>
                           </li>
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                             <a href="{{route('web.route.dashboard.tenders')}}" class="nav-link {{ (Request::is('dashboard/tenders')?'active':'') }}">
-                              {{-- <i class="far fa-circle nav-icon"></i> --}}
                               <p>Tenders</p>
                             </a>
-                          </li>
-                          <li class="nav-item">
+                          </li> --}}
+                          {{-- <li class="nav-item">
                             <a href="{{route('web.route.dashboard.progress')}}" class="nav-link {{ (Request::is('dashboard/progress')?'active':'') }}">
-                              {{-- <i class="far fa-circle nav-icon"></i> --}}
                               <p>Progress</p>
                             </a>
-                          </li>
+                          </li> --}}
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.over_due')}}" class="nav-link {{ (Request::is('dashboard/over-due')?'active':'') }}">
-                              {{-- <i class="far fa-circle nav-icon"></i> --}}
                               <p>Over Due</p>
                             </a>
                           </li>
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.contracts_expediting')}}" class="nav-link {{ (Request::is('dashboard/contracts_expediting')?'active':'') }}">
-                              {{-- <i class="far fa-circle nav-icon"></i> --}}
                               <p>Contracts Expediting</p>
                             </a>
                           </li>

@@ -570,6 +570,16 @@ div.loading {
 td, th {
     border: 1px solid #dee2e6;
 }
+.yf_chat_btn i.far.fa-comment-alt {
+    font-size: 13px;
+}
+a.btn.btn-app.chat_po_btn.yf_chat_btn {
+    max-width: 191px;
+    white-space: initial;
+}
+/* .text-nowrap {
+    white-space: inherit !important;
+} */
 
 /*.sap-report-table tbody {*/
 /*    max-height: 600px;*/

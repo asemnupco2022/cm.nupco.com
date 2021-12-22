@@ -147,6 +147,6 @@
     </style>
 
 
-{{--    @include('dashboards.notification-report-dashboard')--}}
+   {{-- @include('dashboards.notification-report-dashboard') --}}
     @include('dashboards.power-bi-dashboard')
 @endsection

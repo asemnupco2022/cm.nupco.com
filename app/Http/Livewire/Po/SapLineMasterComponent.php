@@ -35,6 +35,7 @@ class SapLineMasterComponent extends Component
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['update-users-filter-template' => 'fetchBaseInfo'];
 
+
     public $searchable_col='po_item';
     public $searchable_operator='LIKE';
     public $searchable_col_val=null;
@@ -87,75 +88,97 @@ class SapLineMasterComponent extends Component
     public $cust_gen_code = [];
     public $vendor_name_en = [];
     public $supplier_comment = [];
+    public $customer_po_no=[];
+    public $customer_po_item=[];
+    public $pur_grp_name=[];
+    public $notified=[];
 //    ========
 
 
+    public function supply_ratio_event($value)
+    {
+       $this->supply_ratio['from']=$value;
+    }
     public function hitSearchInt($query)
     {
        if (Arr::has($this->tender_no, ['from'])){
-            $query=$query->where('tender_no',$this->tender_no['from']);
+            $query=$query->whereIn('tender_no',$this->tender_no['from']);
         }
         if (Arr::has($this->tender_desc, ['from'])){
-            $query=$query->where('tender_desc','LIKE',$this->tender_desc['from']);
+            $query=$query->whereIn('tender_desc',$this->tender_desc['from']);
         }
         if (Arr::has($this->document_type, ['from'])){
 
-            $query=$query->where('document_type',$this->document_type['from']);
+            $query=$query->whereIn('document_type',$this->document_type['from']);
         }
        if (Arr::has($this->document_type_desc, ['from'])){
-            $query=$query->where('document_type_desc','LIKE',$this->document_type_desc['from']);
+            $query=$query->whereIn('document_type_desc',$this->document_type_desc['from']);
         }
        if (Arr::has($this->init_po_number, ['from'])){
-            $query=$query->where('po_number',$this->init_po_number['from']);
+            $query=$query->whereIn('po_number',$this->init_po_number['from']);
         }
        if (Arr::has($this->purchasing_group, ['from'])){
-            $query=$query->where('purchasing_group',$this->purchasing_group['from']);
+            $query=$query->whereIn('purchasing_group',$this->purchasing_group['from']);
         }
        if (Arr::has($this->purchasing_organization, ['from'])){
-            $query=$query->where('purchasing_organization',$this->purchasing_organization['from']);
+            $query=$query->whereIn('purchasing_organization',$this->purchasing_organization['from']);
         }
         if (Arr::has($this->customer_no, ['from'])){
-            $query=$query->where('customer_no',$this->customer_no['from']);
+            $query=$query->whereIn('customer_no',$this->customer_no['from']);
         }
         if (Arr::has($this->generic_mat_code, ['from'])){
-            $query=$query->where('generic_mat_code',$this->generic_mat_code['from']);
+            $query=$query->whereIn('generic_mat_code',$this->generic_mat_code['from']);
         }
         if (Arr::has($this->vendor_code, ['from'])){
-            $query=$query->where('vendor_code',$this->vendor_code['from']);
+            $query=$query->whereIn('vendor_code',$this->vendor_code['from']);
         }
        if (Arr::has($this->storage_location, ['from'])){
-            $query=$query->where('storage_location',$this->storage_location['from']);
+            $query=$query->whereIn('storage_location',$this->storage_location['from']);
         }
         if (Arr::has($this->plant, ['from'])){
-            $query=$query->where('plant',$this->plant['from']);
+            $query=$query->whereIn('plant',$this->plant['from']);
         }
         if (Arr::has($this->customer_name, ['from'])){
-            $query=$query->where('customer_name',$this->customer_name['from']);
+            $query=$query->whereIn('customer_name',$this->customer_name['from']);
         }
         if (Arr::has($this->supply_ratio, ['from'])){
-            $query=$query->where('supply_ratio',$this->supply_ratio['from']);
+            $query=$query->whereIn('supply_ratio',$this->supply_ratio['from']);
         }
         if (Arr::has($this->delivery_address, ['from'])){
-            $query=$query->where('delivery_address',$this->delivery_address['from']);
+            $query=$query->whereIn('delivery_address',$this->delivery_address['from']);
         }
        if (Arr::has($this->mat_description, ['from'])){
-            $query=$query->where('mat_description','LIKE',$this->mat_description['from']);
+            $query=$query->whereIn('mat_description',$this->mat_description['from']);
         }
        if (Arr::has($this->cust_gen_code, ['from'])){
-            $query=$query->where('cust_gen_code',$this->cust_gen_code['from']);
+            $query=$query->whereIn('cust_gen_code',$this->cust_gen_code['from']);
         }
         if (Arr::has($this->vendor_name_en, ['from'])){
-            $query=$query->where('vendor_name_en',$this->vendor_name_en['from']);
+            $query=$query->whereIn('vendor_name_en',$this->vendor_name_en['from']);
         }
         if(Arr::has($this->supplier_comment, ['from']) and $this->supplier_comment['from'] !='0' ){
-            $query=$query->Saptmp($this->supplier_comment['from']);
+            $query=$query->whereIn('supplier_comment',$this->supplier_comment['from']);
         }
         if (Arr::has($this->nupco_delivery_date, ['from'])){
             $query=$query->whereBetween('nupco_delivery_date',[$this->nupco_delivery_date['from'],$this->nupco_delivery_date['to']]);
         }
-        if (Arr::has($this->po_created_on, ['from'])){
-            $query=$query->whereBetween('po_created_on',[$this->po_created_on['from'],$this->po_created_on['to']]);
+        if (Arr::has($this->customer_po_no, ['from'])){
+            $query=$query->whereBetween('customer_po_no',[$this->customer_po_no['from'],$this->customer_po_no['to']]);
         }
+
+        if (Arr::has($this->po_created_on, ['from'])){
+            $query=$query->whereIn('po_created_on',$this->po_created_on['from']);
+        }
+        if (Arr::has($this->customer_po_item, ['from'])){
+            $query=$query->whereIn('customer_po_item',$this->customer_po_item['from']);
+        }
+        if (Arr::has($this->pur_grp_name, ['from'])){
+            $query=$query->whereIn('pur_grp_name',$this->pur_grp_name['from']);
+        }
+        if (Arr::has($this->notified, ['from'])){
+            $query=$query->where('notified',$this->notified['from']);
+        }
+
 
         return $query;
     }

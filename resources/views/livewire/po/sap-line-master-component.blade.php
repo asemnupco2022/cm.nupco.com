@@ -4,6 +4,8 @@
     <!-- daterange picker -->
         <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/daterangepicker/daterangepicker.css')}}">
         <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/summernote/summernote-bs4.min.css')}}">
+        <!-- bootstrap slider -->
+        <link rel="stylesheet" href="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/bootstrap-slider/css/bootstrap-slider.min.css')}}">
         <style>
 
             .alert.alert-warning.alert-dismissible {
@@ -35,8 +37,16 @@
             box-shadow: none;
             font-weight: 400;
             padding: 3px;
+
+
         }
         </style>
+
+<style>
+    #bs-select-19 ul{
+        text-align: right !important;
+    }
+ </style>
     @endpush
     @if(!$initSearch)
     <div class="row">
@@ -238,16 +248,23 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supply Ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td>
                                 <td>
-                                    <a class="btn btn-app chat_po_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
-                                        <span class="badge bg-teal">{{$collection->InternalComentCount}}</span>
-                                        <i class="far fa-comment-alt"></i>
-                                    </a>
+                                <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
+                                    <i class="far fa-comment-alt"></i>
+                                    @if ($collection->IernalComment)
+                                        @foreach ($collection->IernalComment as $interComt)
+                                        <span>{{Str::substr($interComt->msg_body, 0, 30) }}</span><br>
+                                        @endforeach
+                                    @endif
+
+                                </a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-app chat_po_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
-                                        <span class="badge bg-teal bg-maroon">{{$collection->VendorlComentCount}}</span>
-                                        <i class="far fa-comment-alt"></i>
-                                    </a>
+
+                                <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
+                                    <i class="far fa-comment-alt"></i>
+                                    <span>{{$collection->supplier_comment }}</span>
+                                </a>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -541,7 +558,21 @@
         </div>
         <!-- loader -->
 
+<script>
+    document.addEventListener('livewire:load', function () {
+        $('#supply_ratio').change(function () {
+        var vs = $('#supply_ratio').val().split(',');
+            @this.supply_ratio_event(vs);
+        })
+    });
+</script>
+
+
+
     @push('scripts')
+
+    <!-- Bootstrap slider -->
+<script src="{{URL(LbsConstants::BASE_ADMIN_ASSETS.'plugins/bootstrap-slider/bootstrap-slider.min.js')}}"></script>
   <!-- loaderloader -->
         <script>
             window.addEventListener('jq-confirm-alert', event => {
@@ -589,6 +620,16 @@
         <script>
             $(document).ready(function () {
                 $('#reservation').daterangepicker();
+                // $('.slider').bootstrapSlider()
+
+                var slider = new Slider(".slider");
+                slider.on("slide", function(slideEvt) {
+                    $('#sliderValue').val(slider.getValue());
+                console.log(slider.getValue() );
+                });
+
+
+
             })
 
 
@@ -617,6 +658,11 @@
                 }
             }
         });
+
+        $('#submit_filter').click(function () {
+            var vs = $('#sliderValue').val().split(',');
+            @this.supply_ratio.form =vs
+        })
     });
     Livewire.on('set-mail-content', mail_contents => {
 

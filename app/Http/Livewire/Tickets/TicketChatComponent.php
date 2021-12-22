@@ -116,6 +116,8 @@ class TicketChatComponent extends Component
         $send=[
             "vendor_num" => $vendor,
             "unique_hash" => $unique_hash,
+            "po_num"=>$this->ticketParent->po_num,
+            "po_item_num"=>$this->ticketParent->po_item_num,
             "contract_team_comment" =>$contract_team_comment,
             "attachment_info"=>[
                 "original_file_name" => $fileName,
