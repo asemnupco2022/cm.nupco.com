@@ -82,6 +82,12 @@
 </iframe>
 @endif
 
+@if (isset($ces_dashboard))
+
+@include('dashboards.notification-report-dashboard')
+
+@endif
+
 
 
 <script type="text/javascript">

@@ -207,13 +207,21 @@ class PoSapMaster extends Model
     {
 
         return $query->join('po_sap_master_tmps', function($join) use($searchString)
-                {
-                    $join->on('po_sap_master_tmps.po_number', '=', 'po_sap_masters.po_number');
-                    $join->on('po_sap_master_tmps.po_item','=', 'po_sap_masters.po_item');
-                    if(!empty($searchString)){
-                        $join->where('po_sap_master_tmps.supplier_comment',$searchString);
-                    }
-                });
+            {
+                $join->on('po_sap_master_tmps.po_number', '=', 'po_sap_masters.po_number');
+                $join->on('po_sap_master_tmps.po_item','=', 'po_sap_masters.po_item');
+                if(!empty($searchString)){
+                    $join->where('po_sap_master_tmps.supplier_comment',$searchString);
+                }
+            });
+
+    }
+
+    public function getIernalCommentAttribute()
+    {
+       $po_number = $this->attributes['po_number'];
+       $po_item = $this->attributes['po_item'];
+    return  $collection = InternalComment::where('table_type','sap_line_item')->where('purchasing_doc_no',$po_number)->where('line_item_no',$po_item)->take(1)->get();
 
     }
 

@@ -38,7 +38,14 @@ class DashboardController extends Controller
     public function dashboard()
     {
 
-        return redirect()->route('web.route.dashboard.summary');
+        return redirect()->route('web.route.dashboard.ces_dashboard');
+    }
+
+    public function ces_dashboard()
+    {
+        $ces_dashboard=true;
+        $ifram_url='';
+        return view('LbsViews::admin_views.views.dashboard',compact('ces_dashboard','ifram_url'));
     }
 
     public function summary()

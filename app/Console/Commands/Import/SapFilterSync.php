@@ -65,6 +65,15 @@ class SapFilterSync extends Command
         $collection_vendor_codes= DB::table('collection_vendor_codes')->pluck('vendor_code','vendor_code');
         $collection_sap_plnts= DB::table('collection_sap_plnts')->pluck('plant','plant');
 
+        $collection_sap_customer_po_nos= DB::table('collection_sap_customer_po_nos')->pluck('customer_po_no','customer_po_no');
+        $collection_sap_customer_po_items= DB::table('collection_sap_customer_po_items')->pluck('customer_po_item','customer_po_item');
+        $collection_sap_pur_grp_names= DB::table('collection_sap_pur_grp_names')->pluck('pur_grp_name','pur_grp_name');
+        $collection_sap_notifieds=[
+            'yes'=>'yes',
+            'no'=>'no',
+        ];
+
+
 
         return View::make('sap-filter-tmp',compact(
         'collection_sap_po_types',
@@ -81,6 +90,10 @@ class SapFilterSync extends Command
         'collection_sap_storage_locations',
         'collection_sap_customer_nos',
         'collection_vendor_codes',
+        'collection_sap_customer_po_nos',
+        'collection_sap_customer_po_items',
+        'collection_sap_pur_grp_names',
+        'collection_sap_notifieds',
         'collection_sap_plnts'))->render();
 
     }

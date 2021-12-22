@@ -331,7 +331,7 @@
 
 <div class="row dashboard_style">
 
-    <!-- Item Delivery Status -->
+    {{-- <!-- Item Delivery Status -->
     <div class="col-md-12">
         <div class="card card-success">
             <div class="card-header">
@@ -351,11 +351,11 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-    </div>
+    </div> --}}
 
 
     <!-- Item Delivery Status -->
-    <div class="col-md-12">
+    {{-- <div class="col-md-12">
         <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Item Delivery Status</h3>
@@ -374,7 +374,7 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-    </div>
+    </div> --}}
 
 
     <!-- SAP import Report -->
