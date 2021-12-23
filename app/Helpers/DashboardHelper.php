@@ -5,6 +5,7 @@ namespace App\Helpers;
 
 
 use App\Models\SchedulerNotificationHistory;
+use App\Models\TicketManager;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Integer;
@@ -96,9 +97,10 @@ class DashboardHelper
         }
 
         return implode(',',$valueReturn);
+    }
 
-
-
-
+    public  static function vendorComments()
+    {
+      return TicketManager::where('msg_sender_id','vendor')->get()->count();
     }
 }

@@ -152,45 +152,13 @@
 </style>
 @endpush
 <div class="row">
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-4 col-12">
         <!-- small box -->
         <div class="small-box dash_color1">
             <div class="inner">
                 <h3>{{DashboardHelper::historyCounter('enquiry-email',1)}}</h3>
                 <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('enquiry-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
                 <i class="ion ion-person" title="manual"></i>  {{DashboardHelper::historyCounter('enquiry-email',null,'manual',null,null)}}
-                <p>Enquiry Email</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-email"></i>
-            </div>
-
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success dash_color2">
-            <div class="inner">
-                <h3>{{DashboardHelper::historyCounter('expedite-email',1)}}</h3>
-                <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('expedite-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
-                <i class="ion ion-person" title="manual"></i>  {{DashboardHelper::historyCounter('expedite-email',null,'manual',null,null)}}
-                <p>Expedite Email</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-email"></i>
-            </div>
-
-        </div>
-    </div>
-    <!-- ./col -->
-    <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning dash_color3">
-            <div class="inner">
-                <h3>{{DashboardHelper::historyCounter('warning-email',1)}}</h3>
-                <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('warning-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
-                <i class="ion ion-person" title="manual"></i> {{DashboardHelper::historyCounter('warning-email',null,'manual',null,null)}}
                 <p>Warning Email</p>
             </div>
             <div class="icon">
@@ -200,14 +168,14 @@
         </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-6">
+    <div class="col-lg-4 col-12">
         <!-- small box -->
-        <div class="small-box dash_color4">
+        <div class="small-box bg-success dash_color2">
             <div class="inner">
-                <h3>{{DashboardHelper::historyCounter('penalty-email',1)}}</h3>
-                <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('penalty-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
-                <i class="ion ion-person" title="manual"></i>  {{DashboardHelper::historyCounter('penalty-email',null,'manual',null,null)}}
-                <p>Penalty Email</p>
+                <h3>{{DashboardHelper::historyCounter('expedite-email',1)}}</h3>
+                <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('expedite-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp;
+                <i class="ion ion-person" title="manual"></i>  {{DashboardHelper::historyCounter('expedite-email',null,'manual',null,null)}}
+                <p>Reminder Email</p>
             </div>
             <div class="icon">
                 <i class="ion ion-email"></i>
@@ -216,6 +184,23 @@
         </div>
     </div>
     <!-- ./col -->
+    <div class="col-lg-4 col-12">
+        <!-- small box -->
+        <div class="small-box bg-warning dash_color3">
+            <div class="inner">
+                <h3>{{DashboardHelper::vendorComments()}}</h3>
+                {{-- <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('warning-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp; --}}
+                <i class="ion ion-person" title="manual"></i> {{DashboardHelper::vendorComments()}}
+                <p>Vendor Response</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-email"></i>
+            </div>
+
+        </div>
+    </div>
+    <!-- ./col -->
+
 
 
 </div>
@@ -421,7 +406,7 @@
                 labels: [{!! DashboardHelper::lineChart(null,[],true) !!}],
                 datasets: [
                     {
-                        label               : 'Enquiry Email',
+                        label               : 'Warning Email',
                         backgroundColor     : 'rgba(60, 141, 199, 1)',
                         borderColor         : 'rgba(60, 141, 199, 1)',
                         pointRadius          : false,
@@ -432,7 +417,7 @@
                         data                : [{!! DashboardHelper::lineChart('enquiry-email') !!}]
                     },
                     {
-                        label               : 'Expedite Email',
+                        label               : 'Reminder Email',
                         backgroundColor     : 'rgba(137, 93, 148, 1)',
                         borderColor         : 'rgba(137, 93, 148, 1)',
                         pointRadius         : false,
@@ -443,29 +428,29 @@
                         data                : [{!! DashboardHelper::lineChart('expedite-email') !!}]
                     },
 
-                    {
-                        label               : 'Warning Email',
-                        backgroundColor     : 'rgba(231, 142, 74, 1)',
-                        borderColor         : 'rgba(231, 142, 74, 1)',
-                        pointRadius         : false,
-                        pointColor          : 'rgba(231, 142, 74, 1)',
-                        pointStrokeColor    : '#c1c7d1',
-                        pointHighlightFill  : '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data                : [{!! DashboardHelper::lineChart('warning-email') !!}]
-                    },
+                    // {
+                    //     label               : 'Warning Email',
+                    //     backgroundColor     : 'rgba(231, 142, 74, 1)',
+                    //     borderColor         : 'rgba(231, 142, 74, 1)',
+                    //     pointRadius         : false,
+                    //     pointColor          : 'rgba(231, 142, 74, 1)',
+                    //     pointStrokeColor    : '#c1c7d1',
+                    //     pointHighlightFill  : '#fff',
+                    //     pointHighlightStroke: 'rgba(220,220,220,1)',
+                    //     data                : [{!! DashboardHelper::lineChart('warning-email') !!}]
+                    // },
 
-                    {
-                        label               : 'Penalty Email',
-                        backgroundColor     : 'rgba(150, 49, 73, 1)',
-                        borderColor         : 'rgba(150, 49, 73, 1)',
-                        pointRadius         : false,
-                        pointColor          : 'rgba(150, 49, 73, 1)',
-                        pointStrokeColor    : '#c1c7d1',
-                        pointHighlightFill  : '#fff',
-                        pointHighlightStroke: 'rgba(220,220,220,1)',
-                        data                : [{!! DashboardHelper::lineChart('penalty-email') !!}]
-                    },
+                    // {
+                    //     label               : 'Penalty Email',
+                    //     backgroundColor     : 'rgba(150, 49, 73, 1)',
+                    //     borderColor         : 'rgba(150, 49, 73, 1)',
+                    //     pointRadius         : false,
+                    //     pointColor          : 'rgba(150, 49, 73, 1)',
+                    //     pointStrokeColor    : '#c1c7d1',
+                    //     pointHighlightFill  : '#fff',
+                    //     pointHighlightStroke: 'rgba(220,220,220,1)',
+                    //     data                : [{!! DashboardHelper::lineChart('penalty-email') !!}]
+                    // },
                 ]
             }
 
@@ -532,8 +517,8 @@
             var lineChartData = $.extend(true, {}, areaLineData)
             lineChartData.datasets[0].fill = false;
             lineChartData.datasets[1].fill = false;
-            lineChartData.datasets[2].fill = false;
-            lineChartData.datasets[3].fill = false;
+            // lineChartData.datasets[2].fill = false;
+            // lineChartData.datasets[3].fill = false;
             lineChartOptions.datasetFill = false
 
             var lineChart = new Chart(lineChartCanvas, {
@@ -549,20 +534,21 @@
             var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
             var donutData        = {
                 labels: [
-                    'Enquiry Email',
-                    'Expedite Email',
                     'Warning Email',
-                    'Penalty Email',
+                    'Reminder Email',
+                    // 'Warning Email',
+                    // 'Penalty Email',
                 ],
                 datasets: [
                     {
                         data: [
                             {{DashboardHelper::historyCounter('enquiry-email',null,'manual', date('Y'), date('m'))}},
                             {{DashboardHelper::historyCounter('expedite-email',null,'manual', date('Y'), date('m'))}},
-                            {{DashboardHelper::historyCounter('warning-email',null,'manual', date('Y'), date('m'))}},
-                            {{DashboardHelper::historyCounter('penalty-email',null,'manual', date('Y'), date('m'))}}
+                            // {{DashboardHelper::historyCounter('warning-email',null,'manual', date('Y'), date('m'))}},
+                            // {{DashboardHelper::historyCounter('penalty-email',null,'manual', date('Y'), date('m'))}}
                         ],
-                        backgroundColor : ['#3c8dc7', '#895d94', '#e78e4a', '#963149'],
+                        backgroundColor : ['#3c8dc7', '#895d94'],
+                        // backgroundColor : ['#3c8dc7', '#895d94', '#e78e4a', '#963149'],
                     }
                 ]
             }
@@ -586,20 +572,21 @@
             var donutChartCanvas = $('#donutChartManual').get(0).getContext('2d')
             var donutData        = {
                 labels: [
-                    'Enquiry Email',
-                    'Expedite Email',
                     'Warning Email',
-                    'Penalty Email',
+                    'Reminder Email',
+                    // 'Warning Email',
+                    // 'Penalty Email',
                 ],
                 datasets: [
                     {
                         data: [
                             {{DashboardHelper::historyCounter('enquiry-email',null,'automation', date('Y'), date('m'))}},
                             {{DashboardHelper::historyCounter('expedite-email',null,'automation', date('Y'), date('m'))}},
-                            {{DashboardHelper::historyCounter('warning-email',null,'automation', date('Y'), date('m'))}},
-                            {{DashboardHelper::historyCounter('penalty-email',null,'automation', date('Y'), date('m'))}}
+                            // {{DashboardHelper::historyCounter('warning-email',null,'automation', date('Y'), date('m'))}},
+                            // {{DashboardHelper::historyCounter('penalty-email',null,'automation', date('Y'), date('m'))}}
                         ],
-                        backgroundColor : ['#3c8dc7', '#895d94', '#e78e4a', '#963149'],
+                        backgroundColor : ['#3c8dc7', '#895d94'],
+                        // backgroundColor : ['#3c8dc7', '#895d94', '#e78e4a', '#963149'],
                     }
                 ]
             }
@@ -624,12 +611,12 @@
             var barChartData = $.extend(true, {}, areaLineData)
             var temp0 = areaLineData.datasets[0]
             var temp1 = areaLineData.datasets[1]
-            var temp2 = areaLineData.datasets[2]
-            var temp3 = areaLineData.datasets[3]
+            // var temp2 = areaLineData.datasets[2]
+            // var temp3 = areaLineData.datasets[3]
             barChartData.datasets[0] = temp0
             barChartData.datasets[1] = temp1
-            barChartData.datasets[2] = temp2
-            barChartData.datasets[3] = temp3
+            // barChartData.datasets[2] = temp2
+            // barChartData.datasets[3] = temp3
 
             var barChartOptions = {
                 responsive              : true,
