@@ -58,11 +58,11 @@
                               <p>Progress</p>
                             </a>
                           </li> --}}
-                          <li class="nav-item">
+                          {{-- <li class="nav-item">
                             <a href="{{route('web.route.dashboard.over_due')}}" class="nav-link {{ (Request::is('dashboard/over-due')?'active':'') }}">
                               <p>Over Due</p>
                             </a>
-                          </li>
+                          </li> --}}
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.contracts_expediting')}}" class="nav-link {{ (Request::is('dashboard/contracts_expediting')?'active':'') }}">
                               <p>Contracts Expediting</p>
