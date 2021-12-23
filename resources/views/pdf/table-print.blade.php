@@ -118,7 +118,7 @@
 
             <tr>
                 @foreach($collection->getAttributes() as $attrKey => $attributes)
-                    <td>{{$attributes}}</td>
+                    <td>{!! $collection->{ $attrKey}  !!}   </td>
                 @endforeach
             </tr>
         @endforeach
