@@ -166,7 +166,7 @@
         <div class="col-md-3">
             <div class="form-group" wire:ignore>
               {{-- <input type="title" class="form-control"  placeholder="Tender Description" wire:model.defer="tender_desc.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Tender Description">
+              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Customer Po No">
 
                 @foreach ($collection_sap_customer_po_nos as  $customer_po_nos )
                 <option value="{{$customer_po_nos}}">{{$customer_po_nos}}</option>
@@ -177,7 +177,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               {{-- <input type="title" class="form-control"  placeholder="Vendor Name"  wire:model.defer="vendor_name_en.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Vendor Name">
+              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Customer Po Item">
 
                 @foreach ($collection_sap_customer_po_items as  $customer_po_items )
                 <option value="{{$customer_po_items}}">{{$customer_po_items}}</option>
@@ -188,7 +188,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               {{-- <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="pur_grp_name.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Puchasing Document">
+              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Pur Grp Name">
 
                 @foreach ($collection_sap_pur_grp_names as  $pur_grp_names )
                 <option value="{{$pur_grp_names}}">{{$pur_grp_names}}</option>
