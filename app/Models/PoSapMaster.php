@@ -63,6 +63,7 @@ class PoSapMaster extends Model
             "pur_grp_name"=>true,
             "supply_ratio"=>true,
             "supplier_comment"=>false,
+            "internal_comment"=>false,
         ];
 
         const CONS_COLUMNS_NORMALIZED =[
@@ -107,9 +108,10 @@ class PoSapMaster extends Model
             "Gr Amount"=>true,
             "Customer PO No"=>true,
             "Customer PO Item"=>true,
-            "Pur. Grp Name"=>true,
+            "Pur Grp Name"=>true,
             "Supply Ratio"=>true,
             "Supplier Comment"=>false,
+            "Internal Comment"=>false,
         ];
 
 
@@ -162,7 +164,10 @@ class PoSapMaster extends Model
         "asn",
         "unique_hash",
         "supplier_comment",
+        'internal_comment',
     ];
+
+    protected $appends = ['internal_comment'];
 
 
     public function getInternalComentCountAttribute()
@@ -184,7 +189,7 @@ class PoSapMaster extends Model
 
     public function setPoCreatedOnAttribute($value)
     {
-        Log::info('check-> '.$value);
+
         return $this->attributes['po_created_on'] = Carbon::createFromFormat('d.m.Y',$value)->format('Y-m-d');
     }
 
@@ -217,11 +222,15 @@ class PoSapMaster extends Model
 
     }
 
-    public function getIernalCommentAttribute()
+    public function getInternalCommentAttribute()
     {
        $po_number = $this->attributes['po_number'];
        $po_item = $this->attributes['po_item'];
-    return  $collection = InternalComment::where('table_type','sap_line_item')->where('purchasing_doc_no',$po_number)->where('line_item_no',$po_item)->take(1)->get();
+      $collection = InternalComment::where('table_type','sap_line_item')->where('purchasing_doc_no',$po_number)->where('line_item_no',$po_item)->orderBy('id','DESC')->first();
+      if ( $collection) {
+         return  $collection->msg_body;
+      }
+      return null;
 
     }
 

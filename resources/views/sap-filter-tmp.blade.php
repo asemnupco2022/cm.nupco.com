@@ -255,7 +255,7 @@
     <hr style="margin-top: 0px;">
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Vendor NO"  wire:model.defer="vendor_code.from" > --}}
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_code"   wire:model.defer="vendor_code.from"  multiple title="Vendor Code">
@@ -266,16 +266,16 @@
          </select>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="slider-red" wire:ignore>
-            <input type="text" value="" id="supply_ratio" wire:model="supply_ratio" class="slider form-control" data-slider-min="0" data-slider-max="100"
-                 data-slider-step="1" data-slider-value="[0,100]" data-slider-orientation="horizontal"
-                 data-slider-selection="before" data-slider-tooltip="show" >
-                 {{-- <button class="btn btn-success btn-sm flat btn-sm float-right">apply</button> --}}
+      <div class="col-md-2">
+        <div class="slider-red">
+            <input type="text" wire:model.defer="supply_ratio.from.0" class=" form-control"  placeholder="supply ration from" >
           </div>
-
       </div>
-
+      <div class="col-md-2">
+        <div class="slider-red">
+            <input type="text" wire:model.defer="supply_ratio.from.1" class=" form-control"  placeholder="supply ration to" >
+          </div>
+      </div>
 
       <div class="col-md-3">
         <div class="form-group">

@@ -189,8 +189,8 @@
                             @foreach($columnsNormalized as $colKey => $column)
                                 <th class="{{$column==false?'hide':''}}"> {{ $colKey  }}</th>
                             @endforeach
-                            <th>Internal</th>
-                            <th>Vendor</th>
+                            {{-- <th  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Iernal Comment' )==false?'hide':''}}">Internal</th>
+                            <th  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}">Vendor</th> --}}
                         </tr>
                         </thead>
                         <tbody>
@@ -244,28 +244,28 @@
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO No' )==false?'hide':''}}" >{{$collection->customer_po_no}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO Item' )==false?'hide':''}}" >{{$collection->customer_po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Pur. Grp Name' )==false?'hide':''}}" >{{$collection->pur_grp_name}}</td>
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Pur Grp Name' )==false?'hide':''}}" >{{$collection->pur_grp_name}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supply Ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td>
-                                <td>
+                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td> --}}
+
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >
+
+                                    <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
+                                        <i class="far fa-comment-alt"></i>
+                                        <span>{{$collection->supplier_comment }}</span>
+                                    </a>
+                                    </td>
+
+                                <td   class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Internal Comment' )==false?'hide':''}}" >
                                 <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
                                     <i class="far fa-comment-alt"></i>
-                                    @if ($collection->IernalComment)
-                                        @foreach ($collection->IernalComment as $interComt)
-                                        <span>{{Str::substr($interComt->msg_body, 0, 30) }}</span><br>
-                                        @endforeach
+                                    @if ($collection->internal_comment)
+                                        <span>{{Str::substr($collection->internal_comment, 0, 60) }}</span><br>
                                     @endif
-
                                 </a>
                                 </td>
-                                <td>
 
-                                <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
-                                    <i class="far fa-comment-alt"></i>
-                                    <span>{{$collection->supplier_comment }}</span>
-                                </a>
 
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
