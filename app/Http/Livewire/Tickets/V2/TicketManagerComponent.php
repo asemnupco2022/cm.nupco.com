@@ -119,8 +119,8 @@ class TicketManagerComponent extends Component
         if (Arr::has($this->plant, ['from'])){
             $query=$query->where('plant','LIKE','%'.$this->plant['from'].'%');
         }
-        if (Arr::has($this->delivery_date, ['from'])){
-            $query=$query->where('delivery_date','LIKE','%'.$this->delivery_date['from'].'%');
+        if (Arr::has($this->delivery_address, ['from'])){
+            $query=$query->where('delivery_address','LIKE','%'.$this->delivery_address['from'].'%');
         }
         if (Arr::has($this->item_desc, ['from'])){
             $query=$query->where('item_desc','LIKE','%'.$this->item_desc['from'].'%');
@@ -140,8 +140,8 @@ class TicketManagerComponent extends Component
         if (Arr::has($this->importance, ['from'])){
             $query=$query->where('importance','LIKE','%'.$this->importance['from'].'%');
         }
-        if (Arr::has($this->delivery_address, ['from'])){
-            $query=$query->whereBetween('nupco_delivery_date',[$this->delivery_address['from'],$this->delivery_address['to']]);
+        if (Arr::has($this->delivery_date, ['from'])){
+            $query=$query->whereBetween('delivery_date',[$this->delivery_date['from'],$this->delivery_date['to']]);
         }
         if (Arr::has($this->line_status, ['from'])){
             $query=$query->where('line_status','LIKE','%'.$this->line_status['from'].'%');
@@ -150,11 +150,13 @@ class TicketManagerComponent extends Component
 
 
         if (Arr::has($this->supplier_comment, ['from'])){
+
             $query= $query->whereHas('has_chat', function($query) {
                 $query->where('msg_body','LIKE', '%'.$this->supplier_comment['from'].'%');
             });
         }
 
+        // dd($query->toSql());
         return $query;
     }
 

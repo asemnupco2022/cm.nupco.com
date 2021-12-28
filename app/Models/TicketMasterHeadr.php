@@ -79,7 +79,7 @@ class TicketMasterHeadr extends Model
 
     public function has_chat()
     {
-        return $this->hasMany(TicketManager::class, 'unique_line', 'unique_line');
+        return $this->belongsTo(TicketManager::class, 'unique_line', 'unique_line');
     }
 
     public function has_vendor()

@@ -20,8 +20,8 @@ class CreateTicketMasterHeadrsTable extends Migration
             $table->string('message_type')->index();
             $table->string('tender_num')->index();
             $table->string('vendor_num')->index();
-            $table->string('vendor_name_en')->index();
-            $table->string('vendor_name_er')->index();
+            $table->string('vendor_name_en')->nullable()->index();
+            $table->string('vendor_name_er')->nullable()->index();
             $table->string('po_num')->index();
             $table->string('customer_name')->index();
             $table->string('cust_code')->index();
