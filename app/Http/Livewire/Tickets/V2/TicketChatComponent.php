@@ -48,6 +48,7 @@ class TicketChatComponent extends Component
     public function fetchBaseInfo(){
 
         $this->notificationHistory =TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
+        TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['line_status'=>'waiting for action']);
 
     }
 
@@ -91,8 +92,8 @@ class TicketChatComponent extends Component
         $insert->msg_read_at=Carbon::now();
         if ($insert->save()){
 
-            TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['updated_at'=>Carbon::now()]);
-        //  $this->sendToHos($this->notificationHistory->has_vendor->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
+            TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'closed']);
+         $this->sendToHos($this->notificationHistory->has_vendor->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
 
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
