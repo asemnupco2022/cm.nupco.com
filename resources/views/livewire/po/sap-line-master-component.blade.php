@@ -558,14 +558,6 @@
         </div>
         <!-- loader -->
 
-<script>
-    document.addEventListener('livewire:load', function () {
-        $('#supply_ratio').change(function () {
-        var vs = $('#supply_ratio').val().split(',');
-            @this.supply_ratio_event(vs);
-        })
-    });
-</script>
 
 
 
@@ -659,10 +651,7 @@
             }
         });
 
-        $('#submit_filter').click(function () {
-            var vs = $('#sliderValue').val().split(',');
-            @this.supply_ratio.form =vs
-        })
+
     });
     Livewire.on('set-mail-content', mail_contents => {
 

@@ -8,6 +8,7 @@ use App\Models\HosResponseLog;
 use App\Models\PoSapMaster;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
+use App\Models\TicketMasterHeadr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class HosController extends Controller
 {
-    public function vendorResponse(Request $request)
+    public function vendorResponse_(Request $request)
     {
 
         $v = Validator::make($request->all(), [
@@ -85,6 +86,75 @@ class HosController extends Controller
         return response()->json(['status'=>0,'message'=>'there is something wrong']);
     }
 
+
+    public function vendorResponse(Request $request)
+    {
+
+        $v = Validator::make($request->all(), [
+            'unique_hash' => 'required',
+            'vendor_comment' => 'required',
+        ]);
+
+        if ($v->fails())
+        {
+            return response()->json(['success'=>false,'message'=>$v->errors()->first()]);
+        }
+        if (!HosPostHistory::where('unique_hash',$request->unique_hash)->exists()){
+            return response()->json(['success'=>false,'message'=>'unique hash does not found']);
+        }
+
+        $unique_line=(int)$request->po_num.'_'.(int)$request->po_item_num;
+        $hosHistory = TicketMasterHeadr::with('has_vendor')->where('unique_line',$unique_line)->first();
+
+        $tickets = new TicketManager();
+        $tickets->ticket_hash=$hosHistory->unique_hash;
+        $tickets->staff_user_id=null;
+        $tickets->staff_user_model=null;
+        $tickets->staff_name=null;
+        $tickets->staff_email=null;
+        $tickets->vendor_user_id=$hosHistory->has_vendor->id;
+        $tickets->vendor_user_model="rifrocket\\LaravelCms\\Models\\LbsUserMeta";
+        $tickets->vendor_name=$hosHistory->has_vendor->display_name;
+        $tickets->vendor_email=$hosHistory->has_vendor->email;
+        $tickets->msg_sender_id='vendor';
+
+        $tickets->msg_body=json_encode($request->vendor_comment);
+
+        if($request->attachment_info ){
+            $tickets->attachment= $request->attachment_info['file_path'];
+            $tickets->attachment_name=$request->attachment_info['x`'];
+        }
+
+        $tickets->json_data=$request->item_note;
+        $tickets->msg_receiver_id='staff';
+        if ($tickets->save()){
+
+
+            $insert =new HosResponseLog();
+            $insert->request="received comment from Hos by vendor ".$hosHistory->has_vendor->display_name." for ticket unique hash: ".$request->unique_hash;
+            $insert->request_type="POST";
+            $insert->brodcast_type='RECEIVED';
+            $insert->rs_status=1;
+            $insert->rs_mesg="DATA RECEIVED";
+            $insert->rs_body=json_encode($request->all());
+            $insert->save();
+
+            Log::info('HOS-API-LOG',[$insert]);
+
+            SchedulerNotificationHistory::where('mail_ticket_hash',$hosHistory->has_vendor->mail_ticket_hash)->first()->update(['updated_at'=>Carbon::now()]);
+            HosPostHistory::where('unique_hash',$hosHistory->unique_hash)->first()->update(['updated_at'=>Carbon::now()]);
+            $supplier_comment=PoHelper::NormalizeColString($request->vendor_comment[0]);
+
+            $saptmp=[
+                'supplier_comment'=>$supplier_comment,
+                "unique_hash"=>$hosHistory->unique_hash,
+            ];
+            PoHelper::sapMasterTmp($saptmp,$hosHistory->po_num, $hosHistory->po_item_num);
+
+            return response()->json(['status'=>1,'message'=>'data saved successfully!']);
+        }
+        return response()->json(['status'=>0,'message'=>'there is something wrong']);
+    }
 
     public function HosAsnManager(Request $request)
     {

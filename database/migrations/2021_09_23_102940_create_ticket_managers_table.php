@@ -17,6 +17,7 @@ class CreateTicketManagersTable extends Migration
             $table->id();
             $table->string('ticket_number');
             $table->string('ticket_hash');
+            $table->string('unique_line')->index();
             $table->bigInteger('staff_user_id');
             $table->string('staff_user_model');
             $table->string('staff_name')->nullable();

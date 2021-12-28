@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="card-body">
-            @livewire('tickets.ticket-manager-component')
+            @livewire('tickets.v2.ticket-manager-component')
         </div>
         <!-- /.card-body -->
     </div>

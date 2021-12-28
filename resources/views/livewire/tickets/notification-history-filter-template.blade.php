@@ -19,16 +19,12 @@
           <input type="title" class="form-control"  placeholder="Vendor No" wire:model.defer="vendor_num.from" >
         </div>
       </div>
-      {{-- <div class="col-md-3">
-        <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Vendor Name" wire:model.defer="vendor_name.from" >
-        </div>
-      </div> --}}
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Po Number"  wire:model.defer="po_num.from" >
+          <input type="title" class="form-control"  placeholder="Vendor Name" wire:model.defer="vendor_name_en.from" >
         </div>
       </div>
+
       <div class="col-md-2">
         <div class="form-group">
           <input type="title" class="form-control"  placeholder="Customer Code" wire:model.defer="cust_code.from" >
@@ -36,9 +32,62 @@
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Customer Name" wire:model.defer="customer_name.from" >
+          <input type="title" class="form-control"  placeholder="Customer Name"  wire:model.defer="customer_name.from" >
         </div>
       </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Po Num" wire:model.defer="po_num.from" >
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Po Item Num" wire:model.defer="po_item_num.from" >
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Material Num" wire:model.defer="mat_num.from" >
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Tender Desc" wire:model.defer="tender_desc.from" >
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Customer Po No" wire:model.defer="customer_po_no.from" >
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Customer Po Item" wire:model.defer="customer_po_item.from" >
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Importance" wire:model.defer="importance.from" >
+        </div>
+      </div>
+
+      {{-- <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Delivery Address" wire:model.defer="delivery_address.from" >
+        </div>
+      </div> --}}
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <input type="title" class="form-control"  placeholder="Line Status" wire:model.defer="line_status.from" >
+        </div>
+      </div>
+
 
     </div>
     <hr style="margin-top: 0px;">
@@ -47,22 +96,22 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Po Item No" wire:model.defer="po_item_num.from" >
+          <input type="title" class="form-control"  placeholder="UOM" wire:model.defer="uom.from" >
         </div>
       </div>
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Uom"  wire:model.defer="uom.from" >
+          <input type="title" class="form-control"  placeholder="Plant"  wire:model.defer="plant.from" >
         </div>
       </div>
-      <div class="col-md-3">
+      {{-- <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Plant" wire:model.defer="plant.from" >
+          <input type="title" class="form-control"  placeholder="Delivery Date" wire:model.defer="delivery_date.from" >
         </div>
-      </div>
+      </div> --}}
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="Mat No" wire:model.defer="mat_num.from" >
+          <input type="title" class="form-control"  placeholder="Item Desc" wire:model.defer="item_desc.from" >
         </div>
       </div>
     </div>
@@ -95,9 +144,9 @@
                       <i class="far fa-calendar-alt"></i>
                     </span>
                   </div>
-                  <input type="text" class="form-control float-right" id="deliveryDate" placeholder="Last Executed At" >
-                  <input type="hidden"  id="startnupco_delivery_date" wire:model.defe="last_executed_at.from">
-                <input type="hidden"  id="endnupco_delivery_date" wire:model.defe="last_executed_at.to">
+                  <input type="text" class="form-control float-right" id="deliveryDate" placeholder="Delivery Address" >
+                  <input type="hidden"  id="startnupco_delivery_date" wire:model.defe="delivery_address.from">
+                <input type="hidden"  id="endnupco_delivery_date" wire:model.defe="delivery_address.to">
                 </div>
                 <!-- /.input group -->
               </div>
@@ -150,8 +199,8 @@
     );
         $('#deliveryDate').val("");
         $('#deliveryDate').change(function () {
-            @this.set('last_executed_at.from', startnupco_delivery_date.format('YYYY-MM-DD'));
-            @this.set('last_executed_at.to', endnupco_delivery_date.format('YYYY-MM-DD'));
+            @this.set('delivery_address.from', startnupco_delivery_date.format('YYYY-MM-DD'));
+            @this.set('delivery_address.to', endnupco_delivery_date.format('YYYY-MM-DD'));
         })
 
 });

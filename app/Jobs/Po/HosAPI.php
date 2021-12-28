@@ -5,6 +5,7 @@ namespace App\Jobs\Po;
 use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
 use App\Models\PoSapMaster;
+use App\Models\TicketMasterHeadr;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -73,6 +74,7 @@ class HosAPI implements ShouldQueue
                 $insertToHos->customer_po_no=$poItemCol['customer_po_no'];
                 $insertToHos->customer_po_item=$poItemCol['customer_po_item'];
                 $insertToHos->importance=$this->mail_objects['importance'];
+                $insertToHos->delivery_address=$poItemCol['delivery_address'];
                 $insertToHos->save();
 
 
@@ -99,10 +101,45 @@ class HosAPI implements ShouldQueue
                     "customer_po_no"=>$poItemCol['customer_po_no'],
                     "customer_po_item"=>$poItemCol['customer_po_item'],
                     "importance"=>$this->mail_objects['importance'],
+                    "delivery_address"=>$poItemCol['delivery_address'],
                 ];
 
 
+
+                $ticketHeader=[
+                    'unique_hash'=>$unique_hash,
+                    'unique_line'=>$poItemCol['unique_line'],
+                    'message_type'=> $this->mail_type,
+                    'tender_num'=> $poItemCol['tender_no'],
+                    'vendor_num'=>ltrim($this->vendor_code,0),
+                    'vendor_name_en'=>$poItemCol['vendor_name_en'],
+                    'vendor_name_er'=>$poItemCol['vendor_name_er'],
+                    'po_num'=>$poItemCol['po_number'],
+                    'customer_name'=>$poItemCol['customer_name'],
+                    'cust_code'=>$poItemCol['customer_no'],
+                    'po_item_num'=>$poItemCol['po_item'],
+                    'uom'=>$poItemCol['uo_m'],
+                    'plant'=>$poItemCol['plant'],
+                    'ordered_qty'=>$poItemCol['ordered_quantity'],
+                    'open_qty'=>$poItemCol['open_quantity'],
+                    'net_order_value'=>$poItemCol['net_value'],
+                    'delivery_date'=>$poItemCol['nupco_delivery_date'],
+                    "item_desc"=>  $poItemCol['mat_description'],
+                    "mat_num"=> $poItemCol['material_number'],
+                    "tender_desc"=>$poItemCol['tender_desc'],
+                    "customer_po_no"=>$poItemCol['customer_po_no'],
+                    "customer_po_item"=>$poItemCol['customer_po_item'],
+                    "importance"=>$this->mail_objects['importance'],
+                    "delivery_address"=>$poItemCol['delivery_address'],
+                ];
+
                 try {
+                    $ticketMHeader =TicketMasterHeadr::where('unique_line',$poItemCol['unique_line'])->first();
+                    if ($ticketMHeader) {
+                        $ticketMHeader->update($ticketHeader);
+                    }else{
+                        TicketMasterHeadr::create($ticketHeader);
+                    }
 
                     $response = Http::get($this->hosUrl,$sendable );
                     Log::info('HOS-API-POST-REQUEST',[$response]);
