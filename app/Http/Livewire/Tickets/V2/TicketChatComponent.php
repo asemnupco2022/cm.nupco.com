@@ -37,10 +37,12 @@ class TicketChatComponent extends Component
 
     public function mount()
     {
-        // dd(base64_decode($this->mail_ticket_hash));
         $this->unique_line =base64_decode($this->mail_ticket_hash);
         $this->fetchBaseInfo();
         $this->collections = TicketManager::where('unique_line',$this->unique_line)->get();
+        foreach ($this->collections as $key => $value) {
+            TicketManager::find($value->id)->update(['msg_read_at'=>Carbon::now()]);
+        }
 
     }
 
@@ -91,6 +93,8 @@ class TicketChatComponent extends Component
         $insert->attachment_name=$fileOriginalName;
         $insert->msg_read_at=Carbon::now();
         if ($insert->save()){
+
+
 
             TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'closed']);
          $this->sendToHos($this->notificationHistory->has_vendor->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);

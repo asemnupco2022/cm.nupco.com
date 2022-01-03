@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\Tickets;
+namespace App\Http\Livewire\Tickets\V2;
 
 use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
-use App\Models\InternalComment;
-use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
+use App\Models\TicketMasterHeadr;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -23,27 +22,28 @@ class VendorChatComponent extends Component
         $this->emit('toast-notification-component',$message,$msgType);
     }
 
-    // protected $listeners =['open-edit-vendor-comment'=>'fetchBaseInfo'];
+    protected $listeners =['open-edit-vendor-comment'=>'fetchBaseInfo'];
 
     public $mail_ticket_hash, $notificationHistory, $allLineItems;
     public $collections;
     public $headerInfo;
+    public $unique_line;
 
     public $msg_body=null, $attachment=null ,$attachmentName =null , $ticketHash=null, $ticketParent;
     protected $rules = [
         'msg_body' => 'required',
     ];
 
-    public function fetchBaseInfo($purchasing_doc_no, $line_item_no, $tableType ){
+    public function fetchBaseInfo($purchasing_doc_no, $line_item_no, $tableType )
+    {
 
 
-        $uniqueHash=null;
-        if(HosPostHistory::where('po_num',$purchasing_doc_no)->where('po_item_num',$line_item_no)->orderBy('id','DESC')->first()){
+        $this->unique_line =$purchasing_doc_no.'_'.$line_item_no;
 
-            $uniqueHash =  HosPostHistory::where('po_num',$purchasing_doc_no)->where('po_item_num',$line_item_no)->orderBy('id','DESC')->first()->unique_hash;
+        $ticketMAnager=TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
 
-          }
-          if( empty($uniqueHash)){
+
+          if( !$ticketMAnager ){
               $this->dispatchBrowserEvent('close-edit-vendor-comment');
             return $this->emitNotifications('No Conversation Found','error');
           }
@@ -51,28 +51,27 @@ class VendorChatComponent extends Component
         $this->purchasing_doc_no=$purchasing_doc_no;
         $this->line_item_no=$line_item_no;
         $this->tableType=$tableType;
-        $this->collections = TicketManager::where('ticket_hash',$uniqueHash)->get();
+
         $this->dispatchBrowserEvent('scroll-down-chat');
-$this->fetchChat($uniqueHash);
+        $this->fetchChat();
         // dd($this->collections);
     }
 
-    public function fetchChat($value)
+    public function fetchChat()
     {
 
         $this->restInputs();
-        $this->ticketHash=$value;
-       TicketManager::where('ticket_hash',$value)->update(['msg_read_at'=>Carbon::now()]);
-        $this->collections = TicketManager::where('ticket_hash',$value)->get();
-        $this->ticketParent = HosPostHistory::with('VendorData')->where('unique_hash',$value)->first();
-
+        $this->collections = TicketManager::where('unique_line',$this->unique_line)->get();
+        foreach ($this->collections as $key => $value) {
+            TicketManager::find($value->id)->update(['msg_read_at'=>Carbon::now()]);
+        }
+        $this->ticketParent =TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
         $this->dispatchBrowserEvent('scroll-down-chat');
     }
 
 
     public function updatedAttachment($value)
     {
-
         $this->validate([
             'attachment' => 'max:1024',
         ]);
@@ -91,15 +90,16 @@ $this->fetchChat($uniqueHash);
         }
 
         $insert= new TicketManager();
-        $insert->ticket_hash=$this->ticketHash;
+        $insert->ticket_hash=$this->unique_line;
+        $insert->unique_line=$this->unique_line;
         $insert->staff_user_id=auth()->user()->id;
         $insert->staff_user_model="rifrocket\\LaravelCms\\Models\\LbsAdmin";
         $insert->staff_name=auth()->user()->display_name;
         $insert->staff_email=auth()->user()->email;
-        $insert->vendor_user_id=$this->ticketParent->VendorData->id;
+        $insert->vendor_user_id=$this->ticketParent->has_vendor->id;
         $insert->vendor_user_model="rifrocket\\LaravelCms\\Models\\LbsMember";
-        $insert->vendor_name=$this->ticketParent->VendorData->display_name;
-        $insert->vendor_email=$this->ticketParent->VendorData->email;
+        $insert->vendor_name=$this->ticketParent->has_vendor->display_name;
+        $insert->vendor_email=$this->ticketParent->has_vendor->email;
         $insert->msg_sender_id='staff';
         $insert->msg_body=$this->msg_body;
         $insert->msg_receiver_id='vendor';
@@ -109,13 +109,13 @@ $this->fetchChat($uniqueHash);
         if ($insert->save()){
 
 
-
-            $this->sendToHos($this->ticketParent->VendorData->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
+            TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'closed']);
+            $this->sendToHos($this->ticketParent->has_vendor->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
 
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
             // $this->fetchBaseInfo();
-            $this->collections = TicketManager::where('ticket_hash',$this->ticketHash)->get();
+            $this->collections =  TicketManager::where('unique_line',$this->unique_line)->get();
             return $this->emitNotifications('data updated successfully','success');
         }
         return $this->emitNotifications('Something Went Wrong Please try after some time','error');
@@ -127,6 +127,8 @@ $this->fetchChat($uniqueHash);
         $send=[
             "vendor_num" => $vendor,
             "unique_hash" => $unique_hash,
+            "po_num"=>$this->ticketParent->po_num,
+            "po_item_num"=>$this->ticketParent->po_item_num,
             "contract_team_comment" =>$contract_team_comment,
             "attachment_info"=>[
                 "original_file_name" => $fileName,
@@ -153,6 +155,6 @@ $this->fetchChat($uniqueHash);
 
     public function render()
     {
-        return view('livewire.tickets.vendor-chat-component');
+        return view('livewire.tickets.v2.vendor-chat-component');
     }
 }

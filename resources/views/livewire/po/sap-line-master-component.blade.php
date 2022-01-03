@@ -398,7 +398,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
-                    @livewire('tickets.vendor-chat-component')
+                    @livewire('tickets.v2.vendor-chat-component')
                 </div>
                 <div class="modal-footer justify-content-between">
 

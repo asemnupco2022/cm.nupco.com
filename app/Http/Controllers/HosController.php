@@ -89,25 +89,23 @@ class HosController extends Controller
 
     public function vendorResponse(Request $request)
     {
-
         $v = Validator::make($request->all(), [
-            'unique_hash' => 'required',
             'vendor_comment' => 'required',
         ]);
+
 
         if ($v->fails())
         {
             return response()->json(['success'=>false,'message'=>$v->errors()->first()]);
         }
-        if (!HosPostHistory::where('unique_hash',$request->unique_hash)->exists()){
-            return response()->json(['success'=>false,'message'=>'unique hash does not found']);
-        }
+
 
         $unique_line=(int)$request->po_num.'_'.(int)$request->po_item_num;
         $hosHistory = TicketMasterHeadr::with('has_vendor')->where('unique_line',$unique_line)->first();
 
         $tickets = new TicketManager();
-        $tickets->ticket_hash=$hosHistory->unique_hash;
+        $tickets->ticket_hash=$unique_line;
+        $tickets->unique_line=$unique_line;
         $tickets->staff_user_id=null;
         $tickets->staff_user_model=null;
         $tickets->staff_name=null;
@@ -122,7 +120,7 @@ class HosController extends Controller
 
         if($request->attachment_info ){
             $tickets->attachment= $request->attachment_info['file_path'];
-            $tickets->attachment_name=$request->attachment_info['x`'];
+            $tickets->attachment_name=$request->attachment_info['original_file_name'];
         }
 
         $tickets->json_data=$request->item_note;
@@ -141,15 +139,18 @@ class HosController extends Controller
 
             Log::info('HOS-API-LOG',[$insert]);
 
-            SchedulerNotificationHistory::where('mail_ticket_hash',$hosHistory->has_vendor->mail_ticket_hash)->first()->update(['updated_at'=>Carbon::now()]);
-            HosPostHistory::where('unique_hash',$hosHistory->unique_hash)->first()->update(['updated_at'=>Carbon::now()]);
+            TicketMasterHeadr::where('unique_line',$unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'new']);
+            $hosHistory = HosPostHistory::where('unique_line',$unique_line)->first();
+            if ($hosHistory) {
+                $hosHistory->update(['updated_at'=>Carbon::now()]);
+            }
             $supplier_comment=PoHelper::NormalizeColString($request->vendor_comment[0]);
 
             $saptmp=[
                 'supplier_comment'=>$supplier_comment,
-                "unique_hash"=>$hosHistory->unique_hash,
+                "unique_hash"=>$unique_line,
             ];
-            PoHelper::sapMasterTmp($saptmp,$hosHistory->po_num, $hosHistory->po_item_num);
+            PoHelper::sapMasterTmp($saptmp,$request->po_num, $request->po_item_num);
 
             return response()->json(['status'=>1,'message'=>'data saved successfully!']);
         }
