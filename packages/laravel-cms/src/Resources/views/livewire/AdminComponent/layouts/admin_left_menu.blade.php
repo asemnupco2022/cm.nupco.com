@@ -147,7 +147,7 @@
 
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('web.route.customer.request.manager')}}" class="nav-link {{ (Request::is('*/cutomer-request/*')?'active':'') }} {{ (Request::is('*/cutomer-request')?'active':'') }} ">
                                 <img src="{{ asset('img/dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="light_mode_img">
                                 <img src="{{ asset('img/light-dropdown-icon/supplier.svg') }}" alt="job image" title="job image" class="dark_mode_img">
                                 <p>Customer Requests</p>

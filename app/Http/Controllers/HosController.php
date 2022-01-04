@@ -116,7 +116,7 @@ class HosController extends Controller
         $tickets->vendor_email=$hosHistory->has_vendor->email;
         $tickets->msg_sender_id='vendor';
 
-        $tickets->msg_body=json_encode($request->vendor_comment);
+        $tickets->msg_body=$request->vendor_comment[0];
 
         if($request->attachment_info ){
             $tickets->attachment= $request->attachment_info['file_path'];

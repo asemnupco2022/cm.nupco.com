@@ -185,7 +185,6 @@ class TicketManagerComponent extends Component
 
     public function mount()
     {
-
         $this->fetchBaseInfo();
     }
 
