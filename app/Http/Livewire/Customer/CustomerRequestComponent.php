@@ -6,6 +6,7 @@ use App\Helpers\PoHelper;
 use App\Models\CustomerReport;
 use Carbon\Carbon;
 use Livewire\Component;
+use Livewire\WithPagination;
 use rifrocket\LaravelCms\Helpers\Classes\LbsConstants;
 use rifrocket\LaravelCms\Models\LbsAdmin;
 
@@ -17,7 +18,8 @@ class CustomerRequestComponent extends Component
     {
         $this->emit('toast-notification-component',$message,$msgType);
     }
-
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
 
     //Search Params
     public $searchable_col='customer_name_en';
