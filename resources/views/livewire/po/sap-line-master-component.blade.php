@@ -398,7 +398,7 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
-                    @livewire('tickets.vendor-chat-component')
+                    @livewire('tickets.v2.vendor-chat-component')
                 </div>
                 <div class="modal-footer justify-content-between">
 
@@ -558,14 +558,6 @@
         </div>
         <!-- loader -->
 
-<script>
-    document.addEventListener('livewire:load', function () {
-        $('#supply_ratio').change(function () {
-        var vs = $('#supply_ratio').val().split(',');
-            @this.supply_ratio_event(vs);
-        })
-    });
-</script>
 
 
 
@@ -659,10 +651,7 @@
             }
         });
 
-        $('#submit_filter').click(function () {
-            var vs = $('#sliderValue').val().split(',');
-            @this.supply_ratio.form =vs
-        })
+
     });
     Livewire.on('set-mail-content', mail_contents => {
 

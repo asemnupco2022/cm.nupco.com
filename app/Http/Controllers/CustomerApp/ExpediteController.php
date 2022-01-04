@@ -45,8 +45,5 @@ class ExpediteController extends Controller
             return response()->json(['status'=>0,'message'=>'there is something wrong: '.$th->getMessage()]);
         }
 
-
-
-
    }
 }

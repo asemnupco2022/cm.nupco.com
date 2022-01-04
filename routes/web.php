@@ -70,6 +70,10 @@ Route::group(array('middleware'=>'web'), function () {
         Route::get('/vendor-response-attachment-download',[TicketManagerController::class,'download_attachment'])->name('web.route.hos.vendor.download.attachment');
         });
 
+        Route::group(['prefix'=>'cutomer-request'], function(){
+            Route::get('/',[TicketManagerController::class,'index'])->name('web.route.customer.request.manager');
+            });
+
     });
 
 

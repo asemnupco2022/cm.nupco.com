@@ -213,6 +213,7 @@ class PoHelper
 
     public static function sapMasterTmp($requests, $po_number, $po_item)
     {
+
         $update =PoSapMasterTmp::where('unique_line',$po_number.'_'.$po_item)->first();
         $sapMasterUpdate =PoSapMaster::where('unique_line',$po_number.'_'.$po_item)->first();
 
@@ -223,9 +224,15 @@ class PoHelper
         }
         foreach ($requests as $key => $value) {
             $update->{$key} = $value;
-            $sapMasterUpdate->{$key} = $value;
+            if ($sapMasterUpdate) {
+                $sapMasterUpdate->{$key} = $value;
+            }
+
         }
-        $sapMasterUpdate->save();
+        if ($sapMasterUpdate) {
+            $sapMasterUpdate->save();
+        }
+
        return $update->save();
     }
 

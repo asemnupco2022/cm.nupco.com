@@ -95,10 +95,7 @@ class SapLineMasterComponent extends Component
 //    ========
 
 
-    public function supply_ratio_event($value)
-    {
-       $this->supply_ratio['from']=$value;
-    }
+
     public function hitSearchInt($query)
     {
        if (Arr::has($this->tender_no, ['from'])){
@@ -141,8 +138,9 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->customer_name, ['from'])){
             $query=$query->whereIn('customer_name',$this->customer_name['from']);
         }
-        if (Arr::has($this->supply_ratio, ['from'])){
-            $query=$query->whereIn('supply_ratio',$this->supply_ratio['from']);
+        if (Arr::has($this->supply_ratio, ['from']) and Arr::has($this->supply_ratio, ['to'])){
+
+            $query=$query->whereBetween('supply_ratio',[$this->supply_ratio['from'],$this->supply_ratio['to']]);
         }
         if (Arr::has($this->delivery_address, ['from'])){
             $query=$query->whereIn('delivery_address',$this->delivery_address['from']);
@@ -159,7 +157,7 @@ class SapLineMasterComponent extends Component
         if(Arr::has($this->supplier_comment, ['from']) and $this->supplier_comment['from'] !='0' ){
             $query=$query->whereIn('supplier_comment',$this->supplier_comment['from']);
         }
-        if (Arr::has($this->nupco_delivery_date, ['from'])){
+        if (Arr::has($this->nupco_delivery_date, ['from']) and Arr::has($this->nupco_delivery_date, ['to'])){
             $query=$query->whereBetween('nupco_delivery_date',[$this->nupco_delivery_date['from'],$this->nupco_delivery_date['to']]);
         }
         if (Arr::has($this->customer_po_no, ['from'])){

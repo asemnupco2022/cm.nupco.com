@@ -7494,7 +7494,7 @@
         <div class="col-md-3">
             <div class="form-group" wire:ignore>
               
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Tender Description">
+              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Customer Po No">
 
                                 <option value=""></option>
                                 <option value="00000002021100132001">00000002021100132001</option>
@@ -7507,7 +7507,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Vendor Name">
+              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Customer Po Item">
 
                                 <option value="00000">00000</option>
                                 <option value="00008">00008</option>
@@ -7521,7 +7521,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Puchasing Document">
+              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Pur Grp Name">
 
                                 <option value="MOE">MOE</option>
                                 <option value="MOH">MOH</option>
@@ -7845,12 +7845,12 @@
       </div>
       <div class="col-md-2">
         <div class="slider-red">
-            <input type="text" wire:model.defer="supply_ratio.from.0" class=" form-control"  placeholder="supply ration from" >
+            <input type="text" wire:model.defer="supply_ratio.from" class=" form-control"  placeholder="supply ration from" >
           </div>
       </div>
       <div class="col-md-2">
         <div class="slider-red">
-            <input type="text" wire:model.defer="supply_ratio.from.1" class=" form-control"  placeholder="supply ration to" >
+            <input type="text" wire:model.defer="supply_ratio.to" class=" form-control"  placeholder="supply ration to" >
           </div>
       </div>
 

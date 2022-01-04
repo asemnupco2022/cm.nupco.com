@@ -268,12 +268,12 @@
       </div>
       <div class="col-md-2">
         <div class="slider-red">
-            <input type="text" wire:model.defer="supply_ratio.from.0" class=" form-control"  placeholder="supply ration from" >
+            <input type="text" wire:model.defer="supply_ratio.from" class=" form-control"  placeholder="supply ration from" >
           </div>
       </div>
       <div class="col-md-2">
         <div class="slider-red">
-            <input type="text" wire:model.defer="supply_ratio.from.1" class=" form-control"  placeholder="supply ration to" >
+            <input type="text" wire:model.defer="supply_ratio.to" class=" form-control"  placeholder="supply ration to" >
           </div>
       </div>
 

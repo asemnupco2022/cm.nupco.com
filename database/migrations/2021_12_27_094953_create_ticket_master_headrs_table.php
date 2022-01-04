@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHosPostHistoriesTable extends Migration
+class CreateTicketMasterHeadrsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateHosPostHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('hos_post_histories', function (Blueprint $table) {
+        Schema::create('ticket_master_headrs', function (Blueprint $table) {
             $table->id();
-            $table->string('mail_unique')->index();
-            $table->string('mail_hash')->index();
+            $table->string('unique_hash');
+            $table->string('unique_line')->unique();
             $table->string('message_type')->index();
-            $table->string('unique_hash')->unique();
             $table->string('tender_num')->index();
             $table->string('vendor_num')->index();
+            $table->string('vendor_name_en')->nullable()->index();
+            $table->string('vendor_name_er')->nullable()->index();
             $table->string('po_num')->index();
             $table->string('customer_name')->index();
             $table->string('cust_code')->index();
@@ -36,9 +37,9 @@ class CreateHosPostHistoriesTable extends Migration
             $table->string('tender_desc')->nullable()->index();
             $table->string('customer_po_no')->nullable()->index();
             $table->string('customer_po_item')->nullable()->index();
-            $table->string('importance')->default(0)->index();
-            $table->string('delivery_address')->index();
-            $table->string('unique_line')->index();
+            $table->string('importance')->nullable()->default(0)->index();
+            $table->string('delivery_address')->nullable()->index();
+            $table->enum('line_status',['new','waiting for action', 'closed', 'other'])->default('new');
             $table->text('meta')->nullable();
             $table->text('json_data')->nullable();
             $table->enum('status',['new','active', 'deactivated', 'suspended'])->default('active');
@@ -55,6 +56,6 @@ class CreateHosPostHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hos_post_histories');
+        Schema::dropIfExists('ticket_master_headrs');
     }
 }

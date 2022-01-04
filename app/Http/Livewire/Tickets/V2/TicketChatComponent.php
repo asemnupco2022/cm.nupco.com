@@ -1,78 +1,63 @@
 <?php
 
-namespace App\Http\Livewire\Tickets;
+namespace App\Http\Livewire\Tickets\V2;
 
 use App\Helpers\PoHelper;
 use App\Models\HosPostHistory;
 use App\Models\InternalComment;
 use App\Models\SchedulerNotificationHistory;
 use App\Models\TicketManager;
+use App\Models\TicketMasterHeadr;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Log;
 
-class VendorChatComponent extends Component
+class TicketChatComponent extends Component
 {
 
     use WithFileUploads;
-
     public function emitNotifications($message, $msgType)
     {
         $this->emit('toast-notification-component',$message,$msgType);
     }
 
-    // protected $listeners =['open-edit-vendor-comment'=>'fetchBaseInfo'];
 
     public $mail_ticket_hash, $notificationHistory, $allLineItems;
     public $collections;
     public $headerInfo;
+    public $unique_line;
 
     public $msg_body=null, $attachment=null ,$attachmentName =null , $ticketHash=null, $ticketParent;
+
     protected $rules = [
         'msg_body' => 'required',
     ];
 
-    public function fetchBaseInfo($purchasing_doc_no, $line_item_no, $tableType ){
-
-
-        $uniqueHash=null;
-        if(HosPostHistory::where('po_num',$purchasing_doc_no)->where('po_item_num',$line_item_no)->orderBy('id','DESC')->first()){
-
-            $uniqueHash =  HosPostHistory::where('po_num',$purchasing_doc_no)->where('po_item_num',$line_item_no)->orderBy('id','DESC')->first()->unique_hash;
-
-          }
-          if( empty($uniqueHash)){
-              $this->dispatchBrowserEvent('close-edit-vendor-comment');
-            return $this->emitNotifications('No Conversation Found','error');
-          }
-        $this->restInputs();
-        $this->purchasing_doc_no=$purchasing_doc_no;
-        $this->line_item_no=$line_item_no;
-        $this->tableType=$tableType;
-        $this->collections = TicketManager::where('ticket_hash',$uniqueHash)->get();
-        $this->dispatchBrowserEvent('scroll-down-chat');
-$this->fetchChat($uniqueHash);
-        // dd($this->collections);
-    }
-
-    public function fetchChat($value)
+    public function mount()
     {
+        $this->unique_line =base64_decode($this->mail_ticket_hash);
+        $this->fetchBaseInfo();
+        $this->collections = TicketManager::where('unique_line',$this->unique_line)->get();
+        foreach ($this->collections as $key => $value) {
+            TicketManager::find($value->id)->update(['msg_read_at'=>Carbon::now()]);
+        }
 
-        $this->restInputs();
-        $this->ticketHash=$value;
-       TicketManager::where('ticket_hash',$value)->update(['msg_read_at'=>Carbon::now()]);
-        $this->collections = TicketManager::where('ticket_hash',$value)->get();
-        $this->ticketParent = HosPostHistory::with('VendorData')->where('unique_hash',$value)->first();
-
-        $this->dispatchBrowserEvent('scroll-down-chat');
     }
+
+
+    public function fetchBaseInfo(){
+
+        $this->notificationHistory =TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
+        TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['line_status'=>'waiting for action']);
+
+    }
+
 
 
     public function updatedAttachment($value)
     {
-
         $this->validate([
             'attachment' => 'max:1024',
         ]);
@@ -91,15 +76,16 @@ $this->fetchChat($uniqueHash);
         }
 
         $insert= new TicketManager();
-        $insert->ticket_hash=$this->ticketHash;
+        $insert->ticket_hash=$this->unique_line;
+        $insert->unique_line=$this->unique_line;
         $insert->staff_user_id=auth()->user()->id;
         $insert->staff_user_model="rifrocket\\LaravelCms\\Models\\LbsAdmin";
         $insert->staff_name=auth()->user()->display_name;
         $insert->staff_email=auth()->user()->email;
-        $insert->vendor_user_id=$this->ticketParent->VendorData->id;
+        $insert->vendor_user_id=$this->notificationHistory->has_vendor->id;
         $insert->vendor_user_model="rifrocket\\LaravelCms\\Models\\LbsMember";
-        $insert->vendor_name=$this->ticketParent->VendorData->display_name;
-        $insert->vendor_email=$this->ticketParent->VendorData->email;
+        $insert->vendor_name=$this->notificationHistory->has_vendor->display_name;
+        $insert->vendor_email=$this->notificationHistory->has_vendor->email;
         $insert->msg_sender_id='staff';
         $insert->msg_body=$this->msg_body;
         $insert->msg_receiver_id='vendor';
@@ -110,12 +96,13 @@ $this->fetchChat($uniqueHash);
 
 
 
-            $this->sendToHos($this->ticketParent->VendorData->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
+            TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'closed']);
+         $this->sendToHos($this->notificationHistory->has_vendor->vendor_code, $this->ticketHash, $this->msg_body,$filepath,$fileOriginalName);
 
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
             // $this->fetchBaseInfo();
-            $this->collections = TicketManager::where('ticket_hash',$this->ticketHash)->get();
+            $this->collections =  TicketManager::where('unique_line',$this->unique_line)->get();;
             return $this->emitNotifications('data updated successfully','success');
         }
         return $this->emitNotifications('Something Went Wrong Please try after some time','error');
@@ -127,10 +114,12 @@ $this->fetchChat($uniqueHash);
         $send=[
             "vendor_num" => $vendor,
             "unique_hash" => $unique_hash,
+            "po_num"=>$this->notificationHistory->po_num,
+            "po_item_num"=>$this->notificationHistory->po_item_num,
             "contract_team_comment" =>$contract_team_comment,
             "attachment_info"=>[
                 "original_file_name" => $fileName,
-                "file_path"=>$file,
+                "file_path"=>URL($file),
                 ],
         ];
        $response = Http::get($url, $send);
@@ -144,15 +133,14 @@ $this->fetchChat($uniqueHash);
     public function restInputs()
     {
         $this->msg_body=null;
-        $ticketHash=null;
-        $ticketParent=null;
-        $attachment=null;
-        $attachmentName =null;
+        // $this->ticketHash=null;
+        // $this->ticketParent=null;
+        $this->attachment=null;
+        $this->attachmentName =null;
     }
-
 
     public function render()
     {
-        return view('livewire.tickets.vendor-chat-component');
+        return view('livewire.tickets.v2.ticket-chat-component');
     }
 }
