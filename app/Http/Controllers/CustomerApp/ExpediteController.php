@@ -33,8 +33,8 @@ class ExpediteController extends Controller
             'tendor_description'=>$request->tendor_description,
             'customer_email'=>$request->customer_email,
             'customer_phone'=>$request->customer_phone,
-	    'file_name'=>$request->file_name,
-	    'file_path'=>$request->file_path,
+            'file_name'=>$request->file_name,
+            'file_path'=>$request->file_path,
         ];
 
         try {
@@ -45,5 +45,10 @@ class ExpediteController extends Controller
             return response()->json(['status'=>0,'message'=>'there is something wrong: '.$th->getMessage()]);
         }
 
+   }
+
+   public function cumtomer_request()
+   {
+       return view('customer.cumtomer-request');
    }
 }
