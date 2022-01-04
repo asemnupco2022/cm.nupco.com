@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Automation\AutoController;
+use App\Http\Controllers\CustomerApp\ExpediteController;
 use App\Http\Controllers\Filters\FilterController;
 use App\Http\Controllers\HosController;
 use App\Http\Controllers\Logs\UserLogController;
@@ -71,7 +72,7 @@ Route::group(array('middleware'=>'web'), function () {
         });
 
         Route::group(['prefix'=>'cutomer-request'], function(){
-            Route::get('/',[TicketManagerController::class,'index'])->name('web.route.customer.request.manager');
+            Route::get('/',[ExpediteController::class,'cumtomer_request'])->name('web.route.customer.request.manager')->middleware('auth:admin');
             });
 
     });
