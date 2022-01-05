@@ -153,7 +153,7 @@
     <!-- /.col -->
 </div>
 <div class="row">
-  
+
     <!-- /.col -->
     <div class="col-md-12">
         <div class="card direct-chat direct-chat-primary">
@@ -193,9 +193,14 @@
 
                                         }else{
                                                 echo '<ul>';
-                                           foreach (json_decode( $collection->msg_body, true) as $comment){
-                                               echo '<li>'.$comment.'</li>';
-                                           }
+                                            $jsonCheck = json_decode( $collection->msg_body, true);
+                                            if ($jsonCheck and is_array($jsonCheck)) {
+                                                foreach (json_decode( $collection->msg_body, true) as $comment){
+                                                    echo '<li>'.$comment.'</li>';
+                                                }
+                                        }else{
+                                            echo '<li>'.$collection->msg_body.'</li>';
+                                        }
 
                                            if($collection->json_data){
                                                 echo '<li>'.$collection->json_data.'</li>';

@@ -40,6 +40,7 @@ class TicketChatComponent extends Component
         $this->unique_line =base64_decode($this->mail_ticket_hash);
         $this->fetchBaseInfo();
         $this->collections = TicketManager::where('unique_line',$this->unique_line)->get();
+        
         foreach ($this->collections as $key => $value) {
             TicketManager::find($value->id)->update(['msg_read_at'=>Carbon::now()]);
         }
@@ -102,7 +103,8 @@ class TicketChatComponent extends Component
             $this->dispatchBrowserEvent('scroll-down-chat');
             $this->restInputs();
             // $this->fetchBaseInfo();
-            $this->collections =  TicketManager::where('unique_line',$this->unique_line)->get();;
+            $this->collections =  TicketManager::where('unique_line',$this->unique_line)->get();
+
             return $this->emitNotifications('data updated successfully','success');
         }
         return $this->emitNotifications('Something Went Wrong Please try after some time','error');

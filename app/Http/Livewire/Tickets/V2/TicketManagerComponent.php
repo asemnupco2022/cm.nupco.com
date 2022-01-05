@@ -256,11 +256,8 @@ class TicketManagerComponent extends Component
 
     public function search_filter_submit()
     {
-
-        $HosHistoryQuery =TicketMasterHeadr::orderBy('unique_line', 'DESC');
+        $HosHistoryQuery =TicketMasterHeadr::orderBy('unique_line', 'DESC')->where('meta','!=','init');
         $this->mailHash = $this->hitSearchInt($HosHistoryQuery)->select('unique_line')->get();
-
-
     }
 
 
@@ -268,7 +265,7 @@ class TicketManagerComponent extends Component
     public function searchEngine()
     {
 
-        $query=TicketMasterHeadr::NotDel();
+        $query=TicketMasterHeadr::NotDel()->where('meta','!=','init');
 
 
         if ($this->json_data and !empty($this->json_data)){
