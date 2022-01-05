@@ -224,18 +224,20 @@
          </select>
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Customer No" wire:model.defer="customer_no.from" > --}}
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_no"   wire:model.defer="customer_no.from"  multiple title="Customer No">
-
             @foreach ($collection_sap_customer_nos as  $customer_nos )
             <option value="{{$customer_nos}}">{{$customer_nos}}</option>
             @endforeach
          </select>
         </div>
       </div>
-      <div class="col-md-6">
+
+
+
+      <div class="col-md-4">
         <div class="form-group" wire:ignore style="text-align: right ">
             <select class="form-control selectpicker"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments" style="text-align: right "  multiple title="Please Choose Supplier Comments">
 
@@ -248,6 +250,18 @@
                 @endif
 
             </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group" wire:ignore>
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple title="ASN">
+            <option value="no">No</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+            <option value="delivered">Delivered</option>
+            <option value="not_delivered">Not Delivered</option>
+         </select>
         </div>
       </div>
 

@@ -20,7 +20,7 @@ class PoSapMaster extends Model
     const CONS_COLUMNS = [
 
             "notified"=>true,
-            // "asn"=>true,
+            "asn"=>true,
             "document_type"=>true,
             "document_type_desc"=>true,
             "po_number"=>true,
@@ -68,7 +68,7 @@ class PoSapMaster extends Model
 
         const CONS_COLUMNS_NORMALIZED =[
             "Notified"=>true,
-            // "Asn"=>true,
+            "Asn"=>true,
             "Document Type"=>true,
             "Document Type Desc"=>true,
             "Po Number"=>true,

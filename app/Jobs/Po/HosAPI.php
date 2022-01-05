@@ -131,6 +131,7 @@ class HosAPI implements ShouldQueue
                     "customer_po_item"=>$poItemCol['customer_po_item'],
                     "importance"=>$this->mail_objects['importance'],
                     "delivery_address"=>$poItemCol['delivery_address'],
+                    "meta"=>'init',
                 ];
 
                 try {

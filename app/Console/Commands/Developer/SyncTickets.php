@@ -1,10 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Console\Commands\Developer;
 
 use App\Models\HosPostHistory;
-use App\Models\TicketManager;
-use App\Models\TicketMasterHeadr;
 use Illuminate\Console\Command;
 
 class SyncTickets extends Command

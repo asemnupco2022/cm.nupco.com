@@ -139,7 +139,7 @@ class HosController extends Controller
 
             Log::info('HOS-API-LOG',[$insert]);
 
-            TicketMasterHeadr::where('unique_line',$unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'new']);
+            TicketMasterHeadr::where('unique_line',$unique_line)->first()->update(['updated_at'=>Carbon::now(),'line_status'=>'new','meta'=>'new']);
             $hosHistory = HosPostHistory::where('unique_line',$unique_line)->first();
             if ($hosHistory) {
                 $hosHistory->update(['updated_at'=>Carbon::now()]);

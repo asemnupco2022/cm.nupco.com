@@ -21,6 +21,8 @@ use App\Jobs\Po\NotifySap;
 use App\Models\PoSapMasterScheduler;
 use App\Models\PoSapMasterTmp;
 use App\Models\SupplierCommentTypes;
+use App\Models\TicketManager;
+use App\Models\TicketMasterHeadr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Importer;

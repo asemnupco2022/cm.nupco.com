@@ -83,7 +83,6 @@
                             <div class="form-inline">
 
                                 <div class="form-group input-group-sm">
-
                                     <select class="form-control select2 " style="width: 100%;" wire:model.defer="searchable_col" title="Select Search Column">
                                         @foreach($columnsNormalized as $colKey => $column)
                                             <option value="{{$colKey}}" class="{{$colKey==false?'hide':''}}"> {{ $colKey }}</option>
@@ -204,7 +203,7 @@
                                     </div>
                                 </td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Notified' )==false?'hide':''}}" ><span class=" badge badge-info ar-badge">{{$collection->notified}}</span></td>
-                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td> --}}
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type Desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Number' )==false?'hide':''}}" >{{$collection->po_number}}</td>

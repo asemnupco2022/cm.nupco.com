@@ -92,6 +92,7 @@ class SapLineMasterComponent extends Component
     public $customer_po_item=[];
     public $pur_grp_name=[];
     public $notified=[];
+    public $asn = [];
 //    ========
 
 
@@ -175,6 +176,9 @@ class SapLineMasterComponent extends Component
         }
         if (Arr::has($this->notified, ['from'])){
             $query=$query->where('notified',$this->notified['from']);
+        }
+        if (Arr::has($this->asn, ['from'])){
+            $query=$query->where('asn',$this->asn['from']);
         }
 
 
@@ -398,6 +402,7 @@ class SapLineMasterComponent extends Component
         $this->cust_gen_code = [];
         $this->vendor_name_en = [];
         $this->supplier_comment = [];
+        $this->asn = [];
 
 
     }
@@ -406,6 +411,7 @@ class SapLineMasterComponent extends Component
 
     public function mount()
     {
+
         $this->fetchBaseInfo();
     }
 
