@@ -35,9 +35,14 @@
 
                             }else{
                                     echo '<ul>';
+                                        $jsonCheck = json_decode( $collection->msg_body, true);
+                                            if ($jsonCheck and is_array($jsonCheck)) {
                                foreach (json_decode( $collection->msg_body, true) as $comment){
                                    echo '<li>'.$comment.'</li>';
                                }
+                            }else{
+                                            echo '<li>'.$collection->msg_body.'</li>';
+                                        }
 
                                if($collection->json_data){
                                     echo '<li>'.$collection->json_data.'</li>';
