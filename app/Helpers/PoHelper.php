@@ -31,6 +31,7 @@ class PoHelper
 
     public static function NormalizeColString($string = null, array $keyCollection = null)
     {
+
         if ($keyCollection) {
             foreach ($keyCollection as $key => $collection) {
                 $collection = Str::replace('_', ' ', $collection);
@@ -39,7 +40,9 @@ class PoHelper
             }
             return $keyCollection;
         }
+
         $string = Str::replace(['_', '-', '[', ']', '"'], ' ', $string);
+
         return ucwords(trans($string));
     }
 

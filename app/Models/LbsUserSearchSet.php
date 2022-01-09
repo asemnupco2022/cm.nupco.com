@@ -59,7 +59,15 @@ class LbsUserSearchSet extends Model
         $operatorArray=json_decode($json_data, true);
         $count=count($operatorArray);
         foreach ($operatorArray as $strKey => $toString){
-            $json_data_to_string .=PoHelper::NormalizeColString($toString['queryCol']).'  <b>'.$this->operators[$toString['queryOpr']].'</b>  '.$toString['queryVal'];
+
+            if ($toString['queryVal'] and is_array($toString['queryVal'])) {
+
+                $colset=json_encode($toString['queryVal']);
+                $json_data_to_string .=PoHelper::NormalizeColString($toString['queryCol']).'  <b>'.$this->operators[$toString['queryOpr']].'</b>  '.$colset;
+            }else{
+                $json_data_to_string .=PoHelper::NormalizeColString($toString['queryCol']).'  <b>'.$this->operators[$toString['queryOpr']].'</b>  '.$toString['queryVal'];
+            }
+
             if ($count>$strKey+1){
                 $json_data_to_string .=' <b>AND</b>  ';
             }

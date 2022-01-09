@@ -469,7 +469,11 @@ class SapLineMasterComponent extends Component
                 $query = PoSapMaster::orderBy('vendor_code', 'ASC');
                 foreach ($searchableItems as $key => $searchableItem){
                     $operator=$searchableItem['queryOpr'];
-                    $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
+                    if ($operator == 'IN') {
+                        $query = $query->whereIn(trim($searchableItem['queryCol']),($searchableItem['queryVal']));
+                    }else{
+                        $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
+                    }
                 }
                 return  $query;
             }

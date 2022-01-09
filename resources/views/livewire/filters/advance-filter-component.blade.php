@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-md-3">
         <div class="form-group">
-          <input type="title" class="form-control"  placeholder="PO Type " wire:model.defer="document_type.from" >
+          <input type="title" class="form-control"  placeholder="PO Type" wire:model.defer="document_type.from" >
         </div>
       </div>
       <div class="col-md-3">
