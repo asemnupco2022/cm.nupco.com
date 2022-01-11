@@ -8,6 +8,13 @@
 @endpush
 
 <div>
+    <div class="row">
+        <div class="col-md-12">
+                <div class="form-group">
+                    <input type="title" class="form-control"  placeholder="templateName" wire:model.defer="templateName" >
+                </div>
+        </div>
+    </div>
 
     <div class="row">
       <div class="col-md-3">
@@ -257,7 +264,7 @@
         <div class="form-group" wire:ignore>
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple title="ASN">
             <option value="no">No</option>
-            <option value="approved">Approved</option>
+            <option value="accepted">Accepted</option>
             <option value="rejected">Rejected</option>
             <option value="delivered">Delivered</option>
             <option value="not_delivered">Not Delivered</option>
@@ -291,7 +298,7 @@
           </div>
       </div>
 
-      <div class="col-md-3">
+      {{-- <div class="col-md-3">
         <div class="form-group">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -322,7 +329,7 @@
             </div>
             <!-- /.input group -->
           </div>
-      </div>
+      </div> --}}
 
 
     </div>
@@ -331,12 +338,13 @@
     <div class="row">
         <div class="col-md-12 justify-center">
 
-            <button type="button" id="submit_filter" class="btn btn-success btn-sm flat btn-sm float-right" wire:click="search_enter" >
+            <button type="button" id="submit_filter" class="btn btn-success btn-sm flat btn-sm float-right" wire:click="saveTemplateInRepo" >
                 Check Now
             </button>
-            <button type="submit" class="btn btn-success btn-sm flat btn-sm "  title="Reset Current Filter" wire:click="search_reset">
+
+            {{-- <button type="submit" class="btn btn-warning btn-sm flat btn-sm"  title="Reset Current Filter" wire:click="search_reset">
                 <i class="fas fa-sync"></i>
-            </button>
+            </button> --}}
 
         </div>
       </div>

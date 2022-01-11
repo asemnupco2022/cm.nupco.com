@@ -35,6 +35,7 @@ class LbsConstants
         '>'=>'GREATER THAN',
         '!='=>'NOT EQUAL',
         'LIKE'=>'LIKE',
+        'IN'=>'IN',
     ];
 
     const CONST_ACTIONS=[

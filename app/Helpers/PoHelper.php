@@ -31,6 +31,7 @@ class PoHelper
 
     public static function NormalizeColString($string = null, array $keyCollection = null)
     {
+
         if ($keyCollection) {
             foreach ($keyCollection as $key => $collection) {
                 $collection = Str::replace('_', ' ', $collection);
@@ -39,7 +40,9 @@ class PoHelper
             }
             return $keyCollection;
         }
+
         $string = Str::replace(['_', '-', '[', ']', '"'], ' ', $string);
+
         return ucwords(trans($string));
     }
 
@@ -213,7 +216,6 @@ class PoHelper
 
     public static function sapMasterTmp($requests, $po_number, $po_item)
     {
-
         $update =PoSapMasterTmp::where('unique_line',$po_number.'_'.$po_item)->first();
         $sapMasterUpdate =PoSapMaster::where('unique_line',$po_number.'_'.$po_item)->first();
 
@@ -221,6 +223,7 @@ class PoHelper
             $update = new PoSapMasterTmp();
             $update->po_number=$po_number;
             $update->po_item=$po_item;
+            $update->unique_line=$po_number.'_'.$po_item;
         }
         foreach ($requests as $key => $value) {
             $update->{$key} = $value;

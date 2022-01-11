@@ -55,6 +55,7 @@
                 <div class="card-header">
                     <br>
                     @if($json_data_to_string)
+                    <br>
                         <div class="row ">
                             <div class="col-md">
                                 <div class="alert alert-warning alert-dismissible flat">
@@ -365,7 +366,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     {{-- @livewire('po.user-filters-component',['columns'=>$columns,'template_for_table'=>$tableType]) --}}
-                    @livewire('filters.advance-filter-component')
+                    @livewire('filters.v2.advance-filter-component')
                 </div>
                 <div class="modal-footer justify-content-between">
 
@@ -524,11 +525,12 @@
                         <table  class="text-center">
                             @foreach (json_decode($asnJson->asn_json) as $asnKey => $asnValue )
                             <tr>
-                                <th>{{$asnKey}}</th>
+                                <th>{{\App\Helpers\PoHelper::NormalizeColString($asnKey) }}</th>
                                 <td>{{$asnValue}}</td>
                             </tr>
                             @endforeach
                         </table>
+                        <br>
                     @else
                     <h4 class="text-center">NO ASN FOUND</h4>
                     @endif

@@ -27,7 +27,6 @@ class TicketManagerComponent extends Component
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    protected $listeners = ['update-users-filter-template' => 'fetchBaseInfo'];
     public $tableType=LbsUserSearchSet::TEMPLATE_NOTIFICATION_HISTORY;
 
     //Search Params
@@ -40,7 +39,7 @@ class TicketManagerComponent extends Component
     public $columns=TicketMasterHeadr::CONS_COLUMNS;   //table columns for this table
     public $templateArray=LbsUserSearchSet::TEMPLATE_ARRAY;
     public $operators=LbsConstants::CONST_OPERATOR;
-    public $number_of_rows=10;
+    public $number_of_rows=1;
     public $num_rows=LbsConstants::CONST_PAGE_NUMBERS;
 
 
@@ -146,118 +145,28 @@ class TicketManagerComponent extends Component
         if (Arr::has($this->line_status, ['from'])){
             $query=$query->where('line_status','LIKE','%'.$this->line_status['from'].'%');
         }
-
-
-
         if (Arr::has($this->supplier_comment, ['from'])){
 
             $query= $query->whereHas('has_chat', function($query) {
                 $query->where('msg_body','LIKE', '%'.$this->supplier_comment['from'].'%');
             });
         }
-
-        // dd($query->toSql());
         return $query;
     }
 
-    public function updatedSelectAll($value)
-    {
-        if ($value)
-        {
-            $this->selectedPo = $this->searchEngine()->pluck('id')->toArray();
-            $this->selectedPo =   array_fill_keys($this->selectedPo, true);
-        }
-        else
-        {
-            $this->selectedPo = [];
-        }
-    }
+
 
     public function search_reset()
     {
         return redirect()->route('web.route.ticket.manager.list');
-        $this->selected_bulk_action='';
-        $this->searchable_col='id';
-        $this->searchable_operator='LIKE';
-        $this->searchable_col_val=null;
-        $this->number_of_rows=10;
-    }
-
-    public function mount()
-    {
-        $this->fetchBaseInfo();
     }
 
 
-    public function fetchBaseInfo()
-    {
-        $this->userFilterTemplates = LbsUserSearchSet::NotDel()->where('user_id',auth()->user()->id)->where('template_for_table',$this->tableType)->get();
 
-        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id',auth()->user()->id)->first();
-        if ( $StaffColumnSet) {
-            $this->columns = json_decode($StaffColumnSet->columns, true);
-        }
-    }
-
-    public function save_staff_col_set()
-    {
-        $uniue_line=$this->tableType.'_'.auth()->user()->id;
-        $attributes=[
-            'unique_line'=>$this->tableType.'_'.auth()->user()->id,
-            'user_id'=>auth()->user()->id,
-            'table_type'=>$this->tableType,
-            'columns'=>json_encode($this->columns),
-        ];
-
-        if (StaffColumnSet::where('unique_line',$uniue_line)->exists()) {
-            $result = StaffColumnSet::where('unique_line',$uniue_line)->first()->update($attributes);
-        }else{
-            $result = StaffColumnSet::create($attributes);
-        }
-
-        // dd($result);
-        if($result){
-            return $this->emitNotifications('colunm set saved' ,'success');
-        }
-        return $this->emitNotifications('There is Something Wrong','error');
-
-    }
-
-    public function export_data($type)
-    {
-
-        $ColKeys = array_keys(array_filter($this->columns));
-        $selectedRows = array_keys(array_filter($this->selectedPo));
-        $collection = SchedulerNotificationHistory::whereIn('id',$selectedRows)->select($ColKeys)->get();
-        $dateTime=Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
-
-        if ($type=='PDF'){
-            $fileName='notification_history'.'-'.$dateTime.'.pdf';
-            PoHelper::export_pdf($ColKeys,$collection,$fileName);
-            return Storage::disk('local')->download('export/'.$fileName);
-        }
-        if ($type=='EXCEL'){
-            $ColKeys= PoHelper::NormalizeColString(null, $ColKeys);
-            $collection=collect(array_merge([$ColKeys],$collection->toArray()));
-            $fileName='notification_history'.'-'.$dateTime.'.xlsx';
-            PoHelper::excel_export($collection, $fileName);
-            return Storage::disk('local')->download('export/'.$fileName);
-        }
-
-    }
-
-    public function view_email($id)
-    {
-        $notificationHistoryData=SchedulerNotificationHistory::find($id);
-        $this->showEmailStructure=$notificationHistoryData->msg_body;
-        $this->showEmailStructureDate=$notificationHistoryData->created_at;
-        $this->dispatchBrowserEvent('open-mail-views');
-    }
 
     public function search_filter_submit()
     {
-        $HosHistoryQuery =TicketMasterHeadr::orderBy('unique_line', 'DESC')->where('meta','!=','init');
-        $this->mailHash = $this->hitSearchInt($HosHistoryQuery)->select('unique_line')->get();
+        $this->searchEngine();
     }
 
 
@@ -265,41 +174,10 @@ class TicketManagerComponent extends Component
     public function searchEngine()
     {
 
-        $query=TicketMasterHeadr::NotDel()->where('meta','!=','init');
+        $query=TicketMasterHeadr::NotDel()->where('meta','!=','init')->orderBy('updated_at', 'DESC');
 
-
-        if ($this->json_data and !empty($this->json_data)){
-            $searchableItems=json_decode($this->json_data, true);
-            if ($searchableItems and !empty($searchableItems)){
-                foreach ($searchableItems as $key => $searchableItem){
-                    $operator=$searchableItem['queryOpr'];
-                    $query = $query->where(trim($searchableItem['queryCol']),trim("$operator"),trim($searchableItem['queryVal']));
-                }
-                return  $query->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
-            }
-        }
-
-        if ( $this->mailHash) {
-            $query =$query->whereIn('unique_line', $this->mailHash->toArray());
-        }
-
-        if (Arr::has($this->last_executed_at, ['from']) ) {
-
-           return $query=$query->whereBetween('last_executed_at',[$this->last_executed_at['from'],$this->last_executed_at['to']])->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
-        }
-
-        if ($this->searchable_operator=='LIKE'){
-               $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
-               return $query;
-        }else{
-            if (!empty($this->searchable_col_val) and !empty($this->searchable_operator)){
-                return $query= $query->where(trim($this->searchable_col),trim("$this->searchable_operator"), trim($this->searchable_col_val))->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
-            }else{
-                 $query= $query->where($this->searchable_col,'LIKE', '%'.$this->searchable_col_val.'%')->orderBy('updated_at', 'DESC')->paginate($this->number_of_rows);
-                return  $query;
-            }
-        }
-
+        $query = $this->hitSearchInt($query);
+        return  $query->paginate($this->number_of_rows);
 
     }
 
