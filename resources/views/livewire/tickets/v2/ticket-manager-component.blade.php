@@ -14,9 +14,9 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="col-sm-3 inline_block pr-0">
-                            <div class="form-inline">
+                        <div class="col-sm-5 inline_block pr-0"></div>
+                        {{-- <div class="col-sm-3 inline_block pr-0">
+                            <div class="form-inline">6
                                 <div class="form-group input-group-sm">
                                     <select class="form-control select2 " style="width: 100%;" wire:model="searchable_col" title="Select Search Column">
                                         @foreach($columns as $colKey => $column)
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="col-sm-3">
                             <div class="input-group input-group-sm" >
@@ -101,11 +101,11 @@
                     <table class="table table-hover text-nowrap">
                         <thead>
                         <tr>
-                            <th>
+                            {{-- <th>
                                 <div class="icheck-primary d-inline">
                                     <input type="checkbox" autocomplete="off" wire:model="selectAll">
                                 </div>
-                            </th>
+                            </th> --}}
                             @foreach($columns as $colKey => $column)
                                 <th class="{{$column==false?'hide':''}}"> {{ $colKey }}</th>
                             @endforeach
@@ -119,11 +119,11 @@
                             @foreach($collections as $key => $collection)
 
                                 <tr>
-                                    <td>
+                                    {{-- <td>
                                         <div class="icheck-primary d-inline " >
                                             <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $key }}" wire:model="selectedPo.{{$collection->id }}">
                                         </div>
-                                    </td>
+                                    </td> --}}
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'Message Type' )==false?'hide':''}}" >{{\App\Helpers\PoHelper::NormalizeColString($collection->message_type )}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'Tender Num' )==false?'hide':''}}" >{{$collection->tender_num}}</td>
                                     <td  class="{{\Illuminate\Support\Arr::get($columns, 'Vendor Num' )==false?'hide':''}}" >{{$collection->vendor_num}}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PoHelper;
+use App\Models\AsnHeader;
 use App\Models\HosPostHistory;
 use App\Models\HosResponseLog;
 use App\Models\PoSapMaster;
@@ -160,32 +161,95 @@ class HosController extends Controller
     public function HosAsnManager(Request $request)
     {
 
+
        $v = Validator::make($request->all(), [
-            'po_number' => 'required',
-            'po_item' => 'required',
-            'asn_status'=>'required',
-            'asn_json'=>'required',
+            'asn_id' => 'required',
+            'status' => 'required',
         ]);
 
         if ($v->fails())
         {
             return response()->json(['success'=>false,'message'=>$v->errors()->first()]);
         }
-        $unique_line =$request->po_number.'_'.$request->po_item;
-        if (!PoSapMaster::where('unique_line', $unique_line)->exists()){
-            return response()->json(['success'=>false,'message'=>'unique hash does not found']);
-        }
 
-        $saptmp=[
-            'asn'=>$request->asn_status,
-            'asn_json'=>$request->asn_json,
+
+        switch ($request->status) {
+            case '1':
+                $asn_status = 'new';
+                break;
+
+            case '2':
+                $asn_status = 'accepted';
+                break;
+
+            case '3':
+                $asn_status = 'rejected';
+                break;
+
+            case '4':
+                $asn_status = 'delivered';
+                break;
+
+            case '5':
+                $asn_status = 'not_delivered';
+                break;
+
+            default:
+                $asn_status = 'new';
+                break;
+        }
+        $asnInsertable=[
+
+                'asn_id'=>$request->asn_id,
+                'plant'=>$request->plant,
+                'sloc'=>$request->sloc,
+                'vendor_no'=>$request->vendor_no,
+                'total_pallet_count'=>$request->total_pallet_count,
+                'truck_no'=>$request->truck_no,
+                'delivery_date'=>$request->delivery_date,
+                'delivery_time'=>$request->delivery_time,
+                'asn_status'=> $asn_status ,
+
         ];
 
-        $result = PoHelper::sapMasterTmp($saptmp,$request->po_number, $request->po_item);
+        $asn_json = json_encode( $asnInsertable );
+        foreach ($request->po_details as $pokey => $povalue) {
+
+            $povalue= (object) $povalue;
+            $unique_line =$povalue->nupco_po_no.'_'.$povalue->nupco_po_item;
+            $asnInsertable['unique_line']=$unique_line;
+            $asnInsertable['nupco_po_no']=$povalue->nupco_po_no;
+            $asnInsertable['nupco_po_item']=$povalue->nupco_po_item;
+            $asnInsertable['nupco_material']=$povalue->nupco_material;
+            $asnInsertable['trade_code']=$povalue->trade_code;
+            $asnInsertable['batch_no']=$povalue->batch_no;
+            $asnInsertable['mfg_date']=$povalue->mfg_date;
+            $asnInsertable['expiry_date']= $povalue->expiry_date;
+
+            $asnCheck = AsnHeader::where('unique_line',$unique_line)->first();
+            if (!$asnCheck) {
+
+                AsnHeader::create($asnInsertable);
+            }
+            else{
+
+                $asnCheck ->update($asnInsertable);
+            }
+
+            $saptmp=[
+                'asn'=> $asn_status,
+                'asn_json'=>$asn_json,
+            ];
+
+            $result = PoHelper::sapMasterTmp($saptmp, $povalue->nupco_po_no, $povalue->nupco_po_item);
+        }
+
+
+
         if($result){
 
             $insert =new HosResponseLog();
-            $insert->request="received ASN information for SAP uniqui line ".$unique_line;
+            $insert->request="received ASN information for asn_id ".$request->asn_id;
             $insert->request_type="POST";
             $insert->brodcast_type='RECEIVED';
             $insert->rs_status=1;

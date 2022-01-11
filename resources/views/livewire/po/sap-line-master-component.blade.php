@@ -525,11 +525,12 @@
                         <table  class="text-center">
                             @foreach (json_decode($asnJson->asn_json) as $asnKey => $asnValue )
                             <tr>
-                                <th>{{$asnKey}}</th>
+                                <th>{{\App\Helpers\PoHelper::NormalizeColString($asnKey) }}</th>
                                 <td>{{$asnValue}}</td>
                             </tr>
                             @endforeach
                         </table>
+                        <br>
                     @else
                     <h4 class="text-center">NO ASN FOUND</h4>
                     @endif
