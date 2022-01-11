@@ -179,7 +179,7 @@ class HosController extends Controller
                 break;
 
             case '2':
-                $asn_status = 'accepted';
+                $asn_status = 'approved';
                 break;
 
             case '3':
@@ -225,6 +225,7 @@ class HosController extends Controller
             $asnInsertable['batch_no']=$povalue->batch_no;
             $asnInsertable['mfg_date']=$povalue->mfg_date;
             $asnInsertable['expiry_date']= $povalue->expiry_date;
+            $asnInsertable['is_deleted']= $povalue->is_deleted;
 
             $asnCheck = AsnHeader::where('unique_line',$unique_line)->first();
             if (!$asnCheck) {
