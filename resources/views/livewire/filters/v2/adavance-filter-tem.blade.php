@@ -264,6 +264,7 @@
         <div class="form-group" wire:ignore>
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple title="ASN">
             <option value="no">No</option>
+            <option value="new">New</option>
             <option value="accepted">Accepted</option>
             <option value="rejected">Rejected</option>
             <option value="delivered">Delivered</option>
