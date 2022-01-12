@@ -577,6 +577,10 @@ a.btn.btn-app.chat_po_btn.yf_chat_btn {
     max-width: 191px;
     white-space: initial;
 }
+
+div#bs-select-40 ul {
+    text-align: right !important ;
+}
 /* .text-nowrap {
     white-space: inherit !important;
 } */
