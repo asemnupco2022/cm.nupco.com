@@ -23,6 +23,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 
@@ -82,8 +83,11 @@ class PoHelper
         if (!File::exists($path)) {
             File::makeDirectory($path, 0755, true, true);
         }
-        return PDF::loadView('pdf.table-print', compact('cols', 'collections', 'title'))->save($path . '/' . $filename);
+        return PDF::chunkLoadView('<html-separator/>', 'pdf.table-print', compact('cols', 'collections', 'title'))->save($path . '/' . $filename);
     }
+
+
+
 
 
     public static function SaveNotificationHistory($notifiable, $mailableData)

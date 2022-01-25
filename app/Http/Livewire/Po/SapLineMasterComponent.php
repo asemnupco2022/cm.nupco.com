@@ -253,17 +253,6 @@ class SapLineMasterComponent extends Component
 
         $dateTime = Carbon::now(config('app.timezone'))->format('D-M-Y h.m.s');
         $collection = PoSapMaster::orderBy('vendor_code', 'ASC')->whereIn('id', $selectedRows)->select(PoHelper::DeNormalizeColString(null, $ColKeys))->get();
-        // $collections=$collection;
-        // foreach($collections as $key => $collection){
-
-        //     foreach($collection->getAttributes() as $attrKey => $attributes){
-        //         dump($collection->{ $attrKey});
-        // }
-        // }
-        // die;
-
-
-
 
         if ($type == 'PDF') {
             if ($collectionCount > 1000) {

@@ -115,7 +115,7 @@
     <tbody>
     @if($collections and $cols)
         @foreach($collections as $key => $collection)
-
+         <html-separator/>
             <tr>
                 @foreach($collection->getAttributes() as $attrKey => $attributes)
                     <td>{!! $collection->{ $attrKey}  !!}   </td>
