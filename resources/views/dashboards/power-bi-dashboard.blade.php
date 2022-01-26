@@ -23,7 +23,7 @@
     </style>
 @endpush
 @if(isset($summary))
-@if(auth()->user()->hasAnyPermission(['access_summary_dashboard']))
+@if(auth()->user()->hasAnyPermission(['access_summary_dashboard_']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -35,7 +35,7 @@
 @endif
 
 @if(isset($suppliers_performance))
-@if(auth()->user()->hasAnyPermission(['access_suppliers_dashboard']))
+@if(auth()->user()->hasAnyPermission(['access_suppliers_dashboard_']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -48,7 +48,7 @@
 
 
 @if(isset($tenders))
-@if(auth()->user()->hasAnyPermission(['access_tenders_dashboard']))
+@if(auth()->user()->hasAnyPermission(['access_tenders_dashboard_']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -60,7 +60,7 @@
 
 
 @if(isset($progress))
-@if(auth()->user()->hasAnyPermission(['access_progress_dashboard']))
+@if(auth()->user()->hasAnyPermission(['access_progress_dashboard_']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -73,7 +73,7 @@
 
 @if(isset($over_due))
 
-@if(auth()->user()->hasAnyPermission(['access_over_due_dashboard']))
+@if(auth()->user()->hasAnyPermission(['access_over_due_dashboard_']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -85,7 +85,7 @@
 
 
 @if(isset($contracts_expediting))
-    @if(auth()->user()->hasAnyPermission(['access_contracts_expediting_dashboard']))
+    @if(auth()->user()->hasAnyPermission(['access_contracts_expediting_dashboard_']))
     <iframe id="inlineFrameExample"
             title="Inline Frame Example"
             width="100%"
@@ -96,7 +96,7 @@
 @endif
 
 @if (isset($ces_dashboard))
-    @if(auth()->user()->hasAnyPermission([ 'access_ces_dashboard']))
+    @if(auth()->user()->hasAnyPermission([ 'access_ces_dashboard_']))
          @include('dashboards.notification-report-dashboard')
     @endif
 @endif
