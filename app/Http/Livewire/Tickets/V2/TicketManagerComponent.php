@@ -177,6 +177,8 @@ class TicketManagerComponent extends Component
         $query=TicketMasterHeadr::NotDel()->where('meta','!=','init')->orderBy('updated_at', 'DESC');
 
         $query = $this->hitSearchInt($query);
+        // dd($this->customer_name);
+        // dd($query->toSql());
         return  $query->paginate($this->number_of_rows);
 
     }

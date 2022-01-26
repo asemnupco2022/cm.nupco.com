@@ -52,7 +52,7 @@ class TicketChatComponent extends Component
 
         $this->notificationHistory =TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
         $changeStatus =  TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
-        if($changeStatus and $changeStatus->line_status != 'waiting for action'){
+        if($changeStatus and $changeStatus->line_status != 'closed'){
             $changeStatus->update(['line_status' => 'waiting for action']);
         }
 
