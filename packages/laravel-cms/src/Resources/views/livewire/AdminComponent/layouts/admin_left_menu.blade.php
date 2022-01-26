@@ -22,7 +22,16 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
+                    @if(auth()->user()->hasAnyPermission([
+                        'access_ces_dashboard',
+                        'access_summary_dashboard',
+                        'access_suppliers_dashboard',
+                        'access_tenders_dashboard',
+                        'access_progress_dashboard',
+                        'access_over_due_dashboard',
+                        'access_contracts_expediting_dashboard',
 
+                        ]))
                      <li class="nav-item {{ (Request::is('dashboard/*')?'menu-open':'') }} ">
                         <a href="#" class="nav-link text-bold {{ (Request::is('dashboard')?'active':'') }} {{ (Request::is('dashboard/*')?'active':'') }}">
                             <img src="{{ asset('img/lt1.svg') }}" alt="job image" title="job image" class="light_mode_img">
@@ -33,44 +42,59 @@
                           </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
+                        @if(auth()->user()->hasAnyPermission(['access_ces_dashboard']))
+                          <li class="nav-item">
                             <a href="{{route('web.route.dashboard.ces_dashboard')}}" class="nav-link {{ (Request::is('dashboard/ces-dashboard')?'active':'') }}">
                               <p>Ces Dashboard</p>
                             </a>
                           </li>
-                          {{-- <li class="nav-item">
+                          @endif
+
+                          @if(auth()->user()->hasAnyPermission(['access_summary_dashboard']))
+                          <li class="nav-item">
                             <a href="{{route('web.route.dashboard.summary')}}" class="nav-link {{ (Request::is('dashboard/summary')?'active':'') }}">
                               <p>Summary Dashboard</p>
                             </a>
-                          </li> --}}
+                          </li>
+                          @endif
+                          @if(auth()->user()->hasAnyPermission(['access_suppliers_dashboard']))
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.suppliers_performance')}}" class="nav-link {{ (Request::is('dashboard/suppliers-performance')?'active':'') }}">
                               <p>Suppliers Performance</p>
                             </a>
                           </li>
-                          {{-- <li class="nav-item">
+                          @endif
+                          @if(auth()->user()->hasAnyPermission(['access_tenders_dashboard']))
+                          <li class="nav-item">
                             <a href="{{route('web.route.dashboard.tenders')}}" class="nav-link {{ (Request::is('dashboard/tenders')?'active':'') }}">
                               <p>Tenders</p>
                             </a>
-                          </li> --}}
-                          {{-- <li class="nav-item">
+                          </li>
+                          @endif
+                          @if(auth()->user()->hasAnyPermission(['access_progress_dashboard']))
+                          <li class="nav-item">
                             <a href="{{route('web.route.dashboard.progress')}}" class="nav-link {{ (Request::is('dashboard/progress')?'active':'') }}">
                               <p>Progress</p>
                             </a>
-                          </li> --}}
-                          {{-- <li class="nav-item">
+                          </li>
+                          @endif
+                          @if(auth()->user()->hasAnyPermission(['access_over_due_dashboard']))
+                          <li class="nav-item">
                             <a href="{{route('web.route.dashboard.over_due')}}" class="nav-link {{ (Request::is('dashboard/over-due')?'active':'') }}">
                               <p>Over Due</p>
                             </a>
-                          </li> --}}
+                          </li>
+                          @endif
+                          @if(auth()->user()->hasAnyPermission(['access_contracts_expediting_dashboard']))
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.contracts_expediting')}}" class="nav-link {{ (Request::is('dashboard/contracts_expediting')?'active':'') }}">
                               <p>Contracts Expediting</p>
                             </a>
                           </li>
+                          @endif
                         </ul>
                       </li>
-
+                    @endif
                 @if(auth()->user()->hasAnyPermission(['lbs-permission-sap-po','lbs-permission-import','view_only_po_management','lbs-permission-mawari-po']))
                 <li class="nav-item increase_size  {{ (Request::is('expediting-management/*')?'menu-open':'')  }}">
                     <a href="#" class="nav-link text-bold">

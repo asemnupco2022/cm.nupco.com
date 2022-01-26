@@ -23,6 +23,7 @@
     </style>
 @endpush
 @if(isset($summary))
+@if(auth()->user()->hasAnyPermission(['access_summary_dashboard']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -31,8 +32,10 @@
         src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Summary%20Dashboard?rs:embed=true">
 </iframe>
 @endif
+@endif
 
 @if(isset($suppliers_performance))
+@if(auth()->user()->hasAnyPermission(['access_suppliers_dashboard']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -41,9 +44,11 @@
 
 </iframe>
 @endif
+@endif
 
 
 @if(isset($tenders))
+@if(auth()->user()->hasAnyPermission(['access_tenders_dashboard']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -51,9 +56,11 @@
         src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Tenders?rs:embed=true">
 </iframe>
 @endif
+@endif
 
 
 @if(isset($progress))
+@if(auth()->user()->hasAnyPermission(['access_progress_dashboard']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -61,9 +68,12 @@
         src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Progress?rs:embed=true">
 </iframe>
 @endif
+@endif
 
 
 @if(isset($over_due))
+
+@if(auth()->user()->hasAnyPermission(['access_over_due_dashboard']))
 <iframe id="inlineFrameExample"
         title="Inline Frame Example"
         width="100%"
@@ -71,21 +81,24 @@
         src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Over%20Due?rs:embed=true">
 </iframe>
 @endif
+@endif
 
 
 @if(isset($contracts_expediting))
-<iframe id="inlineFrameExample"
-        title="Inline Frame Example"
-        width="100%"
-        height="500px"
-        src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Contracts%20Expediting%20Dashboard?rs:embed=true">
-</iframe>
+    @if(auth()->user()->hasAnyPermission(['access_contracts_expediting_dashboard']))
+    <iframe id="inlineFrameExample"
+            title="Inline Frame Example"
+            width="100%"
+            height="500px"
+            src="https://nupcobi.nupco.com/Reports/powerbi/Contract/Contracts%20Expediting%20Dashboard?rs:embed=true">
+    </iframe>
+    @endif
 @endif
 
 @if (isset($ces_dashboard))
-
-@include('dashboards.notification-report-dashboard')
-
+    @if(auth()->user()->hasAnyPermission([ 'access_ces_dashboard']))
+         @include('dashboards.notification-report-dashboard')
+    @endif
 @endif
 
 

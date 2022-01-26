@@ -38,10 +38,10 @@ Route::group(array('middleware'=>'web'), function () {
     //DASHBOARD
     Route::group(['prefix'=>'dashboard'], function(){
         Route::get('/ces-dashboard',[DashboardController::class,'ces_dashboard'])->name('web.route.dashboard.ces_dashboard');
-        // Route::get('/summary',[DashboardController::class,'summary'])->name('web.route.dashboard.summary');
+        Route::get('/summary',[DashboardController::class,'summary'])->name('web.route.dashboard.summary');
         Route::get('/suppliers-performance',[DashboardController::class,'suppliers_performance'])->name('web.route.dashboard.suppliers_performance');
-        // Route::get('/tenders',[DashboardController::class,'tenders'])->name('web.route.dashboard.tenders');
-        // Route::get('/progress',[DashboardController::class,'progress'])->name('web.route.dashboard.progress');
+        Route::get('/tenders',[DashboardController::class,'tenders'])->name('web.route.dashboard.tenders');
+        Route::get('/progress',[DashboardController::class,'progress'])->name('web.route.dashboard.progress');
         Route::get('/over-due',[DashboardController::class,'over_due'])->name('web.route.dashboard.over_due');
         Route::get('/contracts-expediting',[DashboardController::class,'contracts_expediting'])->name('web.route.dashboard.contracts_expediting');
     });
