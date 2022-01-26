@@ -13,7 +13,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Vendor No" wire:model.defer="vendor_num.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="vendor_num.from"  title="vendor num">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="vendor_num.from"  title="vendor num">
             @foreach ($collection_vendor_num as  $vendor_nums )
               <option value="{{$vendor_nums}}">{{$vendor_nums}}</option>
             @endforeach
@@ -22,9 +22,9 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Vendor Name" wire:model.defer="vendor_name_en.from" > --}}
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="vendor_name_en.from"  title="vendor name en">
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="vendor_name_en.from"  title="vendor name en">
             @foreach ($collection_vendor_name_en as  $vendor_name_ens )
             <option value="{{$vendor_name_ens}}">{{$vendor_name_ens}}</option>
             @endforeach
@@ -33,9 +33,9 @@
       </div>
 
       <div class="col-md-2">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Customer Code" wire:model.defer="cust_code.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="cust_code.from"  title="cust code">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="cust_code.from"  title="cust code">
             @foreach ($collection_cust_code as  $cust_codes )
             <option value="{{$cust_codes}}">{{$cust_codes}}</option>
             @endforeach
@@ -43,9 +43,9 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Customer Name"  wire:model.defer="customer_name.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="customer_name.from"  title="customer name">
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="customer_name.from"  title="customer name">
             @foreach ($collection_customer_name as  $customer_names )
             <option value="{{$customer_names}}">{{$customer_names}}</option>
             @endforeach
@@ -53,9 +53,9 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Po Num" wire:model.defer="po_num.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="po_num.from"  title="po num">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="po_num.from"  title="po num">
             @foreach ($collection_po_num as  $po_nums )
             <option value="{{$po_nums}}">{{$po_nums}}</option>
             @endforeach
@@ -63,9 +63,9 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Po Item Num" wire:model.defer="po_item_num.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="po_item_num.from"  title="po item num">
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="po_item_num.from"  title="po item num">
             @foreach ($collection_po_item_num as  $po_item_nums )
             <option value="{{$po_item_nums}}">{{$po_item_nums}}</option>
             @endforeach
@@ -74,9 +74,9 @@
       </div>
 
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Material Num" wire:model.defer="mat_num.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="mat_num.from"  title="mat num">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="mat_num.from"  title="mat num">
             @foreach ($collection_mat_num as  $mat_nums )
             <option value="{{$mat_nums}}">{{$mat_nums}}</option>
             @endforeach
@@ -85,9 +85,9 @@
       </div>
 
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Tender Desc" wire:model.defer="tender_desc.from" > --}}
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="tender_desc.from"  title="tender desc">
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="tender_desc.from"  title="tender desc">
             @foreach ($collection_tender_desc as  $tender_descs )
             <option value="{{$tender_descs}}">{{$tender_descs}}</option>
             @endforeach
@@ -96,9 +96,9 @@
       </div>
 
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Customer Po No" wire:model.defer="customer_po_no.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="customer_po_no.from"  title="customer po no">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="customer_po_no.from"  title="customer po no">
             @foreach ($collection_customer_po_no as  $customer_po_nos )
             <option value="{{$customer_po_nos}}">{{$customer_po_nos}}</option>
             @endforeach
@@ -107,9 +107,9 @@
       </div>
 
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Customer Po Item" wire:model.defer="customer_po_item.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="customer_po_item.from"  title="customer po item">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="customer_po_item.from"  title="customer po item">
             @foreach ($collection_customer_po_item as  $customer_po_items )
             <option value="{{$customer_po_items}}">{{$customer_po_items}}</option>
             @endforeach
@@ -118,9 +118,9 @@
       </div>
 
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Importance" wire:model.defer="importance.from" > --}}
-         <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="importance.from"  title="importance">
+         <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="importance.from"  title="importance">
             <option value="1">yes</option>
             <option value="0">no</option>
          </select>
@@ -130,9 +130,9 @@
 
 
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Line Status" wire:model.defer="line_status.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="line_status.from"  title="line status">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="line_status.from"  title="line status">
             <option value="new">new</option>
             <option value="waiting for action">waiting for action</option>
             <option value="closed">closed</option>
@@ -148,9 +148,9 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="UOM" wire:model.defer="uom.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="uom.from"  title="uom">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="uom.from"  title="uom">
             @foreach ($collection_uom as  $uoms )
             <option value="{{$uoms}}">{{$uoms}}</option>
             @endforeach
@@ -158,9 +158,9 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Plant"  wire:model.defer="plant.from" > --}}
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="plant.from"  title="plant">
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="plant.from"  title="plant">
             @foreach ($collection_plant as  $plants )
             <option value="{{$plants}}">{{$plants}}</option>
             @endforeach
@@ -168,9 +168,9 @@
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group">
+        <div class="form-group"  wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Item Desc" wire:model.defer="item_desc.from" > --}}
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="item_desc.from"  title="item desc">
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="item_desc.from"  title="item desc">
             @foreach ($collection_item_desc as  $item_descs )
             <option value="{{$item_descs}}">{{$item_descs}}</option>
             @endforeach
@@ -197,7 +197,7 @@
           </div>
 
           <div class="col-md-4">
-            <div class="form-group">
+            <div class="form-group"  wire:ignore >
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
