@@ -40,7 +40,7 @@ class TicketChatComponent extends Component
         $this->unique_line =base64_decode($this->mail_ticket_hash);
         $this->fetchBaseInfo();
         $this->collections = TicketManager::where('unique_line',$this->unique_line)->get();
-        
+
         foreach ($this->collections as $key => $value) {
             TicketManager::find($value->id)->update(['msg_read_at'=>Carbon::now()]);
         }
@@ -51,7 +51,11 @@ class TicketChatComponent extends Component
     public function fetchBaseInfo(){
 
         $this->notificationHistory =TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
-        TicketMasterHeadr::where('unique_line',$this->unique_line)->first()->update(['line_status'=>'waiting for action']);
+        $changeStatus =  TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
+        if($changeStatus and $changeStatus->line_status != 'waiting for action'){
+            $changeStatus->update(['line_status' => 'waiting for action']);
+        }
+
 
     }
 
