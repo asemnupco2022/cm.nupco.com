@@ -53,20 +53,20 @@ class SapFilterSync extends Command
 
     public function getSuplierRequestView()
     {
-        $collection_tender_num = DB::table('ticket_master_headrs')->pluck('tender_num', 'tender_num');
-        $collection_vendor_num = DB::table('ticket_master_headrs')->pluck('vendor_num', 'vendor_num');
-        $collection_vendor_name_en = DB::table('ticket_master_headrs')->pluck('vendor_name_en', 'vendor_name_en');
-        $collection_cust_code = DB::table('ticket_master_headrs')->pluck('cust_code', 'cust_code');
-        $collection_customer_name = DB::table('ticket_master_headrs')->pluck('customer_name', 'customer_name');
-        $collection_po_num = DB::table('ticket_master_headrs')->pluck('po_num', 'po_num');
-        $collection_po_item_num = DB::table('ticket_master_headrs')->pluck('po_item_num', 'po_item_num');
-        $collection_mat_num = DB::table('ticket_master_headrs')->pluck('mat_num', 'mat_num');
-        $collection_tender_desc = DB::table('ticket_master_headrs')->pluck('tender_desc', 'tender_desc');
-        $collection_customer_po_no = DB::table('ticket_master_headrs')->pluck('customer_po_no', 'customer_po_no');
-        $collection_customer_po_item = DB::table('ticket_master_headrs')->pluck('customer_po_item', 'customer_po_item');
-        $collection_uom = DB::table('ticket_master_headrs')->pluck('uom', 'uom');
-        $collection_plant = DB::table('ticket_master_headrs')->pluck('plant', 'plant');
-        $collection_item_desc = DB::table('ticket_master_headrs')->pluck('item_desc', 'item_desc');
+        $collection_tender_num = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('tender_num', 'tender_num');
+        $collection_vendor_num = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('vendor_num', 'vendor_num');
+        $collection_vendor_name_en = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('vendor_name_en', 'vendor_name_en');
+        $collection_cust_code = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('cust_code', 'cust_code');
+        $collection_customer_name = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('customer_name', 'customer_name');
+        $collection_po_num = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('po_num', 'po_num');
+        $collection_po_item_num = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('po_item_num', 'po_item_num');
+        $collection_mat_num = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('mat_num', 'mat_num');
+        $collection_tender_desc = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('tender_desc', 'tender_desc');
+        $collection_customer_po_no = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('customer_po_no', 'customer_po_no');
+        $collection_customer_po_item = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('customer_po_item', 'customer_po_item');
+        $collection_uom = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('uom', 'uom');
+        $collection_plant = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('plant', 'plant');
+        $collection_item_desc = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('item_desc', 'item_desc');
 
 
         return   View::make('livewire.tickets.v2.filter.notification-history-filter-tmp', compact(
