@@ -41,6 +41,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
+
         return redirect()->route('web.route.dashboard.ces_dashboard');
     }
 
