@@ -2,92 +2,92 @@
     <div class="row">
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
-
+          
            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="PO Type " wire:model.defer="tender_num.from"  title="tender num">
                      </select>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="vendor_num.from"  title="vendor num">
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="vendor_num.from"  title="vendor num">
                      </select>
 
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="vendor_name_en.from"  title="vendor name en">
+        <div class="form-group"  wire:ignore >
+          
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="vendor_name_en.from"  title="vendor name en">
                      </select>
         </div>
       </div>
 
       <div class="col-md-2">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="cust_code.from"  title="cust code">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="cust_code.from"  title="cust code">
                      </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="customer_name.from"  title="customer name">
+        <div class="form-group"  wire:ignore >
+          
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="customer_name.from"  title="customer name">
                      </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="po_num.from"  title="po num">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="po_num.from"  title="po num">
                      </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="po_item_num.from"  title="po item num">
-                     </select>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="mat_num.from"  title="mat num">
+        <div class="form-group"  wire:ignore >
+          
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="po_item_num.from"  title="po item num">
                      </select>
         </div>
       </div>
 
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="tender_desc.from"  title="tender desc">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="mat_num.from"  title="mat num">
                      </select>
         </div>
       </div>
 
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="customer_po_no.from"  title="customer po no">
+        <div class="form-group"  wire:ignore >
+          
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="tender_desc.from"  title="tender desc">
                      </select>
         </div>
       </div>
 
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="customer_po_item.from"  title="customer po item">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="customer_po_no.from"  title="customer po no">
                      </select>
         </div>
       </div>
 
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="customer_po_item.from"  title="customer po item">
+                     </select>
+        </div>
+      </div>
 
-         <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="importance.from"  title="importance">
+      <div class="col-md-3">
+        <div class="form-group"  wire:ignore >
+          
+         <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="importance.from"  title="importance">
             <option value="1">yes</option>
             <option value="0">no</option>
          </select>
@@ -97,9 +97,9 @@
 
 
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="line_status.from"  title="line status">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="line_status.from"  title="line status">
             <option value="new">new</option>
             <option value="waiting for action">waiting for action</option>
             <option value="closed">closed</option>
@@ -115,23 +115,23 @@
 
     <div class="row">
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="uom.from"  title="uom">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="uom.from"  title="uom">
                      </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="plant.from"  title="plant">
+        <div class="form-group"  wire:ignore >
+          
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="plant.from"  title="plant">
                      </select>
         </div>
       </div>
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-
-           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"  wire:model.defer="item_desc.from"  title="item desc">
+        <div class="form-group"  wire:ignore >
+          
+           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="   wire:model.defer="item_desc.from"  title="item desc">
                      </select>
         </div>
       </div>
@@ -150,7 +150,7 @@
           </div>
 
           <div class="col-md-4">
-            <div class="form-group">
+            <div class="form-group"  wire:ignore >
                 <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -178,7 +178,7 @@
                 Check Now
             </button>
 
-
+            
 
         </div>
       </div>
