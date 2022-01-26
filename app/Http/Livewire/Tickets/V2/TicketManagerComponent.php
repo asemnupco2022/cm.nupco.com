@@ -39,7 +39,7 @@ class TicketManagerComponent extends Component
     public $columns=TicketMasterHeadr::CONS_COLUMNS;   //table columns for this table
     public $templateArray=LbsUserSearchSet::TEMPLATE_ARRAY;
     public $operators=LbsConstants::CONST_OPERATOR;
-    public $number_of_rows=1;
+    public $number_of_rows=10;
     public $num_rows=LbsConstants::CONST_PAGE_NUMBERS;
 
 
