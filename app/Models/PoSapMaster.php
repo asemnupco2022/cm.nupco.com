@@ -165,6 +165,7 @@ class PoSapMaster extends Model
         "unique_hash",
         "supplier_comment",
         'internal_comment',
+        'execution_done',
     ];
 
     protected $appends = ['internal_comment'];

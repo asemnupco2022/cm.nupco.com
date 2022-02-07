@@ -51,10 +51,22 @@ table.table-data {
 													due date based on below infomation:</p> --}}
 											{{-- </div> --}}
 
+                                            @php
+
+                                            $date=5;
+                                            if($mail_data['sap_object'] and !empty($mail_data['sap_object']) and $mail_data['sap_object'] !='[]'){
+                                                $sap_object=$mail_data['sap_object'][0];
+                                                if ($sap_object['execution_done'] != 'init') {
+
+                                                     $date=$sap_object['execution_done'];
+                                                 }
+                                            }
+
+                                             @endphp
 											<div class="two_col" style="width: 40%;float: right;">
 												<h3 dir="rtl" style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;">الموضوع: الحث على توريد  </h3>
 												<p dir="rtl">السادة / {{$mail_data['vendor_name_er']}} </p>
-												<p dir="rtl">إشارة لمنافسة نحيطكم علما بقرب انتهاء توريد الدفعة للبنود المذكورة أدناة (خلال 5 ايام من تاريخ اليوم) لذا نرجو منكم سرعة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية بناء على المعلومات ادناة:</p>
+												<p dir="rtl">إشارة لمنافسة نحيطكم علما بقرب انتهاء توريد الدفعة للبنود المذكورة أدناة (خلال {{$date}} ايام من تاريخ اليوم) لذا نرجو منكم سرعة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية بناء على المعلومات ادناة:</p>
 											</div>
 
 										</td>

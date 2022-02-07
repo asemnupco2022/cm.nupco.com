@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title class="text-uppercase ">@yield('title_') | {{config('lbs-laravel-cms.application.admin_route_domain')}}  {{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}} </title>
+    <title class="text-uppercase "> {{config('lbs-laravel-cms.application.admin_route_domain')}}  {{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}} </title>
     <link rel="icon" type="image/x-icon" href="{{URL(LaravelCms::lbs_object_key_exists('app_logo',Session::get('_LbsAppSession')))}}" alt="{{LaravelCms::lbs_object_key_exists('app_company',Session::get('_LbsAppSession'))}}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">

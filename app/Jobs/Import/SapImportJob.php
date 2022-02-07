@@ -116,7 +116,7 @@ class SapImportJob implements ShouldQueue
             "net_price"=>$row[20],
             "price_unit"=>$row[21],
             "net_value"=>$row[22],
-            "nupco_trade_code"=>$row[23],
+            "nupco_trade_code" => ltrim($row[23], "0"),
             "nupco_delivery_date"=>$row[24],
             "ordered_quantity"=>$row[25],
             "open_quantity"=>$row[26],

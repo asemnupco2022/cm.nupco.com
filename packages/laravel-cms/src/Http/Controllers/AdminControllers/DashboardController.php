@@ -18,6 +18,7 @@ use App\Http\Controllers\Controller;
 use App\Jobs\Po\FilterSap;
 use App\Jobs\Po\MigrateSap;
 use App\Jobs\Po\NotifySap;
+use App\Jobs\SapAutomation\FullAutomationJob;
 use App\Models\PoSapMasterScheduler;
 use App\Models\PoSapMasterTmp;
 use App\Models\SupplierCommentTypes;
@@ -41,7 +42,6 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-
         return redirect()->route('web.route.dashboard.ces_dashboard');
     }
 
@@ -191,7 +191,7 @@ class DashboardController extends Controller
             "net_price"=>$row[20],
             "price_unit"=>$row[21],
             "net_value"=>$row[22],
-            "nupco_trade_code"=>$row[23],
+            "nupco_trade_code"=> ltrim($row[23], "0"),
             "nupco_delivery_date"=>$row[24],
             "ordered_quantity"=>$row[25],
             "open_quantity"=>$row[26],

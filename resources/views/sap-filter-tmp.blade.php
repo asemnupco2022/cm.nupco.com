@@ -213,13 +213,24 @@
 
 
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Storage Location"   wire:model.defer="storage_location.from" > --}}
           <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" storage_location"   wire:model.defer="storage_location.from"  multiple title="Storage Location">
 
             @foreach ($collection_sap_storage_locations as  $storage_locations )
             <option value="{{$storage_locations}}">{{$storage_locations}}</option>
+            @endforeach
+         </select>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Storage Location"   wire:model.defer="nupco_trade_code.from" > --}}
+          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" nupco_trade_code"   wire:model.defer="nupco_trade_code.from"  multiple title="Trade Code">
+
+            @foreach ($collection_sap_nupco_trade_codes as  $nupco_trade_codes )
+            <option value="{{$nupco_trade_codes}}">{{$nupco_trade_codes}}</option>
             @endforeach
          </select>
         </div>

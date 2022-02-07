@@ -93,6 +93,7 @@ class SapLineMasterComponent extends Component
     public $pur_grp_name = [];
     public $notified = [];
     public $asn = [];
+    public $nupco_trade_code = [];
     //    ========
 
 
@@ -179,6 +180,9 @@ class SapLineMasterComponent extends Component
         }
         if (Arr::has($this->asn, ['from'])) {
             $query = $query->where('asn', $this->asn['from']);
+        }
+        if (Arr::has($this->nupco_trade_code, ['from'])) {
+            $query = $query->whereIn('nupco_trade_code', $this->nupco_trade_code['from']);
         }
 
 

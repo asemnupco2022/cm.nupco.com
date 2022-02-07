@@ -142,18 +142,23 @@ class HosAPI implements ShouldQueue
                         TicketMasterHeadr::create($ticketHeader);
                     }
 
-                    $response = Http::get($this->hosUrl,$sendable );
-                    Log::info('HOS-API-POST-REQUEST',[$response]);
 
-                    $hosLog = PoHelper::hosLogs( $response, 'send notification for sap line item: '.json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
-                    Log::info('HOS-API-LOG',[$hosLog]);
 
                     $saptmp=[
                         'unique_hash'=>$unique_hash,
                         'notified'=>'yes',
+                        'execution_done'=> $poItemCol['execution_done'],
                     ];
                     $tmpResult=PoHelper::sapMasterTmp($saptmp,$poItemCol['po_number'], $poItemCol['po_item']);
                     Log::info('update sap tmp record'.$poItemCol['id'],[$tmpResult]);
+
+
+                    $response = Http::get($this->hosUrl, $sendable);
+                    Log::info('HOS-API-POST-REQUEST', [$response]);
+
+                    $hosLog = PoHelper::hosLogs($response, 'send notification for sap line item: ' . json_encode($sendable), 'SEND', 'SAP_LINE_ITEM');
+                    Log::info('HOS-API-LOG', [$hosLog]);
+
                 } catch (\Throwable $th) {
                     //throw $th;
                 }

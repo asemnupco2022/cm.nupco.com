@@ -109,6 +109,7 @@ class SapFilterSync extends Command
         $collection_sap_customer_po_nos = DB::table('collection_sap_customer_po_nos')->pluck('customer_po_no', 'customer_po_no');
         $collection_sap_customer_po_items = DB::table('collection_sap_customer_po_items')->pluck('customer_po_item', 'customer_po_item');
         $collection_sap_pur_grp_names = DB::table('collection_sap_pur_grp_names')->pluck('pur_grp_name', 'pur_grp_name');
+        $collection_sap_nupco_trade_codes = DB::table('po_sap_masters')->pluck('nupco_trade_code', 'nupco_trade_code');
         $collection_sap_notifieds = [
             'yes' => 'yes',
             'no' => 'no',
@@ -134,7 +135,8 @@ class SapFilterSync extends Command
             'collection_sap_customer_po_items',
             'collection_sap_pur_grp_names',
             'collection_sap_notifieds',
-            'collection_sap_plnts'
+            'collection_sap_plnts',
+            'collection_sap_nupco_trade_codes'
         ))->render();
     }
 
@@ -159,6 +161,7 @@ class SapFilterSync extends Command
         $collection_sap_customer_po_nos = DB::table('collection_sap_customer_po_nos')->pluck('customer_po_no', 'customer_po_no');
         $collection_sap_customer_po_items = DB::table('collection_sap_customer_po_items')->pluck('customer_po_item', 'customer_po_item');
         $collection_sap_pur_grp_names = DB::table('collection_sap_pur_grp_names')->pluck('pur_grp_name', 'pur_grp_name');
+        $collection_sap_nupco_trade_codes = DB::table('po_sap_masters')->pluck('nupco_trade_code', 'nupco_trade_code');
         $collection_sap_notifieds = [
             'yes' => 'yes',
             'no' => 'no',
@@ -184,7 +187,8 @@ class SapFilterSync extends Command
             'collection_sap_customer_po_items',
             'collection_sap_pur_grp_names',
             'collection_sap_notifieds',
-            'collection_sap_plnts'
+            'collection_sap_plnts',
+            'collection_sap_nupco_trade_codes'
         ))->render();
     }
 }
