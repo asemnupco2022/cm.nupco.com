@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Mail;
 
 
 use App\Helpers\PoHelper;
+use App\Models\LbsUserSearchSet;
+use App\Models\NupAutoSetting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -88,6 +90,14 @@ class ComposeMailComponent extends Component
         $emails_to = explode(',', $this->mail_to);
         $this->mail_to = $emails_to[0];
         $emails_subject = $this->mail_subject;
+
+        // $autoSetting = NupAutoSetting::where('setting_for_table', LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM)->first();
+        // if ($autoSetting) {
+        //     if ($autoSetting->setting_switch == 'quality') {
+        //         $emails_to = $autoSetting->test_email;
+        //         $this->mail_to = $autoSetting->test_email;
+        //     }
+        // }
 
         try {
 

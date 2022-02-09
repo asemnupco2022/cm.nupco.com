@@ -102,7 +102,7 @@ class FullAutomation extends Command
                         'sap_object' => PoSapMaster::whereIn('id', $ids)->get()
                     ];
                     $tableType = LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM;
-                    $to = trim(LbsMember::where('vendor_code', $vendorCode)->first()->email);
+                    $to = str_replace(' ', '', LbsMember::where('vendor_code', $vendorCode)->first()->email);
 
                     dispatch(new FullAutomationJob('enquiry-email', $sendData, $tableType, $to));
                 }
