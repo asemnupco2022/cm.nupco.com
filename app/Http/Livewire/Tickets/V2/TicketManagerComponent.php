@@ -140,7 +140,7 @@ class TicketManagerComponent extends Component
             $query=$query->whereIn('importance',$this->importance['from']);
         }
         if (Arr::has($this->delivery_date, ['from'])){
-            $query=$query->whereInBetween('delivery_date',[$this->delivery_date['from'],$this->delivery_date['to']]);
+            $query=$query->whereBetween('delivery_date',[$this->delivery_date['from'],$this->delivery_date['to']]);
         }
         if (Arr::has($this->line_status, ['from'])){
             $query=$query->whereIn('line_status',$this->line_status['from']);

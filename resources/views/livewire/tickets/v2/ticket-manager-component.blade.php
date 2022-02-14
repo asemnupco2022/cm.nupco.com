@@ -285,7 +285,11 @@
                                 var startnupco_delivery_date;
                                 var endnupco_delivery_date;
                                 $('#deliveryDate').daterangepicker({
-                                        format: 'YYYY-MM-DD',
+                                       autoUpdateInput: false,
+                                format: 'YYYY-MM-DD',
+                                 locale: {
+                                    cancelLabel: 'Clear'
+                                }
                                     },
                                     function(start, end) {
                                         startnupco_delivery_date = start;
@@ -293,11 +297,27 @@
 
                                     }
                                 );
-                                $('#deliveryDate').val("");
-                                $('#deliveryDate').change(function() {
-                                    @this.set('delivery_address.from', startnupco_delivery_date.format('YYYY-MM-DD'));
-                                    @this.set('delivery_address.to', endnupco_delivery_date.format('YYYY-MM-DD'));
-                                })
+
+                                 $('#deliveryDate').on('apply.daterangepicker', function(ev, picker) {
+                                    $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+
+                                    @this.set('delivery_date.from', picker.startDate.format('YYYY-MM-DD'));
+                                    @this.set('delivery_date.to', picker.endDate.format('YYYY-MM-DD'));
+
+                                });
+
+                                $('#deliveryDate').on('cancel.daterangepicker', function(ev, picker) {
+                                    $(this).val('');
+                                    @this.set('delivery_date.from','');
+                                    @this.set('delivery_date.to', '');
+
+                                });
+
+                                // $('#deliveryDate').val("");
+                                // $('#deliveryDate').change(function() {
+                                //     @this.set('delivery_address.from', startnupco_delivery_date.format('YYYY-MM-DD'));
+                                //     @this.set('delivery_address.to', endnupco_delivery_date.format('YYYY-MM-DD'));
+                                // })
 
                             });
                         </script>

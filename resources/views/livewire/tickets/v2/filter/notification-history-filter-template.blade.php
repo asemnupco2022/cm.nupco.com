@@ -3,7 +3,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" multiple wire:model.defer="tender_num.from"  title="tender num">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" multiple  data-actions-box="true"  wire:model.defer="tender_num.from"  title="tender num">
                         <option value="RFQ-42-2021">RFQ-42-2021</option>
                         <option value="NPT0016/20">NPT0016/20</option>
                         <option value="NPT0011/19">NPT0011/19</option>
@@ -19,7 +19,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="vendor_num.from"  title="vendor num">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="vendor_num.from"  title="vendor num">
                           <option value="400038">400038</option>
                           <option value="400190">400190</option>
                           <option value="400019">400019</option>
@@ -33,7 +33,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="vendor_name_en.from"  title="vendor name en">
+            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="vendor_name_en.from"  title="vendor name en">
                         <option value=""></option>
                         <option value="Al Hayat Medical Company">Al Hayat Medical Company</option>
                      </select>
@@ -43,7 +43,7 @@
       <div class="col-md-2">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="cust_code.from"  title="cust code">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="cust_code.from"  title="cust code">
                         <option value="120000">120000</option>
                         <option value="120074">120074</option>
                         <option value="130018">130018</option>
@@ -63,7 +63,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="customer_name.from"  title="customer name">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="customer_name.from"  title="customer name">
                         <option value="MOH - Ministry of Health وزارة الصحة">MOH - Ministry of Health وزارة الصحة</option>
                         <option value="MOH - Ehssa Health Directorate المديريةالعامة للشؤون الصحية الاحسا">MOH - Ehssa Health Directorate المديريةالعامة للشؤون الصحية الاحسا</option>
                         <option value="MOD - King Fahad Armed Forces Hospi in Jeddah">MOD - King Fahad Armed Forces Hospi in Jeddah</option>
@@ -83,7 +83,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="po_num.from"  title="po num">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="po_num.from"  title="po num">
                         <option value="4000000036">4000000036</option>
                         <option value="4600016090">4600016090</option>
                         <option value="4600017532">4600017532</option>
@@ -120,7 +120,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="po_item_num.from"  title="po item num">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="po_item_num.from"  title="po item num">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="30">30</option>
@@ -140,7 +140,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="mat_num.from"  title="mat num">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="mat_num.from"  title="mat num">
                         <option value="4229474100001">4229474100001</option>
                         <option value="4216163500701">4216163500701</option>
                         <option value="4216163500901">4216163500901</option>
@@ -172,7 +172,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="tender_desc.from"  title="tender desc">
+            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="tender_desc.from"  title="tender desc">
                         <option value=""></option>
                         <option value="منافسة محاليل الكلية والغسيل">منافسة محاليل الكلية والغسيل</option>
                         <option value="منافسة العلاج التنفسي والتخدير">منافسة العلاج التنفسي والتخدير</option>
@@ -183,7 +183,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="customer_po_no.from"  title="customer po no">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="customer_po_no.from"  title="customer po no">
                         <option value=""></option>
                         <option value="2021100131">2021100131</option>
                      </select>
@@ -193,7 +193,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="customer_po_item.from"  title="customer po item">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="customer_po_item.from"  title="customer po item">
                         <option value=""></option>
                         <option value="00000">00000</option>
                      </select>
@@ -203,7 +203,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-         <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="importance.from"  title="importance">
+         <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="importance.from"  title="importance">
             <option value="1">yes</option>
             <option value="0">no</option>
          </select>
@@ -215,7 +215,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="line_status.from"  title="line status">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="line_status.from"  title="line status">
             <option value="new">new</option>
             <option value="waiting for action">waiting for action</option>
             <option value="closed">closed</option>
@@ -233,7 +233,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="uom.from"  title="uom">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="uom.from"  title="uom">
                         <option value="EA">EA</option>
                         <option value="TAB">TAB</option>
                         <option value="BT">BT</option>
@@ -244,7 +244,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="plant.from"  title="plant">
+            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="plant.from"  title="plant">
                         <option value="1100">1100</option>
                         <option value="C2C1">C2C1</option>
                         <option value="E2C1">E2C1</option>
@@ -255,7 +255,7 @@
       <div class="col-md-3">
         <div class="form-group"  wire:ignore >
           
-           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple wire:model.defer="item_desc.from"  title="item desc">
+           <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;"   multiple  data-actions-box="true"  wire:model.defer="item_desc.from"  title="item desc">
                         <option value="OPTICROSS CATHETER H749518120 BOSTON">OPTICROSS CATHETER H749518120 BOSTON</option>
                         <option value="SOD BICARB 304-0650 SAUDI MAIS">SOD BICARB 304-0650 SAUDI MAIS</option>
                         <option value="SOD BICARB 301-0650 SAUDI MAIS">SOD BICARB 301-0650 SAUDI MAIS</option>
@@ -291,7 +291,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="form-group" wire:ignore style="text-align: right ">
-                <select autocomplete="off" class="form-control selectpicker "  multiple wire:model.defer="supplier_comment.from" Please Choose Supplier Comments" style="text-align: right ">
+                <select autocomplete="off" class="form-control selectpicker "  multiple  data-actions-box="true"  wire:model.defer="supplier_comment.from" Please Choose Supplier Comments" style="text-align: right ">
                     <option value="0" selected  >Please Choose Supplier Comments</option>
                                                                                 </select>
             </div>

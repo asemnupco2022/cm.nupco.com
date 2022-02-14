@@ -4,7 +4,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="PO Type " wire:model.defer="document_type.from" multiple title="PO Type">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="PO Type " wire:model.defer="document_type.from" multiple  data-actions-box="true"  title="PO Type">
 
                         <option value="NB">NB</option>
                         <option value="Z103">Z103</option>
@@ -24,7 +24,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="purchasing_group.from" multiple title="Purchasing Group">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="purchasing_group.from" multiple  data-actions-box="true"  title="Purchasing Group">
 
                         <option value="110">110</option>
                         <option value="120">120</option>
@@ -58,7 +58,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_name"   wire:model.defer="customer_name.from" multiple title="Customer Name">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_name"   wire:model.defer="customer_name.from"  multiple  data-actions-box="true"  title="Customer Name">
 
                         <option value=""></option>
                         <option value="KAMC - King Abdullah Medical City مدينة الملك عبد الله الطبية">KAMC - King Abdullah Medical City مدينة الملك عبد الله الطبية</option>
@@ -128,7 +128,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_no"   wire:model.defer="tender_no.from" multiple title="Tender No">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_no"   wire:model.defer="tender_no.from" multiple  data-actions-box="true"  title="Tender No">
 
                         <option value=""></option>
                         <option value="12110400">12110400</option>
@@ -181,7 +181,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_desc"   wire:model.defer="tender_desc.from" multiple title="Tender Description">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_desc"   wire:model.defer="tender_desc.from" multiple  data-actions-box="true"  title="Tender Description">
 
                         <option value=""></option>
                         <option value="390014020017">390014020017</option>
@@ -207,7 +207,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_name_en"   wire:model.defer="vendor_name_en.from" multiple title="Vendor Name">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_name_en"   wire:model.defer="vendor_name_en.from" multiple  data-actions-box="true"  title="Vendor Name">
 
                         <option value="12 cups">12 cups</option>
                         <option value="4D Medical call centers company">4D Medical call centers company</option>
@@ -596,7 +596,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" init_po_number"   wire:model.defer="init_po_number.from" multiple title="Puchasing Document">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" init_po_number"   wire:model.defer="init_po_number.from" multiple  data-actions-box="true"  title="Puchasing Document">
 
                         <option value="2090">2090</option>
                         <option value="5911">5911</option>
@@ -3635,7 +3635,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" generic_mat_code"   wire:model.defer="generic_mat_code.from" multiple title="Generic Mat Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" generic_mat_code"   wire:model.defer="generic_mat_code.from" multiple  data-actions-box="true"  title="Generic Mat Code">
 
                         <option value="0">0</option>
                         <option value="4010151200000">4010151200000</option>
@@ -6295,7 +6295,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" cust_gen_code"   wire:model.defer="cust_gen_code.from" multiple title="CUST Gen Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" cust_gen_code"   wire:model.defer="cust_gen_code.from" multiple  data-actions-box="true"  title="CUST Gen Code">
 
                         <option value="0">0</option>
                         <option value="6505">6505</option>
@@ -8484,7 +8484,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" mat_description"   wire:model.defer="mat_description.from" multiple title="Mat Description" >
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" mat_description"   wire:model.defer="mat_description.from" multiple  data-actions-box="true"  title="Mat Description" >
 
                         <option value="*EZ File A4 size 8.0cm spine">*EZ File A4 size 8.0cm spine</option>
                         <option value="*HP Cyan Contract Toner Cartridge-">*HP Cyan Contract Toner Cartridge-</option>
@@ -12172,7 +12172,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore >
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="Delivery Address"   wire:model.defer="delivery_address.from" multiple title="Delivery Address">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="Delivery Address"   wire:model.defer="delivery_address.from" multiple  data-actions-box="true"  title="Delivery Address">
 
                         <option value="C.WH in Aseer for MOH مست ودع عسير – وزارة الصحة">C.WH in Aseer for MOH مست ودع عسير – وزارة الصحة</option>
                         <option value="C.WH in Aseer for NUPCO مستودع عسير – نوبكو">C.WH in Aseer for NUPCO مستودع عسير – نوبكو</option>
@@ -12259,7 +12259,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           
-            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" plant"   wire:model.defer="plant.from" multiple title="plant">
+            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" plant"   wire:model.defer="plant.from" multiple  data-actions-box="true"  title="plant">
 
                                 <option value="1100">1100</option>
                                 <option value="1200">1200</option>
@@ -12294,7 +12294,7 @@
         <div class="col-md-3">
             <div class="form-group" wire:ignore>
               
-              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Customer Po No">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple  data-actions-box="true"  title="Customer Po No">
 
                                 <option value=""></option>
                                 <option value="0001001009">0001001009</option>
@@ -12311,7 +12311,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               
-              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Customer Po Item">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple  data-actions-box="true"  title="Customer Po Item">
 
                                 <option value="00000">00000</option>
                                 <option value="00010">00010</option>
@@ -12327,7 +12327,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               
-              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Pur Grp Name">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple  data-actions-box="true"  title="Pur Grp Name">
 
                                 <option value="Audit Req.">Audit Req.</option>
                                 <option value="Commercial.Req.">Commercial.Req.</option>
@@ -12376,7 +12376,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" storage_location"   wire:model.defer="storage_location.from"  multiple title="Storage Location">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" storage_location"   wire:model.defer="storage_location.from"  multiple  data-actions-box="true"  title="Storage Location">
 
                         <option value=""></option>
                         <option value="1000">1000</option>
@@ -12391,7 +12391,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" nupco_trade_code"   wire:model.defer="nupco_trade_code.from"  multiple title="Trade Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" nupco_trade_code"   wire:model.defer="nupco_trade_code.from"  multiple  data-actions-box="true"  title="Trade Code">
 
                         <option value=""></option>
                         <option value="000000000000005001">000000000000005001</option>
@@ -15558,7 +15558,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_no"   wire:model.defer="customer_no.from"  multiple title="Customer No">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_no"   wire:model.defer="customer_no.from"  multiple  data-actions-box="true"  title="Customer No">
                         <option value="110000">110000</option>
                         <option value="120000">120000</option>
                         <option value="120001">120001</option>
@@ -15647,7 +15647,7 @@
 
       <div class="col-md-3">
         <div class="form-group" wire:ignore style="text-align: right ">
-            <select autocomplete="off" class="form-control selectpicker"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments" style="text-align: right "  multiple title="Please Choose Supplier Comments">
+            <select autocomplete="off" class="form-control selectpicker"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments" style="text-align: right "  multiple  data-actions-box="true"  title="Please Choose Supplier Comments">
 
                                 
                 
@@ -15657,7 +15657,7 @@
 
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple title="ASN">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple  data-actions-box="true"  title="ASN">
             <option value="no">No</option>
             <option value="new">New</option>
             <option value="approved">Approved</option>
@@ -15675,7 +15675,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           
-          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_code"   wire:model.defer="vendor_code.from"  multiple title="Vendor Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_code"   wire:model.defer="vendor_code.from"  multiple  data-actions-box="true"  title="Vendor Code">
 
                         <option value="130001">130001</option>
                         <option value="160000">160000</option>
