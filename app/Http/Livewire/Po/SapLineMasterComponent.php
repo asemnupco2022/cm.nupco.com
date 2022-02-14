@@ -165,7 +165,6 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->customer_po_no, ['from'])) {
             $query = $query->whereBetween('customer_po_no', [$this->customer_po_no['from'], $this->customer_po_no['to']]);
         }
-
         if (Arr::has($this->po_created_on, ['from'])) {
             $query = $query->whereIn('po_created_on', $this->po_created_on['from']);
         }
@@ -239,6 +238,8 @@ class SapLineMasterComponent extends Component
 
         if ($collectionCount == 0  and count($this->selectedPo) == 0) {
             $collection =  $this->searchEngine();
+
+            $collection =  $collection->select(PoHelper::DeNormalizeColString(null, $ColKeys));
             $queryString = $this->getEloquentSqlWithBindings($collection);
 
             if ($type == 'PDF') {

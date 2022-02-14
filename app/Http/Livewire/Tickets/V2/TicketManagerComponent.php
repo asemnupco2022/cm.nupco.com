@@ -89,72 +89,102 @@ class TicketManagerComponent extends Component
     public function hitSearchInt($query)
     {
         if (Arr::has($this->message_type, ['from'])){
-            $query=$query->where('message_type',$this->message_type['from']);
+            $query=$query->whereIn('message_type',$this->message_type['from']);
         }
         if (Arr::has($this->tender_num, ['from'])){
-            $query=$query->where('tender_num',$this->tender_num['from']);
+            $query=$query->whereIn('tender_num',$this->tender_num['from']);
         }
         if (Arr::has($this->vendor_num, ['from'])){
-            $query=$query->where('vendor_num',$this->vendor_num['from']);
+            $query=$query->whereIn('vendor_num',$this->vendor_num['from']);
         }
         if (Arr::has($this->vendor_name_en, ['from'])){
-            $query=$query->where('vendor_name_en',$this->vendor_name_en['from']);
+            $query=$query->whereIn('vendor_name_en',$this->vendor_name_en['from']);
         }
         if (Arr::has($this->customer_name, ['from'])){
-            $query=$query->where('customer_name','LIKE','%'.$this->customer_name['from'].'%');
+            $query=$query->whereIn('customer_name',$this->customer_name['from']);
         }
         if (Arr::has($this->cust_code, ['from'])){
-            $query=$query->where('cust_code',$this->cust_code['from']);
+            $query=$query->whereIn('cust_code',$this->cust_code['from']);
         }
         if (Arr::has($this->po_item_num , ['from'])){
-            $query=$query->where('po_item_num ',$this->po_item_num ['from']);
+            $query=$query->whereIn('po_item_num ',$this->po_item_num ['from']);
         }
         if (Arr::has($this->po_num, ['from'])){
-            $query=$query->where('po_num',$this->po_num['from']);
+            $query=$query->whereIn('po_num',$this->po_num['from']);
         }
         if (Arr::has($this->uom, ['from'])){
-            $query=$query->where('uom',$this->uom['from']);
+            $query=$query->whereIn('uom',$this->uom['from']);
         }
         if (Arr::has($this->plant, ['from'])){
-            $query=$query->where('plant','LIKE','%'.$this->plant['from'].'%');
+            $query=$query->whereIn('plant',$this->plant['from']);
         }
         if (Arr::has($this->delivery_address, ['from'])){
-            $query=$query->where('delivery_address','LIKE','%'.$this->delivery_address['from'].'%');
+            $query=$query->whereIn('delivery_address',$this->delivery_address['from']);
         }
         if (Arr::has($this->item_desc, ['from'])){
-            $query=$query->where('item_desc','LIKE','%'.$this->item_desc['from'].'%');
+            $query=$query->whereIn('item_desc',$this->item_desc['from']);
         }
         if (Arr::has($this->mat_num, ['from'])){
-            $query=$query->where('mat_num','LIKE','%'.$this->mat_num['from'].'%');
+            $query=$query->whereIn('mat_num',$this->mat_num['from']);
         }
         if (Arr::has($this->tender_desc, ['from'])){
-            $query=$query->where('tender_desc','LIKE','%'.$this->tender_desc['from'].'%');
+            $query=$query->whereIn('tender_desc',$this->tender_desc['from']);
         }
         if (Arr::has($this->customer_po_no, ['from'])){
-            $query=$query->where('customer_po_no','LIKE','%'.$this->customer_po_no['from'].'%');
+            $query=$query->whereIn('customer_po_no',$this->customer_po_no['from']);
         }
         if (Arr::has($this->customer_po_item, ['from'])){
-            $query=$query->where('customer_po_item','LIKE','%'.$this->customer_po_item['from'].'%');
+            $query=$query->whereIn('customer_po_item',$this->customer_po_item['from']);
         }
         if (Arr::has($this->importance, ['from'])){
-            $query=$query->where('importance','LIKE','%'.$this->importance['from'].'%');
+            $query=$query->whereIn('importance',$this->importance['from']);
         }
         if (Arr::has($this->delivery_date, ['from'])){
-            $query=$query->whereBetween('delivery_date',[$this->delivery_date['from'],$this->delivery_date['to']]);
+            $query=$query->whereInBetween('delivery_date',[$this->delivery_date['from'],$this->delivery_date['to']]);
         }
         if (Arr::has($this->line_status, ['from'])){
-            $query=$query->where('line_status','LIKE','%'.$this->line_status['from'].'%');
+            $query=$query->whereIn('line_status',$this->line_status['from']);
         }
         if (Arr::has($this->supplier_comment, ['from'])){
 
             $query= $query->whereHas('has_chat', function($query) {
-                $query->where('msg_body','LIKE', '%'.$this->supplier_comment['from'].'%');
+                $query->whereIn('msg_body',$this->supplier_comment['from']);
             });
         }
         return $query;
     }
 
 
+    public function mount()
+    {
+        $StaffColumnSet = StaffColumnSet::where('table_type', $this->tableType)->where('user_id', auth()->user()->id)->first();
+        if ($StaffColumnSet) {
+            $this->columns = json_decode($StaffColumnSet->columns, true);
+        }
+    }
+
+    public function save_staff_col_set()
+    {
+        $uniue_line = $this->tableType . '_' . auth()->user()->id;
+        $attributes = [
+            'unique_line' => $this->tableType . '_' . auth()->user()->id,
+            'user_id' => auth()->user()->id,
+            'table_type' => $this->tableType,
+            'columns' => json_encode($this->columns),
+        ];
+
+        if (StaffColumnSet::where('unique_line', $uniue_line)->exists()) {
+            $result = StaffColumnSet::where('unique_line', $uniue_line)->first()->update($attributes);
+        } else {
+            $result = StaffColumnSet::create($attributes);
+        }
+
+        // dd($result);
+        if ($result) {
+            return $this->emitNotifications('colunm set saved', 'success');
+        }
+        return $this->emitNotifications('There is Something Wrong', 'error');
+    }
 
     public function search_reset()
     {

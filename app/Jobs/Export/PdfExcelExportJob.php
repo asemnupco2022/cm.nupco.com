@@ -57,7 +57,8 @@ class PdfExcelExportJob implements ShouldQueue
         }
         if ($this->type =='EXCEL'){
             $ColKeys= PoHelper::NormalizeColString(null, $this->ColKeys);
-            $collection=collect(array_merge([$ColKeys],$this->collection));
+            $newArray = array_merge([$ColKeys], $this->collection);
+            $collection = collect($newArray);
             $fileName='SAP-'.$dateTime.'.xlsx';
             PoHelper::excel_export($collection, $fileName);
         }

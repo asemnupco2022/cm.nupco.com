@@ -13,7 +13,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="PO Type " wire:model.defer="document_type.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="PO Type " wire:model.defer="document_type.from" multiple title="PO Type">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="PO Type " wire:model.defer="document_type.from" multiple title="PO Type">
 
             @foreach ($collection_sap_po_types as  $po_types )
             <option value="{{$po_types}}">{{$po_types}}</option>
@@ -26,7 +26,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Pur. Group" wire:model.defer="purchasing_group.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="purchasing_group.from" multiple title="Purchasing Group">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" purchasing_group"   wire:model.defer="purchasing_group.from" multiple title="Purchasing Group">
 
             @foreach ($collection_sap_pur_groups as  $purchasing_groups )
             <option value="{{$purchasing_groups}}">{{$purchasing_groups}}</option>
@@ -37,7 +37,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Customer Name"  wire:model.defer="customer_name.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_name"   wire:model.defer="customer_name.from" multiple title="Customer Name">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_name"   wire:model.defer="customer_name.from" multiple title="Customer Name">
 
             @foreach ($collection_sap_customer_names as  $customer_names )
             <option value="{{$customer_names}}">{{$customer_names}}</option>
@@ -48,7 +48,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Tender no" wire:model.defer="tender_no.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_no"   wire:model.defer="tender_no.from" multiple title="Tender No">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_no"   wire:model.defer="tender_no.from" multiple title="Tender No">
 
             @foreach ($collection_sap_tender_nos as  $tender_nos )
             <option value="{{$tender_nos}}">{{$tender_nos}}</option>
@@ -65,7 +65,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Tender Description" wire:model.defer="tender_desc.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_desc"   wire:model.defer="tender_desc.from" multiple title="Tender Description">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" tender_desc"   wire:model.defer="tender_desc.from" multiple title="Tender Description">
 
             @foreach ($collection_sap_tender_descs as  $tender_descs )
             <option value="{{$tender_descs}}">{{$tender_descs}}</option>
@@ -76,7 +76,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Vendor Name"  wire:model.defer="vendor_name_en.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_name_en"   wire:model.defer="vendor_name_en.from" multiple title="Vendor Name">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_name_en"   wire:model.defer="vendor_name_en.from" multiple title="Vendor Name">
 
             @foreach ($collection_sap_vendor_name_ens as  $vendor_name_ens )
             <option value="{{$vendor_name_ens}}">{{$vendor_name_ens}}</option>
@@ -87,7 +87,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="init_po_number.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" init_po_number"   wire:model.defer="init_po_number.from" multiple title="Puchasing Document">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" init_po_number"   wire:model.defer="init_po_number.from" multiple title="Puchasing Document">
 
             @foreach ($collection_sap_po_numbers as  $po_numbers )
             <option value="{{$po_numbers}}">{{$po_numbers}}</option>
@@ -98,7 +98,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Generic Mat Code" wire:model.defer="generic_mat_code.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" generic_mat_code"   wire:model.defer="generic_mat_code.from" multiple title="Generic Mat Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" generic_mat_code"   wire:model.defer="generic_mat_code.from" multiple title="Generic Mat Code">
 
             @foreach ($collection_sap_generic_mat_codes as  $generic_mat_codes )
             <option value="{{$generic_mat_codes}}">{{$generic_mat_codes}}</option>
@@ -115,7 +115,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="CUST Gen Code"  wire:model.defer="cust_gen_code.from"  > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" cust_gen_code"   wire:model.defer="cust_gen_code.from" multiple title="CUST Gen Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" cust_gen_code"   wire:model.defer="cust_gen_code.from" multiple title="CUST Gen Code">
 
             @foreach ($collection_sap_cust_gen_codes as  $cust_gen_codes )
             <option value="{{$cust_gen_codes}}">{{$cust_gen_codes}}</option>
@@ -126,7 +126,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Mat Description" wire:model.defer="mat_description.from"  > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" mat_description"   wire:model.defer="mat_description.from" multiple title="Mat Description" >
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" mat_description"   wire:model.defer="mat_description.from" multiple title="Mat Description" >
 
             @foreach ($collection_sap_mat_descriptions as  $mat_descriptions )
             <option value="{{$mat_descriptions}}">{{$mat_descriptions}}</option>
@@ -137,7 +137,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore >
           {{-- <input type="title" class="form-control"  placeholder="Delivery Address"   wire:model.defer="delivery_address.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="Delivery Address"   wire:model.defer="delivery_address.from" multiple title="Delivery Address">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="Delivery Address"   wire:model.defer="delivery_address.from" multiple title="Delivery Address">
 
             @foreach ($collection_sap_delivery_address as  $delivery_address )
             <option value="{{$delivery_address}}">{{$delivery_address}}</option>
@@ -148,7 +148,7 @@
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Plant"  wire:model.defer="plant.from" > --}}
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" plant"   wire:model.defer="plant.from" multiple title="plant">
+            <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" plant"   wire:model.defer="plant.from" multiple title="plant">
 
                 @foreach ($collection_sap_plnts as  $plants )
                 <option value="{{$plants}}">{{$plants}}</option>
@@ -166,7 +166,7 @@
         <div class="col-md-3">
             <div class="form-group" wire:ignore>
               {{-- <input type="title" class="form-control"  placeholder="Tender Description" wire:model.defer="tender_desc.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Customer Po No">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_no"   wire:model.defer="customer_po_no.from" multiple title="Customer Po No">
 
                 @foreach ($collection_sap_customer_po_nos as  $customer_po_nos )
                 <option value="{{$customer_po_nos}}">{{$customer_po_nos}}</option>
@@ -177,7 +177,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               {{-- <input type="title" class="form-control"  placeholder="Vendor Name"  wire:model.defer="vendor_name_en.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Customer Po Item">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_po_item"   wire:model.defer="customer_po_item.from" multiple title="Customer Po Item">
 
                 @foreach ($collection_sap_customer_po_items as  $customer_po_items )
                 <option value="{{$customer_po_items}}">{{$customer_po_items}}</option>
@@ -188,7 +188,7 @@
           <div class="col-md-3">
             <div class="form-group" wire:ignore>
               {{-- <input type="title" class="form-control"  placeholder="Puchasing Document" wire:model.defer="pur_grp_name.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Pur Grp Name">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" pur_grp_name"   wire:model.defer="pur_grp_name.from" multiple title="Pur Grp Name">
 
                 @foreach ($collection_sap_pur_grp_names as  $pur_grp_names )
                 <option value="{{$pur_grp_names}}">{{$pur_grp_names}}</option>
@@ -199,7 +199,7 @@
         <div class="col-md-3">
           <div class="form-group" wire:ignore>
             {{-- <input type="title" class="form-control"  placeholder="Plant"  wire:model.defer="plant.from" > --}}
-              <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" notified"   wire:model.defer="notified.from"  title="notified">
+              <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" notified"   wire:model.defer="notified.from"  title="notified">
 
                   @foreach ($collection_sap_notifieds as  $notifieds )
                   <option value="{{$notifieds}}">{{$notifieds}}</option>
@@ -216,7 +216,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Storage Location"   wire:model.defer="storage_location.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" storage_location"   wire:model.defer="storage_location.from"  multiple title="Storage Location">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" storage_location"   wire:model.defer="storage_location.from"  multiple title="Storage Location">
 
             @foreach ($collection_sap_storage_locations as  $storage_locations )
             <option value="{{$storage_locations}}">{{$storage_locations}}</option>
@@ -227,7 +227,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Storage Location"   wire:model.defer="nupco_trade_code.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" nupco_trade_code"   wire:model.defer="nupco_trade_code.from"  multiple title="Trade Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" nupco_trade_code"   wire:model.defer="nupco_trade_code.from"  multiple title="Trade Code">
 
             @foreach ($collection_sap_nupco_trade_codes as  $nupco_trade_codes )
             <option value="{{$nupco_trade_codes}}">{{$nupco_trade_codes}}</option>
@@ -238,7 +238,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Customer No" wire:model.defer="customer_no.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_no"   wire:model.defer="customer_no.from"  multiple title="Customer No">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" customer_no"   wire:model.defer="customer_no.from"  multiple title="Customer No">
             @foreach ($collection_sap_customer_nos as  $customer_nos )
             <option value="{{$customer_nos}}">{{$customer_nos}}</option>
             @endforeach
@@ -248,9 +248,9 @@
 
 
 
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="form-group" wire:ignore style="text-align: right ">
-            <select class="form-control selectpicker"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments" style="text-align: right "  multiple title="Please Choose Supplier Comments">
+            <select autocomplete="off" class="form-control selectpicker"  wire:model.defer="supplier_comment.from"  placeholder="Please Choose Supplier Comments" style="text-align: right "  multiple title="Please Choose Supplier Comments">
 
                 @if (\App\Models\SupplierCommentTypes::supplierCommets())
                 @foreach (\App\Models\SupplierCommentTypes::supplierCommets() as $key => $supComs)
@@ -266,7 +266,7 @@
 
       <div class="col-md-3">
         <div class="form-group" wire:ignore>
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple title="ASN">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" asn"   wire:model.defer="asn.from"  multiple title="ASN">
             <option value="no">No</option>
             <option value="new">New</option>
             <option value="approved">Approved</option>
@@ -284,7 +284,7 @@
       <div class="col-md-2">
         <div class="form-group" wire:ignore>
           {{-- <input type="title" class="form-control"  placeholder="Vendor NO"  wire:model.defer="vendor_code.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_code"   wire:model.defer="vendor_code.from"  multiple title="Vendor Code">
+          <select autocomplete="off" class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" vendor_code"   wire:model.defer="vendor_code.from"  multiple title="Vendor Code">
 
             @foreach ($collection_vendor_codes as  $vendor_codes )
             <option value="{{$vendor_codes}}">{{$vendor_codes}}</option>
@@ -311,7 +311,7 @@
                   <i class="far fa-calendar-alt"></i>
                 </span>
               </div>
-              <input type="text" class="form-control float-right" id="deliveryDate" placeholder="Nupco Delivery Date" >
+              <input type="text" class="form-control float-right" id="deliveryDate" placeholder="Nupco Delivery Date" autocomplete="off">
               <input type="hidden"  id="startnupco_delivery_date" wire:model.defe="nupco_delivery_date.from">
             <input type="hidden"  id="endnupco_delivery_date" wire:model.defe="nupco_delivery_date.to">
             </div>
@@ -328,7 +328,7 @@
                   <i class="far fa-calendar-alt"></i>
                 </span>
               </div>
-              <input type="text" class="form-control float-right" id="createDate" placeholder="Po Created On">
+              <input type="text" class="form-control float-right" id="createDate" placeholder="Po Created On" autocomplete="off">
               <input type="hidden"  id="startpo_created_on" wire:model.defe="po_created_on.from">
                 <input type="hidden"  id="endpo_created_on" wire:model.defe="po_created_on.to">
             </div>

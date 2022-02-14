@@ -40,6 +40,9 @@
 
 
         }
+        th{
+            background-color: white;
+        }
         </style>
 
 <style>
