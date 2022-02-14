@@ -487,9 +487,6 @@
 
                                 $('#createDate').on('cancel.daterangepicker', function(ev, picker) {
                                     $(this).val('');
-                                    @this.set('po_created_on.from','');
-                                    @this.set('po_created_on.to', '');
-
                                 });
 
 
@@ -523,9 +520,6 @@
 
                                 $('#deliveryDate').on('cancel.daterangepicker', function(ev, picker) {
                                     $(this).val('');
-
-                                     @this.set('nupco_delivery_date.from','');
-                                    @this.set('nupco_delivery_date.to', '');
                                 });
 
                     });
