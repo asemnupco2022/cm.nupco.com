@@ -93,6 +93,7 @@ class SapLineMasterComponent extends Component
     public $pur_grp_name = [];
     public $notified = [];
     public $asn = [];
+    public $nupco_trade_code = [];
     //    ========
 
 
@@ -164,9 +165,9 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->customer_po_no, ['from'])) {
             $query = $query->whereBetween('customer_po_no', [$this->customer_po_no['from'], $this->customer_po_no['to']]);
         }
-
-        if (Arr::has($this->po_created_on, ['from'])) {
-            $query = $query->whereIn('po_created_on', $this->po_created_on['from']);
+      
+        if (Arr::has($this->po_created_on, ['from']) and Arr::has($this->po_created_on, ['to'])) {
+            $query = $query->whereBetween('po_created_on', [$this->po_created_on['from'], $this->po_created_on['to']]);
         }
         if (Arr::has($this->customer_po_item, ['from'])) {
             $query = $query->whereIn('customer_po_item', $this->customer_po_item['from']);
@@ -179,6 +180,9 @@ class SapLineMasterComponent extends Component
         }
         if (Arr::has($this->asn, ['from'])) {
             $query = $query->where('asn', $this->asn['from']);
+        }
+        if (Arr::has($this->nupco_trade_code, ['from'])) {
+            $query = $query->whereIn('nupco_trade_code', $this->nupco_trade_code['from']);
         }
 
 
@@ -235,6 +239,8 @@ class SapLineMasterComponent extends Component
 
         if ($collectionCount == 0  and count($this->selectedPo) == 0) {
             $collection =  $this->searchEngine();
+
+            $collection =  $collection->select(PoHelper::DeNormalizeColString(null, $ColKeys));
             $queryString = $this->getEloquentSqlWithBindings($collection);
 
             if ($type == 'PDF') {

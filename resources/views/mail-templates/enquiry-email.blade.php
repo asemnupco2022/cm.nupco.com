@@ -69,6 +69,7 @@ table.table-data {
 
                                                 @if($mail_data['sap_object'] and !empty($mail_data['sap_object']) and $mail_data['sap_object'] !='[]')
                                                     @foreach($mail_data['sap_object'] as $key=> $sap_object)
+
                                                         <tr>
                                                             <td>{{$sap_object['customer_name']}}</td>
                                                             <td>{{$sap_object['tender_no']}}</td>
@@ -86,8 +87,14 @@ table.table-data {
 									   </table>
 									</tr>
 									<tr>
+                                        @php
+                                            $date=30;
+                                            if ($sap_object['execution_done'] != 'init') {
+                                                $date=$sap_object['execution_done'];
+                                            }
+                                        @endphp
 										<td>
-											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها بتاريخ</span> 28 أغسطس <span>، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، عليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم خلال المده الممنوحه في خطابنا هذا التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية.</p>
+											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها بتاريخ</span> {{$date}} أغسطس <span>، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، عليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم خلال المده الممنوحه في خطابنا هذا التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية.</p>
 										</td>
 									</tr>
 

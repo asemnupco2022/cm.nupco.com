@@ -1,3 +1,38 @@
+@push('styles')
+
+        <style>
+            .fixTableHead {
+                overflow-y: auto;
+                height: 600px;
+            }
+            .fixTableHead thead th {
+                position: sticky;
+                top: 0;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            thead.data-sticky-header tr th {
+                background: #fff;
+            }
+
+            .ar-badge {
+            color: #fff;
+            background-color: #e37526 !important;
+            border-color: #e37526 !important;
+            box-shadow: none;
+            font-weight: 400;
+            padding: 3px;
+        }
+
+        th{
+            background-color: white;
+        }
+        </style>
+
+
+    @endpush
 <div>
     <div class="row">
         <div class="col-12">
@@ -37,7 +72,7 @@
                 </div>
 
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
+                <div class="card-body table-responsive p-0 fixTableHead">
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
@@ -179,6 +214,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-light" wire:click="save_staff_col_set">Save</button>
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -249,7 +285,11 @@
                                 var startnupco_delivery_date;
                                 var endnupco_delivery_date;
                                 $('#deliveryDate').daterangepicker({
-                                        format: 'YYYY-MM-DD',
+                                       autoUpdateInput: false,
+                                format: 'YYYY-MM-DD',
+                                 locale: {
+                                    cancelLabel: 'Clear'
+                                }
                                     },
                                     function(start, end) {
                                         startnupco_delivery_date = start;
@@ -257,11 +297,27 @@
 
                                     }
                                 );
-                                $('#deliveryDate').val("");
-                                $('#deliveryDate').change(function() {
-                                    @this.set('delivery_address.from', startnupco_delivery_date.format('YYYY-MM-DD'));
-                                    @this.set('delivery_address.to', endnupco_delivery_date.format('YYYY-MM-DD'));
-                                })
+
+                                 $('#deliveryDate').on('apply.daterangepicker', function(ev, picker) {
+                                    $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+
+                                    @this.set('delivery_date.from', picker.startDate.format('YYYY-MM-DD'));
+                                    @this.set('delivery_date.to', picker.endDate.format('YYYY-MM-DD'));
+
+                                });
+
+                                $('#deliveryDate').on('cancel.daterangepicker', function(ev, picker) {
+                                    $(this).val('');
+                                    @this.set('delivery_date.from','');
+                                    @this.set('delivery_date.to', '');
+
+                                });
+
+                                // $('#deliveryDate').val("");
+                                // $('#deliveryDate').change(function() {
+                                //     @this.set('delivery_address.from', startnupco_delivery_date.format('YYYY-MM-DD'));
+                                //     @this.set('delivery_address.to', endnupco_delivery_date.format('YYYY-MM-DD'));
+                                // })
 
                             });
                         </script>

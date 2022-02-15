@@ -40,6 +40,9 @@
 
 
         }
+        th{
+            background-color: white;
+        }
         </style>
 
 <style>
@@ -461,7 +464,11 @@
                                 var endpo_created_on;
                                 $('#createDate').daterangepicker(
                             {
+                                autoUpdateInput: false,
                                 format: 'YYYY-MM-DD',
+                                 locale: {
+                                    cancelLabel: 'Clear'
+                                }
                             },
                             function(start, end) {
                                 startpo_created_on = start;
@@ -469,12 +476,19 @@
 
                             }
                             );
-                                $('#createDate').val("");
-                                $('#createDate').change(function () {
-                                    @this.set('po_created_on.from', startpo_created_on.format('YYYY-MM-DD'));
-                                    @this.set('po_created_on.to', endpo_created_on.format('YYYY-MM-DD'));
 
-                                })
+                              $('#createDate').on('apply.daterangepicker', function(ev, picker) {
+                                    $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+
+                                    @this.set('po_created_on.from', picker.startDate.format('YYYY-MM-DD'));
+                                    @this.set('po_created_on.to', picker.endDate.format('YYYY-MM-DD'));
+
+                                });
+
+                                $('#createDate').on('cancel.daterangepicker', function(ev, picker) {
+                                    $(this).val('');
+                                });
+
 
 
 
@@ -483,7 +497,11 @@
                                 var endnupco_delivery_date;
                                 $('#deliveryDate').daterangepicker(
                             {
+                                autoUpdateInput: false,
                                 format: 'YYYY-MM-DD',
+                                 locale: {
+                                    cancelLabel: 'Clear'
+                                }
                             },
                             function(start, end) {
                                 startnupco_delivery_date = start;
@@ -491,11 +509,18 @@
 
                             }
                             );
-                                $('#deliveryDate').val("");
-                                $('#deliveryDate').change(function () {
-                                    @this.set('nupco_delivery_date.from', startnupco_delivery_date.format('YYYY-MM-DD'));
-                                    @this.set('nupco_delivery_date.to', endnupco_delivery_date.format('YYYY-MM-DD'));
-                                })
+
+                             $('#deliveryDate').on('apply.daterangepicker', function(ev, picker) {
+                                    $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
+
+                                     @this.set('nupco_delivery_date.from', picker.startDate.format('YYYY-MM-DD'));
+                                    @this.set('nupco_delivery_date.to', picker.endDate.format('YYYY-MM-DD'));
+
+                                });
+
+                                $('#deliveryDate').on('cancel.daterangepicker', function(ev, picker) {
+                                    $(this).val('');
+                                });
 
                     });
                     </script>

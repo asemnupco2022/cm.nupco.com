@@ -1,51 +1,46 @@
 <?php
 
-namespace App\Http\Livewire\Mail;
-
+namespace App\Jobs\SapAutomation;
 
 use App\Helpers\PoHelper;
 use App\Models\LbsUserSearchSet;
 use App\Models\NupAutoSetting;
 use Carbon\Carbon;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Livewire\Component;
 use rifrocket\LaravelCms\Facades\LaravelCmsFacade;
 use rifrocket\LaravelCms\Models\LbsMember;
 
-
-class ComposeMailComponent extends Component
+class FullAutomationJob implements ShouldQueue
 {
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function emitNotifications($message, $msgType)
-    {
-        $this->emit('toast-notification-component', $message, $msgType);
-    }
-
+    public $mailType, $mail_data, $to;
     public $mail_to, $mail_subject, $mail_content, $mailType_pro, $tableType, $mailableData, $importance;
-
-
-
-    protected $listeners = ['event-show-compose-email' => 'prepareComposerModal'];
-
-    protected $rules = [
-        'mail_to' => 'required',
-        'mail_subject' => 'required',
-        'mail_content' => 'required',
-    ];
-
-
-    public function prepareComposerModal($mailType, $mail_data, $tableType, $to)
+    /**
+     * Create a new job instance.
+     *
+     * @return void
+     */
+    public function __construct($mailType, $mail_data, $tableType, $to)
     {
-
-        $this->mail_to = $to;
+        $this->mailType=$mailType;
+        $this->mail_data=$mail_data;
         $this->mailableData = $mail_data;
+        $this->tableType= $tableType;
+        $this->mailType_pro = $tableType;
+        $this->to=$to;
+        $this->mail_to = $to;
+        $this->importance =0;
         $this->mail_content = null;
-        $this->mailType_pro = $mailType;
-        $this->tableType = $tableType;
-        $this->mail_content = $this->fetchTemplate($mailType, $mail_data);
-        $this->emit('set-mail-content', $this->mail_content);
-        $this->dispatchBrowserEvent('open-mail-composer');
+
     }
 
 
@@ -79,25 +74,25 @@ class ComposeMailComponent extends Component
     }
 
 
-
     public function sendEmail()
     {
 
-        $this->validate();
+
 
         $mailData = ['msg_content' => $this->mail_content, 'msg_subject' => $this->mail_subject];
 
-        $emails_to = explode(',', $this->mail_to);
-        $this->mail_to = $emails_to[0];
-        $emails_subject = $this->mail_subject;
+        $emails_to = $this->mail_to;
+        $this->mail_to = $emails_to;
 
-        // $autoSetting = NupAutoSetting::where('setting_for_table', LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM)->first();
-        // if ($autoSetting) {
-        //     if ($autoSetting->setting_switch == 'quality') {
-        //         $emails_to = $autoSetting->test_email;
-        //         $this->mail_to = $autoSetting->test_email;
-        //     }
-        // }
+        $autoSetting = NupAutoSetting::where('setting_for_table', LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM)->first();
+        if ($autoSetting) {
+            if($autoSetting->setting_switch== 'quality'){
+                $emails_to = $autoSetting->test_email;
+                $this->mail_to = $autoSetting->test_email;
+            }
+        }
+
+        $emails_subject = $this->mail_subject;
 
         try {
 
@@ -106,23 +101,27 @@ class ComposeMailComponent extends Component
             });
 
             if (Mail::failures()) {
-                return redirect()->back()->with('error', 'mail sending failed, check log for more details');
+                PoHelper::createLogChennel('full-automate.log');
+                return  Log::channel('custom_chennel')->info('mail sending failed, check email', [$emails_to]);
             }
+
+
+
 
             $messageBody = view('livewire.mail.notice-mailable', $mailData)->render();
             $vendorDetails = LbsMember::where('vendor_code', $this->mailableData['vendor_code'])->first();
             $ticket_number = LaravelCmsFacade::lbs_random_generator(16, true, false, true, false);
             $ticket_hash = Hash::make($ticket_number);
             $notifiable =  [
-                'broadcast_type' => 'manual',
+                'broadcast_type' => 'automation',
                 'mail_ticket_number' => $ticket_number,
                 'mail_ticket_hash' => $ticket_hash,
                 'mail_type' => $this->mailType_pro,
                 'table_type' => $this->tableType,
-                'sender_user_id' => auth()->user()->id,
-                'sender_user_model' => "rifrocket\\LaravelCms\\Models\\LbsAdmin",
-                'sender_name' => auth()->user()->display_name,
-                'sender_email' => auth()->user()->email,
+                'sender_user_id' =>null,
+                'sender_user_model' => null,
+                'sender_name' => null,
+                'sender_email' => 'automated-no-reply@nupco.com',
                 'recipient_user_id' => $vendorDetails ? $vendorDetails->id : null,
                 'recipient_user_model' => "rifrocket\\LaravelCms\\Models\\LbsMember",
                 'recipient_name' => $vendorDetails ? $vendorDetails->display_name : null,
@@ -140,25 +139,25 @@ class ComposeMailComponent extends Component
 
             PoHelper::SaveNotificationHistory($notifiable, $this->mailableData);
 
-            $this->clearData();
+            PoHelper::createLogChennel('full-automate.log');
+            return  Log::channel('custom_chennel')->info('done', [$emails_to]);
 
-            $this->dispatchBrowserEvent('close-mail-composer');
-            return $this->emitNotifications('mail send successfully', 'success');
         } catch (\Throwable $exception) {
-            return $this->emitNotifications($exception->getMessage(), 'error');
+
+            PoHelper::createLogChennel('full-automate.log');
+            return  Log::channel('custom_chennel')->info('mail sending failed, check log for more details', [$exception->getMessage()]);
+
         }
     }
 
-    public function clearData()
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
     {
-        $this->mail_to = null;
-        $this->mail_subject = null;
-        $this->mail_content = null;
-    }
-
-
-    public function render()
-    {
-        return view('livewire.mail.compose-mail-component');
+        $this->mail_content = $this->fetchTemplate($this->mailType, $this->mail_data);
+        $this->sendEmail();
     }
 }
