@@ -30,6 +30,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('lbs:import-sap-po')->dailyAt('01:00'); //SAP Import and copy files
         $schedule->command('lbs:Sap-master-sync-tmp')->dailyAt('05:00'); //SAP Import and copy files
         $schedule->command('lbs:sync-sap-filter')->dailyAt('06:00'); //SAP filter sync
+        $schedule->command('lbs:full-sap-automation')->dailyAt('06:30'); //SAP filter sync
 
          //Run Notification Scheduler
         $schedule->command('lbs:notification-scheduler')->everyMinute(); //Execute Notification Scheduler for manual-automation

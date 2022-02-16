@@ -149,7 +149,7 @@
                                             {{ $collection->line_status }}</td>
                                         <td>
                                             <a
-                                                href="{{ route('web.route.ticket.manager.chat', ['token' => base64_encode($collection->unique_line)]) }}"><i
+                                                target="_blank" href="{{ route('web.route.ticket.manager.chat', ['token' => base64_encode($collection->unique_line)]) }}"><i
                                                     class="fas fa-eye"></i></a>&nbsp;
                                             <span class="right badge badge-success"
                                                 title="total coments">{{ $collection->AllTicketCount }}</span>&nbsp;
