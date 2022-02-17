@@ -9,7 +9,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Automation History</h3>
+            <h3 class="card-title">Notification History</h3>
 
             <div class="card-tools">
             </div>

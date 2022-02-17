@@ -50,7 +50,7 @@ class TicketChatComponent extends Component
 
     public function fetchBaseInfo(){
 
-        $this->notificationHistory =TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
+        $this->notificationHistory =TicketMasterHeadr::where('unique_line',$this->unique_line)->first(); //dd($this->notificationHistory);
         $changeStatus =  TicketMasterHeadr::where('unique_line',$this->unique_line)->first();
         if($changeStatus and $changeStatus->line_status != 'closed'){
             $changeStatus->update(['line_status' => 'waiting for action']);

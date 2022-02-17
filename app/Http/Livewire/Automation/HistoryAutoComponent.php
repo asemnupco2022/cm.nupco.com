@@ -27,7 +27,7 @@ class HistoryAutoComponent extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     protected $listeners = ['update-users-filter-template' => 'fetchBaseInfo'];
-    public $tableType=LbsUserSearchSet::TEMPLATE_NOTIFICATION_HISTORY;
+    public $tableType= SchedulerNotificationHistory::TEMPLATE_NOTIFICATION_HISTORY;
 
     //Search Params
     public $searchable_col='table_type';
