@@ -165,7 +165,7 @@ class SapLineMasterComponent extends Component
         if (Arr::has($this->customer_po_no, ['from'])) {
             $query = $query->whereBetween('customer_po_no', [$this->customer_po_no['from'], $this->customer_po_no['to']]);
         }
-      
+
         if (Arr::has($this->po_created_on, ['from']) and Arr::has($this->po_created_on, ['to'])) {
             $query = $query->whereBetween('po_created_on', [$this->po_created_on['from'], $this->po_created_on['to']]);
         }
@@ -289,6 +289,7 @@ class SapLineMasterComponent extends Component
     public function emitMailComposerReq($reqType)
     {
         $vendorArray = PoSapMaster::whereIn('id', array_keys(array_filter($this->selectedPo)))->pluck('vendor_code')->toArray();
+        $suplierRatioArray = PoSapMaster::whereIn('id', array_keys(array_filter($this->selectedPo)))->pluck('po_number','supply_ratio')->toArray();
         $pgArray = PoSapMaster::whereIn('id', array_keys(array_filter($this->selectedPo)))->pluck('purchasing_group')->toArray();
 
         if (!$vendorArray or count(array_unique($vendorArray)) > 1) {
@@ -297,6 +298,14 @@ class SapLineMasterComponent extends Component
 
         if (!$pgArray or count(array_unique($pgArray)) > 1) {
             return $this->dispatchBrowserEvent('jq-confirm-alert', ["message" => "Select only One Purchasign group Line Items"]);
+        }
+
+        if($suplierRatioArray){
+            foreach ($suplierRatioArray as $supration => $supRatioArray) {
+                if($supration > 99){
+                    return $this->dispatchBrowserEvent('jq-confirm-alert', ["message" => "supply ratio greater than 99% for PO Num: ". $supRatioArray]);
+                }
+            }
         }
 
         $collections = PoSapMaster::whereIn('id', array_keys(array_filter($this->selectedPo)))->get();

@@ -253,7 +253,7 @@
                         @endif
 
 
-                        @if(auth()->user()->hasAnyPermission(['lbs-permission-automation-po']))
+                        {{-- @if(auth()->user()->hasAnyPermission(['lbs-permission-automation-po']))
                             <li class="nav-item ">
                                 <a href="{{route('web.route.automation.list')}}" class="nav-link {{ (Request::is('*/automation')?'active':'')  }}">
                                     <!-- <i class=" nav-icon fab fa-accusoft"></i> -->
@@ -264,7 +264,7 @@
                                     </p>
                                 </a>
                             </li>
-                        @endif
+                        @endif --}}
 
 
 

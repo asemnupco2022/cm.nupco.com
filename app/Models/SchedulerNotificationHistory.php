@@ -22,6 +22,7 @@ class SchedulerNotificationHistory extends Model
 
     public $operators=LbsConstants::CONST_OPERATOR;
 
+    const TEMPLATE_NOTIFICATION_HISTORY='notification_history_header';
     const CONS_COLUMNS = [
         'broadcast_type' => true,
         'mail_type' => true,

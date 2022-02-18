@@ -14,6 +14,18 @@
 
         </style>
         <style>
+            .badge {
+                display: inline-block;
+                padding: 0.25em 0.4em;
+                font-size: 75%;
+                font-weight: 500;
+                line-height: 1;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: baseline;
+                border-radius: 0.25rem;
+                transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
             .fixTableHead {
                 overflow-y: auto;
                 height: 600px;
@@ -46,7 +58,7 @@
         </style>
 
 <style>
-    #bs-select-19 ul{
+    #bs-select-41 ul{
         text-align: right !important;
     }
  </style>
@@ -206,7 +218,16 @@
                                         <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model.defer="selectedPo.{{$collection->id}}">
                                     </div>
                                 </td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Notified' )==false?'hide':''}}" ><span class=" badge badge-info ar-badge">{{$collection->notified}}</span></td>
+                                @php
+                                    if($collection->notified =='warning'){
+                                        $class =' badge-info ar-badge';
+                                    }elseif($collection->notified =='reminder'){
+                                        $class =' badge-info';
+                                    }else{
+                                       $class =' badge-secondary';
+                                    }
+                                @endphp
+                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Notified' )==false?'hide':''}}" ><span class=" badge {{$class}} ">{{$collection->notified}}</span></td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
                                 <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type Desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>

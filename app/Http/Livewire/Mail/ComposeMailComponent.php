@@ -57,12 +57,12 @@ class ComposeMailComponent extends Component
         }
         switch ($mailType) {
             case 'enquiry-email':
-                $this->mail_subject = PoHelper::NormalizeColString('enquiry email');
+                $this->mail_subject = PoHelper::NormalizeColString('warning email');
                 return $getView = view('mail-templates.enquiry-email', compact('mail_data'))->render();
 
                 break;
             case 'expedite-email':
-                $this->mail_subject = PoHelper::NormalizeColString('expedite email');
+                $this->mail_subject = PoHelper::NormalizeColString('remider email');
                 return $getView = view('mail-templates.expedite-email', compact('mail_data'))->render();
                 break;
             case 'warning-email':
@@ -82,6 +82,19 @@ class ComposeMailComponent extends Component
 
     public function sendEmail()
     {
+        switch ($this->mailType_pro) {
+            case 'enquiry-email':
+               $this->mailType_pro= 'warning-email';
+                break;
+
+            case 'expedite-email':
+               $this->mailType_pro= 'reminder-email';
+                break;
+
+            default:
+               $this->mailType_pro= 'reminder-email';
+                break;
+        }
 
         $this->validate();
 

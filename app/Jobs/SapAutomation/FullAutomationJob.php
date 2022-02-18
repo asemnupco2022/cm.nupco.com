@@ -35,7 +35,7 @@ class FullAutomationJob implements ShouldQueue
         $this->mail_data=$mail_data;
         $this->mailableData = $mail_data;
         $this->tableType= $tableType;
-        $this->mailType_pro = $tableType;
+        $this->mailType_pro = $mailType;
         $this->to=$to;
         $this->mail_to = $to;
         $this->importance =0;
@@ -76,6 +76,19 @@ class FullAutomationJob implements ShouldQueue
 
     public function sendEmail()
     {
+        switch ($this->mailType_pro) {
+            case 'enquiry-email':
+                $this->mailType_pro = 'warning-email';
+                break;
+
+            case 'expedite-email':
+                $this->mailType_pro = 'reminder-email';
+                break;
+
+            default:
+                $this->mailType_pro = 'reminder-email';
+                break;
+        }
 
 
 

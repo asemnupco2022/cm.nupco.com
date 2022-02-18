@@ -129,13 +129,15 @@
             <div class="card-header">
                 <h3 class="card-title">Notification Type :
                     @if($notificationHistory)
-                        @if($notificationHistory->mail_type=='enquiry-email')
+                        @if($notificationHistory->message_type =='enquiry-email')
                             <span class="right badge" style="background: #17a2b7; color: #fff; margin-left: 10px;">Enquiry Email</span>
-                        @elseif($notificationHistory->mail_type=='expedite-email')
+                        @elseif($notificationHistory->message_type =='expedite-email')
                             <span class="right badge" style="background: #27a844; color: #fff; margin-left: 10px;">Expedite Email</span>
-                        @elseif($notificationHistory->mail_type=='warning-email')
-                            <span class="right badge" style="background: #dc3546; color: #fff; margin-left: 10px;">Warning Email</span>
-                        @elseif($notificationHistory->mail_type=='penalty-email')
+                        @elseif($notificationHistory->message_type =='warning-email')
+                            <span class="right badge" style="background: #e37526; color: #fff; margin-left: 10px;">Warning Email</span>
+                        @elseif($notificationHistory->message_type =='reminder-email')
+                            <span class="right badge" style="background: #17a2b8; color: #fff; margin-left: 10px;">Warning Email</span>
+                        @elseif($notificationHistory->message_type =='penalty-email')
                             <span class="right badge" style="background: #fec107; color: #fff; margin-left: 10px;">Penalty Email</span>
                         @endif
                     @endif
@@ -154,8 +156,50 @@
 </div>
 <div class="row">
 
+        <div class="col-md-4">
+        <div class="card card-primary chat_sidebar">
+            <div class="card-header">
+            </div>
+            <div class="">
+                <div class="card-body p-2 ">
+
+                    <table class="table">
+                        <tr>
+                            <td>Email Type: </td>
+                            <td>{{\App\Helpers\PoHelper::NormalizeColString($notificationHistory->message_type)}}</td>
+                        </tr>
+                        <tr>
+                            <td>PO Number: </td>
+                            <td>{{$notificationHistory->po_num}}</td>
+                        </tr>
+                            <td>PO Item: </td>
+                            <td>{{$notificationHistory->po_item_num}}</td>
+                        </tr>
+                            <td>Matrial Description: </td>
+                            <td>{{$notificationHistory->item_desc}}</td>
+                        </tr>
+                            <td>Matrial Code:  </td>
+                            <td>{{$notificationHistory->mat_num}}</td>
+                        </tr>
+                        </tr>
+                            <td>Delivery Date:  </td>
+                            <td>{{$notificationHistory->delivery_date}}</td>
+                        </tr>
+                            <td>Customer:  </td>
+                            <td>{{$notificationHistory->customer_name}}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+                <!-- /.card-body -->
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+
     <!-- /.col -->
-    <div class="col-md-12">
+    <div class="col-md-8">
         <div class="card direct-chat direct-chat-primary">
 
             <!-- /.card-header -->
