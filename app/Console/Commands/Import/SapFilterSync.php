@@ -67,6 +67,7 @@ class SapFilterSync extends Command
         $collection_uom = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('uom', 'uom');
         $collection_plant = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('plant', 'plant');
         $collection_item_desc = DB::table('ticket_master_headrs')->where('meta','!=','init')->pluck('item_desc', 'item_desc');
+        $collection_employee_names = DB::table('ticket_managers')->pluck('staff_name', 'staff_name');
 
 
         return   View::make('livewire.tickets.v2.filter.notification-history-filter-tmp', compact(
@@ -84,6 +85,7 @@ class SapFilterSync extends Command
             'collection_uom',
             'collection_plant',
             'collection_item_desc',
+            'collection_employee_names'
         ))->render();
     }
 

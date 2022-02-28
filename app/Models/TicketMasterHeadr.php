@@ -82,6 +82,8 @@ class TicketMasterHeadr extends Model
         return $this->belongsTo(TicketManager::class, 'unique_line', 'unique_line');
     }
 
+  
+
     public function has_vendor()
     {
         return $this->belongsTo(LbsMember::class, 'vendor_num', 'vendor_code');
