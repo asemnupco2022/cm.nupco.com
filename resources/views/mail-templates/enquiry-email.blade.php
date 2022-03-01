@@ -19,7 +19,7 @@ table.table-data {
 	  </style>
    </head>
    <body>
-      <table width="100%" border="0" align="center" width="100% cellpadding="0" cellspacing="0" style="padding: 20px 25px;">
+      <table width="100%" border="0" align="center" width="100% cellpadding="0" cellspacing="0" style="padding: 20px 25px;" class="table-no-border">
          <tbody>
             <tr>
                <td align="center">
@@ -39,7 +39,8 @@ table.table-data {
                                     </tr>
 									<tr>
 										<td>
-											<p dir="ltr" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px;"><span></span>السادة/ <span> {{$mail_data['vendor_name_er']}}.</span></p>
+
+										<p dir="ltr" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px;"><span>السادة</span> / {{$mail_data['vendor_name_er']}} </p>
 										</td>
 									</tr>
 									<tr>
@@ -89,12 +90,16 @@ table.table-data {
 									<tr>
                                         @php
                                             $date=30;
+                                            $month= Carbon\Carbon::parse($sap_object['nupco_delivery_date'])->format('F');
+                                            $day= Carbon\Carbon::parse($sap_object['nupco_delivery_date'])->format('d');
+
                                             if ($sap_object['execution_done'] != 'init') {
                                                 $date=$sap_object['execution_done'];
+
                                             }
                                         @endphp
 										<td>
-											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها بتاريخ</span> {{$date}} أغسطس <span>، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، عليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم خلال المده الممنوحه في خطابنا هذا التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية.</p>
+											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها بتاريخ</span> {{$day}} {{__('months.'.$month)}}<span>، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، عليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم خلال المده الممنوحه في خطابنا هذا التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية.</p>
 										</td>
 									</tr>
 

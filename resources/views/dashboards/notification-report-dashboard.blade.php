@@ -153,7 +153,7 @@
 @endpush
 <br>
 <div class="row">
-    <div class="col-lg-4 col-12">
+    {{-- <div class="col-lg-4 col-12">
         <!-- small box -->
         <div class="small-box dash_color1">
             <div class="inner">
@@ -190,7 +190,6 @@
         <div class="small-box bg-warning dash_color3">
             <div class="inner">
                 <h3>{{DashboardHelper::vendorComments()}}</h3>
-                {{-- <i class="ion ion-ios-gear" title="automated"></i>  {{DashboardHelper::historyCounter('warning-email',null,'automation',null,null)}} &nbsp;&nbsp;&nbsp; --}}
                 <i class="ion ion-person" title="manual"></i> {{DashboardHelper::vendorComments()}}
                 <p>Vendor Response</p>
             </div>
@@ -199,7 +198,7 @@
             </div>
 
         </div>
-    </div>
+    </div> --}}
     <!-- ./col -->
 
 

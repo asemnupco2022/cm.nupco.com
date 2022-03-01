@@ -23,7 +23,7 @@ table.table-data {
 	  </style>
    </head>
    <body>
-      <table width="100%" border="0" align="center" width="100% cellpadding="0" cellspacing="0" style="padding: 20px 25px;">
+      <table width="100%" border="0" align="center" width="100% cellpadding="0" cellspacing="0" style="padding: 20px 25px;" class="table-no-border">
          <tbody>
             <tr>
                <td align="center">
@@ -65,7 +65,7 @@ table.table-data {
                                              @endphp
 											<div class="two_col" style="width: 40%;float: right;">
 												<h3 dir="rtl" style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;">الموضوع: الحث على توريد  </h3>
-												<p dir="rtl">السادة / {{$mail_data['vendor_name_er']}} </p>
+												<p dir="rtl">السادة  <span>/{{$mail_data['vendor_name_er']}}</span></p>
 												<p dir="rtl">إشارة لمنافسة نحيطكم علما بقرب انتهاء توريد الدفعة للبنود المذكورة أدناة (خلال {{$date}} ايام من تاريخ اليوم) لذا نرجو منكم سرعة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية بناء على المعلومات ادناة:</p>
 											</div>
 
