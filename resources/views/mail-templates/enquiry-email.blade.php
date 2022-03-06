@@ -50,7 +50,7 @@ table.table-data {
 									</tr>
 									<tr>
 										<td>
-											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px;">إشارة إلى بيانات المنافسة ادناة:</p>
+											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px;">إشارة الى بيانات المنافسة / امر الشراء التالية: </p>
 										</td>
 									</tr>
 									<tr>
@@ -59,13 +59,14 @@ table.table-data {
 												<tr style="background-color: #d0cece; color: #333;">
 													<th>Customer name</th>
 													<th>Tender No</th>
-													<th>Tender desc</th>
-													<th>Purchasing Order</th>
+													{{-- <th>Tender desc</th> --}}
+													<th>Po No</th>
 													<th>PO Item</th>
-													<th>Generic Item Code</th>
-													<th>Item Description</th>
-													<th>Ordered Quantity</th>
-													<th>Contract Delivery</th>
+													<th>Nupco Trade Code</th>
+													<th>Mat Description</th>
+													<th>Odered Quantity</th>
+													<th>Delivery Address</th>
+													<th>Delivery Date</th>
 												</tr>
 
                                                 @if($mail_data['sap_object'] and !empty($mail_data['sap_object']) and $mail_data['sap_object'] !='[]')
@@ -74,12 +75,13 @@ table.table-data {
                                                         <tr>
                                                             <td>{{$sap_object['customer_name']}}</td>
                                                             <td>{{$sap_object['tender_no']}}</td>
-                                                            <td>{{$sap_object['tender_desc']}}</td>
+                                                            {{-- <td>{{$sap_object['tender_desc']}}</td> --}}
                                                             <td>{{$sap_object['po_number']}}</td>
                                                             <td>{{$sap_object['po_item']}}</td>
-                                                            <td>{{$sap_object['generic_mat_code']}}</td>
+                                                            <td>{{$sap_object['nupco_trade_code']}}</td>
                                                             <td>{{$sap_object['mat_description']}}</td>
                                                             <td>{{$sap_object['ordered_quantity']}}</td>
+                                                            <td>{{$sap_object['delivery_address']}}</td>
                                                             <td>{{$sap_object['nupco_delivery_date']}}</td>
                                                         </tr>
                                                     @endforeach
@@ -99,7 +101,10 @@ table.table-data {
                                             }
                                         @endphp
 										<td>
-											<p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها بتاريخ</span> {{$day}} {{__('months.'.$month)}}<span>، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، عليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم خلال المده الممنوحه في خطابنا هذا التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية.</p>
+                                            <p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها حسب التاريخ أعلاه ، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، وعليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية. علماً أن استمرار تقصيركم سوف يؤثر على فرص مشاركتكم في المنافسات القادمة. </p>
+                                            <p dir="rtl" style="text-align: center;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">
+وتقبلوا وافر تحياتي وتقديري،</p>
+											{{-- <p dir="rtl" style="text-align: right;font-weight: 500;font-size: 21px; margin: 0px;padding-bottom: 10px; line-height: 37px;">نود إبلاغكم أن الدفعة قد انتهت فترة توريدها بتاريخ</span> {{$day}} {{__('months.'.$month)}}<span>، حيث أنه لم يظهر لنا في النظام ما يفيد توريدكم، عليه يجب تصحيح حالة التوريد خلال فترة الإنذار 15 يوم من تاريخ انتهاء مدة التوريد أو تقديم ما يثبت توريد جميع الكميات المتعثرة وإبلاغنا فور التوريد, وفي حالة عدم تمكنكم من تصحيح الوضع سيتم خلال المده الممنوحه في خطابنا هذا التأمين على حسابكم مع تطبيق الغرامة المستحقة وتحملكم أي تكاليف إضافية.</p> --}}
 										</td>
 									</tr>
 
