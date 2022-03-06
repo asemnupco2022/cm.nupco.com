@@ -23,7 +23,7 @@ table.table-data {
 	  </style>
    </head>
    <body>
-      <table width="100%" border="0" align="center" width="100% cellpadding="0" cellspacing="0" style="padding: 20px 25px;">
+      <table width="100%" border="0" align="center" width="100% cellpadding="0" cellspacing="0" style="padding: 20px 25px;" class="table-no-border">
          <tbody>
             <tr>
                <td align="center">
@@ -65,8 +65,8 @@ table.table-data {
                                              @endphp
 											<div class="two_col" style="width: 40%;float: right;">
 												<h3 dir="rtl" style="font-family: Helvetica, Arial, sans-serif; margin:0; mso-line-height-rule:exactly; margin-bottom: 40px;">الموضوع: الحث على توريد  </h3>
-												<p dir="rtl">السادة / {{$mail_data['vendor_name_er']}} </p>
-												<p dir="rtl">إشارة لمنافسة نحيطكم علما بقرب انتهاء توريد الدفعة للبنود المذكورة أدناة (خلال {{$date}} ايام من تاريخ اليوم) لذا نرجو منكم سرعة التوريد من خلال المنصة الألكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية بناء على المعلومات ادناة:</p>
+												<p dir="rtl">السادة  <span>/{{$mail_data['vendor_name_er']}}</span></p>
+												<p dir="rtl">إشارة الى امر الشراء المرفق لكم ادناه، حيطكم علما بقرب انتهاء توريد الدفعة للبنود المذكورة ،لذا نرجو منكم سرعة التوريد من خلال المنصة الإلكترونية بوقت كافي فبل انتهاء فترة التوريد لتفادي حدوث نقص حاد لدى الجهات الصحية .</p>
 											</div>
 
 										</td>
@@ -75,28 +75,40 @@ table.table-data {
 										<table class="table-data" width="100%" border="1" align="center" width="100% cellpadding="0" cellspacing="0">
 											<tbody>
 												<tr style="background-color: #d0cece; color: #333;">
-													<th><span dir="rtl">منطقة</span><br>Plant</th>
+													{{-- <th><span dir="rtl">منطقة</span><br>Plant</th>
 													<th><span dir="rtl">لصالح الجهة</span><br>Customer Name</th>
 													<th><span dir="rtl">أمر الشراء</span><br> PO No</th>
 													<th><span dir="rtl"></span>	رقم بند نوبكو<br>Nupco Code</th>
 													<th style="width: 154px;"><span dir="rtl"></span>مسمى البند<br>Description</th>
 													<th><span dir="rtl"></span>كمية الدفعة<br>Batch QTY</th>
 													<th style="width: 131px;"><span dir="rtl"></span>نهاية توريد الدفعة<br>Delivery Day</th>
-													<th><span dir="rtl"></span>المستودع – الجهة<br>Del.LOCATION</th>
+													<th><span dir="rtl"></span>المستودع – الجهة<br>Del.LOCATION</th> --}}
+                                                    <th>Customer name</th>
+													<th>Tender No</th>
+													{{-- <th>Tender desc</th> --}}
+													<th>Po No</th>
+													<th>PO Item</th>
+													<th>Nupco Trade Code</th>
+													<th>Mat Description</th>
+													<th>Odered Quantity</th>
+													<th>Delivery Address</th>
+													<th>Delivery Date</th>
 												</tr>
 
                                                 @if($mail_data['sap_object'] and !empty($mail_data['sap_object']) and $mail_data['sap_object'] !='[]')
                                                 @foreach($mail_data['sap_object'] as $key=> $sap_object)
-												<tr>
-													<td>{{$sap_object['plant']}}</td>
-													<td>{{$sap_object['customer_name']}}</td>
-													<td>{{$sap_object['po_number']}}</td>
-													<td>{{$sap_object['generic_mat_code']}}</td>
-													<td>{{$sap_object['mat_description']}}</td>
-													<td>{{$sap_object['ordered_quantity']}}</td>
-													<td>{{$sap_object['nupco_delivery_date']}}</td>
-													<td>{{$sap_object['delivery_address']}}</td>
-												</tr>
+												  <tr>
+                                                            <td>{{$sap_object['customer_name']}}</td>
+                                                            <td>{{$sap_object['tender_no']}}</td>
+                                                            {{-- <td>{{$sap_object['tender_desc']}}</td> --}}
+                                                            <td>{{$sap_object['po_number']}}</td>
+                                                            <td>{{$sap_object['po_item']}}</td>
+                                                            <td>{{$sap_object['nupco_trade_code']}}</td>
+                                                            <td>{{$sap_object['mat_description']}}</td>
+                                                            <td>{{$sap_object['ordered_quantity']}}</td>
+                                                            <td>{{$sap_object['delivery_address']}}</td>
+                                                            <td>{{$sap_object['nupco_delivery_date']}}</td>
+                                                        </tr>
                                                 @endforeach
                                                 @endif
 											</tbody>

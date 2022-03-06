@@ -567,8 +567,13 @@ div.loading {
     z-index: 9999 !important;
 }
 
+
 td, th {
     border: 1px solid #dee2e6;
+}
+
+table.table-no-border>td,th {
+    border: 0px !important;
 }
 .yf_chat_btn i.far.fa-comment-alt {
     font-size: 13px;
