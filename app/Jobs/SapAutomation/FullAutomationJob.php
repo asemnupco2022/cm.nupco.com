@@ -124,7 +124,7 @@ class FullAutomationJob implements ShouldQueue
             if ($autoSetting) {
             if($autoSetting->setting_switch == 'quality'){
                 PoHelper::createLogChennel('full-automate-flight-mode.log');
-                return  Log::channel('custom_chennel')->info('automated mail: ', ['mail-to'=> $currentMAils, 'brocastType' => $emails_subject]);
+                return  Log::channel('custom_chennel')->info('automated mail: ', ['mail-to'=> $currentMAils, 'brocastType' => $emails_subject,'vendor_code'=> $this->mailableData['vendor_code']]);
                 }
                 exit;
             }
