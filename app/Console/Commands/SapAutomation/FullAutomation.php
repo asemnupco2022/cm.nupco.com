@@ -68,15 +68,19 @@ class FullAutomation extends Command
         }
 
 
-        $prepares_20=PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
-        $prepares_15=PoSapMaster::whereDate('nupco_delivery_date',$expDate_15)->where('execution_done', $day_1)->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
-        $prepares_05=PoSapMaster::whereDate('nupco_delivery_date',$expDate_05)->where('execution_done', $day_2)->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
-        $prepares_00=PoSapMaster::whereDate('nupco_delivery_date',$expDate_00)->where('execution_done', $day_3)->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
+        // $prepares_20=PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
+        // $prepares_15=PoSapMaster::whereDate('nupco_delivery_date',$expDate_15)->where('execution_done', $day_1)->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
+        // $prepares_05=PoSapMaster::whereDate('nupco_delivery_date',$expDate_05)->where('execution_done', $day_2)->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
+        // $prepares_00=PoSapMaster::whereDate('nupco_delivery_date',$expDate_00)->where('execution_done', $day_3)->where('supply_ratio','<',$expSup_ratio)->get()->toArray();
 
+        $prepares_20 = PoSapMaster::whereDate('nupco_delivery_date', $expDate_20)->where('supply_ratio', '<', $expSup_ratio)->get()->toArray();
+        $prepares_15 = PoSapMaster::whereDate('nupco_delivery_date', $expDate_15)->where('supply_ratio', '<', $expSup_ratio)->get()->toArray();
+        $prepares_05 = PoSapMaster::whereDate('nupco_delivery_date', $expDate_05)->where('supply_ratio', '<', $expSup_ratio)->get()->toArray();
+        $prepares_00 = PoSapMaster::whereDate('nupco_delivery_date', $expDate_00)->where('supply_ratio', '<', $expSup_ratio)->get()->toArray();
 
         if ($prepares_20 and !empty($prepares_20)){
 
-            PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->update(['execution_done'=>"$day_1"]);
+            // PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', 'init')->update(['execution_done'=>"$day_1"]);
             $vendorByCollection = collect($prepares_20)->groupBy(['vendor_code', 'purchasing_group']);
 
             foreach ($vendorByCollection as $vendorCode => $collection) {
@@ -111,7 +115,7 @@ class FullAutomation extends Command
 
         if ($prepares_15 and !empty($prepares_15)){
 
-            PoSapMaster::whereDate('nupco_delivery_date', $expDate_15)->where('execution_done', $day_1)->update(['execution_done'=>"$day_2"]);
+            // PoSapMaster::whereDate('nupco_delivery_date', $expDate_15)->where('execution_done', $day_1)->update(['execution_done'=>"$day_2"]);
             $vendorByCollection = collect($prepares_15)->groupBy(['vendor_code', 'purchasing_group']);
 
             foreach ($vendorByCollection as $vendorCode => $collection) {
@@ -146,7 +150,7 @@ class FullAutomation extends Command
 
         if ($prepares_05 and !empty($prepares_05)){
 
-            PoSapMaster::whereDate('nupco_delivery_date', $expDate_00)->where('execution_done', $day_2)->update(['execution_done'=>"$day_3"]);
+            // PoSapMaster::whereDate('nupco_delivery_date', $expDate_00)->where('execution_done', $day_2)->update(['execution_done'=>"$day_3"]);
             $vendorByCollection = collect($prepares_05)->groupBy(['vendor_code', 'purchasing_group']);
 
             foreach ($vendorByCollection as $vendorCode => $collection) {
@@ -182,7 +186,7 @@ class FullAutomation extends Command
 
         if ($prepares_00 and !empty($prepares_00)){
 
-            PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', $day_3)->update(['execution_done'=>'finish']);
+            // PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', $day_3)->update(['execution_done'=>'finish']);
             $vendorByCollection = collect($prepares_05)->groupBy(['vendor_code', 'purchasing_group']);
 
             foreach ($vendorByCollection as $vendorCode => $collection) {

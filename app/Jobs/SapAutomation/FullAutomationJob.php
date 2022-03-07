@@ -98,9 +98,12 @@ class FullAutomationJob implements ShouldQueue
         $this->mail_to = $emails_to;
 
         $autoSetting = NupAutoSetting::where('setting_for_table', LbsUserSearchSet::TEMPLATE_SAP_LINE_ITEM)->first();
+        $currentMAils=null;
         if ($autoSetting) {
             if($autoSetting->setting_switch== 'quality'){
+                 $currentMAils= $this->mail_to;
                 $emails_to = $autoSetting->test_email;
+
                 $this->mail_to = $autoSetting->test_email;
             }
         }
@@ -116,6 +119,14 @@ class FullAutomationJob implements ShouldQueue
             if (Mail::failures()) {
                 PoHelper::createLogChennel('full-automate.log');
                 return  Log::channel('custom_chennel')->info('mail sending failed, check email', [$emails_to]);
+            }
+
+            if ($autoSetting) {
+            if($autoSetting->setting_switch == 'quality'){
+                PoHelper::createLogChennel('full-automate-flight-mode.log');
+                return  Log::channel('custom_chennel')->info('automated mail: ', ['mail-to'=> $currentMAils, 'brocastType' => $emails_subject]);
+                }
+                exit;
             }
 
 
