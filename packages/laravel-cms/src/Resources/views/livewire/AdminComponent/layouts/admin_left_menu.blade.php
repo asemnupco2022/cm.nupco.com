@@ -67,14 +67,14 @@
                           @if(auth()->user()->hasAnyPermission(['access_tenders_dashboard_']))
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.tenders')}}" class="nav-link {{ (Request::is('dashboard/tenders')?'active':'') }}">
-                              <p>Tenders</p>
+                              <p>MOH - Supply Delivery Index</p>
                             </a>
                           </li>
                           @endif
                           @if(auth()->user()->hasAnyPermission(['access_progress_dashboard_']))
                           <li class="nav-item">
                             <a href="{{route('web.route.dashboard.progress')}}" class="nav-link {{ (Request::is('dashboard/progress')?'active':'') }}">
-                              <p>Progress</p>
+                              <p>Contracts Expediting section</p>
                             </a>
                           </li>
                           @endif
