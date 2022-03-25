@@ -176,10 +176,10 @@ class SapLineMasterComponent extends Component
             $query = $query->whereIn('pur_grp_name', $this->pur_grp_name['from']);
         }
         if (Arr::has($this->notified, ['from'])) {
-            $query = $query->where('notified', $this->notified['from']);
+            $query = $query->whereIn('notified', $this->notified['from']);
         }
         if (Arr::has($this->asn, ['from'])) {
-            $query = $query->where('asn', $this->asn['from']);
+            $query = $query->whereIn('asn', $this->asn['from']);
         }
         if (Arr::has($this->nupco_trade_code, ['from'])) {
             $query = $query->whereIn('nupco_trade_code', $this->nupco_trade_code['from']);
