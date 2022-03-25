@@ -53,20 +53,30 @@ class SapImport extends Command
 
 
 
-        if (env('APP_DEBUG')==false)
-        {
+        if (env('APP_DEBUG') == false) {
 
-            if(File::exists($baseFilePath)) {
+            if (File::exists($baseFilePath)) {
                 File::delete($baseFilePath);
             }
-
-            if (App::environment('local')){
-                $filesName=   Storage::disk('nupco_remote_dev')->allFiles()[0];
-                Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote_dev')->get($filesName));
-
-            }else{
-                $filesName=   Storage::disk('nupco_remote')->allFiles()[0];
-                Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($filesName));
+            Storage::disk('public_uploads')->append('uploads/sap_nupco_backup.csv', '');
+            if (App::environment('local')) {
+                $filesNames =   Storage::disk('nupco_remote_dev')->allFiles();
+                foreach ($filesNames as $fileKey => $fileName) {
+                    if ($fileKey == 0) {
+                        Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote_dev')->get($fileName));
+                    } else {
+                        Storage::disk('public_uploads')->append('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote_dev')->get($fileName));
+                    }
+                }
+            } else {
+                $filesNames =   Storage::disk('nupco_remote')->allFiles();
+                foreach ($filesNames as $fileKey => $fileName) {
+                    if ($fileKey == 0) {
+                        Storage::disk('public_uploads')->put('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($fileName));
+                    } else {
+                        Storage::disk('public_uploads')->append('uploads/sap_nupco_backup.csv', Storage::disk('nupco_remote')->get($fileName));
+                    }
+                }
             }
         }
 
