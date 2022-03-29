@@ -428,29 +428,6 @@
                         data                : [{!! DashboardHelper::lineChart('expedite-email') !!}]
                     },
 
-                    // {
-                    //     label               : 'Warning Email',
-                    //     backgroundColor     : 'rgba(231, 142, 74, 1)',
-                    //     borderColor         : 'rgba(231, 142, 74, 1)',
-                    //     pointRadius         : false,
-                    //     pointColor          : 'rgba(231, 142, 74, 1)',
-                    //     pointStrokeColor    : '#c1c7d1',
-                    //     pointHighlightFill  : '#fff',
-                    //     pointHighlightStroke: 'rgba(220,220,220,1)',
-                    //     data                : [{!! DashboardHelper::lineChart('warning-email') !!}]
-                    // },
-
-                    // {
-                    //     label               : 'Penalty Email',
-                    //     backgroundColor     : 'rgba(150, 49, 73, 1)',
-                    //     borderColor         : 'rgba(150, 49, 73, 1)',
-                    //     pointRadius         : false,
-                    //     pointColor          : 'rgba(150, 49, 73, 1)',
-                    //     pointStrokeColor    : '#c1c7d1',
-                    //     pointHighlightFill  : '#fff',
-                    //     pointHighlightStroke: 'rgba(220,220,220,1)',
-                    //     data                : [{!! DashboardHelper::lineChart('penalty-email') !!}]
-                    // },
                 ]
             }
 

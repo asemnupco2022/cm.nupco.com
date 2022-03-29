@@ -47,4 +47,13 @@ class LbsMember extends Authenticatable
         return $this->attributes['avatar'];
     }
 
+    public function getByVendorCode($vendorCode, $parameter)
+    {
+        try {
+           return LbsMember::where('vendor_code',$vendorCode)->pluck($parameter)->first();
+        } catch (\Throwable $th) {
+            return null;
+        }
+    }
+
 }

@@ -338,7 +338,17 @@
                     wire:model.defer="supplier_comment.from" Please Choose Supplier Comments"
                     style="text-align: right ">
                     <option value="0" selected>Please Choose Supplier Comments</option>
-                                                                                </select>
+                                                                        <option value="تم التوريد (يجب ارفاق مذكرة استلام)">تم التوريد (يجب ارفاق مذكرة استلام)</option>
+                                                    <option value="سيتم التوريد (يجب تحديد التاريخ)">سيتم التوريد (يجب تحديد التاريخ)</option>
+                                                    <option value="رفض استلام من الجهة (يجب ارفاق الرفض)">رفض استلام من الجهة (يجب ارفاق الرفض)</option>
+                                                    <option value="توريد جزئي">توريد جزئي</option>
+                                                    <option value="توريد جزئي حسب طلب الجهة (يجب ارفاق الطلب)">توريد جزئي حسب طلب الجهة (يجب ارفاق الطلب)</option>
+                                                    <option value="اعتذار عن توريد البند (يجب ارفاق خطاب أسباب الاعتذار)">اعتذار عن توريد البند (يجب ارفاق خطاب أسباب الاعتذار)</option>
+                                                    <option value="طلب خطاب تمديد/ فتح دفعة (يجب ارفاق الطلب)">طلب خطاب تمديد/ فتح دفعة (يجب ارفاق الطلب)</option>
+                                                    <option value="طلب اذن استيراد (يجب ارفاق الطلب)">طلب اذن استيراد (يجب ارفاق الطلب)</option>
+                                                    <option value="الرد على خطاب الانذار">الرد على خطاب الانذار</option>
+                                                    <option value="أخرى">أخرى</option>
+                                                            </select>
             </div>
         </div>
 
