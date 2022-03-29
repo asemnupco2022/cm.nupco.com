@@ -232,6 +232,9 @@ class SapLineMasterComponent extends Component
     public function statistic_collection()
     {
         $collection = $this->searchEngine()->select('id');
+        if($collection->count() and $collection->count()> 10000){
+            return $this->emitNotifications('Only 10000 line can be used for statistic', 'error');
+        }
         $statisticCollection = $this->getEloquentSqlWithBindings($collection);
         $this->dispatchBrowserEvent('open-statistic-page', ['statisticCollection'=>base64_encode($statisticCollection)]);
     }
