@@ -81,10 +81,41 @@
                         </div>
                         <br>
                     @endif
-                    <br>
 
                     <div class="row yf_display_inline">
+                        <div class="col-md-6">
+                            <div >
 
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="statistic_collection" >
+                                    Statistic Dashboard
+                                </button>
+
+                                {{-- <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
+                                    Supplier Comment Dashboard
+                                </button> --}}
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="text-align: end">
+                            <div >
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-filter-sap-po">
+                                    <i class="fas fa-filter"></i>
+                                  </button>
+                                  <button type="submit" class="btn btn-warning btn-sm flat btn-sm"  title="Reset Current Filter" wire:click="search_reset">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('PDF')" >
+                                    DOWNLOAD PDF
+                                </button>
+
+                                <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
+                                    DOWNLOAD Excel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row yf_display_inline">
                         <div class="col-sm-1">
                             <div class="form-group input-group-sm">
                                 <select class="form-control select2 " style="width: 100%;" wire:model="number_of_rows" >
@@ -170,7 +201,7 @@
                                 Select Columns
                             </button>
                         </div>
-                        <div class="download_btn">
+                        {{-- <div class="download_btn">
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" data-toggle="modal" data-target="#modal-filter-sap-po">
                                 <i class="fas fa-filter"></i>
                               </button>
@@ -185,7 +216,7 @@
                             <button type="button" class="btn btn-warning btn-sm flat btn-sm" wire:click="export_data('EXCEL')" >
                                 DOWNLOAD Excel
                             </button>
-                        </div>
+                        </div> --}}
                     </div>
 
 
@@ -649,6 +680,12 @@
 
                 $('body').removeClass('modal-open');
                 $('#modal-open-edit-vendor-comment').modal('hide');
+            })
+
+            window.addEventListener('open-statistic-page', event => {
+                var baseUrl='{{URL("expediting-management/sap-line-items-statistic/v2")}}';
+                var url=baseUrl+'/'+(event.detail.statisticCollection);
+                window.open(url, "_blank");
             })
 
         </script>

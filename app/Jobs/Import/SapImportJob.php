@@ -85,6 +85,14 @@ class SapImportJob implements ShouldQueue
     }
 
     protected function storeInfo($row){
+
+        if(empty($row)){
+
+            PoHelper::createLogChennel('import-sap-no-row-job.log');
+            Log::info("import-sap-no-row-job",[$th->getMessage()]);
+            return true;
+        }
+
         $uniqueLine= (int)$row[2].'_'.(int)$row[3];
         if(PoSapMaster::where('unique_line',$uniqueLine)->where('unique_line_date',$uniqueLine.'_'.Carbon::now()->format('Y_m_d'))->first()){
             PoHelper::createLogChennel('import-sap-job.log');

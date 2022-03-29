@@ -97,6 +97,7 @@ class SapLineMasterComponent extends Component
     //    ========
 
 
+    public $statisticCollection=[];
 
     public function hitSearchInt($query)
     {
@@ -176,7 +177,7 @@ class SapLineMasterComponent extends Component
             $query = $query->whereIn('pur_grp_name', $this->pur_grp_name['from']);
         }
         if (Arr::has($this->notified, ['from'])) {
-            $query = $query->whereIn('notified', $this->notified['from']);
+            $query = $query->where('notified', $this->notified['from']);
         }
         if (Arr::has($this->asn, ['from'])) {
             $query = $query->whereIn('asn', $this->asn['from']);
@@ -226,6 +227,13 @@ class SapLineMasterComponent extends Component
 
             $this->columnsNormalized = array_fill_keys($this->columnsNormalized, false);
         }
+    }
+
+    public function statistic_collection()
+    {
+        $collection = $this->searchEngine()->select('id');
+        $statisticCollection = $this->getEloquentSqlWithBindings($collection);
+        $this->dispatchBrowserEvent('open-statistic-page', ['statisticCollection'=>base64_encode($statisticCollection)]);
     }
 
 

@@ -100,8 +100,7 @@ class DashboardController extends Controller
     public function importPO()
     {
 
-         $filesName=   Storage::disk('nupco_remote_dev')->allFiles();
-         dd($filesName);
+
 
         $baseFile = file(public_path('uploads/sap_nupco_backup.csv'));
         if (!File::exists(public_path('uploads/sap_nupco_backup.csv'))) {

@@ -56,6 +56,7 @@ Route::group(array('middleware'=>'web'), function () {
         Route::get('mowared-pos',[PoImportController::class,'MawTable'])->name('web.route.po.MawTable');
         Route::get('sap-line-items-po/{slug}',[PoImportController::class,'SAPTableLineItem'])->name('web.route.po.SAPTableLineItem');
         Route::get('sap-line-items-po/v2',[PoImportController::class,'SAPTableLineItems'])->name('web.route.po.SAPTableLineItems');
+        Route::get('sap-line-items-statistic/v2/{slug}',[PoImportController::class,'SAPTableLinestatistic'])->name('web.route.po.SAPTableLinestatistic');
         Route::get('mow-line-items-po/{slug}',[PoImportController::class,'MawTableLineItem'])->name('web.route.po.MawTableLineItem');
 
     });
