@@ -51,7 +51,7 @@
                                echo '</ul>';
                                if($collection->attachment){
                                     echo '<a href="'.$collection->attachment.'" download><i
-                                class="fas fa-file-alt fa-2x"></i>  '.$collection->attachment_name.'</a>';
+                                class="fas fa-file-alt fa-2x" target="_blank"></i>  '.$collection->attachment_name.'</a>';
                                }
 
                             }

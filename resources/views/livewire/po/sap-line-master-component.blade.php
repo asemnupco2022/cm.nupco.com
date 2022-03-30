@@ -241,88 +241,94 @@
                         </thead>
                         <tbody>
 
-                        @foreach($collections as $key => $collection)
-                        {{-- @dd($collection) --}}
-                            <tr>
-                                <td>
-                                    <div class="icheck-primary d-inline">
-                                        <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model.defer="selectedPo.{{$collection->id}}">
-                                    </div>
-                                </td>
-                                @php
-                                    if($collection->notified =='warning'){
-                                        $class =' badge-info ar-badge';
-                                    }elseif($collection->notified =='reminder'){
-                                        $class =' badge-info';
-                                    }else{
-                                       $class =' badge-secondary';
-                                    }
-                                @endphp
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Notified' )==false?'hide':''}}" ><span class=" badge {{$class}} ">{{$collection->notified}}</span></td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type Desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Number' )==false?'hide':''}}" >{{$collection->po_number}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Item' )==false?'hide':''}}" >{{$collection->po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Material Number' )==false?'hide':''}}" >{{$collection->material_number}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Mat Description' )==false?'hide':''}}" >{{$collection->mat_description}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Created On' )==false?'hide':''}}" >{{$collection->po_created_on}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Purchasing Organization' )==false?'hide':''}}" >{{$collection->purchasing_organization}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Purchasing Group' )==false?'hide':''}}" >{{$collection->purchasing_group}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Currency' )==false?'hide':''}}" >{{$collection->currency}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer No' )==false?'hide':''}}" >{{$collection->customer_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer Name' )==false?'hide':''}}" >{{$collection->customer_name}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Tender No' )==false?'hide':''}}" >{{$collection->tender_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Tender Desc' )==false?'hide':''}}" >{{$collection->tender_desc}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Vendor Code' )==false?'hide':''}}" >{{$collection->vendor_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Vendor Name En' )==false?'hide':''}}" >{{$collection->vendor_name_en}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Vendor Name Er' )==false?'hide':''}}" >{{$collection->vendor_name_er}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Storage Location' )==false?'hide':''}}" >{{$collection->storage_location}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Uo M' )==false?'hide':''}}" >{{$collection->uo_m}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Net Price' )==false?'hide':''}}" >{{$collection->net_price}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Price Unit' )==false?'hide':''}}" >{{$collection->price_unit}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Net Value' )==false?'hide':''}}" >{{$collection->net_value}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Nupco Trade Code' )==false?'hide':''}}" >{{$collection->nupco_trade_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Nupco Delivery Date' )==false?'hide':''}}" >{{$collection->nupco_delivery_date}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Ordered Quantity' )==false?'hide':''}}" >{{$collection->ordered_quantity}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Open Quantity' )==false?'hide':''}}" >{{$collection->open_quantity}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Item Status' )==false?'hide':''}}" >{{$collection->item_status}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Delivery Address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Delivery No' )==false?'hide':''}}" >{{$collection->delivery_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Cust Cont Trade Numb' )==false?'hide':''}}" >{{$collection->cust_cont_trade_numb}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Cust Gen Code' )==false?'hide':''}}" >{{$collection->cust_gen_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Generic Mat Code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Old New Po Number' )==false?'hide':''}}" >{{$collection->old_new_po_number}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Old Po Item' )==false?'hide':''}}" >{{$collection->old_po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Quantity' )==false?'hide':''}}" >{{$collection->gr_quantity}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO No' )==false?'hide':''}}" >{{$collection->customer_po_no}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO Item' )==false?'hide':''}}" >{{$collection->customer_po_item}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Pur Grp Name' )==false?'hide':''}}" >{{$collection->pur_grp_name}}</td>
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supply Ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
-                                {{-- <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td> --}}
+                            @foreach($collections as $key => $collection)
+                            {{-- @dd($collection) --}}
+                                <tr>
+                                    <td>
+                                        <div class="icheck-primary d-inline">
+                                            <input class="sleectALlClass" autocomplete="off" type="checkbox" wire:key="{{ $collection->id}}" wire:model.defer="selectedPo.{{$collection->id}}">
+                                        </div>
+                                    </td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Notified' )==false?'hide':''}}" ><span class=" badge badge-info ar-badge">{{$collection->notified}}</span></td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Asn' )==false?'hide':''}}" wire:click="show_asan_info_modal({{$collection->po_number}},{{$collection->po_item}})"><span class=" badge badge-info ar-badge">{{$collection->asn}}</span></td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type' )==false?'hide':''}}" >{{$collection->document_type}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Document Type Desc' )==false?'hide':''}}" >{{$collection->document_type_desc}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Purchasing Group' )==false?'hide':''}}" >{{$collection->purchasing_group}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer Name' )==false?'hide':''}}" >{{$collection->customer_name}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Number' )==false?'hide':''}}" >{{$collection->po_number}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Tender No' )==false?'hide':''}}" >{{$collection->tender_no}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Tender Desc' )==false?'hide':''}}" >{{$collection->tender_desc}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Vendor Code' )==false?'hide':''}}" >{{$collection->vendor_code}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Vendor Name En' )==false?'hide':''}}" >{{$collection->vendor_name_en}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Vendor Name Er' )==false?'hide':''}}" >{{$collection->vendor_name_er}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Created On' )==false?'hide':''}}" >{{date('m-d-Y', strtotime($collection->po_created_on))}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Purchasing Organization' )==false?'hide':''}}" >{{$collection->purchasing_organization}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Po Item' )==false?'hide':''}}" >{{$collection->po_item}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Material Number' )==false?'hide':''}}" >{{$collection->material_number}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Nupco Trade Code' )==false?'hide':''}}" >{{$collection->nupco_trade_code}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Cust Gen Code' )==false?'hide':''}}" >{{$collection->cust_gen_code}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Mat Description' )==false?'hide':''}}" >{{$collection->mat_description}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Ordered Quantity' )==false?'hide':''}}" >{{$collection->ordered_quantity}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Quantity' )==false?'hide':''}}" >{{$collection->gr_quantity}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Open Quantity' )==false?'hide':''}}" >{{$collection->open_quantity}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supply Ratio' )==false?'hide':''}}" >{{$collection->supply_ratio}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Net Price' )==false?'hide':''}}" >{{$collection->net_price}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Price Unit' )==false?'hide':''}}" >{{$collection->price_unit}}</td>
+                                    <?php
+                                        $net_price_per_unit =(float)$collection->net_price / (int)$collection->price_unit;
+                                        $net_order_value = $net_price_per_unit*(float)$collection->ordered_quantity;
 
-                                <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >
+                                        $open_amount = $net_order_value-(float)$collection->gr_amount;
+                                        $amount_ratio = (float)$collection->gr_amount/$net_order_value;
+                                    ?>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Price Unit' )==false?'hide':''}}" ><?php echo $net_price_per_unit; ?></td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Price Unit' )==false?'hide':''}}" ><?php echo $net_order_value; ?></td>
 
-                                    <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Amount' )==false?'hide':''}}" >{{$collection->gr_amount}}</td>
+
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Amount' )==false?'hide':''}}" ><?php echo $open_amount; ?></td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Gr Amount' )==false?'hide':''}}" ><?php echo $amount_ratio; ?></td>
+
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Currency' )==false?'hide':''}}" >{{$collection->currency}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Delivery Address' )==false?'hide':''}}" >{{$collection->delivery_address}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Plant' )==false?'hide':''}}" >{{$collection->plant}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Storage Location' )==false?'hide':''}}" >{{$collection->storage_location}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Nupco Delivery Date' )==false?'hide':''}}" >{{date('m-d-Y', strtotime($collection->nupco_delivery_date))}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Delivery No' )==false?'hide':''}}" >{{$collection->delivery_no}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer No' )==false?'hide':''}}" >{{$collection->customer_no}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Uo M' )==false?'hide':''}}" >{{$collection->uo_m}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Net Value' )==false?'hide':''}}" >{{$collection->net_value}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Item Status' )==false?'hide':''}}" >{{$collection->item_status}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Cust Cont Trade Numb' )==false?'hide':''}}" >{{$collection->cust_cont_trade_numb}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Generic Mat Code' )==false?'hide':''}}" >{{$collection->generic_mat_code}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Old New Po Number' )==false?'hide':''}}" >{{$collection->old_new_po_number}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Old Po Item' )==false?'hide':''}}" >{{$collection->old_po_item}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO No' )==false?'hide':''}}" >{{$collection->customer_po_no}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Customer PO Item' )==false?'hide':''}}" >{{$collection->customer_po_item}}</td>
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Pur Grp Name' )==false?'hide':''}}" >{{$collection->pur_grp_name}}</td>
+
+                                    {{-- <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >{{$collection->supplier_comment}}</td> --}}
+
+                                    <td  class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Supplier Comment' )==false?'hide':''}}" >
+
+                                        <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_vendor_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item', '{{$collection->unique_hash??"null" }}')">
+                                            <i class="far fa-comment-alt"></i>
+                                            <span>{{$collection->supplier_comment }}</span>
+                                        </a>
+                                        </td>
+
+                                    <td   class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Internal Comment' )==false?'hide':''}}" >
+                                    <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
                                         <i class="far fa-comment-alt"></i>
-                                        <span>{{$collection->supplier_comment }}</span>
+                                        @if ($collection->internal_comment)
+                                            <span>{{Str::substr($collection->internal_comment, 0, 60) }}</span><br>
+                                        @endif
                                     </a>
                                     </td>
 
-                                <td   class="{{\Illuminate\Support\Arr::get($columnsNormalized, 'Internal Comment' )==false?'hide':''}}" >
-                                <a class="btn btn-app chat_po_btn yf_chat_btn" wire:click="open_comment_modal({{$collection->po_number }},{{$collection->po_item}},'sap_line_item')">
-                                    <i class="far fa-comment-alt"></i>
-                                    @if ($collection->internal_comment)
-                                        <span>{{Str::substr($collection->internal_comment, 0, 60) }}</span><br>
-                                    @endif
-                                </a>
-                                </td>
 
-
-                            </tr>
-                        @endforeach
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
