@@ -152,22 +152,23 @@
          </select>
         </div>
       </div>
-      {{--Asem Shehadeh Start--}}
       <div class="col-md-3">
-        <div class="form-group" wire:ignore >
-          {{-- <input type="title" class="form-control"  placeholder="Delivery Number"   wire:model.defer="delivery_no.from" > --}}
-          <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder="Delivery Number"   wire:model.defer="delivery_no.from" multiple title="Delivery Number">
+        <div class="form-group" wire:ignore>
+          {{-- <input type="title" class="form-control"  placeholder="Plant"  wire:model.defer="plant.from" > --}}
+            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" plant"   wire:model.defer="plant.from" multiple title="plant">
 
-            @foreach ($collection_sap_delivery_no as  $delivery_no )
-            <option value="{{$delivery_no}}">{{$delivery_no}}</option>
-            @endforeach
-         </select>
+                @foreach ($collection_sap_plnts as  $plants )
+                <option value="{{$plants}}">{{$plants}}</option>
+                @endforeach
+            </select>
         </div>
       </div>
-      {{--Asem Shehadeh End--}}
 
     </div>
     <hr style="margin-top: 0px;">
+
+
+
     <div class="row">
         <div class="col-md-3">
             <div class="form-group" wire:ignore>
@@ -285,17 +286,6 @@
             <option value="{{$vendor_codes}}">{{$vendor_codes}}</option>
             @endforeach
          </select>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group" wire:ignore>
-          {{-- <input type="title" class="form-control"  placeholder="Plant"  wire:model.defer="plant.from" > --}}
-            <select class="form-control selectpicker " data-show-subtext="false" data-live-search="true" style="-webkit-appearance: none;" placeholder=" plant"   wire:model.defer="plant.from" multiple title="plant">
-
-                @foreach ($collection_sap_plnts as  $plants )
-                <option value="{{$plants}}">{{$plants}}</option>
-                @endforeach
-            </select>
         </div>
       </div>
       <div class="col-md-2">
