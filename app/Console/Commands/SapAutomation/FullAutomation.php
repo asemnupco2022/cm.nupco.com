@@ -186,7 +186,7 @@ class FullAutomation extends Command
         if ($prepares_00 and !empty($prepares_00)) {
 
             // PoSapMaster::whereDate('nupco_delivery_date',$expDate_20)->where('execution_done', $day_3)->update(['execution_done'=>'finish']);
-            $vendorByCollection = collect($prepares_00)->groupBy(['vendor_code', 'purchasing_group']);
+            $vendorByCollection = collect($prepares_05)->groupBy(['vendor_code', 'purchasing_group']);
 
             foreach ($vendorByCollection as $vendorCode => $collection) {
 

@@ -85,7 +85,7 @@ class SapImportJob implements ShouldQueue
     }
 
     protected function storeInfo($row){
-        try {
+
         if(empty($row)){
 
             PoHelper::createLogChennel('import-sap-no-row-job.log');
@@ -145,7 +145,7 @@ class SapImportJob implements ShouldQueue
             "unique_line_date"=>$uniqueLine.'_'.Carbon::now()->format('Y_m_d')
         ];
 
-
+        try {
             PoSapMaster::create($insertable);
 
             if(! PoSapMasterTmp::where('unique_line',$uniqueLine)->exists()){

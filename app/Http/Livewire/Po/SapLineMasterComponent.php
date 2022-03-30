@@ -96,69 +96,6 @@ class SapLineMasterComponent extends Component
     public $nupco_trade_code = [];
     //    ========
 
-        //Asem Shehadeh
-        public $delivery_no = [];
-        public $sap_table_order = [
-                "Notified"=>"Notified",
-                "Asn"=>"ASN",
-                "Document Type"=>"Document Type",
-                "Document Type Desc"=>"Document Type Description",
-                "Purchasing Group"=>"Purchasing Group",
-                "Customer Name"=>"Customer Name",
-                "Po Number"=>"Po Number",
-                "Tender No"=>"Tender No",
-                "Tender Desc"=>"Tender Description",
-                "Vendor Code"=>"Vendor Code",
-                "Vendor Name En"=>"Vendor Name English",
-                "Vendor Name Er"=>"Vendor Name Arabic",
-                "Po Created On"=>"Po Created On",
-                "Purchasing Organization"=>"Purchasing Document",
-                "Po Item"=>"Po Line Item",
-                "Material Number"=>"Generic Mat Code",
-                "Nupco Trade Code"=>"Nupco Trade Code",
-                "Cust Gen Code"=>"Cust Gen Code",
-                "Mat Description"=>"Mat Description",
-                "Unit"=>"Unit",
-                "Ordered Quantity"=>"Ordered Quantity",
-                "Gr Quantity"=>"Gr Quantity",
-                "Open Quantity"=>"Open Quantity",
-                "Supply Ratio"=>"Supply Ratio",
-                "Net Price"=>"Net Price",
-                "Price Unit"=>"Per Unit",
-
-
-                //"Net Price Per Unit"=>"Net Price Per Unit",//
-                //"Net Order Value"=>"Net Order Value",//
-
-                "Gr Amount"=>"Gr Amount",
-
-                //"Open Amount"=>"Open Amount",//
-                //"Amount Ratio"=>"Amount Ratio",//
-
-                "Currency"=>"Currency",
-                "Delivery Address"=>"Delivery Address",
-                "Plant"=>"Plant",
-                "Storage Location"=>"Storage Location",
-                "Nupco Delivery Date"=>"Nupco Delivery Date",
-                "Delivery No"=>"Delivery No",
-                "Customer No"=>"Customer No",
-                "Uo M"=>"Uo M",
-                "Net Value"=>"Net Value",
-                "Item Status"=>"Item Status",
-                "Cust Cont Trade Numb"=>"Cust Cont Trade Numb",
-                "Generic Mat Code"=>"Generic Mat Code",
-                "Old New Po Number"=>"Old New Po Number",
-                "Old Po Item"=>"Old Po Item",
-                "Customer PO No"=>"Customer PO No",
-                "Customer PO Item"=>"Customer PO Item",
-                "Pur Grp Name"=>"Pur Grp Name",
-
-                "Supplier Comment"=>"Supplier Comment",
-                "Internal Comment"=>"Internal Comment",
-
-        ] ;
-        //    ========
-
 
     public $statisticCollection=[];
 
@@ -247,10 +184,6 @@ class SapLineMasterComponent extends Component
         }
         if (Arr::has($this->nupco_trade_code, ['from'])) {
             $query = $query->whereIn('nupco_trade_code', $this->nupco_trade_code['from']);
-        }
-         //Asem Shehadeh
-         if (Arr::has($this->delivery_no, ['from'])) {
-            $query = $query->whereIn('delivery_no', $this->delivery_no['from']);
         }
 
 
