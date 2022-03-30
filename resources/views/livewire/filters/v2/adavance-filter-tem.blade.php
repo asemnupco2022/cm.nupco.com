@@ -365,7 +365,6 @@
   @stack("sap-filter-scripts")
 
 
-
 @push('livewire-parent')
 @endpush
 
